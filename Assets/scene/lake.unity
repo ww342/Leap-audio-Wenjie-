@@ -3574,6 +3574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f480397e468844f283c63ff208e1d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  watchticking: {fileID: 8300000, guid: 76985608eca3b4e2b99d97c370c2132d, type: 3}
   stoneskipping: {fileID: 8300000, guid: 55e97d5e8c3744b0bb98b1b3d1b925fd, type: 3}
   rockhitleave: {fileID: 8300000, guid: 28351deaab7874f1e9b82d82d98dcc20, type: 3}
   snore: {fileID: 8300000, guid: ccdbdfa250fc54c16a597b22575576ac, type: 3}

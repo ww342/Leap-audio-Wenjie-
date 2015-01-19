@@ -24,6 +24,7 @@ public class Hands : MonoBehaviour {
 	private AudioSource musicControl_B;
 	private AudioSource Handfree;
 	private AudioSource musicControl_C;
+	private AudioSource watch;
 	
 	public  int stonecount;
 	public  int birdcount;
@@ -72,10 +73,26 @@ public class Hands : MonoBehaviour {
 		musicControl_C.minDistance = 6;
 		musicControl_C.Play ();
 
+		watch  = gameObject.AddComponent <AudioSource> ();
+		watch.clip  = sounds.watchticking;
+		watch.loop = true;
+		watch.pitch = 1;
+		watch.minDistance = 20;
+		watch.Play ();
+
 
 	}
 	
-		
+    void quickwatch(){
+				watch.pitch = 3;
+		}
+	void transitwatch(){
+		watch.pitch = 2;
+	}
+	void normalwatch(){
+		watch.pitch = 1;
+	}
+
 
 	void playropepose(){
 		audio.PlayOneShot (voice.ropepose);
@@ -506,6 +523,7 @@ public class Hands : MonoBehaviour {
 						audio.PlayOneShot (sounds.shortflapping);
 						audio.PlayOneShot (voice.birdwrong);
 						WrongCount ();
+						quickwatch ();
 						Bird = HandState.cooldown ;
 					}
 					
@@ -514,6 +532,7 @@ public class Hands : MonoBehaviour {
 						audio.PlayOneShot (sounds.shortflapping);
 						audio.PlayOneShot (voice.birdwrong);
 						WrongCount ();
+						quickwatch ();
 						Bird = HandState.cooldown;
 					}
 				}
@@ -530,6 +549,7 @@ public class Hands : MonoBehaviour {
 					if (rhhit == 1 && lhhit == 1) {
 						birdcount ++;
 						LevelCount ();
+						normalwatch ();
 						audio.PlayOneShot (sounds.grabseed);
 						audio.PlayOneShot (sounds.bird);
 					

@@ -175,24 +175,26 @@ public class Righthand : MonoBehaviour {
 						case GestureState.action:
 
 								if (openhand) {
+					                    GameObject.Find ("Hands").SendMessage ("quickwatch");
 										Stone = GestureState.none;
 										audio.PlayOneShot (script1.stonedrop);
 								}
 						
 				if (transWave_z_10 > 100) {
-					                
+					                    GameObject.Find ("Hands").SendMessage ("quickwatch");
 										Stone = GestureState.ready;
 								}
 				         
 				if (palmleft || palmleftin || palmup || palmright){
 
 					Stone = GestureState.other;
-			
+					GameObject.Find ("Hands").SendMessage ("quickwatch");
 				}
 				
 
 					if (palmdown ){
 					if((transWave_y_10 <- 50)&&(transWave_y_10 >-200)) {
+						GameObject.Find ("Hands").SendMessage ("normalwatch");
 										Stone = GestureState.ing;
 								
 				                }
@@ -202,7 +204,7 @@ public class Righthand : MonoBehaviour {
 
 				if(Grab == 0){
 					//audio.PlayOneShot (script.stonewrong);
-					audio.PlayOneShot (sounds.waterdrop,30.0f);
+					audio.PlayOneShot (sounds.waterdrop,50.0f);
 					GameObject.Find ("Hands").SendMessage ("WrongCount");
 					Stone = GestureState .none;
 				}
@@ -217,6 +219,7 @@ public class Righthand : MonoBehaviour {
 					if (  Mathf.Abs(transWave_y_10/transWave_x_10)<0.6  &&  Mathf.Abs(transWave_y_10/transWave_x_10)>0.1  ){
 						if(openhand){
 							//audio.PlayOneShot (script.stonewrong);
+							GameObject.Find ("Hands").SendMessage ("quickwatch");
 							audio.PlayOneShot (sounds.waterdrop,30.0f);
 							GameObject.Find ("Hands").SendMessage ("WrongCount");
 							Stone = GestureState.none;
@@ -224,6 +227,7 @@ public class Righthand : MonoBehaviour {
 					}
 
 					if((transWave_y_10 <- 100)&&(transWave_y_10 >-200)) {
+						GameObject.Find ("Hands").SendMessage ("normalwatch");
 						Stone = GestureState.ing;
 						
 					}
@@ -267,13 +271,13 @@ public class Righthand : MonoBehaviour {
 				
 				if (openhand && wristforward) {
 					if(wristmiddle){
-				
+						               
 										GameObject.Find ("Hands").SendMessage ("StoneCount");
 										Stone = GestureState .cooldown;
 								}
 
 					if(wristhigh){
-						
+						GameObject.Find ("Hands").SendMessage ("quickwatch");
 						GameObject.Find ("Northforward").SendMessage ("farskip");
 						Stone = GestureState .none;
 					}
@@ -282,12 +286,14 @@ public class Righthand : MonoBehaviour {
 
 				if( openhand  && wristleft ) {
 					if(wristhigh){
+					GameObject.Find ("Hands").SendMessage ("quickwatch");
 					GameObject.Find ("Northwest").SendMessage ("sound1");
 					GameObject.Find ("Northwest").SendMessage ("sound2");
 					    audio.PlayOneShot (script1.creak1);
 						Stone = GestureState .none;
 					}
 					if(wristmiddle){
+						GameObject.Find ("Hands").SendMessage ("quickwatch");
 						GameObject.Find ("Northforward").SendMessage ("leftskip");
 						Stone = GestureState .none;
 					}
@@ -296,12 +302,14 @@ public class Righthand : MonoBehaviour {
 
 				if( openhand && wristright) {
 					if(wristhigh){
+					GameObject.Find ("Hands").SendMessage ("quickwatch");
 					GameObject.Find ("Northeast").SendMessage ("sound1");
 					GameObject.Find ("Northeast").SendMessage ("sound2");
 					audio.PlayOneShot (script1.creak1);
 					Stone = GestureState .none;
 				  }
 			       if(wristmiddle){
+						GameObject.Find ("Hands").SendMessage ("quickwatch");
 						GameObject.Find ("Northforward").SendMessage ("rightskip");
 						Stone = GestureState .none;
 					}
@@ -347,6 +355,7 @@ public class Righthand : MonoBehaviour {
 								}
 				if (Grab==1) {
 					Bird = GestureState.ready;
+					GameObject.Find ("Hands").SendMessage ("quickwatch");
 					audio.PlayOneShot (sounds.panicflapping);
 					audio.PlayOneShot (sounds.grabbird);
 					audio.PlayOneShot (sounds.boatshiffer2, 5.0f);
@@ -356,6 +365,7 @@ public class Righthand : MonoBehaviour {
 
 				if (transWave_y_3>30) {
 					Bird = GestureState .none;
+					GameObject.Find ("Hands").SendMessage ("quickwatch");
 					audio.PlayOneShot (sounds.seedpouring);
 					audio.PlayOneShot (sounds.panicbird);
 					audio.PlayOneShot (sounds.panicflapping);
@@ -370,6 +380,7 @@ public class Righthand : MonoBehaviour {
 			case GestureState.ready:
 				if( Grab <0.8){
 					Bird = GestureState.none;
+					GameObject.Find ("Hands").SendMessage ("transitwatch");
 					audio.PlayOneShot (sounds.weakflapping);
 					audio.PlayOneShot (sounds.birdflyslonghand);
 				}
