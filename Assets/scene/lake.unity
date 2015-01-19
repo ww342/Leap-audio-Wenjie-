@@ -3574,7 +3574,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f480397e468844f283c63ff208e1d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionhint1: {fileID: 8300000, guid: d5ada5e14fc8d4462ae3af35c3704672, type: 3}
+  transitionhint2: {fileID: 8300000, guid: 10b48d4ebbe6c4afea860ffecb30637b, type: 3}
+  transitionhint3: {fileID: 8300000, guid: 8ad884e81e1b74623b68d5813014870d, type: 3}
   watchticking: {fileID: 8300000, guid: 76985608eca3b4e2b99d97c370c2132d, type: 3}
+  timetravel: {fileID: 8300000, guid: c8b41877fb542462da9c51ba6c200c56, type: 3}
   stoneskipping: {fileID: 8300000, guid: 55e97d5e8c3744b0bb98b1b3d1b925fd, type: 3}
   rockhitleave: {fileID: 8300000, guid: 28351deaab7874f1e9b82d82d98dcc20, type: 3}
   snore: {fileID: 8300000, guid: ccdbdfa250fc54c16a597b22575576ac, type: 3}

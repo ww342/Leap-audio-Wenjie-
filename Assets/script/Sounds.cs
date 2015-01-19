@@ -3,7 +3,13 @@ using System.Collections;
 [RequireComponent(typeof(AudioSource))]
 
 public class Sounds : MonoBehaviour {
+
+	public AudioClip transitionhint1;
+	public AudioClip transitionhint2;
+	public AudioClip transitionhint3;
 	public AudioClip watchticking;
+	public AudioClip timetravel;
+
 	public AudioClip stoneskipping;
 	public AudioClip rockhitleave;
 	public AudioClip snore;

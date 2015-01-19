@@ -25,7 +25,8 @@ public class Hands : MonoBehaviour {
 	private AudioSource Handfree;
 	private AudioSource musicControl_C;
 	private AudioSource watch;
-	
+	private AudioSource transtion_hint;
+
 	public  int stonecount;
 	public  int birdcount;
 	public  int paddlecount;
@@ -80,6 +81,12 @@ public class Hands : MonoBehaviour {
 		watch.minDistance = 20;
 		watch.Play ();
 
+		transtion_hint = gameObject.AddComponent <AudioSource> ();
+		transtion_hint.clip  = sounds.transitionhint1;
+		transtion_hint.pitch = 1;
+		transtion_hint.minDistance = 5;
+	
+
 
 	}
 	
@@ -93,6 +100,20 @@ public class Hands : MonoBehaviour {
 		watch.pitch = 1;
 	}
 
+	void hint1(){
+		transtion_hint.clip  = sounds.transitionhint1;
+		transtion_hint.Play ();
+		}
+
+	void hint2(){
+		transtion_hint.clip  = sounds.transitionhint2;
+		transtion_hint.Play ();
+	}
+
+	void hint3(){
+		transtion_hint.clip  = sounds.transitionhint3;
+		transtion_hint.Play ();
+	}
 
 	void playropepose(){
 		audio.PlayOneShot (voice.ropepose);
@@ -298,16 +319,26 @@ public class Hands : MonoBehaviour {
 		if (starcount == 3) {
 			audio.PlayOneShot (voice.star3);
 			Invoke ("Glow",2);
+			Invoke ("Timetravel",5);
+			Invoke ("watchstop",8);
 			LevelCount();}
 			
 	}
 
+	void watchstop(){
+
+		watch.Stop ();
+
+	}
 
 
 	void Glow(){
 		audio.PlayOneShot (sounds.glow);
 		}
 
+    void Timetravel(){
+		audio.PlayOneShot (sounds.timetravel, 100.0f);
+		}
 
 	void LHhit (int statenumber)
 	{
@@ -524,6 +555,7 @@ public class Hands : MonoBehaviour {
 						audio.PlayOneShot (voice.birdwrong);
 						WrongCount ();
 						quickwatch ();
+						hint3 ();
 						Bird = HandState.cooldown ;
 					}
 					
@@ -533,6 +565,7 @@ public class Hands : MonoBehaviour {
 						audio.PlayOneShot (voice.birdwrong);
 						WrongCount ();
 						quickwatch ();
+						hint3 ();
 						Bird = HandState.cooldown;
 					}
 				}
@@ -550,6 +583,7 @@ public class Hands : MonoBehaviour {
 						birdcount ++;
 						LevelCount ();
 						normalwatch ();
+						hint1 ();
 						audio.PlayOneShot (sounds.grabseed);
 						audio.PlayOneShot (sounds.bird);
 					
