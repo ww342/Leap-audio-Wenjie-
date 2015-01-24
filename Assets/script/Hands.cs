@@ -91,7 +91,7 @@ public class Hands : MonoBehaviour {
 	}
 	
     void quickwatch(){
-				watch.pitch = 3;
+	  watch.pitch = 3;
 		}
 	void transitwatch(){
 		watch.pitch = 2;

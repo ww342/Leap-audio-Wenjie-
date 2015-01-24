@@ -4,6 +4,9 @@ using System.Collections;
 
 public class Sounds : MonoBehaviour {
 
+	public AudioClip rightsleevelift;
+	public AudioClip rightsleevedown;
+
 	public AudioClip transitionhint1;
 	public AudioClip transitionhint2;
 	public AudioClip transitionhint3;

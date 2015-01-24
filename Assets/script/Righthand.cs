@@ -28,6 +28,8 @@ public class Righthand : MonoBehaviour {
 	public int armcount;
 
 
+	private AudioSource armlift;
+	private AudioSource armdown;
 
 
 	
@@ -42,6 +44,13 @@ public class Righthand : MonoBehaviour {
 		GameObject.Find("Hands").SendMessage("RHhit", hit); 
 
 
+		armlift = gameObject.AddComponent <AudioSource> ();
+		armlift.clip = sounds.rightsleevelift;
+		armlift.minDistance = 500;
+
+		armdown = gameObject.AddComponent <AudioSource> ();
+		armdown.clip = sounds.rightsleevedown;
+		armdown.minDistance = 500;
 	}
 
 	// Update is called once per frame
@@ -196,7 +205,8 @@ public class Righthand : MonoBehaviour {
 					if (palmdown ){
 					if((transWave_y_10 <- 50)&&(transWave_y_10 >-200)) {
 						GameObject.Find ("Hands").SendMessage ("normalwatch");
-						GameObject.Find ("Hands").SendMessage ("hint1");
+						armlift.PlayOneShot(sounds.rightsleevelift,100.0f);
+						GameObject.Find ("Hands").SendMessage ("hint3");
 										Stone = GestureState.ing;
 								
 				                }
@@ -223,21 +233,22 @@ public class Righthand : MonoBehaviour {
 							//audio.PlayOneShot (script.stonewrong);
 							GameObject.Find ("Hands").SendMessage ("quickwatch");
 							audio.PlayOneShot (sounds.waterdrop,30.0f);
-							GameObject.Find ("Hands").SendMessage ("hint3");
+							GameObject.Find ("Hands").SendMessage ("hint1");
 							GameObject.Find ("Hands").SendMessage ("WrongCount");
 							Stone = GestureState.none;
 						}
 					}
 
 					if((transWave_y_10 <- 100)&&(transWave_y_10 >-200)) {
-						GameObject.Find ("Hands").SendMessage ("hint1");
+						GameObject.Find ("Hands").SendMessage ("hint3");
+						armlift.PlayOneShot(sounds.rightsleevelift, 100.0f);
 						GameObject.Find ("Hands").SendMessage ("normalwatch");
 						Stone = GestureState.ing;
 						
 					}
 				}
 				if(palmleft || palmleftin || palmup || palmright ){
-					GameObject.Find ("Hands").SendMessage ("hint3");
+					GameObject.Find ("Hands").SendMessage ("hint2");
 					if (  Mathf.Abs(transWave_y_6/transWave_x_6)<0.6  &&  Mathf.Abs(transWave_y_6/transWave_x_6)>0.1  ){
 
 						if ( transPitch>20 && Grab<0.5){
@@ -277,13 +288,16 @@ public class Righthand : MonoBehaviour {
 				if (openhand && wristforward) {
 
 					if(wristmiddle){
+						               if(transWave_z_3>10){
+							            armdown.PlayOneShot(sounds.rightsleevedown, 100.0f);
+						               }
+									    GameObject.Find ("Hands").SendMessage ("StoneCount");
 						               
-										GameObject.Find ("Hands").SendMessage ("StoneCount");
 										Stone = GestureState .cooldown;
 								}
 
 					if(wristhigh){
-						GameObject.Find ("Hands").SendMessage ("hint3");
+						GameObject.Find ("Hands").SendMessage ("hint1");
 						GameObject.Find ("Hands").SendMessage ("quickwatch");
 						GameObject.Find ("Northforward").SendMessage ("farskip");
 						Stone = GestureState .none;
@@ -293,7 +307,7 @@ public class Righthand : MonoBehaviour {
 
 				if( openhand  && wristleft ) {
 
-					GameObject.Find ("Hands").SendMessage ("hint3");
+					GameObject.Find ("Hands").SendMessage ("hint1");
 
 					if(wristhigh){
 					GameObject.Find ("Hands").SendMessage ("quickwatch");
@@ -312,7 +326,7 @@ public class Righthand : MonoBehaviour {
 
 				if( openhand && wristright) {
 
-					GameObject.Find ("Hands").SendMessage ("hint3");
+					GameObject.Find ("Hands").SendMessage ("hint1");
 
 					if(wristhigh){
 					GameObject.Find ("Hands").SendMessage ("quickwatch");
