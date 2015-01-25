@@ -27,6 +27,7 @@ public class finger_left : MonoBehaviour {
 			
 			Finger finger_ = leftmost.Fingers [(int)fingerType];
 
+
 	}
  }
 }

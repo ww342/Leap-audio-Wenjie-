@@ -39,7 +39,8 @@ public class bonestart1 : MonoBehaviour {
 				float boneStart_z = bone.PrevJoint.z;
 				float boneLength = bone.Length;
 				Vector3 boneStart = new Vector3 (boneStart_x , boneStart_y , -boneStart_z);
-
+			    
+			 
 			
 								//transform.rotation = Quaternion.Slerp (transform.rotation, twist, Time.deltaTime * smooth); 
 								transform.position = boneStart * 0.05f;

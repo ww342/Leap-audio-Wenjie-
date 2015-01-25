@@ -14,11 +14,21 @@ public class Hands : MonoBehaviour {
 	public HandState Paddle = HandState.none;
 	public HandState Bird = HandState.none;
 	public HandState Bike = HandState.none;
+
 	private float cooldownTime;
 	public float MaxcooldownTime;
 	public float MaxcooldownTime1;
 	public int rhhit;
 	public int lhhit;
+
+	//SOS GESTURE VARIABLES
+
+	public Vector3 watchposition;
+	public Vector3 tapwatch;
+	public Vector3 difference;
+	public float tappingdistance;
+
+	//
 
 	private AudioSource musicControl_A;
 	private AudioSource musicControl_B;
@@ -26,6 +36,7 @@ public class Hands : MonoBehaviour {
 	private AudioSource musicControl_C;
 	private AudioSource watch;
 	private AudioSource transtion_hint;
+	private AudioSource Narrator;
 
 	public  int stonecount;
 	public  int birdcount;
@@ -84,9 +95,12 @@ public class Hands : MonoBehaviour {
 		transtion_hint = gameObject.AddComponent <AudioSource> ();
 		transtion_hint.clip  = sounds.transitionhint1;
 		transtion_hint.pitch = 1;
-		transtion_hint.minDistance = 5;
+		transtion_hint.minDistance = 2;
 	
 
+
+		Narrator = gameObject.AddComponent <AudioSource> ();
+		Narrator.minDistance = 10;
 
 	}
 	
@@ -355,6 +369,61 @@ public class Hands : MonoBehaviour {
 	}
 
 
+
+	// A void that gets wrist position from the right hand
+
+	/*
+	void WatchSurface(Vector3 wristposition)
+	{
+		watchposition = wristposition;
+		Update ();
+
+		}
+
+		
+
+
+	// A void that gets index position from the left hand
+
+	void TaptheWatch(Vector3 indextip)
+	{
+		tapwatch = indextip;
+		Update ();
+
+	}
+
+
+    void Beep(){
+
+
+		switch (TapWatch) {
+		case HandState.none:
+		    {
+
+				audio.PlayOneShot (sounds.watchbeep, 30.0f);
+				
+				TapWatch = HandState.cooldown;
+			}
+			
+			break;
+			
+		case HandState.cooldown:
+			
+			cooldownTime -= Time.deltaTime;
+			if (cooldownTime <= 0) {
+				TapWatch = HandState.none;
+				cooldownTime = MaxcooldownTime1;
+			}
+			
+			break;
+		}
+
+		
+	}
+
+	
+	*/
+
 	void LevelCount(){
 		levelcount ++;
 		if (levelcount==5){
@@ -401,7 +470,7 @@ public class Hands : MonoBehaviour {
 				                Handfree.loop = false;
 				                //audio.PlayOneShot(begin);
 				                LevelCount();
-				               audio.PlayOneShot (voice.begin);
+				               Narrator.PlayOneShot (voice.begin);
 						}
 
 				}
@@ -437,6 +506,42 @@ public class Hands : MonoBehaviour {
 				}
 
 */
+
+		// Tap Watch to Send SOS message
+
+
+		/*
+		 * difference = new Vector3( watchposition.x  - tapwatch.x, watchposition.y - tapwatch.y, watchposition.z - tapwatch.z);
+		
+		tappingdistance = Mathf.Sqrt(
+			Mathf.Pow(difference.x, 2f) +
+			Mathf.Pow(difference.y, 2f) +
+			Mathf.Pow(difference.z, 2f));
+		
+
+		switch (TapWatch) {
+				case HandState.none:
+						if (tappingdistance > 90 && tappingdistance < 100) {
+				
+								audio.PlayOneShot (sounds.watchbeep, 30.0f);
+
+								TapWatch = HandState.cooldown;
+						}
+
+						break;
+
+				case HandState.cooldown:
+
+						cooldownTime -= Time.deltaTime;
+						if (cooldownTime <= 0) {
+								TapWatch = HandState.none;
+								cooldownTime = MaxcooldownTime1;
+						}
+
+						break;
+				}
+*/
+
 		// Paddle
 		if (levelcount==3){
 			switch (Paddle) {

@@ -31,7 +31,7 @@ public class Lefthand : MonoBehaviour {
 		GameObject.Find("Hands").SendMessage("LHhit", hit );
 	}
 	
-	
+
 	
 	// Update is called once per frame
 	
@@ -54,6 +54,34 @@ public class Lefthand : MonoBehaviour {
 						Finger middle = startframe.Fingers [2];
 						Finger ring = startframe.Fingers [3];
 						Finger pinky = startframe.Fingers [4];
+
+			
+			float thumbtip_x = thumb.TipPosition.x;
+			float thumbtip_y = thumb.TipPosition.y;
+			float thumbtip_z = thumb.TipPosition.z;
+			           
+			float indextip_x = index.TipPosition.x;
+			float indextip_y = index.TipPosition.y;
+			float indextip_z = index.TipPosition.z;
+
+			float middletip_x = middle.TipPosition.x;
+			float middletip_y = middle.TipPosition.y;
+			float middletip_z = middle.TipPosition.z;
+
+			float ringtip_x = ring.TipPosition.x;
+			float ringtip_y = ring.TipPosition.y;
+			float ringtip_z = ring.TipPosition.z;
+
+			float pinkytip_x = pinky.TipPosition.x;
+			float pinkytip_y = pinky.TipPosition.y;
+			float pinkytip_z = pinky.TipPosition.z;
+
+			Vector3 thumbtip = new Vector3(thumbtip_x,thumbtip_y ,-thumbtip_z);
+			Vector3 indextip = new Vector3(indextip_x,indextip_y ,-indextip_z);
+			Vector3 middletip = new Vector3(middletip_x,middletip_y ,-middletip_z);
+			Vector3 ringtip = new Vector3(ringtip_x,ringtip_y ,-ringtip_z);
+			Vector3 pinkytip = new Vector3(pinkytip_x,pinkytip_y ,-pinkytip_z);
+			        
 
 
 						float pitch = leftmost.Direction.Pitch * 180.0f / Mathf.PI;
@@ -92,7 +120,9 @@ public class Lefthand : MonoBehaviour {
 			            bool palmrightin = roll>130 && roll< 160;
 						bool openhand = thumb.IsExtended && index.IsExtended && middle.IsExtended && ring.IsExtended && pinky.IsExtended;
 	
-			
+			            
+
+			          
 						/*
 		if (script.levelcount == 2 || script.levelcount ==3 ) {
 						if ((leftmost.IsLeft) && (startframe.Hands.Count > 0)) {
@@ -106,6 +136,15 @@ public class Lefthand : MonoBehaviour {
 				}
 
 		*/
+
+
+
+
+			//keep sending left hand index tip position to script"Hands" to check SOS WATCH TAPPING MESSAGE 
+			//GameObject.Find ("Hands").SendMessage ("TaptheWatch", indextip);
+
+
+
 						switch (Bird) {
 				
 						case GestureState.none:

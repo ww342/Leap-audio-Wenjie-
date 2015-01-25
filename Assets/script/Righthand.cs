@@ -46,11 +46,11 @@ public class Righthand : MonoBehaviour {
 
 		armlift = gameObject.AddComponent <AudioSource> ();
 		armlift.clip = sounds.rightsleevelift;
-		armlift.minDistance = 500;
+		armlift.minDistance = 800;
 
 		armdown = gameObject.AddComponent <AudioSource> ();
 		armdown.clip = sounds.rightsleevedown;
-		armdown.minDistance = 500;
+		armdown.minDistance = 800;
 	}
 
 	// Update is called once per frame
@@ -103,6 +103,8 @@ public class Righthand : MonoBehaviour {
 			            float elbow_z = rightmost.Arm.ElbowPosition.z;
 		
 						Vector3 handcenter = new Vector3 (handmove_x, handmove_y, -handmove_z);
+
+			            Vector3 wristposition= new Vector3( wrist_x ,wrist_y ,-wrist_z );
 		
 		
 						float transRadius = perviousframe6.Hands.Rightmost.SphereRadius - radius;
@@ -153,12 +155,20 @@ public class Righthand : MonoBehaviour {
 			            bool wristright = wrist_x>70;
 			            bool wristmiddle= wrist_y<350;
 				        bool wristforward = wrist_x>-70 && wrist_x<70;
+
+			            
+
+			//keep sending right hand wrist position to script"Hands" to check SOS WATCH TAPPING MESSAGE 
+			//GameObject.Find ("Hands").SendMessage ("WatchSurface", wristposition);
+
+
 						//Stone
 			
 						switch (Stone) {
 			
 						case GestureState.none:
 								if (script.levelcount == 0) {
+					                    
 
 										if (pitchforward && palmdown) {
 												Stone = GestureState .detected;
