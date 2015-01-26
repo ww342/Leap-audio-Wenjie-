@@ -36,7 +36,7 @@ public class Hands : MonoBehaviour {
 	private AudioSource musicControl_C;
 	private AudioSource watch;
 	private AudioSource transtion_hint;
-	private AudioSource Narrator;
+	public AudioSource Narrator;
 
 	public  int stonecount;
 	public  int birdcount;
@@ -47,7 +47,7 @@ public class Hands : MonoBehaviour {
 	public  int starcount;
 	public  int bellcount;
 	public  int wrongcount;
-	public int hands;
+	public  int hands;
 
 	// Use this for initialization
 	void Start () {

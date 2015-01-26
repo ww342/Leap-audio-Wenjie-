@@ -1994,7 +1994,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TapWatch: 0
   sounds: {fileID: 580846435}
+  script: {fileID: 1080527653}
+  voice: {fileID: 485923159}
   MaxcooldownTime: 0
+  voiceon: 0
 --- !u!23 &337765521
 Renderer:
   m_ObjectHideFlags: 0
@@ -2042,7 +2045,7 @@ Transform:
   m_GameObject: {fileID: 337765519}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.28388023, y: -90.8445206, z: 579.221375}
-  m_LocalScale: {x: 3, y: 2, z: 2}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -5241,7 +5244,6 @@ MonoBehaviour:
   Paddle: 0
   Bird: 0
   Bike: 0
-  TapWatch: 0
   MaxcooldownTime: 2
   MaxcooldownTime1: 1
   rhhit: 0
@@ -5250,6 +5252,7 @@ MonoBehaviour:
   tapwatch: {x: 0, y: 0, z: 0}
   difference: {x: 0, y: 0, z: 0}
   tappingdistance: 0
+  Narrator: {fileID: 0}
   stonecount: 0
   birdcount: 0
   paddlecount: 0

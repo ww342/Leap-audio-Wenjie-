@@ -5,52 +5,85 @@ using Leap;
 
 public class watch : MonoBehaviour {
 	Controller Controller = new Controller();
-
+	
 	// Use this for initialization
-
+	
 	public enum GestureState { none,ready,detected,action,ing,other,cooldown}
-
+	
 	public GestureState TapWatch = GestureState.none;
 
+	
 	public Sounds sounds;
+	public Hands script;
+	public Narrator voice;
 
 	private float cooldownTime;
 	public float MaxcooldownTime;
 
-	void Start () {
+	public int voiceon;
 	
+	void Start () {
+		voiceon = 1;
 	}
-
+	
 	void OnTriggerEnter(Collider other) {
-				
-				if (other.name == ("bone_distal_index_L")) {
+		
+		if (other.name == ("bone_distal_index_L")) {
 
+			audio.PlayOneShot(sounds.watchbeep, 30.0f);
+
+			
 			switch (TapWatch) {
+
 			case GestureState.none:
-			{
-				
-				audio.PlayOneShot (sounds.watchbeep, 30.0f);
-				
-				TapWatch = GestureState.cooldown;
-			}
+			
+			if(script.levelcount == 0){
+
+
+					if( voiceon == 1){
+						script.Narrator.Stop ();
+						voiceon = 0;
+						TapWatch= GestureState.cooldown;
+					}
+					if(	voiceon == 0){
+							TapWatch= GestureState.other;
+
+					}
+
+				}
 				
 				break;
-				
+
+
+			case GestureState.other:
+
+					script.Narrator.PlayOneShot(voice.begin);
+					voiceon = 1;
+				    TapWatch = GestureState.cooldown;
+
+
+				break;
+
 			case GestureState.cooldown:
 				
 				cooldownTime -= Time.deltaTime;
 				if (cooldownTime <= 0) {
 					TapWatch = GestureState.none;
+					//voiceon = 1;
 					cooldownTime = MaxcooldownTime;
 				}
 				
 				break;
 			}
+			
 
-						//GameObject.Find ("Hands").SendMessage ("Beep");
-				}
+		
+
+
+		
 		}
-
+	}
+	
 	// Update is called once per frame
 	void Update () {
 		Frame startframe = Controller.Frame ();
@@ -59,12 +92,12 @@ public class watch : MonoBehaviour {
 		float wrist_y = rightmost.Arm.WristPosition.y;
 		float wrist_z = rightmost.Arm.WristPosition.z;
 		Vector3 wristcenter = new Vector3 ( wrist_x, wrist_y, -wrist_z);
-
+		
 		if ((rightmost.IsRight) && (startframe.Hands.Count > 0)) {
 			
-
+			
 			transform.position = wristcenter * 0.05f;
-	
+			
 			
 		}
 	}
