@@ -7,6 +7,7 @@ public class Lefthand : MonoBehaviour {
 	public Hands script;
 	public Sounds sounds;
 	public Narrator voice;
+	public hint hint;
 	public finger_left  script1;
 
 	public enum GestureState { none,detected,action,ing,ready,cooldown}

@@ -982,6 +982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds: {fileID: 580846435}
   voice: {fileID: 485923159}
+  hint: {fileID: 953696198}
   script: {fileID: 1080527653}
   script1: {fileID: 1916112003}
   Stone: 0
@@ -992,6 +993,7 @@ MonoBehaviour:
   Flower: 0
   Tree: 0
   Bike: 0
+  stonecorrect_hint: 0
   MaxcooldownTime: 1
   MaxcooldownTime1: 2
   hit: 0
@@ -1487,6 +1489,7 @@ MonoBehaviour:
   script: {fileID: 1080527653}
   sounds: {fileID: 580846435}
   voice: {fileID: 485923159}
+  hint: {fileID: 953696198}
   script1: {fileID: 748403458}
   Bird: 0
   Paddle: 0
@@ -3738,7 +3741,9 @@ MonoBehaviour:
   transitionhint1: {fileID: 8300000, guid: 5c2cd057e1c0d4e8093d7cf67fb7e6ff, type: 3}
   transitionhint2: {fileID: 8300000, guid: 9f987a11b5a604d99941e84f00cd0272, type: 3}
   transitionhint3: {fileID: 8300000, guid: cb96fae237c1b4ed5a53e18ae08d00af, type: 3}
-  watchticking: {fileID: 8300000, guid: 76985608eca3b4e2b99d97c370c2132d, type: 3}
+  slowwatch: {fileID: 8300000, guid: 76985608eca3b4e2b99d97c370c2132d, type: 3}
+  middlewatch: {fileID: 8300000, guid: 1a8835591e13b4ab4a260f8c617ba5f5, type: 3}
+  quickwatch: {fileID: 8300000, guid: d53c522d9c72b435386fea0a31f56064, type: 3}
   watchbeep: {fileID: 8300000, guid: e1a84061a9af844cb9eec30ad8c8a735, type: 3}
   timetravel: {fileID: 8300000, guid: c8b41877fb542462da9c51ba6c200c56, type: 3}
   stoneskipping: {fileID: 8300000, guid: 55e97d5e8c3744b0bb98b1b3d1b925fd, type: 3}
@@ -4972,6 +4977,113 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1331399841}
   m_GameObject: {fileID: 949806536}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &953696197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 953696200}
+  - 82: {fileID: 953696199}
+  - 114: {fileID: 953696198}
+  m_Layer: 0
+  m_Name: hint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &953696198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 953696197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8023b3c5cec6e41c5a6487b9fffcedb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stone_correct_hint0: {fileID: 8300000, guid: 9a8e1f2ff32fc4b11a6521e063884782, type: 3}
+  Stone_correct_hint1: {fileID: 8300000, guid: e67e615f63ee0431590377bac92cee41, type: 3}
+  Stone_correct_hint2: {fileID: 8300000, guid: f9c1910649daa4d75a843196db12ac4a, type: 3}
+  Stone_correct_hint3: {fileID: 8300000, guid: e48ad5e51bc0844b8b670461f9e1ea61, type: 3}
+  Stone_correct_hint4: {fileID: 8300000, guid: 7f370e48b6377424c9dc3fe6800ad7de, type: 3}
+  Stone_wrong_hint1: {fileID: 0}
+  Stone_wrong_hint2: {fileID: 0}
+  Stone_wrong_hint3: {fileID: 0}
+  Stone_wrong_hint4: {fileID: 0}
+--- !u!82 &953696199
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 953696197}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!4 &953696200
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 953696197}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.06849051, y: 3.03019905, z: -1.50158179}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
 --- !u!1 &953994669
 GameObject:
   m_ObjectHideFlags: 0
@@ -5241,6 +5353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds: {fileID: 580846435}
   voice: {fileID: 485923159}
+  hint: {fileID: 953696198}
   Paddle: 0
   Bird: 0
   Bike: 0
@@ -10367,7 +10480,7 @@ GUIText:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2027973603}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Text: Gui Text
   m_Anchor: 0

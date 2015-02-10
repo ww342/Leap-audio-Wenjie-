@@ -36,9 +36,6 @@ public class watch : MonoBehaviour {
 			switch (TapWatch) {
 
 			case GestureState.none:
-			
-			if(script.levelcount == 0){
-
 
 					if( voiceon == 1){
 						script.Narrator.Stop ();
@@ -50,16 +47,20 @@ public class watch : MonoBehaviour {
 
 					}
 
-				}
+
 				
 				break;
 
 
 			case GestureState.other:
+				voiceon = 1;
+				TapWatch = GestureState.cooldown;
 
-					script.Narrator.PlayOneShot(voice.begin);
-					voiceon = 1;
-				    TapWatch = GestureState.cooldown;
+				    if(script.levelcount == 0){
+
+					script.Narrator.PlayOneShot(voice.stonewrong);
+
+				}
 
 
 				break;

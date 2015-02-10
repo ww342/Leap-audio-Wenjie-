@@ -11,7 +11,9 @@ public class Sounds : MonoBehaviour {
 	public AudioClip transitionhint1;
 	public AudioClip transitionhint2;
 	public AudioClip transitionhint3;
-	public AudioClip watchticking;
+	public AudioClip slowwatch;
+	public AudioClip middlewatch;
+	public AudioClip quickwatch;
 	public AudioClip watchbeep;
 
 	public AudioClip timetravel;
