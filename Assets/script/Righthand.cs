@@ -228,31 +228,28 @@ public class Righthand : MonoBehaviour {
 					//audio.PlayOneShot (hint.Stone_correct_hint0);
 
 					if(wrist_y > 250 && wrist_y<=300){
-						hint.audio.PlayOneShot (hint.Stone_correct_hint1,3.0f);
+						hint.audio.PlayOneShot (hint.Stone_correct_hint1,5.0f);
 						
 					}
 					if(wrist_y > 300 && wrist_y<=350){
 						
-						hint.audio.PlayOneShot (hint.Stone_correct_hint2,3.0f);
+						hint.audio.PlayOneShot (hint.Stone_correct_hint2,5.0f);
 						
 					}
 					if(wrist_y > 350 && wrist_y<=400){
 						
-						hint.audio.PlayOneShot (hint.Stone_correct_hint3,3.0f);
+						hint.audio.PlayOneShot (hint.Stone_correct_hint3,5.0f);
 						
 					}
 					if(wrist_y > 400 && wrist_y<=500){
 						
-						hint.audio.PlayOneShot (hint.Stone_correct_hint4,3.0f);
+						hint.audio.PlayOneShot (hint.Stone_correct_hint4,5.0f);
 						
 					}
 
 
-					if((transWave_y_10 <- 50)&&(transWave_y_10 >-200)) {
+					if(transWave_y_10 <- 50) {
 						//GameObject.Find ("Hands").SendMessage ("normalwatch");
-							
-
-					
 
 						armlift.PlayOneShot(sounds.rightsleevelift,3.0f);
 						GameObject.Find ("Hands").SendMessage ("hint3");
@@ -291,9 +288,9 @@ public class Righthand : MonoBehaviour {
 						}
 					}
 
-					if((transWave_y_10 <- 100)&&(transWave_y_10 >-200)) {
+					if(transWave_y_10 <- 50) {
 						GameObject.Find ("Hands").SendMessage ("hint3");
-						armlift.PlayOneShot(sounds.rightsleevelift, 5.0f);
+						armlift.PlayOneShot(sounds.rightsleevelift,5.0f);
 						GameObject.Find ("Hands").SendMessage ("normalwatch");
 						Stone = GestureState.ing;
 						
