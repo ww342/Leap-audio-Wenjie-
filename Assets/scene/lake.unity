@@ -1999,7 +1999,9 @@ MonoBehaviour:
   sounds: {fileID: 580846435}
   script: {fileID: 1080527653}
   voice: {fileID: 485923159}
-  MaxcooldownTime: 0
+  losetrack: {x: 0, y: 0, z: 0}
+  wristcenter: {x: 0, y: 0, z: 0}
+  MaxcooldownTime: 1
   voiceon: 0
 --- !u!23 &337765521
 Renderer:
@@ -5539,7 +5541,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1128608479
 Light:
   m_ObjectHideFlags: 0
@@ -10714,7 +10716,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2078964461
 Transform:
   m_ObjectHideFlags: 0

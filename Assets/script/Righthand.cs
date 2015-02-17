@@ -50,11 +50,11 @@ public class Righthand : MonoBehaviour {
 
 		armlift = gameObject.AddComponent <AudioSource> ();
 		armlift.clip = sounds.rightsleevelift;
-		armlift.minDistance = 800;
+		armlift.minDistance = 50;
 
 		armdown = gameObject.AddComponent <AudioSource> ();
 		armdown.clip = sounds.rightsleevedown;
-		armdown.minDistance = 800;
+		armdown.minDistance = 50;
 
 		armdown = gameObject.AddComponent <AudioSource> ();
 		armdown.minDistance = 1;
@@ -111,8 +111,9 @@ public class Righthand : MonoBehaviour {
 		
 						Vector3 handcenter = new Vector3 (handmove_x, handmove_y, -handmove_z);
 
-			            Vector3 wristposition= new Vector3( wrist_x ,wrist_y ,-wrist_z );
-		
+			            Vector3 wristposition= new Vector3 ( wrist_x ,wrist_y ,-wrist_z );
+
+
 		
 						float transRadius = perviousframe6.Hands.Rightmost.SphereRadius - radius;
 						float transPitch = perviousframe10.Hands.Rightmost.Direction.Pitch - pitch;
@@ -187,7 +188,7 @@ public class Righthand : MonoBehaviour {
 						case GestureState.detected:
 								//if (transPitch > 10) {
 
-										if (!openhand && Grab == 1) {
+										if (!openhand && Grab >0.8) {
 					
 					                            audio.PlayOneShot (sounds.grabstone);
 												Stone = GestureState .action;
@@ -224,22 +225,28 @@ public class Righthand : MonoBehaviour {
 				if (palmdown ){
 
 
-					audio.PlayOneShot (hint.Stone_correct_hint0);
+					//audio.PlayOneShot (hint.Stone_correct_hint0);
 
 					if(wrist_y > 250 && wrist_y<=300){
-						hint.audio.PlayOneShot (hint.Stone_correct_hint1);
+						hint.audio.PlayOneShot (hint.Stone_correct_hint1,3.0f);
 						
 					}
 					if(wrist_y > 300 && wrist_y<=350){
 						
-						hint.audio.PlayOneShot (hint.Stone_correct_hint2);
+						hint.audio.PlayOneShot (hint.Stone_correct_hint2,3.0f);
 						
 					}
 					if(wrist_y > 350 && wrist_y<=400){
 						
-						hint.audio.PlayOneShot (hint.Stone_correct_hint3);
+						hint.audio.PlayOneShot (hint.Stone_correct_hint3,3.0f);
 						
 					}
+					if(wrist_y > 400 && wrist_y<=500){
+						
+						hint.audio.PlayOneShot (hint.Stone_correct_hint4,3.0f);
+						
+					}
+
 
 					if((transWave_y_10 <- 50)&&(transWave_y_10 >-200)) {
 						//GameObject.Find ("Hands").SendMessage ("normalwatch");
@@ -247,7 +254,7 @@ public class Righthand : MonoBehaviour {
 
 					
 
-						armlift.PlayOneShot(sounds.rightsleevelift,100.0f);
+						armlift.PlayOneShot(sounds.rightsleevelift,3.0f);
 						GameObject.Find ("Hands").SendMessage ("hint3");
 						Stone = GestureState.ing;
 								
@@ -260,7 +267,7 @@ public class Righthand : MonoBehaviour {
 
 				if(Grab == 0){
 					//audio.PlayOneShot (script.stonewrong);
-					audio.PlayOneShot (sounds.waterdrop,50.0f);
+					audio.PlayOneShot (sounds.waterdrop,10.0f);
 					GameObject.Find ("Hands").SendMessage ("WrongCount");
 					GameObject.Find ("Hands").SendMessage ("hint2");
 					Stone = GestureState .none;
@@ -277,7 +284,7 @@ public class Righthand : MonoBehaviour {
 						if(openhand){
 							//audio.PlayOneShot (script.stonewrong);
 							GameObject.Find ("Hands").SendMessage ("quickwatch");
-							audio.PlayOneShot (sounds.waterdrop,30.0f);
+							audio.PlayOneShot (sounds.waterdrop,10.0f);
 							GameObject.Find ("Hands").SendMessage ("hint1");
 							GameObject.Find ("Hands").SendMessage ("WrongCount");
 							Stone = GestureState.none;
@@ -286,7 +293,7 @@ public class Righthand : MonoBehaviour {
 
 					if((transWave_y_10 <- 100)&&(transWave_y_10 >-200)) {
 						GameObject.Find ("Hands").SendMessage ("hint3");
-						armlift.PlayOneShot(sounds.rightsleevelift, 100.0f);
+						armlift.PlayOneShot(sounds.rightsleevelift, 5.0f);
 						GameObject.Find ("Hands").SendMessage ("normalwatch");
 						Stone = GestureState.ing;
 						
@@ -334,18 +341,22 @@ public class Righthand : MonoBehaviour {
 			case  GestureState.ing:
 				
 				if (openhand && wristforward) {
+					if((transWave_y_10 >10)&& (transWave_z_3>5)){
 
 					if(wristmiddle){
-						               if(transWave_z_3>10){
-							            armdown.PlayOneShot(sounds.rightsleevedown, 100.0f);
-							      
+
+						
 							            
-						               }
+							armdown.PlayOneShot(sounds.rightsleevedown, 3.0f);
+
 									    GameObject.Find ("Hands").SendMessage ("StoneCount");
 						                GameObject.Find ("Hands").SendMessage ("normalwatch");
 						                audio.PlayOneShot (hint.Stone_correct_hint4);
 										Stone = GestureState .cooldown;
-								}
+								
+					
+					
+					}
 
 					if(wristhigh){
 						GameObject.Find ("Hands").SendMessage ("hint1");
@@ -353,12 +364,30 @@ public class Righthand : MonoBehaviour {
 						GameObject.Find ("Northforward").SendMessage ("farskip");
 						Stone = GestureState .none;
 					}
+					
+						if(transWave_y_10 <10 && transWave_z_3<10){
+							audio.PlayOneShot (script1.stonedrop,10.0f);
+						    GameObject.Find ("Hands").SendMessage ("quickwatch");
+						    Stone = GestureState .none;
+
+				}
+					if(transWave_y_10 <10 && transWave_z_3>10){
+						audio.PlayOneShot (sounds.waterdrop,10.0f);
+						audio.PlayOneShot (sounds.longlean);
+						GameObject.Find ("Hands").SendMessage ("quickwatch");
+						Stone = GestureState .none;
+						
+					}
+
+				}
 				}
 
 
-				if( openhand  && wristleft ) {
+				if( openhand && wristleft){
+						
 
 					GameObject.Find ("Hands").SendMessage ("hint1");
+					if((transWave_y_10 >10)&& (transWave_z_3>5)){
 
 					if(wristhigh){
 					GameObject.Find ("Hands").SendMessage ("quickwatch");
@@ -367,13 +396,18 @@ public class Righthand : MonoBehaviour {
 					    audio.PlayOneShot (script1.creak1);
 						Stone = GestureState .none;
 					}
-					if(wristmiddle){
+						if(wristmiddle){
 						GameObject.Find ("Hands").SendMessage ("quickwatch");
 						GameObject.Find ("Northforward").SendMessage ("leftskip");
+						Stone = GestureState.none;
+					}
+					}
+				        if(transWave_y_10<10){
+						audio.PlayOneShot(script1.stonedrop,10.0f);
 						Stone = GestureState .none;
 					}
-				}
 
+					}
 
 				if( openhand && wristright) {
 

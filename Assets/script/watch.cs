@@ -17,6 +17,9 @@ public class watch : MonoBehaviour {
 	public Hands script;
 	public Narrator voice;
 
+	public Vector3 losetrack;
+	public Vector3 wristcenter;
+
 	private float cooldownTime;
 	public float MaxcooldownTime;
 
@@ -30,7 +33,7 @@ public class watch : MonoBehaviour {
 		
 		if (other.name == ("bone_distal_index_L")) {
 
-			audio.PlayOneShot(sounds.watchbeep, 30.0f);
+			audio.PlayOneShot(sounds.watchbeep,5.0f);
 
 			
 			switch (TapWatch) {
@@ -84,7 +87,19 @@ public class watch : MonoBehaviour {
 		
 		}
 	}
-	
+
+
+	void PositionSave(){
+
+		PlayerPrefs.SetFloat("x",transform.position.x);
+		PlayerPrefs.SetFloat("y",transform.position.y);
+		PlayerPrefs.SetFloat("z",transform.position.z);
+
+		losetrack = new Vector3(transform.position.x, transform.position.y,transform.position.z);
+
+	}
+
+
 	// Update is called once per frame
 	void Update () {
 		Frame startframe = Controller.Frame ();
@@ -92,7 +107,7 @@ public class watch : MonoBehaviour {
 		float wrist_x = rightmost.Arm.WristPosition.x;
 		float wrist_y = rightmost.Arm.WristPosition.y;
 		float wrist_z = rightmost.Arm.WristPosition.z;
-		Vector3 wristcenter = new Vector3 ( wrist_x, wrist_y, -wrist_z);
+	    wristcenter = new Vector3 ( wrist_x, wrist_y, -wrist_z);
 		
 		if ((rightmost.IsRight) && (startframe.Hands.Count > 0)) {
 			
@@ -101,5 +116,14 @@ public class watch : MonoBehaviour {
 			
 			
 		}
+
+
+		//checking the wrist position while it loses track from the camera
+		
+		else{
+
+			PositionSave();
+
+			 }  
 	}
 }

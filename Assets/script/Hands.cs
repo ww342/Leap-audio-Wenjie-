@@ -357,7 +357,7 @@ public class Hands : MonoBehaviour {
 		}
 
     void Timetravel(){
-		audio.PlayOneShot (sounds.timetravel, 100.0f);
+		audio.PlayOneShot (sounds.timetravel);
 		}
 
 	void LHhit (int statenumber)
