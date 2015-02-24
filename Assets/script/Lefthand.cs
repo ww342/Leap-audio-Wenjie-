@@ -19,7 +19,14 @@ public class Lefthand : MonoBehaviour {
 	public float MaxcooldownTime1;
 	public int hit;
 
-
+	private AudioSource Stone_response;
+	private AudioSource Bird_response;
+	private AudioSource Flower_response;
+	private AudioSource Paddle_response;
+	private AudioSource Rope_response;
+	private AudioSource Bike_response;
+	private AudioSource Star_response;
+	private AudioSource Gesturehint;
 
 	
 	// Use this for initialization
@@ -170,10 +177,10 @@ public class Lefthand : MonoBehaviour {
 								}
 					
 				              if (Grab==1) {
-					                 Bird = GestureState .ready;
-					                 audio.PlayOneShot (sounds.panicflapping);
-					                 audio.PlayOneShot (sounds.grabbird);
-					                 audio.PlayOneShot (sounds.boatshiffer2, 5.0f);
+					Bird = GestureState .ready;
+					Bird_response.PlayOneShot (sounds.panicflapping);
+					Bird_response.PlayOneShot (sounds.grabbird);
+					Bird_response.PlayOneShot (sounds.boatshiffer2, 5.0f);
 					                 
 					
 				               }
@@ -183,8 +190,8 @@ public class Lefthand : MonoBehaviour {
 			         case GestureState.ready:
 				          if( Grab <0.8){
 					         Bird = GestureState.none;
-					         audio.PlayOneShot (sounds.weakflapping);
-					        audio.PlayOneShot (sounds.birdflyslonghand);
+					Bird_response.PlayOneShot (sounds.weakflapping);
+					Bird_response.PlayOneShot (sounds.birdflyslonghand);
 				}
 				         break;
 				
@@ -224,7 +231,7 @@ public class Lefthand : MonoBehaviour {
 						case GestureState.detected:
 				if (transPitch>30) {
 										hit = 2;
-										audio.PlayOneShot (script1.creak1);
+										Paddle_response.PlayOneShot (script1.creak1);
 										GameObject.Find ("Hands").SendMessage ("LHhit", hit);
 										Paddle = GestureState .action;
 								} 
@@ -267,7 +274,7 @@ public class Lefthand : MonoBehaviour {
 				if (script.levelcount==5 && script.bellcount<6){
 					
 					if (palmdown && Grab>0.4) {
-						audio.PlayOneShot (script1.bike );
+						Bike_response.PlayOneShot (script1.bike );
 						Bike = GestureState .detected;
 					}
 					
