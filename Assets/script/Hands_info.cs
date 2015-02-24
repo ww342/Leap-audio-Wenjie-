@@ -1,25 +1,41 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 using Leap;
 
-public class Righthand_info : MonoBehaviour {
+/// <summary>
+/// Hands_info. Update UI Text components with status info on Leap hand detection.
+/// </summary>
+public class Hands_info : MonoBehaviour {
 	Controller Controller;
+	public Text statusText;
+	public Text frameText;
+	public Text otherText;
 
-	// Use this for initialization
 	void Start () {
 		Controller = new Controller ();
+		if (statusText != null) {
+			statusText.text = "Controller object";
+		}
 	}
 	
-	// Update is called once per frame
 	void Update () {
-		//Frame variables
+		if (statusText != null) {
+			string status = (Controller.IsServiceConnected() ? "Svc" : "No Leap Service");
+			status += (Controller.HasFocus ? "" : ", no focus");
+			status += ", " + Controller.Devices.Count + " dev's";
+			status += ", " + (Controller.IsConnected ? "" : "not ") + "connected";
+			statusText.text = status;
+		}
 		Frame frame = Controller.Frame();
+		if (frameText != null) {
+			frameText.text = frame.Id.ToString();
+		}
 		int handnumbers = frame.Hands.Count;
 
 		//Hand variables
 		string [] handnames = new string[2] {"Left","Right"};
 		Hand rightmost = frame.Hands.Rightmost;
-
+		// TODO: data for left hand too?
 		float pitch = rightmost.Direction.Pitch* 180.0f/Mathf.PI ;
 		float roll= rightmost.PalmNormal.Roll * 180.0f/Mathf.PI;
 		float yaw= rightmost.Direction.Yaw * 180.0f/Mathf.PI;
@@ -37,7 +53,7 @@ public class Righthand_info : MonoBehaviour {
 		float elbow_x = rightmost.Arm.ElbowPosition.x;
 		float elbow_y = rightmost.Arm.ElbowPosition.y;
 		float elbow_z = rightmost.Arm.ElbowPosition.z;
-
+		
 		/*
 		int toolnum = rightmost.Tools.Count;
 		Tool paddle = rightmost.Tools [0];
@@ -52,27 +68,9 @@ public class Righthand_info : MonoBehaviour {
 		//Fingers variables
 		int extendedfingers = 0;
 
-		guiText.lineSpacing = 1.5F;
-		guiText.text = "Frame ID:"+ frame.Id +"\n"
-			           + "Hand Type: "+"\n"
-				     
-				       +"Palm Position:"+"\n"
-				       +"Pitch :  "  + "\n" 
-				       + "Yaw :  " + "\n"  
-				       + "Roll :  " +"\n"
-				       +" Radius :"+"\n"
-				       +" Grab :"+"\n"
-				+" Wrist:"+  "\n"
-				+" Elbow:"+ "\n"
-
-				//+ "\n"+ "tool number:"
-				;
-		
-		if ((rightmost.IsRight)&&(frame.Hands.Count >0)) {
-			guiText.lineSpacing = 1.5F;
-			guiText.text = "Frame ID:"+ frame.Id+"\n"
-				           + "Hand Type: " + handnames[1]+"\n"
-
+		if (otherText != null) {
+			if ((rightmost.IsRight)&&(frame.Hands.Count >0)) {
+				otherText.text = "Hand Type: " + handnames[1]+"\n"
 					+"Palm Position:"+rightmost.PalmPosition+"\n"
 					       +"Pitch :  " + pitch + "\n" 
 					       + "Yaw :  " + yaw + "\n" 
@@ -81,16 +79,17 @@ public class Righthand_info : MonoBehaviour {
 					        +" Grab :"+ Grab+ "\n"
 					        +" Wrist:"+  rightmost.Arm.WristPosition  +"\n"
 					+" Elbow:"+  rightmost.Arm.ElbowPosition +"\n"
-
 					+ rightmost.Fingers[0].Type().ToString()+ rightmost.Fingers[0].IsExtended+"\n"
 					+ rightmost.Fingers[1].Type().ToString() + rightmost.Fingers[1].IsExtended+"\n"
 					+ rightmost.Fingers[2].Type().ToString()+ rightmost.Fingers[2].IsExtended+"\n"
 					+ rightmost.Fingers[3].Type().ToString()+ rightmost.Fingers[3].IsExtended+"\n"
 					+ rightmost.Fingers[4].Type().ToString() + rightmost.Fingers[4].IsExtended+"\n"
 					+ rightmost.Fingers[4].TipVelocity +"\n"
-
 					//+ "\n"+ "tool number:" + toolnum 
 					;
+			} else {
+				otherText.text = "No right hand at the moment.";
+			}
 		}
 	}	
 }
