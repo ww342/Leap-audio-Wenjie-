@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Leap;
-[RequireComponent(typeof(AudioSource))]
 
+[RequireComponent(typeof(AudioSource))]
 public class Hands : MonoBehaviour {
 
 	Controller Controller = new Controller();
@@ -57,7 +57,6 @@ public class Hands : MonoBehaviour {
 		cooldownTime = MaxcooldownTime;
 		levelcount = -1;
 
-
 		Handfree = gameObject.AddComponent <AudioSource> ();
 		Handfree.clip = sounds.snore;
 		Handfree.loop = true;
@@ -65,13 +64,11 @@ public class Hands : MonoBehaviour {
 		Handfree.minDistance = 8;
 		Handfree.Play ();
 
-
 		musicControl_A = gameObject.AddComponent<AudioSource>();
 		musicControl_A.clip = sounds.fish;
 		musicControl_A.loop = true;
 		musicControl_A.minDistance = 10;
 		musicControl_A.Play ();
-
 
 		musicControl_B = gameObject.AddComponent<AudioSource>();
 		musicControl_B.clip = sounds.frog;

@@ -1,36 +1,24 @@
 ﻿using UnityEngine;
-using UnityEngine;
 using System.Collections;
 using Leap;
 
 public class Righthand_info : MonoBehaviour {
 	Controller Controller;
-	
-	
-	
+
 	// Use this for initialization
-	
 	void Start () {
-		
 		Controller = new Controller ();
-		
 	}
 	
-	
-	
 	// Update is called once per frame
-	
 	void Update () {
-
 		//Frame variables
 		Frame frame = Controller.Frame();
 		int handnumbers = frame.Hands.Count;
 
-
 		//Hand variables
 		string [] handnames = new string[2] {"Left","Right"};
 		Hand rightmost = frame.Hands.Rightmost;
-
 
 		float pitch = rightmost.Direction.Pitch* 180.0f/Mathf.PI ;
 		float roll= rightmost.PalmNormal.Roll * 180.0f/Mathf.PI;
@@ -61,14 +49,9 @@ public class Righthand_info : MonoBehaviour {
 		bool pinky =  rightmost.Fingers [4].IsExtended;
 		*/
 
-
 		//Fingers variables
-
-
 		int extendedfingers = 0;
 
-		
-		
 		guiText.lineSpacing = 1.5F;
 		guiText.text = "Frame ID:"+ frame.Id +"\n"
 			           + "Hand Type: "+"\n"
@@ -85,9 +68,7 @@ public class Righthand_info : MonoBehaviour {
 				//+ "\n"+ "tool number:"
 				;
 		
-		
 		if ((rightmost.IsRight)&&(frame.Hands.Count >0)) {
-			
 			guiText.lineSpacing = 1.5F;
 			guiText.text = "Frame ID:"+ frame.Id+"\n"
 				           + "Hand Type: " + handnames[1]+"\n"
@@ -107,15 +88,9 @@ public class Righthand_info : MonoBehaviour {
 					+ rightmost.Fingers[3].Type().ToString()+ rightmost.Fingers[3].IsExtended+"\n"
 					+ rightmost.Fingers[4].Type().ToString() + rightmost.Fingers[4].IsExtended+"\n"
 					+ rightmost.Fingers[4].TipVelocity +"\n"
-					 
 
 					//+ "\n"+ "tool number:" + toolnum 
 					;
-			
-			
 		}
-		
-		
-	}
-	
+	}	
 }

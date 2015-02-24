@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-[RequireComponent(typeof(AudioSource))]
 
-public class Narrator : MonoBehaviour {
+[RequireComponent(typeof(AudioSource))]
+public class Narrator : MonoBehaviour
+{
 	public AudioClip begin;
 	public AudioClip flowerpose;
 	public AudioClip flower1;
@@ -31,15 +32,14 @@ public class Narrator : MonoBehaviour {
 	public AudioClip birdwrong;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 	
 	}
 
-
-
-
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 	
 	}
 }

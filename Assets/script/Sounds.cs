@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+
 [RequireComponent(typeof(AudioSource))]
-
-public class Sounds : MonoBehaviour {
-
+public class Sounds : MonoBehaviour
+{
 	public AudioClip rightsleevelift;
 	public AudioClip rightsleevedown;
-
-
 	public AudioClip transitionhint1;
 	public AudioClip transitionhint2;
 	public AudioClip transitionhint3;
@@ -15,9 +13,7 @@ public class Sounds : MonoBehaviour {
 	public AudioClip middlewatch;
 	public AudioClip quickwatch;
 	public AudioClip watchbeep;
-
 	public AudioClip timetravel;
-
 	public AudioClip stoneskipping;
 	public AudioClip rockhitleave;
 	public AudioClip snore;
@@ -74,16 +70,6 @@ public class Sounds : MonoBehaviour {
 	public AudioClip boatshiffer;
 	public AudioClip boatshiffer1;
 	public AudioClip boatshiffer2;
-
 	public AudioClip longcreak;
 	public AudioClip longlean;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
