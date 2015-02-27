@@ -102,7 +102,8 @@ public class Hands : MonoBehaviour
 		//transtion_hint.pitch = 1;
 		transtion_hint.minDistance = 2;
 
-		Narrator = gameObject.AddComponent <AudioSource> ();
+		Narrator = GameObject.Find ("Narrator").GetComponent<AudioSource>();
+		//Narrator = gameObject.AddComponent <AudioSource> ();
 		Narrator.minDistance = 10;
 	}
 	

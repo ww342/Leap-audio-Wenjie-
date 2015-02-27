@@ -184,6 +184,8 @@ public class Righthand : MonoBehaviour
 			//GameObject.Find ("Hands").SendMessage ("WatchSurface", wristposition);
 
 			//Stone
+			AudioSource narrator = GameObject.Find ("Narrator").GetComponent<AudioSource>();
+			if(!narrator.isPlaying){
 			switch (Stone) {
 			
 			case GestureState.none:
@@ -408,6 +410,8 @@ public class Righthand : MonoBehaviour
 					cooldownTime = MaxcooldownTime;
 				}
 				break;
+			}
+
 			}
 
 			//Bird
