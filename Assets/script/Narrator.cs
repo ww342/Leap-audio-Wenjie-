@@ -41,5 +41,8 @@ public class Narrator : MonoBehaviour
 	void Update ()
 	{
 	
+
+
+
 	}
 }
