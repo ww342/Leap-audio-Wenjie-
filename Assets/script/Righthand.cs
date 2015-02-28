@@ -496,7 +496,7 @@ public class Righthand : MonoBehaviour
 			case GestureState.detected:
 				if (transPitch > 30) { 
 					hit = 2;
-					Paddle_response.PlayOneShot (script1.creak1);
+					audio.PlayOneShot (script1.creak1);
 					GameObject.Find ("Hands").SendMessage ("RHhit", hit);
 					Paddle = GestureState.action;
 				} 

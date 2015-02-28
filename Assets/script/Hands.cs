@@ -40,7 +40,8 @@ public class Hands : MonoBehaviour
 	private AudioSource Handfree;
 	private AudioSource watch;
 	private AudioSource transtion_hint;
-	public AudioSource Narrator;
+	public  AudioSource Narrator;
+
 	public  int stonecount;
 	public  int birdcount;
 	public  int paddlecount;
@@ -104,7 +105,7 @@ public class Hands : MonoBehaviour
 
 		Narrator = GameObject.Find ("Narrator").GetComponent<AudioSource>();
 		//Narrator = gameObject.AddComponent <AudioSource> ();
-		Narrator.minDistance = 10;
+		Narrator.minDistance = 50;
 	}
 	
 	void quickwatch ()
