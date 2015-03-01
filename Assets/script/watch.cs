@@ -19,9 +19,10 @@ public class watch : MonoBehaviour
 	}
 	
 	public GestureState TapWatch = GestureState.none;
-	public Sounds sounds;
-	public Hands script;
-	public Narrator voice;
+	public Sounds Sounds;
+	public Metrics Metrics;
+	public Hands Hands;
+	public Narrator Narrator;
 	public Vector3 wristcenter;
 	private float cooldownTime;
 	public float MaxcooldownTime;
@@ -35,13 +36,13 @@ public class watch : MonoBehaviour
 	void OnTriggerEnter (Collider other)
 	{
 		if (other.name == ("bone_distal_index_L")) {
-			audio.PlayOneShot (sounds.watchbeep, 5.0f);
+			audio.PlayOneShot (Sounds.watchbeep, 5.0f);
 
 			switch (TapWatch) {
 
 			case GestureState.none:
 				if (voiceon == 1) {
-					script.Narrator.Stop ();
+					Hands.narrator.Stop ();
 					voiceon = 0;
 					TapWatch = GestureState.cooldown;
 				}
@@ -54,8 +55,8 @@ public class watch : MonoBehaviour
 			case GestureState.other:
 				voiceon = 1;
 				TapWatch = GestureState.cooldown;
-				if (script.levelcount == 0) {
-					script.Narrator.PlayOneShot (voice.stonewrong);
+				if (Metrics.levelcount == 0) {
+					Hands.narrator.PlayOneShot (Narrator.stonewrong);
 				}
 				break;
 

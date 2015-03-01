@@ -6,10 +6,11 @@ using Leap;
 public class Hands : MonoBehaviour
 {
 	Controller Controller = new Controller ();
-	public Sounds sounds;
-	public Narrator voice;
-	public hint hint;
 
+	public Sounds Sounds;
+	public Narrator Narrator;
+	public Metrics Metrics;
+	
 	public enum HandState
 	{
 		none,
@@ -27,11 +28,12 @@ public class Hands : MonoBehaviour
 	public int lhhit;
 
 	//SOS GESTURE VARIABLES
+/*
 	public Vector3 watchposition;
 	public Vector3 tapwatch;
 	public Vector3 difference;
 	public float tappingdistance;
-
+*/
 	//
 	private AudioSource Ambience_A;
 	private AudioSource Ambience_B;
@@ -40,8 +42,9 @@ public class Hands : MonoBehaviour
 	private AudioSource Handfree;
 	private AudioSource watch;
 	private AudioSource transtion_hint;
-	public  AudioSource Narrator;
+	public AudioSource narrator;
 
+	/*
 	public  int stonecount;
 	public  int birdcount;
 	public  int paddlecount;
@@ -51,6 +54,7 @@ public class Hands : MonoBehaviour
 	public  int starcount;
 	public  int bellcount;
 	public  int wrongcount;
+	*/
 	public  int hands;
 
 	// Use this for initialization
@@ -58,29 +62,29 @@ public class Hands : MonoBehaviour
 	{
 		Controller = new Controller ();
 		cooldownTime = MaxcooldownTime;
-		levelcount = -1;
+		Metrics.levelcount = -1;
 
 		Handfree = gameObject.AddComponent<AudioSource> ();
-		Handfree.clip = sounds.snore;
+		Handfree.clip = Sounds.snore;
 		Handfree.loop = true;
 		Handfree.pitch = 2;
 		Handfree.minDistance = 8;
 		Handfree.Play ();
 
 		Ambience_A = gameObject.AddComponent<AudioSource> ();
-		Ambience_A.clip = sounds.fish;
+		Ambience_A.clip = Sounds.fish;
 		Ambience_A.loop = true;
 		Ambience_A.minDistance = 10;
 		Ambience_A.Play ();
 
 		Ambience_B = gameObject.AddComponent<AudioSource> ();
-		Ambience_B.clip = sounds.frog;
+		Ambience_B.clip = Sounds.frog;
 		Ambience_B.loop = true;
 		Ambience_B.minDistance = 10;
 		Ambience_B.Play ();
 
 		Ambience_C = gameObject.AddComponent <AudioSource> ();
-		Ambience_C.clip = sounds.lakewaveslapping;
+		Ambience_C.clip = Sounds.lakewaveslapping;
 		Ambience_C.loop = true;
 		Ambience_C.pitch = 1;
 		Ambience_C.minDistance = 6;
@@ -90,7 +94,7 @@ public class Hands : MonoBehaviour
 		Ambience_D.minDistance = 10;
 
 		watch = gameObject.AddComponent <AudioSource> ();
-		watch.clip = sounds.slowwatch;
+		watch.clip = Sounds.slowwatch;
 		watch.loop = true;
 		watch.minDistance = 20;
 		watch.Play ();
@@ -98,93 +102,93 @@ public class Hands : MonoBehaviour
 		transtion_hint = gameObject.AddComponent <AudioSource> ();
 
 		//transtion_hint.clip  = hint.Stone_correct_hint0;
-		transtion_hint.clip = sounds.transitionhint1;
+		transtion_hint.clip = Sounds.transitionhint1;
 		//transtion_hint .loop = true;
 		//transtion_hint.pitch = 1;
 		transtion_hint.minDistance = 2;
 
-		Narrator = GameObject.Find ("Narrator").GetComponent<AudioSource>();
-		//Narrator = gameObject.AddComponent <AudioSource> ();
-		Narrator.minDistance = 50;
+		narrator = GameObject.Find ("Narrator").GetComponent<AudioSource>();
+		//narrator = gameObject.AddComponent <AudioSource> ();
+		//narrator.minDistance = 50;
 	}
 	
 	void quickwatch ()
 	{
-		watch.clip = sounds.quickwatch;
+		watch.clip = Sounds.quickwatch;
 		watch.Play ();
 	}
 
 	void transitwatch ()
 	{
-		watch.clip = sounds.middlewatch;
+		watch.clip = Sounds.middlewatch;
 		watch.Play ();
 	}
 
 	void normalwatch ()
 	{
-		watch.clip = sounds.slowwatch;
+		watch.clip = Sounds.slowwatch;
 		watch.Play ();
 	}
 
 	void hint1 ()
 	{
-		transtion_hint.clip = sounds.transitionhint1;
+		transtion_hint.clip = Sounds.transitionhint1;
 		transtion_hint.Play ();
 	}
 
 	void hint2 ()
 	{
-		transtion_hint.clip = sounds.transitionhint2;
+		transtion_hint.clip = Sounds.transitionhint2;
 		transtion_hint.Play ();
 	}
 
 	void hint3 ()
 	{
-		transtion_hint.clip = sounds.transitionhint3;
+		transtion_hint.clip = Sounds.transitionhint3;
 		transtion_hint.Play ();
 	}
 
 	void playropepose ()
 	{
-		audio.PlayOneShot (voice.ropepose);
+		narrator.PlayOneShot (Narrator.ropepose);
 	}
 
 	void StoneCount ()
 	{
-		stonecount ++;
+		Metrics.stonecount ++;
 		//audio.PlayOneShot (stone);
 		//audio.PlayOneShot (hitfish);
 		GameObject.Find ("Northdown").SendMessage ("sound1");
 		GameObject.Find ("Northdown").SendMessage ("sound2");
 		GameObject.Find ("Northdown").SendMessage ("sound6");
 
-		if (stonecount == 1) {
-			Narrator.PlayOneShot (voice.stone1);
+		if (Metrics.stonecount == 1) {
+			narrator.PlayOneShot (Narrator.stone1);
 			Ambience_A.minDistance = 7;
 		}
 
-		if (stonecount == 2) {
-			Narrator.PlayOneShot (voice.stone2);
+		if (Metrics.stonecount == 2) {
+			narrator.PlayOneShot (Narrator.stone2);
 			Ambience_A.minDistance = 4;
 		}
 
-		if (stonecount == 3) {
-			Ambience_D.PlayOneShot (sounds.spash, 0.5f);
+		if (Metrics.stonecount == 3) {
+			Ambience_D.PlayOneShot (Sounds.spash, 0.5f);
 			LevelCount ();
 			Ambience_A.minDistance = 1;
 	
-			if (wrongcount <= 2) {
-				Narrator.PlayOneShot (voice.flowerpose);
-				Ambience_A.clip = sounds.duck;
+			if (Metrics.wrongcount <= 2) {
+				narrator.PlayOneShot (Narrator.flowerpose);
+				Ambience_A.clip = Sounds.duck;
 				Ambience_A.minDistance = 8;
 				Ambience_B.loop = true;
 				Ambience_A.Play ();
 			}
 
-			if (wrongcount > 2) {
-				Narrator.PlayOneShot (voice.stone3);
-				Ambience_D.PlayOneShot (sounds.birdstandonpaddle);
-				Ambience_A.clip = sounds.shortflapping;
+			if (Metrics.wrongcount > 2) {
+				narrator.PlayOneShot (Narrator.stone3);
+				Ambience_D.PlayOneShot (Sounds.birdstandonpaddle);
+				Ambience_A.clip = Sounds.shortflapping;
 				Ambience_A.minDistance = 20;
 				Ambience_A.loop = false;
 				Ambience_A.Play ();
@@ -194,111 +198,111 @@ public class Hands : MonoBehaviour
 	
 	void RopeCount ()
 	{
-		ropecount ++;
+		Metrics.ropecount ++;
 				
-		if (ropecount == 1) {
-			Ambience_D.PlayOneShot (sounds.rope);
-			Narrator.PlayOneShot (voice.rope1);
+		if (Metrics.ropecount == 1) {
+			Ambience_D.PlayOneShot (Sounds.rope);
+			narrator.PlayOneShot (Narrator.rope1);
 			Ambience_B.minDistance = 0;
-			Ambience_B.clip = sounds.crickets;
+			Ambience_B.clip = Sounds.crickets;
 		}
 		
-		if (ropecount == 2) {
-			Ambience_D.PlayOneShot (sounds.rope);
-			Narrator.PlayOneShot (voice.rope2);
+		if (Metrics.ropecount == 2) {
+			Ambience_D.PlayOneShot (Sounds.rope);
+			narrator.PlayOneShot (Narrator.rope2);
 			Ambience_B.minDistance = 2;
 		}
 
-		if (ropecount == 3) {
-			Narrator.PlayOneShot (voice.rope3);
-			Narrator.PlayOneShot (sounds.grass);
+		if (Metrics.ropecount == 3) {
+			narrator.PlayOneShot (Narrator.rope3);
+			Ambience_D.PlayOneShot (Sounds.grass);
 			Ambience_B.minDistance = 5;
 			Ambience_B.Play ();
 			LevelCount ();
-			wrongcount = 0;
+			Metrics.wrongcount = 0;
 		}
 	}
 	
 	void BirdCount ()
 	{
-		birdcount ++;
-		Ambience_D.PlayOneShot (sounds.bird);
+		Metrics.birdcount ++;
+		Ambience_D.PlayOneShot (Sounds.bird);
 
-		if (birdcount == 1) {
-			Narrator.PlayOneShot (voice.bird1);
+		if (Metrics.birdcount == 1) {
+			narrator.PlayOneShot (Narrator.bird1);
 			LevelCount ();
 		}
-		if (birdcount == 2) {
-			Narrator.PlayOneShot (voice.bird2);
-			Ambience_D.PlayOneShot (sounds.rain);
-			Ambience_A.clip = sounds.wave;
+		if (Metrics.birdcount == 2) {
+			narrator.PlayOneShot (Narrator.bird2);
+			Ambience_D.PlayOneShot (Sounds.rain);
+			Ambience_A.clip = Sounds.wave;
 			Ambience_A.loop = true;
 			Ambience_A.Play ();
 			LevelCount ();
-			wrongcount = 0;
+			Metrics.wrongcount = 0;
 		}
 	}
 
 	void FlowerCount ()
 	{
-		flowercount ++;
+		Metrics.flowercount ++;
 		        
-		if (flowercount == 1) {
-			Narrator.PlayOneShot (voice.flower1);
+		if (Metrics.flowercount == 1) {
+			narrator.PlayOneShot (Narrator.flower1);
 		}
 
-		if (flowercount == 4) {
-			wrongcount = 0;
+		if (Metrics.flowercount == 4) {
+			Metrics.wrongcount = 0;
 			Ambience_A.Stop ();
 			Ambience_A.minDistance = 20;
-			Ambience_A.clip = sounds.wave;
-			Ambience_D.PlayOneShot (sounds.landonflpping, 5.0f);
-			Ambience_D.PlayOneShot (sounds.birdstandonpaddle);
-			Narrator.PlayOneShot (voice.flyfromtree);
+			Ambience_A.clip = Sounds.wave;
+			Ambience_D.PlayOneShot (Sounds.landonflpping, 5.0f);
+			Ambience_D.PlayOneShot (Sounds.birdstandonpaddle);
+			narrator.PlayOneShot (Narrator.flyfromtree);
 		}
 
-		if (flowercount == 5) {
-			audio.PlayOneShot (sounds.leave);
+		if (Metrics.flowercount == 5) {
+			audio.PlayOneShot (Sounds.leave);
 		}
 
-		if (flowercount == 7) {
-			Ambience_D.PlayOneShot (sounds.leave);
+		if (Metrics.flowercount == 7) {
+			Ambience_D.PlayOneShot (Sounds.leave);
 		}
 
-		if (flowercount == 10) {
-			Ambience_D.PlayOneShot (sounds.leave);
-			Ambience_D.PlayOneShot (sounds.wind, 10.0f);
+		if (Metrics.flowercount == 10) {
+			Ambience_D.PlayOneShot (Sounds.leave);
+			Ambience_D.PlayOneShot (Sounds.wind, 10.0f);
 		}
 			            
-		if (flowercount == 12) {
-			Narrator.PlayOneShot (voice.tietheboat);
+		if (Metrics.flowercount == 12) {
+			narrator.PlayOneShot (Narrator.tietheboat);
 			//LevelCount ();
-			wrongcount = 0;
+			Metrics.wrongcount = 0;
 		}
 	}
 	
 	void BellCount ()
 	{
-		bellcount ++;
-		if (bellcount == 1) {
+		Metrics.bellcount ++;
+		if (Metrics.bellcount == 1) {
 			Ambience_B.minDistance = 10;
 		}
-		if (bellcount == 3) {
-			Ambience_D.PlayOneShot (sounds.lightning);
+		if (Metrics.bellcount == 3) {
+			Ambience_D.PlayOneShot (Sounds.lightning);
 		}
 
-		if (bellcount == 4) {
+		if (Metrics.bellcount == 4) {
 		}
 		
-		if (bellcount == 5) {
-			Ambience_D.PlayOneShot (sounds.wind);
-			Ambience_B.clip = sounds.grass;
+		if (Metrics.bellcount == 5) {
+			Ambience_D.PlayOneShot (Sounds.wind);
+			Ambience_B.clip = Sounds.grass;
 			Ambience_B .Play ();
 		}
 
-		if (bellcount == 6) {
-			Ambience_D.PlayOneShot (sounds.brake);
-			Narrator.PlayOneShot (voice.bell6);
+		if (Metrics.bellcount == 6) {
+			Ambience_D.PlayOneShot (Sounds.brake);
+			narrator.PlayOneShot (Narrator.bell6);
 
 			LevelCount ();
 		}
@@ -306,20 +310,20 @@ public class Hands : MonoBehaviour
 	
 	void StarCount ()
 	{
-		starcount ++;
+		Metrics.starcount ++;
 
-		if (starcount == 1) {
-			Ambience_D.PlayOneShot (sounds.lightning);
-			Narrator.PlayOneShot (voice.star1);
-			Ambience_D.PlayOneShot (sounds.footstep);
+		if (Metrics.starcount == 1) {
+			Ambience_D.PlayOneShot (Sounds.lightning);
+			narrator.PlayOneShot (Narrator.star1);
+			Ambience_D.PlayOneShot (Sounds.footstep);
 		}
-		if (starcount == 2) {
-			Narrator.PlayOneShot (voice.star2);
-			Ambience_D.PlayOneShot (sounds.footstep);
+		if (Metrics.starcount == 2) {
+			narrator.PlayOneShot (Narrator.star2);
+			Ambience_D.PlayOneShot (Sounds.footstep);
 		}
 		
-		if (starcount == 3) {
-			Narrator.PlayOneShot (voice.star3);
+		if (Metrics.starcount == 3) {
+			narrator.PlayOneShot (Narrator.star3);
 			Invoke ("Glow", 2);
 			Invoke ("Timetravel", 5);
 			Invoke ("watchstop", 8);
@@ -334,12 +338,12 @@ public class Hands : MonoBehaviour
 
 	void Glow ()
 	{
-		Ambience_D.PlayOneShot (sounds.glow);
+		Ambience_D.PlayOneShot (Sounds.glow);
 	}
 
 	void Timetravel ()
 	{
-		Ambience_D.PlayOneShot (sounds.timetravel);
+		Ambience_D.PlayOneShot (Sounds.timetravel);
 	}
 
 	void LHhit (int statenumber)
@@ -393,19 +397,19 @@ public class Hands : MonoBehaviour
 
 	void LevelCount ()
 	{
-		levelcount ++;
-		if (levelcount == 5) {
-			Ambience_D.PlayOneShot (sounds.wind);
+		Metrics.levelcount ++;
+		if (Metrics.levelcount == 5) {
+			Ambience_D.PlayOneShot (Sounds.wind);
 		}
-		if (levelcount == 6) {
-			Ambience_D.PlayOneShot (sounds.sky);
+		if (Metrics.levelcount == 6) {
+			Ambience_D.PlayOneShot (Sounds.sky);
 			Ambience_B.minDistance = 10;
 		}
 	}
 
 	void WrongCount ()
 	{
-		wrongcount ++;
+		Metrics.wrongcount ++;
 	}
 
 	/*void loadlandscene()
@@ -425,17 +429,17 @@ public class Hands : MonoBehaviour
 		Frame frame = Controller.Frame ();
 		int handnumbers = frame.Hands.Count;
 
-		if (levelcount == -1) {
+		if (Metrics.levelcount == -1) {
 			if (handnumbers > 0) {
 				Handfree.Stop ();
 				Handfree.loop = false;
 				//audio.PlayOneShot(begin);
 				LevelCount ();
-				Narrator.PlayOneShot (voice.begin);
+				narrator.PlayOneShot (Narrator.begin);
 			}
 		}
 
-		if (levelcount > -1 && levelcount < 6) {
+		if (Metrics.levelcount > -1 && Metrics.levelcount < 6) {
 			if (handnumbers < 1) {
 				/*
 				Handfree.pitch =3;
@@ -498,7 +502,7 @@ public class Hands : MonoBehaviour
 */
 
 		// Paddle
-		if (levelcount == 3) {
+		if (Metrics.levelcount == 3) {
 			switch (Paddle) {
 
 			case HandState.none:
@@ -513,13 +517,13 @@ public class Hands : MonoBehaviour
 			case HandState.onehand:
 				if (handnumbers == 1) {
 					if (rhhit == 2 && lhhit == 0) {
-						Ambience_D.PlayOneShot (sounds.paddlewrong);
+						Ambience_D.PlayOneShot (Sounds.paddlewrong);
 						WrongCount ();
 						Paddle = HandState.cooldown;
 					}
 		
 					if (lhhit == 2 && rhhit == 0) {
-						Ambience_D.PlayOneShot (sounds.paddlewrong);
+						Ambience_D.PlayOneShot (Sounds.paddlewrong);
 						WrongCount ();
 						Paddle = HandState.cooldown;
 					}
@@ -533,36 +537,36 @@ public class Hands : MonoBehaviour
 			case HandState.twohands:
 				if (handnumbers == 2) {
 					if (rhhit == 2 && lhhit == 2) {
-						paddlecount ++;
-						Ambience_D.PlayOneShot (sounds.paddle);
+						Metrics.paddlecount ++;
+						Ambience_D.PlayOneShot (Sounds.paddle);
 				
-						if (paddlecount == 1) {
-							Narrator.PlayOneShot (voice.paddle1);
+						if (Metrics.paddlecount == 1) {
+							narrator.PlayOneShot (Narrator.paddle1);
 							Ambience_A.minDistance = 5;
-							Ambience_D.PlayOneShot (sounds.lakewaveslapping);
+							Ambience_D.PlayOneShot (Sounds.lakewaveslapping);
 							Ambience_A.Play ();
 							Ambience_B.minDistance = 8;
 						}
-						if (paddlecount == 2) {
-							Narrator.PlayOneShot (voice.paddle2);
+						if (Metrics.paddlecount == 2) {
+							narrator.PlayOneShot (Narrator.paddle2);
 							Ambience_B.minDistance = 6;
 						}
-						if (paddlecount == 3) {
-							Narrator.PlayOneShot (voice.paddle3);
+						if (Metrics.paddlecount == 3) {
+							narrator.PlayOneShot (Narrator.paddle3);
 							Ambience_B.minDistance = 4;
 							Ambience_C.minDistance = 2;
 						}
-						if (paddlecount == 4) {
-							Narrator.PlayOneShot (voice.paddle4);
+						if (Metrics.paddlecount == 4) {
+							narrator.PlayOneShot (Narrator.paddle4);
 							Ambience_A.Stop ();
 							Ambience_B.minDistance = 1;
 							Ambience_C.minDistance = 1;
 							LevelCount ();
-							if (wrongcount > 2) {
+							if (Metrics.wrongcount > 2) {
 								Invoke ("playropepose", 5);
 							}
-							if (wrongcount <= 2) {
-								Narrator.PlayOneShot (voice.treepose);
+							if (Metrics.wrongcount <= 2) {
+								narrator.PlayOneShot (Narrator.treepose);
 							}
 						}
 
@@ -587,7 +591,7 @@ public class Hands : MonoBehaviour
 		}
 
 		//new bird
-		if (levelcount == 1 || levelcount == 2) {
+		if (Metrics.levelcount == 1 || Metrics.levelcount == 2) {
 			switch (Bird) {
 				
 			case HandState.none:
@@ -602,9 +606,9 @@ public class Hands : MonoBehaviour
 			case HandState.onehand:
 				if (handnumbers == 1) {
 					if (rhhit == 1 && lhhit == 0) {
-						Ambience_D.PlayOneShot (sounds.birdonboat);
-						Ambience_D.PlayOneShot (sounds.shortflapping);
-						Narrator.PlayOneShot (voice.birdwrong);
+						Ambience_D.PlayOneShot (Sounds.birdonboat);
+						Ambience_D.PlayOneShot (Sounds.shortflapping);
+						narrator.PlayOneShot (Narrator.birdwrong);
 						WrongCount ();
 						quickwatch ();
 						hint3 ();
@@ -612,9 +616,9 @@ public class Hands : MonoBehaviour
 					}
 					
 					if (lhhit == 1 && rhhit == 0) {
-						Ambience_D.PlayOneShot (sounds.birdonboat);
-						Ambience_D.PlayOneShot (sounds.shortflapping);
-						Narrator.PlayOneShot (voice.birdwrong);
+						Ambience_D.PlayOneShot (Sounds.birdonboat);
+						Ambience_D.PlayOneShot (Sounds.shortflapping);
+						narrator.PlayOneShot (Narrator.birdwrong);
 						WrongCount ();
 						quickwatch ();
 						hint3 ();
@@ -630,20 +634,20 @@ public class Hands : MonoBehaviour
 			case HandState.twohands:
 				if (handnumbers == 2) {
 					if (rhhit == 1 && lhhit == 1) {
-						birdcount ++;
+						Metrics.birdcount ++;
 						LevelCount ();
 						normalwatch ();
 						hint3 ();
-						Ambience_D.PlayOneShot (sounds.grabseed);
-						Ambience_D.PlayOneShot (sounds.bird);
+						Ambience_D.PlayOneShot (Sounds.grabseed);
+						Ambience_D.PlayOneShot (Sounds.bird);
 
-						if (birdcount == 1) {
-							Narrator.PlayOneShot (voice.bird1);
+						if (Metrics.birdcount == 1) {
+							narrator.PlayOneShot (Narrator.bird1);
 						}
 						
-						if (birdcount == 2) {
-							Narrator.PlayOneShot (voice.bird2);
-							Ambience_D.PlayOneShot (sounds.rain);
+						if (Metrics.birdcount == 2) {
+							narrator.PlayOneShot (Narrator.bird2);
+							Ambience_D.PlayOneShot (Sounds.rain);
 						}
 						Bird = HandState.cooldown;
 					}

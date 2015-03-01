@@ -4,12 +4,14 @@ using Leap;
 
 public class Lefthand : MonoBehaviour
 {
-	Controller Controller;
-	public Hands script;
-	public Sounds sounds;
-	public Narrator voice;
+	Controller Controller = new Controller ();
+
+	public Sounds Sounds;
+	public Narrator Narrator;
 	public hint hint;
-	public finger_left  script1;
+	public leftpalm leftpalm;
+	public finger_left finger_left;
+	public Metrics Metrics;
 
 	public enum GestureState
 	{
@@ -139,8 +141,8 @@ public class Lefthand : MonoBehaviour
 			switch (Bird) {
 				
 			case GestureState.none:
-				if (script.levelcount == 1 || script.levelcount == 2) {
-					if (script.wrongcount > 2 || script.flowercount == 4) {
+				if (Metrics.levelcount == 1 || Metrics.levelcount == 2) {
+					if (Metrics.wrongcount > 2 || Metrics.flowercount == 4) {
 						if (openhand && palmdown) {
 							Bird = GestureState .detected;
 						}
@@ -154,17 +156,17 @@ public class Lefthand : MonoBehaviour
 				}
 				if (Grab == 1) {
 					Bird = GestureState .ready;
-					Bird_response.PlayOneShot (sounds.panicflapping);
-					Bird_response.PlayOneShot (sounds.grabbird);
-					Bird_response.PlayOneShot (sounds.boatshiffer2, 5.0f);
+					Bird_response.PlayOneShot (Sounds.panicflapping);
+					Bird_response.PlayOneShot (Sounds.grabbird);
+					Bird_response.PlayOneShot (Sounds.boatshiffer2, 5.0f);
 				}
 				break;
 
 			case GestureState.ready:
 				if (Grab < 0.8) {
 					Bird = GestureState.none;
-					Bird_response.PlayOneShot (sounds.weakflapping);
-					Bird_response.PlayOneShot (sounds.birdflyslonghand);
+					Bird_response.PlayOneShot (Sounds.weakflapping);
+					Bird_response.PlayOneShot (Sounds.birdflyslonghand);
 				}
 				break;
 				
@@ -191,7 +193,7 @@ public class Lefthand : MonoBehaviour
 			switch (Paddle) {
 				
 			case GestureState.none:
-				if (script.levelcount == 3) {
+				if (Metrics.levelcount == 3) {
 					if (pitchforward && palmdown) {
 						Paddle = GestureState .detected;
 					}
@@ -201,7 +203,7 @@ public class Lefthand : MonoBehaviour
 			case GestureState.detected:
 				if (transPitch > 30) {
 					hit = 2;
-					audio.PlayOneShot (script1.creak1);
+					audio.PlayOneShot (finger_left.creak1);
 					GameObject.Find ("Hands").SendMessage ("LHhit", hit);
 					Paddle = GestureState .action;
 				} 
@@ -228,7 +230,7 @@ public class Lefthand : MonoBehaviour
 			switch (Bike) {
 				
 			case GestureState.none:
-				if (script.levelcount == 5) {
+				if (Metrics.levelcount == 5) {
 					if (pitchforward) {
 						Bike = GestureState.ready;
 					}
@@ -236,9 +238,9 @@ public class Lefthand : MonoBehaviour
 				break;
 				
 			case GestureState.ready:
-				if (script.levelcount == 5 && script.bellcount < 6) {
+				if (Metrics.levelcount == 5 && Metrics.bellcount < 6) {
 					if (palmdown && Grab > 0.4) {
-						Bike_response.PlayOneShot (script1.bike);
+						Bike_response.PlayOneShot (finger_left.bike);
 						Bike = GestureState .detected;
 					}
 				}

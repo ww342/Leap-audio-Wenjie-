@@ -1048,12 +1048,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530f5f0376e9641bcba619bddc38296a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: {fileID: 580846435}
-  voice: {fileID: 485923159}
+  Sounds: {fileID: 580846435}
+  Narrator: {fileID: 485923159}
   hint: {fileID: 953696198}
-  script: {fileID: 1080527653}
   rightpalm: {fileID: 679575042}
-  script1: {fileID: 1916112003}
+  finger_right: {fileID: 1916112003}
+  Metrics: {fileID: 269770586}
   Stone: 0
   Bird: 0
   Paddle: 0
@@ -1694,11 +1694,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 601c5d44d104a49ebb2a6ede2143f487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  script: {fileID: 1080527653}
-  sounds: {fileID: 580846435}
-  voice: {fileID: 485923159}
+  Sounds: {fileID: 580846435}
+  Narrator: {fileID: 485923159}
   hint: {fileID: 953696198}
-  script1: {fileID: 748403458}
+  leftpalm: {fileID: 701041835}
+  finger_left: {fileID: 748403458}
+  Metrics: {fileID: 269770586}
   Bird: 0
   Paddle: 0
   Bike: 0
@@ -1929,6 +1930,54 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &269770585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 269770587}
+  - 114: {fileID: 269770586}
+  m_Layer: 0
+  m_Name: Metrics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &269770586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 269770585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff1e5369bc03a456ea5d037f3a2ec892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stonecount: 0
+  birdcount: 0
+  paddlecount: 0
+  levelcount: 0
+  ropecount: 0
+  flowercount: 0
+  starcount: 0
+  bellcount: 0
+  wrongcount: 0
+--- !u!4 &269770587
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 269770585}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 130.812439, y: 233.3125, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
 --- !u!1 &310004782
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,9 +2234,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TapWatch: 0
-  sounds: {fileID: 580846435}
-  script: {fileID: 1080527653}
-  voice: {fileID: 485923159}
+  Sounds: {fileID: 580846435}
+  Metrics: {fileID: 269770586}
+  Hands: {fileID: 1080527653}
+  Narrator: {fileID: 485923159}
   wristcenter: {x: 0, y: 0, z: 0}
   MaxcooldownTime: 1
   voiceon: 0
@@ -6337,8 +6387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc0018ccf63b49d490b47f6fc7813cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  script: {fileID: 1080527653}
-  sounds: {fileID: 580846435}
+  Metrics: {fileID: 269770586}
   lake: {fileID: 8300000, guid: 8e652f280dde046c88641178d420e79a, type: 3}
   land: {fileID: 8300000, guid: 440593d4a38214547ad867b67e98e21b, type: 3}
 --- !u!1 &1058298454
@@ -6418,9 +6467,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d0c11f5bc194a6f8c7653d6820fe4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: {fileID: 580846435}
-  voice: {fileID: 485923159}
-  hint: {fileID: 953696198}
+  Sounds: {fileID: 580846435}
+  Narrator: {fileID: 485923159}
+  Metrics: {fileID: 269770586}
   Paddle: 0
   Bird: 0
   Bike: 0
@@ -6428,20 +6477,7 @@ MonoBehaviour:
   MaxcooldownTime1: 1
   rhhit: 0
   lhhit: 0
-  watchposition: {x: 0, y: 0, z: 0}
-  tapwatch: {x: 0, y: 0, z: 0}
-  difference: {x: 0, y: 0, z: 0}
-  tappingdistance: 0
-  Narrator: {fileID: 0}
-  stonecount: 0
-  birdcount: 0
-  paddlecount: 0
-  levelcount: 0
-  ropecount: 0
-  flowercount: 0
-  starcount: 0
-  bellcount: 0
-  wrongcount: 0
+  narrator: {fileID: 485923157}
   hands: 0
 --- !u!82 &1080527654
 AudioSource:

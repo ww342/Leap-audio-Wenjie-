@@ -5,12 +5,13 @@ using Leap;
 public class Righthand : MonoBehaviour
 {
 	Controller Controller = new Controller ();
-	public Sounds sounds;
-	public Narrator voice;
+
+	public Sounds Sounds;
+	public Narrator Narrator;
 	public hint hint;
-	public Hands script;
 	public rightpalm rightpalm;
-	public finger_right script1;
+	public finger_right finger_right;
+	public Metrics Metrics;
 
 	public enum GestureState
 	{
@@ -189,7 +190,7 @@ public class Righthand : MonoBehaviour
 			switch (Stone) {
 			
 			case GestureState.none:
-				if (script.levelcount == 0) {
+					if (Metrics.levelcount == 0) {
 					if (pitchforward && palmdown) {
 						Stone = GestureState .detected;
 					}
@@ -199,7 +200,7 @@ public class Righthand : MonoBehaviour
 			case GestureState.detected:
 								//if (transPitch > 10) {
 				if (!openhand && Grab > 0.8) {
-					Stone_response.PlayOneShot (sounds.grabstone);
+					Stone_response.PlayOneShot (Sounds.grabstone);
 					Stone = GestureState .action;
 					GameObject.Find ("Hands").SendMessage ("hint3");
 				}
@@ -211,7 +212,7 @@ public class Righthand : MonoBehaviour
 					GameObject.Find ("Hands").SendMessage ("transitwatch");
 					Stone = GestureState.none;
 					GameObject.Find ("Hands").SendMessage ("hint2");
-					Stone_response.PlayOneShot (script1.stonedrop);
+						Stone_response.PlayOneShot (finger_right.stonedrop);
 				}
 				if (Mathf.Abs (transWave_z_10) > 30) {
 				    //|| Mathf.Abs(losetrack_trans_z) >30)
@@ -257,7 +258,7 @@ public class Righthand : MonoBehaviour
 
 					if (transWave_y_10 < - 50) {
 						//GameObject.Find ("Hands").SendMessage ("normalwatch");
-						Stone_response.PlayOneShot (sounds.rightsleevelift);
+						Stone_response.PlayOneShot (Sounds.rightsleevelift);
 						GameObject.Find ("Hands").SendMessage ("hint3");
 						Stone = GestureState.ing;
 					}
@@ -267,7 +268,7 @@ public class Righthand : MonoBehaviour
 			case GestureState.ready:
 				if (Grab == 0) {
 					//audio.PlayOneShot (script.stonewrong);
-					Stone_response.PlayOneShot (sounds.waterdrop, 10.0f);
+					Stone_response.PlayOneShot (Sounds.waterdrop, 10.0f);
 					GameObject.Find ("Hands").SendMessage ("WrongCount");
 					GameObject.Find ("Hands").SendMessage ("hint2");
 					Stone = GestureState .none;
@@ -281,7 +282,7 @@ public class Righthand : MonoBehaviour
 						if (openhand) {
 							//audio.PlayOneShot (script.stonewrong);
 							GameObject.Find ("Hands").SendMessage ("quickwatch");
-							Stone_response.PlayOneShot (sounds.waterdrop, 10.0f);
+							Stone_response.PlayOneShot (Sounds.waterdrop, 10.0f);
 							GameObject.Find ("Hands").SendMessage ("hint1");
 							GameObject.Find ("Hands").SendMessage ("WrongCount");
 							Stone = GestureState.none;
@@ -289,7 +290,7 @@ public class Righthand : MonoBehaviour
 					}
 					if (transWave_y_10 < - 50) {
 						GameObject.Find ("Hands").SendMessage ("hint3");
-						Stone_response.PlayOneShot (sounds.rightsleevelift, 5.0f);
+						Stone_response.PlayOneShot (Sounds.rightsleevelift, 5.0f);
 						GameObject.Find ("Hands").SendMessage ("normalwatch");
 						Stone = GestureState.ing;
 					}
@@ -334,7 +335,7 @@ public class Righthand : MonoBehaviour
 				if (openhand && wristforward) {
 					if ((transWave_y_10 > 10 && transWave_z_3 > 5) || (losetrack_trans_y > 10)) {
 						if (wristmiddle) {
-							Stone_response.PlayOneShot (sounds.rightsleevedown, 3.0f);
+							Stone_response.PlayOneShot (Sounds.rightsleevedown, 3.0f);
 							GameObject.Find ("Hands").SendMessage ("StoneCount");
 							GameObject.Find ("Hands").SendMessage ("normalwatch");
 							audio.PlayOneShot (hint.Stone_correct_hint4);
@@ -347,13 +348,13 @@ public class Righthand : MonoBehaviour
 							Stone = GestureState .none;
 						}
 						if ((transWave_y_10 < 10 && transWave_z_3 < 10) || (losetrack_trans_y < 10 && losetrack_trans_z < 10)) {
-							Stone_response.PlayOneShot (script1.stonedrop, 10.0f);
+								Stone_response.PlayOneShot (finger_right.stonedrop, 10.0f);
 							GameObject.Find ("Hands").SendMessage ("quickwatch");
 							Stone = GestureState .none;
 						}
 						if ((transWave_y_10 < 10 && transWave_z_3 > 10) || (losetrack_trans_y < 10 && losetrack_trans_z > 10)) {
-							Stone_response.PlayOneShot (sounds.waterdrop, 10.0f);
-							Stone_response.PlayOneShot (sounds.longlean);
+							Stone_response.PlayOneShot (Sounds.waterdrop, 10.0f);
+							Stone_response.PlayOneShot (Sounds.longlean);
 							GameObject.Find ("Hands").SendMessage ("quickwatch");
 							Stone = GestureState .none;
 						}
@@ -366,7 +367,7 @@ public class Righthand : MonoBehaviour
 							GameObject.Find ("Hands").SendMessage ("quickwatch");
 							GameObject.Find ("Northwest").SendMessage ("sound1");
 							GameObject.Find ("Northwest").SendMessage ("sound2");
-							Stone_response.PlayOneShot (script1.creak1);
+								Stone_response.PlayOneShot (finger_right.creak1);
 							Stone = GestureState .none;
 						}
 						if (wristmiddle) {
@@ -376,7 +377,7 @@ public class Righthand : MonoBehaviour
 						}
 					}
 					if ((transWave_y_10 < 10) || (losetrack_trans_y < 10)) {
-						Stone_response.PlayOneShot (script1.stonedrop, 10.0f);
+						Stone_response.PlayOneShot (finger_right.stonedrop, 10.0f);
 						Stone = GestureState .none;
 					}
 				}
@@ -387,7 +388,7 @@ public class Righthand : MonoBehaviour
 							GameObject.Find ("Hands").SendMessage ("quickwatch");
 							GameObject.Find ("Northeast").SendMessage ("sound1");
 							GameObject.Find ("Northeast").SendMessage ("sound2");
-							Stone_response.PlayOneShot (script1.creak1);
+								Stone_response.PlayOneShot (finger_right.creak1);
 							Stone = GestureState .none;
 						}
 						if (wristmiddle) {
@@ -397,7 +398,7 @@ public class Righthand : MonoBehaviour
 						}
 					}
 					if ((transWave_y_10 < 10) || (losetrack_trans_y < 10)) {
-						Stone_response.PlayOneShot (script1.stonedrop, 10.0f);
+							Stone_response.PlayOneShot (finger_right.stonedrop, 10.0f);
 						Stone = GestureState .none;
 					}
 				}
@@ -418,8 +419,8 @@ public class Righthand : MonoBehaviour
 			switch (Bird) {
 			
 			case GestureState.none:
-				if (script.levelcount == 1 || script.levelcount == 2) {
-					if (script.wrongcount > 2 || script.flowercount == 4) {
+				if (Metrics.levelcount == 1 || Metrics.levelcount == 2) {
+					if (Metrics.wrongcount > 2 || Metrics.flowercount == 4) {
 						if (openhand && palmdown) {
 							Bird = GestureState .detected;
 						}
@@ -435,21 +436,21 @@ public class Righthand : MonoBehaviour
 					Bird = GestureState.ready;
 					GameObject.Find ("Hands").SendMessage ("quickwatch");
 					GameObject.Find ("Hands").SendMessage ("hint1");
-					Bird_response.PlayOneShot (sounds.panicflapping);
-					Bird_response.PlayOneShot (sounds.grabbird);
-					Bird_response.PlayOneShot (sounds.boatshiffer2, 5.0f);
+					Bird_response.PlayOneShot (Sounds.panicflapping);
+					Bird_response.PlayOneShot (Sounds.grabbird);
+					Bird_response.PlayOneShot (Sounds.boatshiffer2, 5.0f);
 				}
 				if (transWave_y_3 > 30) {
 					Bird = GestureState .none;
 					GameObject.Find ("Hands").SendMessage ("quickwatch");
 					GameObject.Find ("Hands").SendMessage ("hint1");
-					Bird_response.PlayOneShot (sounds.seedpouring);
-					Bird_response.PlayOneShot (sounds.panicbird);
-					Bird_response.PlayOneShot (sounds.panicflapping);
-					Bird_response.PlayOneShot (sounds.panicfrog);
-					Bird_response.PlayOneShot (sounds.boatshake, 5.0f);
-					Bird_response.PlayOneShot (sounds.longlean);
-					Bird_response.PlayOneShot (sounds.birdpecking);
+					Bird_response.PlayOneShot (Sounds.seedpouring);
+					Bird_response.PlayOneShot (Sounds.panicbird);
+					Bird_response.PlayOneShot (Sounds.panicflapping);
+					Bird_response.PlayOneShot (Sounds.panicfrog);
+					Bird_response.PlayOneShot (Sounds.boatshake, 5.0f);
+					Bird_response.PlayOneShot (Sounds.longlean);
+					Bird_response.PlayOneShot (Sounds.birdpecking);
 				}
 				break;
 
@@ -458,8 +459,8 @@ public class Righthand : MonoBehaviour
 					Bird = GestureState.none;
 					GameObject.Find ("Hands").SendMessage ("transitwatch");
 					GameObject.Find ("Hands").SendMessage ("hint2");
-					audio.PlayOneShot (sounds.weakflapping);
-					audio.PlayOneShot (sounds.birdflyslonghand);
+					audio.PlayOneShot (Sounds.weakflapping);
+					audio.PlayOneShot (Sounds.birdflyslonghand);
 				}
 				break;
 			
@@ -486,7 +487,7 @@ public class Righthand : MonoBehaviour
 			switch (Paddle) {
 			
 			case GestureState.none:
-				if (script.levelcount == 3) {
+				if (Metrics.levelcount == 3) {
 					if (pitchforward && palmdown) {
 						Paddle = GestureState .detected;
 					}
@@ -496,7 +497,7 @@ public class Righthand : MonoBehaviour
 			case GestureState.detected:
 				if (transPitch > 30) { 
 					hit = 2;
-					audio.PlayOneShot (script1.creak1);
+					audio.PlayOneShot (finger_right.creak1);
 					GameObject.Find ("Hands").SendMessage ("RHhit", hit);
 					Paddle = GestureState.action;
 				} 
@@ -521,8 +522,8 @@ public class Righthand : MonoBehaviour
 			switch (Rope) {
 				
 			case GestureState.none:
-				if (script.levelcount == 4) {
-					if (script.wrongcount > 2 || script.flowercount == 12) {
+				if (Metrics.levelcount == 4) {
+					if (Metrics.wrongcount > 2 || Metrics.flowercount == 12) {
 						if (palmright) {
 							Rope = GestureState.ready;
 						}
@@ -531,8 +532,8 @@ public class Righthand : MonoBehaviour
 				break;
 
 			case  GestureState.ready:
-				if (script.levelcount == 4) {
-					if (script.wrongcount > 2 || script.flowercount == 12) {
+				if (Metrics.levelcount == 4) {
+					if (Metrics.wrongcount > 2 || Metrics.flowercount == 12) {
 						if (!openhand) {
 							if (transWave_z_10 > 50) {
 								Rope = GestureState .detected;
@@ -580,7 +581,7 @@ public class Righthand : MonoBehaviour
 			switch (Flower) {
 			
 			case GestureState.none:
-				if (script.levelcount == 1 && script.wrongcount <= 2 && script.flowercount < 4) {
+				if (Metrics.levelcount == 1 && Metrics.wrongcount <= 2 && Metrics.flowercount < 4) {
 					if (pitchforward && palmdown) {
 						Flower = GestureState .detected;
 					}
@@ -596,11 +597,11 @@ public class Righthand : MonoBehaviour
 			case GestureState.action:
 				if (palmup) {//transRoll > 50 && transRoll < 120 && Pinch > 0.8)
 					GameObject.Find ("Hands").SendMessage ("FlowerCount");
-					Flower_response.PlayOneShot (sounds.flower);
+					Flower_response.PlayOneShot (Sounds.flower);
 					Flower = GestureState .cooldown;	
 				}
 				if (transRoll > 50 && transRoll < 120 && Pinch < 0.5) {
-					Flower_response.PlayOneShot (sounds.paddlewrong);
+					Flower_response.PlayOneShot (Sounds.paddlewrong);
 					Flower = GestureState .cooldown;	
 				}
 				break;
@@ -619,7 +620,7 @@ public class Righthand : MonoBehaviour
 			switch (Tree) {
 			
 			case GestureState.none:
-				if (script.levelcount == 4 && script.wrongcount <= 2 && script.flowercount < 12) {
+				if (Metrics.levelcount == 4 && Metrics.wrongcount <= 2 && Metrics.flowercount < 12) {
 					if (palmleft) {
 						Tree = GestureState .detected;
 					}
@@ -627,7 +628,7 @@ public class Righthand : MonoBehaviour
 				break;
 			
 			case GestureState.detected:
-				if (script.levelcount == 4 && script.wrongcount <= 2 && script.flowercount < 12) {
+				if (Metrics.levelcount == 4 && Metrics.wrongcount <= 2 && Metrics.flowercount < 12) {
 					if (!ring.IsExtended) {
 						Tree = GestureState .action;
 					}
@@ -654,7 +655,7 @@ public class Righthand : MonoBehaviour
 			switch (Bike) {
 			
 			case GestureState.none:
-				if (script.levelcount == 5) {
+				if (Metrics.levelcount == 5) {
 					if (pitchforward) {
 						Bike = GestureState.ready;
 					}
@@ -662,9 +663,9 @@ public class Righthand : MonoBehaviour
 				break;
 			
 			case GestureState.ready:
-				if (script.levelcount == 5 && script.bellcount < 6) {
+				if (Metrics.levelcount == 5 && Metrics.bellcount < 6) {
 					if (palmdown && Grab > 0.4 && thumb.IsExtended) {
-						Bike_response.PlayOneShot (script1.bike);
+						Bike_response.PlayOneShot (finger_right.bike);
 						Bike = GestureState .detected;
 					}
 				}
@@ -672,7 +673,7 @@ public class Righthand : MonoBehaviour
 			
 			case GestureState.detected:
 				if (!thumb.IsExtended) {
-					Bike_response.PlayOneShot (script1.bell);
+					Bike_response.PlayOneShot (finger_right.bell);
 					GameObject.Find ("Hands").SendMessage ("BellCount");
 					Bike = GestureState.action;
 				
@@ -696,7 +697,7 @@ public class Righthand : MonoBehaviour
 			switch (Star) {
 			
 			case GestureState.none:
-				if (script.levelcount == 6) {
+				if (Metrics.levelcount == 6) {
 					if (pitchupforward) {
 						Star = GestureState.ready;
 					}
@@ -714,7 +715,7 @@ public class Righthand : MonoBehaviour
 			case GestureState.detected:
 				//if(transYaw>3){
 				if (palmin) {
-					Star_response.PlayOneShot (sounds.star);
+					Star_response.PlayOneShot (Sounds.star);
 					Star = GestureState .action;
 				}
 				break;
@@ -722,8 +723,8 @@ public class Righthand : MonoBehaviour
 			case GestureState.action:
 				if (palmup) {
 					GameObject.Find ("Hands").SendMessage ("StarCount");
-					Star_response.PlayOneShot (sounds.win);
-					Star_response.PlayOneShot (sounds.shiny);
+					Star_response.PlayOneShot (Sounds.win);
+					Star_response.PlayOneShot (Sounds.shiny);
 					Star = GestureState .cooldown;	
 				}
 				break;

@@ -4,10 +4,10 @@
 public class bgm : MonoBehaviour
 {
 
-	public Hands script;
-	public Sounds sounds;
+	public Metrics Metrics;
 	public AudioClip lake;
 	public AudioClip land;
+
 
 	// Use this for initialization
 
@@ -27,7 +27,7 @@ public class bgm : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (script.levelcount == 4) {
+		if (Metrics.levelcount == 4) {
 			audio.Stop ();
 			audio.clip = land;
 			audio.loop = false;
