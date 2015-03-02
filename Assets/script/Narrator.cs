@@ -31,17 +31,17 @@ public class Narrator : MonoBehaviour
 	public AudioClip stonewrong;
 	public AudioClip birdwrong;
 
+
+
 	// Use this for initialization
 	void Start ()
 	{
-	
+
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-	
-
 
 
 	}

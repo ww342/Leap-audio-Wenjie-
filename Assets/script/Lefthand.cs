@@ -138,16 +138,23 @@ public class Lefthand : MonoBehaviour
 			//keep sending left hand index tip position to script"Hands" to check SOS WATCH TAPPING MESSAGE 
 			//GameObject.Find ("Hands").SendMessage ("TaptheWatch", indextip);
 
-			switch (Bird) {
+
+
+			// Bird
+
+			if (Metrics.levelcount == 1 || Metrics.levelcount == 2) {
+				if (Metrics.wrongcount > 2 || Metrics.flowercount == 4) {
+					if(!Metrics.Nar_Check){
+
+					switch (Bird) {
 				
 			case GestureState.none:
-				if (Metrics.levelcount == 1 || Metrics.levelcount == 2) {
-					if (Metrics.wrongcount > 2 || Metrics.flowercount == 4) {
+
 						if (openhand && palmdown) {
 							Bird = GestureState .detected;
 						}
-					}
-				}
+					
+				
 				break;
 				
 			case GestureState.detected:
@@ -189,15 +196,22 @@ public class Lefthand : MonoBehaviour
 				break;
 			}
 
+			}
+			}
+			}
+
 			// Paddle
+
+			if (Metrics.levelcount == 3) {
+				if(!Metrics.Nar_Check){
 			switch (Paddle) {
 				
 			case GestureState.none:
-				if (Metrics.levelcount == 3) {
+
 					if (pitchforward && palmdown) {
 						Paddle = GestureState .detected;
 					}
-				}
+			
 				break;
 				
 			case GestureState.detected:
@@ -227,14 +241,22 @@ public class Lefthand : MonoBehaviour
 				break;
 			}
 
+			}
+			}
+
+
+			//Bike
+			if (Metrics.levelcount == 5) {
+				if(!Metrics.Nar_Check ){
+
 			switch (Bike) {
 				
 			case GestureState.none:
-				if (Metrics.levelcount == 5) {
+
 					if (pitchforward) {
 						Bike = GestureState.ready;
 					}
-				}
+				
 				break;
 				
 			case GestureState.ready:
@@ -265,6 +287,8 @@ public class Lefthand : MonoBehaviour
 					cooldownTime = MaxcooldownTime;
 				}
 				break;
+			    }
+				}
 			}
 		}
 	}
