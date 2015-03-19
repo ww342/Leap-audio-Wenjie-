@@ -25,7 +25,7 @@ public class Northdown : MonoBehaviour
 
 		sound2_once = gameObject.AddComponent <AudioSource> ();
 		sound2_once.clip = sounds.hitfish;
-		sound2_once.minDistance = 200;
+		sound2_once.minDistance = 100;
 
 		sound3_once = gameObject.AddComponent <AudioSource> ();
 		sound3_once.clip = sounds.stoneskipping;

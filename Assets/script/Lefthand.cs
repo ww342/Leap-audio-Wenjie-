@@ -29,13 +29,7 @@ public class Lefthand : MonoBehaviour
 	public float MaxcooldownTime;
 	public float MaxcooldownTime1;
 	public int hit;
-	private AudioSource Stone_response;
-	private AudioSource Bird_response;
-	private AudioSource Flower_response;
-	private AudioSource Paddle_response;
-	private AudioSource Rope_response;
-	private AudioSource Bike_response;
-	private AudioSource Star_response;
+
 	private AudioSource Gesturehint;
 
 	// Use this for initialization
@@ -163,17 +157,17 @@ public class Lefthand : MonoBehaviour
 				}
 				if (Grab == 1) {
 					Bird = GestureState .ready;
-					Bird_response.PlayOneShot (Sounds.panicflapping);
-					Bird_response.PlayOneShot (Sounds.grabbird);
-					Bird_response.PlayOneShot (Sounds.boatshiffer2, 5.0f);
+					audio.PlayOneShot (Sounds.panicflapping);
+					audio.PlayOneShot (Sounds.grabbird);
+					audio.PlayOneShot (Sounds.boatshiffer2, 5.0f);
 				}
 				break;
 
 			case GestureState.ready:
 				if (Grab < 0.8) {
 					Bird = GestureState.none;
-					Bird_response.PlayOneShot (Sounds.weakflapping);
-					Bird_response.PlayOneShot (Sounds.birdflyslonghand);
+					audio.PlayOneShot (Sounds.weakflapping);
+					audio.PlayOneShot (Sounds.birdflyslonghand);
 				}
 				break;
 				
@@ -246,6 +240,8 @@ public class Lefthand : MonoBehaviour
 
 
 			//Bike
+
+
 			if (Metrics.levelcount == 5) {
 				if(!Metrics.Nar_Check ){
 
@@ -255,30 +251,38 @@ public class Lefthand : MonoBehaviour
 
 					if (pitchforward) {
 						Bike = GestureState.ready;
-					}
+			}
 				
-				break;
+			break;
+
+
 				
 			case GestureState.ready:
+
 				if (Metrics.levelcount == 5 && Metrics.bellcount < 6) {
+
 					if (palmdown && Grab > 0.4) {
-						Bike_response.PlayOneShot (finger_left.bike);
+
+						audio.PlayOneShot(finger_left.bike);
 						Bike = GestureState .detected;
+
 					}
 				}
-				break;
+			break;
+
+
 				
 			case GestureState.detected:
 				//if(middle.IsExtended){
 				Bike = GestureState .action;
 				//}
-				break;
+			break;
 
 			case GestureState.action:
 				//if(!middle.IsExtended){
 				Bike = GestureState .cooldown;	
 				//}
-				break;
+			break;
 
 			case GestureState.cooldown:
 				cooldownTime -= Time.deltaTime;
@@ -286,8 +290,12 @@ public class Lefthand : MonoBehaviour
 					Bike = GestureState.ready;
 					cooldownTime = MaxcooldownTime;
 				}
-				break;
+			break;
+
 			    }
+
+
+
 				}
 			}
 		}

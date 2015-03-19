@@ -42,19 +42,9 @@ public class Hands : MonoBehaviour
 	private AudioSource Handfree;
 	private AudioSource watch;
 	private AudioSource transtion_hint;
-	//private AudioSource narrator;
 
-	/*
-	public  int stonecount;
-	public  int birdcount;
-	public  int paddlecount;
-	public  int levelcount;
-	public  int ropecount;
-	public  int flowercount;
-	public  int starcount;
-	public  int bellcount;
-	public  int wrongcount;
-	*/
+
+
 	public  int hands;
 
 	//public float VoiceLength;
@@ -77,11 +67,13 @@ public class Hands : MonoBehaviour
 		Handfree.minDistance = 8;
 		Handfree.Play ();
 
+
 		Ambience_A = gameObject.AddComponent<AudioSource> ();
 		Ambience_A.clip = Sounds.fish;
 		Ambience_A.loop = true;
 		Ambience_A.minDistance = 10;
-		Ambience_A.Play ();
+		//Ambience_A.Play ();
+
 
 		Ambience_B = gameObject.AddComponent<AudioSource> ();
 		Ambience_B.clip = Sounds.frog;
@@ -102,7 +94,7 @@ public class Hands : MonoBehaviour
 		watch = gameObject.AddComponent <AudioSource> ();
 		watch.clip = Sounds.slowwatch;
 		watch.loop = true;
-		watch.minDistance = 20;
+		watch.minDistance = 30;
 		watch.Play ();
 
 		transtion_hint = gameObject.AddComponent <AudioSource> ();
@@ -166,6 +158,7 @@ public class Hands : MonoBehaviour
 		Metrics.stonecount ++;
 		//audio.PlayOneShot (stone);
 		//audio.PlayOneShot (hitfish);
+		//normalwatch ();
 		GameObject.Find ("Northdown").SendMessage ("sound1");
 		GameObject.Find ("Northdown").SendMessage ("sound2");
 		GameObject.Find ("Northdown").SendMessage ("sound6");
@@ -334,6 +327,7 @@ public class Hands : MonoBehaviour
 			Ambience_D.PlayOneShot (Sounds.rain);
 			Ambience_A.clip = Sounds.wave;
 			Ambience_A.loop = true;
+			Ambience_A.minDistance = 8;
 			Ambience_A.Play ();
 			Metrics.wrongcount = 0;
 		}
@@ -354,6 +348,7 @@ public class Hands : MonoBehaviour
 	void FlowerCount ()
 	{
 		Metrics.flowercount ++;
+		audio.PlayOneShot (Sounds.flower);
 		        
 		if (Metrics.flowercount == 1) {
 			Narrator.audio.PlayOneShot (Narrator.flower1);
@@ -364,7 +359,7 @@ public class Hands : MonoBehaviour
 		if (Metrics.flowercount == 4) {
 			Metrics.wrongcount = 0;
 			Ambience_A.Stop ();
-			Ambience_A.minDistance = 20;
+			Ambience_A.minDistance = 8;
 			Ambience_A.clip = Sounds.wave;
 			Ambience_D.PlayOneShot (Sounds.landonflpping, 5.0f);
 			Ambience_D.PlayOneShot (Sounds.birdstandonpaddle);
@@ -384,7 +379,7 @@ public class Hands : MonoBehaviour
 
 		if (Metrics.flowercount == 10) {
 			Ambience_D.PlayOneShot (Sounds.leave);
-			Ambience_D.PlayOneShot (Sounds.wind, 10.0f);
+			Ambience_D.PlayOneShot (Sounds.wind, 5.0f);
 		}
 			            
 		if (Metrics.flowercount == 12) {
@@ -399,6 +394,7 @@ public class Hands : MonoBehaviour
 	void BellCount ()
 	{
 		Metrics.bellcount ++;
+
 		if (Metrics.bellcount == 1) {
 			Ambience_B.minDistance = 10;
 		}
@@ -410,12 +406,14 @@ public class Hands : MonoBehaviour
 		}
 		
 		if (Metrics.bellcount == 5) {
+
 			Ambience_D.PlayOneShot (Sounds.wind);
 			Ambience_B.clip = Sounds.grass;
 			Ambience_B .Play ();
 		}
 
 		if (Metrics.bellcount == 6) {
+
 			Ambience_D.PlayOneShot (Sounds.brake);
 			Narrator.audio.PlayOneShot (Narrator.bell6);
 			Metrics.Nar_Check= true;
@@ -438,13 +436,17 @@ public class Hands : MonoBehaviour
 			Ambience_D.PlayOneShot (Sounds.lightning);
 			Ambience_D.PlayOneShot (Sounds.footstep);
 		}
+
+
 		if (Metrics.starcount == 2) {
+
 			Narrator.audio.PlayOneShot (Narrator.star2);
 			Metrics.Nar_Check= true;
 			Metrics.VoiceLength = Narrator.star2.length;
 
 			Ambience_D.PlayOneShot (Sounds.footstep);
 		}
+
 		
 		if (Metrics.starcount == 3) {
 			Narrator.audio.PlayOneShot (Narrator.star3);
@@ -452,7 +454,7 @@ public class Hands : MonoBehaviour
 			Metrics.VoiceLength = Narrator.star3.length;
 
 			Invoke ("Glow", 2);
-			Invoke ("Timetravel", 5);
+			Invoke ("Timetravel", 6);
 			Invoke ("watchstop", 8);
 			LevelCount ();
 		}
@@ -470,7 +472,7 @@ public class Hands : MonoBehaviour
 
 	void Timetravel ()
 	{
-		Ambience_D.PlayOneShot (Sounds.timetravel);
+		Ambience_D.PlayOneShot (Sounds.timetravel,2.0f);
 	}
 
 	void LHhit (int statenumber)
@@ -677,12 +679,14 @@ public class Hands : MonoBehaviour
 										if (handnumbers == 1) {
 												if (rhhit == 2 && lhhit == 0) {
 														Ambience_D.PlayOneShot (Sounds.paddlewrong);
+							                            GameObject.Find ("Hands").SendMessage ("quickwatch");
 														WrongCount ();
 														Paddle = HandState.cooldown;
 												}
 		
 												if (lhhit == 2 && rhhit == 0) {
 														Ambience_D.PlayOneShot (Sounds.paddlewrong);
+							                            GameObject.Find ("Hands").SendMessage ("quickwatch");
 														WrongCount ();
 														Paddle = HandState.cooldown;
 												}
@@ -690,6 +694,7 @@ public class Hands : MonoBehaviour
 
 										if (handnumbers == 2) {
 												Paddle = HandState.twohands;
+						                        GameObject.Find ("Hands").SendMessage ("transitwatch");
 										}
 										break;
 
@@ -697,7 +702,7 @@ public class Hands : MonoBehaviour
 										if (handnumbers == 2) {
 												if (rhhit == 2 && lhhit == 2) {
 														PaddleCount ();
-
+							                            GameObject.Find ("Hands").SendMessage ("normalwatch");
 
 														Paddle = HandState.cooldown;
 												}
@@ -735,6 +740,7 @@ public class Hands : MonoBehaviour
 										if (handnumbers == 1) {
 												Bird = HandState.onehand;
 										}
+
 										if (handnumbers == 2) {
 												Bird = HandState.twohands;
 										}
@@ -757,6 +763,7 @@ public class Hands : MonoBehaviour
 												Bird = HandState.twohands;
 										}
 										break;
+
 				
 								case HandState.twohands:
 										if (handnumbers == 2) {
@@ -769,8 +776,8 @@ public class Hands : MonoBehaviour
 										if (handnumbers == 1) { 
 												Bird = HandState.onehand;
 										}
-				
 										break;
+
 
 								case HandState.cooldown:
 										cooldownTime -= Time.deltaTime;
@@ -780,6 +787,7 @@ public class Hands : MonoBehaviour
 										}
 										break;
 								}
+
 						}
 				}
 	}

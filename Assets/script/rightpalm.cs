@@ -16,6 +16,7 @@ public class rightpalm : MonoBehaviour
 	public float losetrack_z;
 	
 	void PositionSave ()
+
 	{
 		PlayerPrefs.SetFloat ("x", transform.position.x);
 		PlayerPrefs.SetFloat ("y", transform.position.y);
@@ -30,10 +31,10 @@ public class rightpalm : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		Frame startframe = Controller.Frame ();
-		Frame perviousframe3 = Controller.Frame (3);
-		Frame perviousframe10 = Controller.Frame (10);
-		Frame perviousframe6 = Controller.Frame (6);
+		Frame startframe = Controller.Frame();
+		Frame perviousframe3 = Controller.Frame(3);
+		Frame perviousframe10 = Controller.Frame(10);
+		Frame perviousframe6 = Controller.Frame(6);
 		Hand rightmost = startframe.Hands.Rightmost;
 
 		float handmove_x = rightmost.PalmPosition.x;
@@ -52,8 +53,11 @@ public class rightpalm : MonoBehaviour
 		float transWave_x_3 = perviousframe3.Hands.Rightmost.PalmPosition.x - handmove_x;
 
 		if ((rightmost.IsRight) && (startframe.Hands.Count > 0)) {
+
 			transform.position = handcenter * 0.05f;
+
 		} else {
+
 			//Save the palm position while it loses track from the camera	
 			PositionSave ();
 		}  

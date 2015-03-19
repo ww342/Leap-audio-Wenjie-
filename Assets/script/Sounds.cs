@@ -3,7 +3,10 @@ using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
 public class Sounds : MonoBehaviour
-{
+
+{  
+	public AudioClip gentlewaterdrop;
+	public AudioClip gentlesplash;
 	public AudioClip rightsleevelift;
 	public AudioClip rightsleevedown;
 	public AudioClip transitionhint1;

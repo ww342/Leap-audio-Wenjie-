@@ -35,6 +35,7 @@ public class watch : MonoBehaviour
 	
 	void OnTriggerEnter (Collider other)
 	{
+
 		if (other.name == ("bone_distal_index_L")) {
 			audio.PlayOneShot (Sounds.watchbeep, 5.0f);
 
@@ -53,13 +54,16 @@ public class watch : MonoBehaviour
 				}
 				break;
 
+
 			case GestureState.other:
 				voiceon = 1;
 				TapWatch = GestureState.cooldown;
 				if (Metrics.levelcount == 0) {
 					Narrator.audio.PlayOneShot (Narrator.stonewrong);
 				}
-				break;
+			
+			break;
+
 
 			case GestureState.cooldown:
 				cooldownTime -= Time.deltaTime;
@@ -68,12 +72,13 @@ public class watch : MonoBehaviour
 					//voiceon = 1;
 					cooldownTime = MaxcooldownTime;
 				}
-				break;
+			break;
 			}
 		}
 	}
 
 	// Update is called once per frame
+
 	void Update ()
 	{
 		Frame startframe = Controller.Frame ();
