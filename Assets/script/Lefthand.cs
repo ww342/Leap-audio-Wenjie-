@@ -39,6 +39,9 @@ public class Lefthand : MonoBehaviour
 		cooldownTime = MaxcooldownTime;
 		hit = 0;
 		GameObject.Find ("Hands").SendMessage ("LHhit", hit);
+
+		Gesturehint = gameObject.AddComponent <AudioSource> ();
+		Gesturehint.minDistance = 5;
 	}
 
 	// Update is called once per frame
