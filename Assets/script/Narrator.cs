@@ -31,18 +31,10 @@ public class Narrator : MonoBehaviour
 	public AudioClip stonewrong;
 	public AudioClip birdwrong;
 
-
-
-	// Use this for initialization
-	void Start ()
+	public AudioSource audiosource;
+	
+	void Awake ()
 	{
-
-	}
-
-	// Update is called once per frame
-	void Update ()
-	{
-
-
+		this.audiosource = GetComponent<AudioSource>();
 	}
 }

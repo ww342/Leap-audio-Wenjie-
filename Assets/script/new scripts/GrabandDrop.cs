@@ -45,7 +45,7 @@ public class GrabandDrop : MonoBehaviour {
 
 				grabbedObject = grabObject;
 
-		        grabbedObjectSize = grabObject.renderer.bounds.size.magnitude;
+		        grabbedObjectSize = grabObject.GetComponent<Renderer>().bounds.size.magnitude;
 
 	}
 

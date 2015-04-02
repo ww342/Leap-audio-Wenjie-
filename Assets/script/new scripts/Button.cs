@@ -34,7 +34,7 @@ public class Button : MonoBehaviour {
 
 						if (seednumber < 1) {
 			
-								audio.PlayOneShot (seed);
+								GetComponent<AudioSource>().PlayOneShot (seed);
 
 								Instantiate (GameObject.Find ("Seed"), transform.position = this.transform.localPosition, transform.rotation = this.transform.localRotation);
 

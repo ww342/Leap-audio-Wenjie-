@@ -14,7 +14,13 @@ public class Northeast : MonoBehaviour
 	private Vector3 speed = new Vector3 (0, -300, -200);
 	bool leavefall = false;
 
-	// Use this for initialization
+	private Rigidbody _rigidbody;
+	
+	void Awake ()
+	{
+		this._rigidbody = GetComponent<Rigidbody>();
+	}
+	
 	void Start ()
 	{
 		sound1_once = gameObject.AddComponent <AudioSource> ();
@@ -47,10 +53,10 @@ public class Northeast : MonoBehaviour
 	void Update ()
 	{
 		if (leavefall == true) {
-			rigidbody.MovePosition (rigidbody.position + speed * Time.deltaTime);
+			_rigidbody.MovePosition (_rigidbody.position + speed * Time.deltaTime);
 		}
 		if (leavefall == false) {
-			rigidbody.transform.position = originalposition;
+			_rigidbody.transform.position = originalposition;
 		}
 	}
 }

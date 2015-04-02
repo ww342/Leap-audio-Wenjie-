@@ -48,7 +48,7 @@ public class FallandFloat : MonoBehaviour {
 
 			GameObject.Find ("Seed").GetComponent<Grab>().Grabbed = false;
 
-			Destroy(GameObject.Find ("Seed").rigidbody);
+			Destroy(GameObject.Find ("Seed").GetComponent<Rigidbody>());
 		}
 	}
 

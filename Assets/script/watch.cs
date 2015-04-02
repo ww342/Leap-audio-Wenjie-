@@ -28,6 +28,13 @@ public class watch : MonoBehaviour
 	public float MaxcooldownTime;
 	public int voiceon;
 	
+	private AudioSource _audio;
+	
+	void Awake ()
+	{
+		this._audio = GetComponent<AudioSource>();
+	}
+
 	void Start ()
 	{
 		voiceon = 1;
@@ -37,13 +44,13 @@ public class watch : MonoBehaviour
 	{
 
 		if (other.name == ("bone_distal_index_L")) {
-			audio.PlayOneShot (Sounds.watchbeep, 5.0f);
+			_audio.PlayOneShot (Sounds.watchbeep, 5.0f);
 
 			switch (TapWatch) {
 
 			case GestureState.none:
 				if (voiceon == 1) {
-					Narrator.audio.Stop ();
+					Narrator.audiosource.Stop ();
 					Metrics.Nar_Check = false;
 					voiceon = 0;
 					TapWatch = GestureState.cooldown;
@@ -59,7 +66,7 @@ public class watch : MonoBehaviour
 				voiceon = 1;
 				TapWatch = GestureState.cooldown;
 				if (Metrics.levelcount == 0) {
-					Narrator.audio.PlayOneShot (Narrator.stonewrong);
+					Narrator.audiosource.PlayOneShot (Narrator.stonewrong);
 				}
 			
 			break;

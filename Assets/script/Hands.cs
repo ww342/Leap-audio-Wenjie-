@@ -348,7 +348,7 @@ public class Hands : MonoBehaviour
 	void FlowerCount ()
 	{
 		Metrics.flowercount ++;
-		audio.PlayOneShot (Sounds.flower);
+		Sounds.audiosource.PlayOneShot (Sounds.flower);
 		        
 		if (Metrics.flowercount == 1) {
 			Narrator.audio.PlayOneShot (Narrator.flower1);
@@ -370,7 +370,7 @@ public class Hands : MonoBehaviour
 		}
 
 		if (Metrics.flowercount == 5) {
-			audio.PlayOneShot (Sounds.leave);
+			Sounds.audiosource.PlayOneShot (Sounds.leave);
 		}
 
 		if (Metrics.flowercount == 7) {
