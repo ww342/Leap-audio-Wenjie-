@@ -75,4 +75,11 @@ public class Sounds : MonoBehaviour
 	public AudioClip boatshiffer2;
 	public AudioClip longcreak;
 	public AudioClip longlean;
+	
+	public AudioSource audiosource;
+	
+	void Awake ()
+	{
+		this.audiosource = GetComponent<AudioSource>();
+	}
 }

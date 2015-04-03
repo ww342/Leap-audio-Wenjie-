@@ -16,7 +16,13 @@ public class Northforward : MonoBehaviour
 	bool leftstoneskip ;
 	bool rightstoneskip ;
 
-	// Use this for initialization
+	private Rigidbody _rigidbody;
+	
+	void Awake ()
+	{
+		this._rigidbody = GetComponent<Rigidbody>();
+	}
+	
 	void Start ()
 	{
 		sound1_once = gameObject.AddComponent <AudioSource> ();
@@ -59,27 +65,27 @@ public class Northforward : MonoBehaviour
 	void Update ()
 	{
 		if (farstoneskip == true) {
-			rigidbody.MovePosition (rigidbody.position + far * Time.deltaTime);
+			_rigidbody.MovePosition (_rigidbody.position + far * Time.deltaTime);
 		}
 		
 		if (farstoneskip == false) {
-			rigidbody.transform.position = originalposition;
+			_rigidbody.transform.position = originalposition;
 		}
 
 		if (leftstoneskip == true) {
-			rigidbody.MovePosition (rigidbody.position + left * Time.deltaTime);
+			_rigidbody.MovePosition (_rigidbody.position + left * Time.deltaTime);
 		}
 		
 		if (leftstoneskip == false) {
-			rigidbody.transform.position = originalposition;
+			_rigidbody.transform.position = originalposition;
 		}
 
 		if (rightstoneskip == true) {
-			rigidbody.MovePosition (rigidbody.position + right * Time.deltaTime);
+			_rigidbody.MovePosition (_rigidbody.position + right * Time.deltaTime);
 		}
 		
 		if (rightstoneskip == false) {
-			rigidbody.transform.position = originalposition;
+			_rigidbody.transform.position = originalposition;
 		}
 	}
 }

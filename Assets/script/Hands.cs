@@ -105,7 +105,7 @@ public class Hands : MonoBehaviour
 		//transtion_hint.pitch = 1;
 		transtion_hint.minDistance = 2;
 
-		//narrator = GameObject.Find ("Narrator").GetComponent<AudioSource>();
+		//narrator = GameObject.Find ("Narrator").audiosource;
 		//narrator = gameObject.AddComponent <AudioSource> ();
 		//narrator.minDistance = 50;
 	}
@@ -148,7 +148,7 @@ public class Hands : MonoBehaviour
 
 	void playropepose ()
 	{
-		Narrator.audio.PlayOneShot (Narrator.ropepose);
+		Narrator.audiosource.PlayOneShot (Narrator.ropepose);
 		Metrics.Nar_Check= true;
 		Metrics.VoiceLength = Narrator.ropepose.length;
 	}
@@ -166,7 +166,7 @@ public class Hands : MonoBehaviour
 
 		if (Metrics.stonecount == 1) {
 
-			Narrator.audio.PlayOneShot (Narrator.stone1);
+			Narrator.audiosource.PlayOneShot (Narrator.stone1);
 			Metrics.Nar_Check =true;
 			Metrics.VoiceLength = Narrator.stone1.length;
 
@@ -175,7 +175,7 @@ public class Hands : MonoBehaviour
 
 		if (Metrics.stonecount == 2) {
 
-			Narrator.audio.PlayOneShot (Narrator.stone2);
+			Narrator.audiosource.PlayOneShot (Narrator.stone2);
 			Metrics.Nar_Check =true;
 			Metrics.VoiceLength = Narrator.stone2.length;
 
@@ -189,7 +189,7 @@ public class Hands : MonoBehaviour
 	
 			if (Metrics.wrongcount <= 2) {
 
-				Narrator.audio.PlayOneShot (Narrator.flowerpose);
+				Narrator.audiosource.PlayOneShot (Narrator.flowerpose);
 				Metrics.Nar_Check =true;
 				Metrics.VoiceLength = Narrator.flowerpose.length;
 
@@ -201,7 +201,7 @@ public class Hands : MonoBehaviour
 
 			if (Metrics.wrongcount > 2) {
 
-				Narrator.audio.PlayOneShot (Narrator.stone3);
+				Narrator.audiosource.PlayOneShot (Narrator.stone3);
 				Metrics.Nar_Check =true;
 				Metrics.VoiceLength = Narrator.stone3.length;
 
@@ -222,7 +222,7 @@ public class Hands : MonoBehaviour
 				Ambience_D.PlayOneShot (Sounds.paddle);
 		
 				if (Metrics.paddlecount == 1) {
-						Narrator.audio.PlayOneShot (Narrator.paddle1);
+						Narrator.audiosource.PlayOneShot (Narrator.paddle1);
 						Metrics.Nar_Check = true;
 						Metrics.VoiceLength = Narrator.paddle1.length;
 						Ambience_A.minDistance = 5;
@@ -240,7 +240,7 @@ public class Hands : MonoBehaviour
 						Ambience_C.minDistance = 2;
 				}
 				if (Metrics.paddlecount == 4) {
-						Narrator.audio.PlayOneShot (Narrator.paddle4);
+						Narrator.audiosource.PlayOneShot (Narrator.paddle4);
 						Metrics.Nar_Check = true;
 						Metrics.VoiceLength = Narrator.paddle4.length;
 			
@@ -252,7 +252,7 @@ public class Hands : MonoBehaviour
 								Invoke ("playropepose", 5);
 						}
 						if (Metrics.wrongcount <= 2) {
-								Narrator.audio.PlayOneShot (Narrator.treepose);
+								Narrator.audiosource.PlayOneShot (Narrator.treepose);
 								Metrics.Nar_Check = true;
 								Metrics.VoiceLength = Narrator.treepose.length;
 						}
@@ -269,7 +269,7 @@ public class Hands : MonoBehaviour
 			
 			if (Metrics.ropecount == 1) {
 				
-				Narrator.audio.PlayOneShot (Narrator.rope1);
+				Narrator.audiosource.PlayOneShot (Narrator.rope1);
 			Metrics.Nar_Check= true;
 			Metrics.VoiceLength = Narrator.rope1.length;
 
@@ -281,7 +281,7 @@ public class Hands : MonoBehaviour
 		if (Metrics.ropecount == 2) {
 
 			Ambience_D.PlayOneShot (Sounds.rope);
-			Narrator.audio.PlayOneShot (Narrator.rope2);
+			Narrator.audiosource.PlayOneShot (Narrator.rope2);
 			Metrics.Nar_Check= true;
 			Metrics.VoiceLength = Narrator.rope2.length;
 
@@ -290,7 +290,7 @@ public class Hands : MonoBehaviour
 
 		if (Metrics.ropecount == 3) {
 
-			Narrator.audio.PlayOneShot (Narrator.rope3);
+			Narrator.audiosource.PlayOneShot (Narrator.rope3);
 			Metrics.Nar_Check= true;
 			Metrics.VoiceLength = Narrator.rope3.length;
 
@@ -314,13 +314,13 @@ public class Hands : MonoBehaviour
 
 		
 		if (Metrics.birdcount == 1) {
-			Narrator.audio.PlayOneShot (Narrator.bird1);
+			Narrator.audiosource.PlayOneShot (Narrator.bird1);
 			Metrics.Nar_Check= true;
 			Metrics.VoiceLength = Narrator.bird1.length;
 
 		}
 		if (Metrics.birdcount == 2) {
-			Narrator.audio.PlayOneShot (Narrator.bird2);
+			Narrator.audiosource.PlayOneShot (Narrator.bird2);
 			Metrics.Nar_Check= true;
 			Metrics.VoiceLength = Narrator.bird2.length;
 
@@ -337,7 +337,7 @@ public class Hands : MonoBehaviour
 
 		Ambience_D.PlayOneShot (Sounds.birdonboat);
 		Ambience_D.PlayOneShot (Sounds.shortflapping);
-		Narrator.audio.PlayOneShot (Narrator.birdwrong);
+		Narrator.audiosource.PlayOneShot (Narrator.birdwrong);
 		Metrics.Nar_Check = true;
 		Metrics.VoiceLength = Narrator.birdwrong.length;
 		WrongCount ();
@@ -348,10 +348,10 @@ public class Hands : MonoBehaviour
 	void FlowerCount ()
 	{
 		Metrics.flowercount ++;
-		audio.PlayOneShot (Sounds.flower);
+		Sounds.audiosource.PlayOneShot (Sounds.flower);
 		        
 		if (Metrics.flowercount == 1) {
-			Narrator.audio.PlayOneShot (Narrator.flower1);
+			Narrator.audiosource.PlayOneShot (Narrator.flower1);
 			Metrics.Nar_Check= true;
 			Metrics.VoiceLength = Narrator.flower1.length;
 		}
@@ -364,13 +364,13 @@ public class Hands : MonoBehaviour
 			Ambience_D.PlayOneShot (Sounds.landonflpping, 5.0f);
 			Ambience_D.PlayOneShot (Sounds.birdstandonpaddle);
 
-			Narrator.audio.PlayOneShot (Narrator.flyfromtree);
+			Narrator.audiosource.PlayOneShot (Narrator.flyfromtree);
 			Metrics.Nar_Check= true;
 			Metrics.VoiceLength = Narrator.flyfromtree.length;
 		}
 
 		if (Metrics.flowercount == 5) {
-			audio.PlayOneShot (Sounds.leave);
+			Sounds.audiosource.PlayOneShot (Sounds.leave);
 		}
 
 		if (Metrics.flowercount == 7) {
@@ -383,7 +383,7 @@ public class Hands : MonoBehaviour
 		}
 			            
 		if (Metrics.flowercount == 12) {
-			Narrator.audio.PlayOneShot (Narrator.tietheboat);
+			Narrator.audiosource.PlayOneShot (Narrator.tietheboat);
 			Metrics.Nar_Check= true;
 			Metrics.VoiceLength = Narrator.tietheboat.length;
 			//LevelCount ();
@@ -415,7 +415,7 @@ public class Hands : MonoBehaviour
 		if (Metrics.bellcount == 6) {
 
 			Ambience_D.PlayOneShot (Sounds.brake);
-			Narrator.audio.PlayOneShot (Narrator.bell6);
+			Narrator.audiosource.PlayOneShot (Narrator.bell6);
 			Metrics.Nar_Check= true;
 			Metrics.VoiceLength = Narrator.bell6.length;
 
@@ -429,7 +429,7 @@ public class Hands : MonoBehaviour
 
 		if (Metrics.starcount == 1) {
 
-			Narrator.audio.PlayOneShot (Narrator.star1);
+			Narrator.audiosource.PlayOneShot (Narrator.star1);
 			Metrics.Nar_Check= true;
 			Metrics.VoiceLength = Narrator.star1.length;
 
@@ -440,7 +440,7 @@ public class Hands : MonoBehaviour
 
 		if (Metrics.starcount == 2) {
 
-			Narrator.audio.PlayOneShot (Narrator.star2);
+			Narrator.audiosource.PlayOneShot (Narrator.star2);
 			Metrics.Nar_Check= true;
 			Metrics.VoiceLength = Narrator.star2.length;
 
@@ -449,7 +449,7 @@ public class Hands : MonoBehaviour
 
 		
 		if (Metrics.starcount == 3) {
-			Narrator.audio.PlayOneShot (Narrator.star3);
+			Narrator.audiosource.PlayOneShot (Narrator.star3);
 			Metrics.Nar_Check= true;
 			Metrics.VoiceLength = Narrator.star3.length;
 
@@ -571,7 +571,7 @@ public class Hands : MonoBehaviour
 								Handfree.Stop ();
 								Handfree.loop = false;
 								LevelCount ();
-								Narrator.audio.PlayOneShot (Narrator.begin);
+								Narrator.audiosource.PlayOneShot (Narrator.begin);
 				                
 			}
 				}

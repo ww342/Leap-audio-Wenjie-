@@ -39,6 +39,9 @@ public class Lefthand : MonoBehaviour
 		cooldownTime = MaxcooldownTime;
 		hit = 0;
 		GameObject.Find ("Hands").SendMessage ("LHhit", hit);
+
+		Gesturehint = gameObject.AddComponent <AudioSource> ();
+		Gesturehint.minDistance = 5;
 	}
 
 	// Update is called once per frame
@@ -157,17 +160,17 @@ public class Lefthand : MonoBehaviour
 				}
 				if (Grab == 1) {
 					Bird = GestureState .ready;
-					audio.PlayOneShot (Sounds.panicflapping);
-					audio.PlayOneShot (Sounds.grabbird);
-					audio.PlayOneShot (Sounds.boatshiffer2, 5.0f);
+					Sounds.audiosource.PlayOneShot (Sounds.panicflapping);
+					Sounds.audiosource.PlayOneShot (Sounds.grabbird);
+					Sounds.audiosource.PlayOneShot (Sounds.boatshiffer2, 5.0f);
 				}
 				break;
 
 			case GestureState.ready:
 				if (Grab < 0.8) {
 					Bird = GestureState.none;
-					audio.PlayOneShot (Sounds.weakflapping);
-					audio.PlayOneShot (Sounds.birdflyslonghand);
+					Sounds.audiosource.PlayOneShot (Sounds.weakflapping);
+					Sounds.audiosource.PlayOneShot (Sounds.birdflyslonghand);
 				}
 				break;
 				
@@ -211,7 +214,7 @@ public class Lefthand : MonoBehaviour
 			case GestureState.detected:
 				if (transPitch > 30) {
 					hit = 2;
-					audio.PlayOneShot (finger_left.creak1);
+					Gesturehint.PlayOneShot (finger_left.creak1);
 					GameObject.Find ("Hands").SendMessage ("LHhit", hit);
 					Paddle = GestureState .action;
 				} 
@@ -263,7 +266,7 @@ public class Lefthand : MonoBehaviour
 
 					if (palmdown && Grab > 0.4) {
 
-						audio.PlayOneShot(finger_left.bike);
+						Gesturehint.PlayOneShot(finger_left.bike);
 						Bike = GestureState .detected;
 
 					}
