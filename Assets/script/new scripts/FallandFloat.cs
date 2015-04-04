@@ -46,7 +46,7 @@ public class FallandFloat : MonoBehaviour {
 			Button.seednumber = 0;
 			//this.GetComponent<Grab> ().Grabbed = false;
 
-			GameObject.Find ("Seed").GetComponent<Grab>().Grabbed = false;
+//			GameObject.Find ("Seed").GetComponent<Grab>().Grabbed = false;
 
 			Destroy(GameObject.Find ("Seed").GetComponent<Rigidbody>());
 		}
@@ -57,13 +57,13 @@ public class FallandFloat : MonoBehaviour {
 	void Update () {
 				if (this.name == "Seed(Clone)") {
 
-						if (!this.GetComponent<Grab> ().Grabbed) {
+						//if (!this.GetComponent<Grab> ().Grabbed) {
 								Vector3 v3 = target.position - transform.position;
 								float angle = Mathf.Atan2 (v3.z, v3.x) * Mathf.Rad2Deg;
 								qTo = Quaternion.AngleAxis (angle, Vector3.down);
 								transform.rotation = Quaternion.RotateTowards (transform.rotation, qTo, rotationSpeed * Time.deltaTime);
 								transform.Translate (Vector3.forward * movementSpeed * Time.deltaTime);
-						}
+						//}
 				}
 		}
 }
