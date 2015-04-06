@@ -5,6 +5,7 @@ using System.Collections;
 public class Sounds : MonoBehaviour
 
 {  
+	public AudioClip upanddownhint;
 	public AudioClip gentlewaterdrop;
 	public AudioClip gentlesplash;
 	public AudioClip rightsleevelift;

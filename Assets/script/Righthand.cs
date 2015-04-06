@@ -17,6 +17,7 @@ public class Righthand : MonoBehaviour
 	// Audio Mixer Groups
 	public AudioMixerGroup RGH;
 	public AudioMixerGroup RSE;
+	public AudioMixer AudioMixer1;
 
 
 	public enum GestureState
@@ -183,7 +184,8 @@ public class Righthand : MonoBehaviour
 										switch (Stone) {
 			
 										case GestureState.none:
-					
+						                        Sinus.frequency =0;
+						                        Sinus.gain =0;
 												if (pitchforward && palmdown) {
 														Stone = GestureState .detected;
 
@@ -251,11 +253,15 @@ public class Righthand : MonoBehaviour
 								//Switch(stonecorrect_hint){
 								
 								//case HintState.hitten:
-								
+
+								/*
 								if (wrist_y > 250 && wrist_y <= 260) {
 									Gesturehint.PlayOneShot (hint.Stone_correct_hint1);
 									//stonecorrect_hint = HintState.cooldown ;
+									//AudioMixer1.SetFloat("RGH-pitchshifter.
+
 								}
+
 								if (wrist_y > 300 && wrist_y <= 310) {
 									Gesturehint.PlayOneShot (hint.Stone_correct_hint2);
 									//stonecorrect_hint = HintState.cooldown;
@@ -268,6 +274,62 @@ public class Righthand : MonoBehaviour
 									Gesturehint.PlayOneShot (hint.Stone_correct_hint4);
 									//stonecorrect_hint = HintState.cooldown;
 								}
+                                */
+
+
+
+
+								if (pitch > 10 && pitch <= 20) {
+									Sinus.gain = 0.01;
+									Sinus.frequency = 450;
+									
+								}
+								
+								if (pitch > 20 && pitch <= 30) {
+									Sinus.gain = 0.02;
+									Sinus.frequency = 500;
+								
+								}
+								if (pitch > 30 && pitch <= 40) {
+									Sinus.gain = 0.03;
+									Sinus.frequency = 550;
+								
+								}
+								if (pitch > 40 && pitch <= 50) {
+									Sinus.gain = 0.04;
+									Sinus.frequency = 600;
+								
+								}
+								
+								if (pitch > 50 && pitch <= 60) {
+									Sinus.gain = 0.05;
+									Sinus.frequency = 650;
+									
+								}
+								
+								if (pitch > 60 && pitch <= 70) {
+									Sinus.gain = 0.06;
+									Sinus.frequency = 700;
+									
+								}
+								if (pitch > 70 && pitch <= 80) {
+									Sinus.gain = 0.07;
+									Sinus.frequency = 750;
+									
+								}
+								if (pitch > 80 && pitch <= 90) {
+									Sinus.gain = 0.08;
+									Sinus.frequency = 800;
+									
+								}
+								
+								if (pitch> 90 && pitch<= 100) { 
+									Sinus.gain = 0.09;
+									Sinus.frequency = 850;
+									
+								}
+								
+
 								/*break;
 
 						case HintState.cooldown:
@@ -278,11 +340,12 @@ public class Righthand : MonoBehaviour
 						}
 						break;*/
 								
-								if (transWave_y_10 < - 50) {
+								if (transWave_y_10 < - 80) {
 									GameObject.Find ("Hands").SendMessage ("normalwatch");
 									Environment.PlayOneShot (Sounds.rightsleevelift,3.0f);
 									GameObject.Find ("Hands").SendMessage ("hint3");
 									Stone = GestureState.ing;
+
 								}
 							}
 						}
@@ -294,6 +357,7 @@ public class Righthand : MonoBehaviour
 								                      GrabWater = false;
 								                      GameObject.Find ("Hands").SendMessage ("hint2");
 							                          Environment.PlayOneShot (Sounds.gentlewaterdrop,2.5f);
+							                          
 							                    }
 						               
 
@@ -302,6 +366,8 @@ public class Righthand : MonoBehaviour
 												break;
 
 										case GestureState.ready:
+						                   Sinus.frequency =0;
+						                   Sinus.gain =0;
 												if (Grab == 0) {
 														//audio.PlayOneShot (script.stonewrong);
 							                            Environment.PlayOneShot (Sounds.waterdrop, 8.0f);
@@ -313,6 +379,8 @@ public class Righthand : MonoBehaviour
 												break;
 
 										case GestureState.other:
+						                     Sinus.frequency =0;
+						                     Sinus.gain =0;
 												if (palmdown) {
 														if (Mathf.Abs (transWave_y_10 / transWave_x_10) < 0.6 && Mathf.Abs (transWave_y_10 / transWave_x_10) > 0.1) {
 																//|| (  Mathf.Abs(losetrack_trans_y/losetrack_trans_x)<0.6  &&  Mathf.Abs(losetrack_trans_y/losetrack_trans_x)>0.1  ))
@@ -369,6 +437,8 @@ public class Righthand : MonoBehaviour
 												break;
 
 										case  GestureState.ing:
+						                    Sinus.frequency =0;
+						                    Sinus.gain =0;
 												if (openhand && wristforward) {
 							                           if (wristmiddle) {
 								                          if ((transWave_y_10 > 60 && transWave_z_3 > 10) || (losetrack_trans_y > 100 )) {
