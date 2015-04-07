@@ -119,7 +119,7 @@ public class Hands_info : MonoBehaviour {
 					//+ "\n"+ "tool number:" + toolnum 
 					;
 			} else {
-				Righthanddata.text = "No right hand at the moment.";
+				Righthanddata.text = "No hand at the moment.";
 			}
 		}
 
@@ -143,7 +143,7 @@ public class Hands_info : MonoBehaviour {
 						//+ "\n"+ "tool number:" + toolnum 
 						;
 			} else {
-				Lefthanddata.text = "No right hand at the moment.";
+				Lefthanddata.text = "No hand at the moment.";
 			}
 		}
 	}	
