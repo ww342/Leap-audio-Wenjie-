@@ -486,6 +486,35 @@ AudioSource:
   m_PrefabParentObject: {fileID: 8246222, guid: 8f946c50459e84ccea82ae287805cda0,
     type: 2}
   m_PrefabInternal: {fileID: 784645378}
+--- !u!1 &304967782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 304967783}
+  m_Layer: 0
+  m_Name: MovingElements
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &304967783
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 304967782}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1738489958}
+  - {fileID: 1764131242}
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
 --- !u!1001 &318934199
 Prefab:
   m_ObjectHideFlags: 0
@@ -542,7 +571,7 @@ GameObject:
   - 114: {fileID: 337765520}
   - 82: {fileID: 337765525}
   m_Layer: 0
-  m_Name: watch
+  m_Name: Watch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -885,19 +914,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: m_LocalScale.x
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: m_LocalScale.y
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: m_LocalScale.z
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: leftGraphicsModel
@@ -921,6 +950,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: handMovementScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
+      propertyPath: destroyHands
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2035,8 +2068,8 @@ Transform:
   m_LocalPosition: {x: -47.3029213, y: 29.5632782, z: -19.5007172}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_Father: {fileID: 304967783}
+  m_RootOrder: 0
 --- !u!114 &1738489959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2153,8 +2186,8 @@ Transform:
   m_LocalPosition: {x: 66, y: -121, z: 95}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_Father: {fileID: 304967783}
+  m_RootOrder: 1
 --- !u!82 &1764131243
 AudioSource:
   m_ObjectHideFlags: 0
