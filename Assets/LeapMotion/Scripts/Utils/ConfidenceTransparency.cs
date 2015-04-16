@@ -24,9 +24,9 @@ public class ConfidenceTransparency : MonoBehaviour {
 
   void Update() {
     Hand leap_hand = GetComponent<HandModel>().GetLeapHand();
-    float confidence = leap_hand.Confidence;
 
     if (leap_hand != null) {
+      float confidence = leap_hand.Confidence;
       Renderer[] renders = GetComponentsInChildren<Renderer>();
       foreach (Renderer render in renders)
         SetRendererAlpha(render, confidence);
