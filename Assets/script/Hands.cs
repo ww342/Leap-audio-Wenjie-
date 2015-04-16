@@ -56,7 +56,6 @@ public class Hands : MonoBehaviour
 
 		Metrics.Nar_Check = false;
 
-		Controller = new Controller ();
 		cooldownTime = MaxcooldownTime;
 		Metrics.levelcount = -1;
 
