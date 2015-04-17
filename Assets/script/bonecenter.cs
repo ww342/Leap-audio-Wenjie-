@@ -9,13 +9,11 @@ public class bonecenter : MonoBehaviour
 	public Finger.FingerType fingerType;
 	public Bone.BoneType BoneType;
 	
-	// Use this for initialization
 	void Start ()
 	{
 		Controller = new Controller ();
 	}
 	
-	// Update is called once per frame
 	void Update ()
 	{
 		Frame startframe = Controller.Frame ();
@@ -30,16 +28,7 @@ public class bonecenter : MonoBehaviour
 		Vector3 xBasis = new Vector3 (-xBasis_x, xBasis_y, xBasis_z);
 
 		if ((rightmost.IsRight) && (startframe.Hands.Count > 0)) {
-			//transform.rotation = Quaternion.Slerp (transform.rotation, twist, Time.deltaTime * smooth); 
 			transform.position = xBasis * 0.05f;
-/*
-			if (NUM_JOINTS >= NUM_BONES) {
-				transform.position = finger_.Bone ((Bone.BoneType.TYPE_DISTAL)).NextJoint;
-			}
-			if (NUM_JOINTS < NUM_BONES) {
-				transform.position = finger_.Bone ((Bone.BoneType.TYPE_DISTAL)).PrevJoint;
-			}
-*/
 		}
 	}
 }

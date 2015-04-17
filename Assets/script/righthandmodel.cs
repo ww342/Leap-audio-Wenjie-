@@ -27,7 +27,6 @@ public class righthandmodel : MonoBehaviour
 		Vector3 handcenter = new Vector3 (handmove_x, handmove_y, -handmove_z);
 		Quaternion wrist = Quaternion.Euler (-pitch, yaw, roll);
 
-		//if (script.levelcount != 2 && script.levelcount >= 0) {
 		if ((rightmost.IsRight) && (startframe.Hands.Count > 0)) {
 			transform.rotation = Quaternion.Slerp (transform.rotation, wrist, Time.deltaTime * smooth); 
 			transform.position = handcenter * 0.05f;
