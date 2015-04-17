@@ -84,8 +84,6 @@ public class watch : MonoBehaviour
 		}
 	}
 
-	// Update is called once per frame
-
 	void Update ()
 	{
 		Frame startframe = Controller.Frame ();

@@ -6,13 +6,6 @@ public class rightcollision : MonoBehaviour
 {
 	Controller Controller = new Controller ();
 
-	// Use this for initialization
-	void Start ()
-	{
-	
-	}
-	
-	// Update is called once per frame
 	void Update ()
 	{
 		Frame startframe = Controller.Frame ();

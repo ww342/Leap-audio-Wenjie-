@@ -9,11 +9,6 @@ public class bonestart : MonoBehaviour
 	public Finger.FingerType fingerType;
 	public Bone.BoneType BoneType ;
 
-	void Start ()
-	{
-		Controller = new Controller ();
-	}
-	
 	void Update ()
 	{
 		Frame startframe = Controller.Frame ();

@@ -10,11 +10,6 @@ public class bonestart1 : MonoBehaviour
 	public Bone.BoneType BoneType ;
 	public Hands script;
 
-	void Start ()
-	{
-		Controller = new Controller ();
-	}
-	
 	void Update ()
 	{
 		Frame startframe = Controller.Frame ();
