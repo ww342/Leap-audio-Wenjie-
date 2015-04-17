@@ -24,8 +24,8 @@ public class Hands : MonoBehaviour
 	private float cooldownTime;
 	public float MaxcooldownTime;
 	public float MaxcooldownTime1;
-	public int rhhit;
-	public int lhhit;
+	public int rhhit = 0;
+	public int lhhit = 0;
 
 	//SOS GESTURE VARIABLES
 /*
@@ -477,13 +477,11 @@ public class Hands : MonoBehaviour
 	void LHhit (int statenumber)
 	{
 		lhhit = statenumber;
-		Update ();
 	}
 
 	void RHhit (int statenumber)
 	{
 		rhhit = statenumber;
-		Update ();
 	}
 
 	// A void that gets wrist position from the right hand

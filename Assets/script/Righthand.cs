@@ -59,7 +59,6 @@ public class Righthand : MonoBehaviour
 		Controller = new Controller ();
 		cooldownTime = MaxcooldownTime;
 		hit = 0;
-		GameObject.Find ("Hands").SendMessage ("RHhit", hit); 
 
 		Environment = gameObject.AddComponent <AudioSource> ();
 		//assign RSE as Environment audiosource's outputaudiomixergroup 

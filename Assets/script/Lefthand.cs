@@ -38,7 +38,6 @@ public class Lefthand : MonoBehaviour
 		Controller = new Controller ();
 		cooldownTime = MaxcooldownTime;
 		hit = 0;
-		GameObject.Find ("Hands").SendMessage ("LHhit", hit);
 
 		Gesturehint = gameObject.AddComponent <AudioSource> ();
 		Gesturehint.minDistance = 5;
