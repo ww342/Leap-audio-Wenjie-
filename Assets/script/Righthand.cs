@@ -15,9 +15,8 @@ public class Righthand : MonoBehaviour
 	public Metrics Metrics;
 
 	// Audio Mixer Groups
-	public AudioMixerGroup RGH;
-	public AudioMixerGroup RSE;
-	public AudioMixer AudioMixer1;
+	public AudioMixerGroup HintsMix;
+	public AudioMixerGroup EnvironmentMix;
 
 
 	public enum GestureState
@@ -62,12 +61,12 @@ public class Righthand : MonoBehaviour
 
 		Environment = gameObject.AddComponent <AudioSource> ();
 		//assign RSE as Environment audiosource's outputaudiomixergroup 
-		Environment.outputAudioMixerGroup = RSE;
+		Environment.outputAudioMixerGroup = EnvironmentMix;
 		Environment.minDistance = 7;
 
 		Gesturehint = gameObject.AddComponent <AudioSource> ();
 		//assign RGH as Gesturehint audiosource's outputaudiomixergroup 
-		Gesturehint.outputAudioMixerGroup = RGH;
+		Gesturehint.outputAudioMixerGroup = HintsMix;
 		Gesturehint.minDistance = 1;
 	}
 

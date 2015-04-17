@@ -28,6 +28,7 @@ AudioMixerController:
     - 8a2050ed8ddc24742b8f834e82c84e10
     - 8b14da5ab87e34f0b9627eee264f9e95
     - 46f4f75613c3a402ca226b0d1c9432ac
+    - 6dfa08268c90e4b6d91ef9f772aefc2a
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500003}
@@ -43,6 +44,7 @@ AudioMixerGroupController:
   - {fileID: 24360642}
   - {fileID: 24367930}
   - {fileID: 24303206}
+  - {fileID: 24363896}
   m_Volume: 128fb97dd311c45f2ba21a1da8f362e5
   m_Pitch: ddf14ed4ffea04f8d920812a628c9fc8
   m_Effects:
@@ -56,7 +58,7 @@ AudioMixerGroupController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: RGH
+  m_Name: HintsMix
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 46f4f75613c3a402ca226b0d1c9432ac
   m_Children: []
@@ -74,7 +76,7 @@ AudioMixerGroupController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: RSE
+  m_Name: EnvironmentMix
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 8b14da5ab87e34f0b9627eee264f9e95
   m_Children: []
@@ -86,12 +88,29 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!243 &24363896
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: BackgroundMix
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 6dfa08268c90e4b6d91ef9f772aefc2a
+  m_Children: []
+  m_Volume: 182063932cd8b434683d11223501817a
+  m_Pitch: 883b89fbf693d40068180b397adb4c2d
+  m_Effects:
+  - {fileID: 24465954}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &24367930
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: NAR
+  m_Name: NarratorMix
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 8a2050ed8ddc24742b8f834e82c84e10
   m_Children: []
@@ -147,6 +166,19 @@ AudioMixerEffectController:
     m_GUID: e34806c3044b543c882564c7629dbf12
   - m_ParameterName: Max channels
     m_GUID: a91ee4f539b8e4117aa8318fdb982fac
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &24465954
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: dd03e0d6a97064279a6304129ec6741a
+  m_EffectName: Attenuation
+  m_MixLevel: d5ad88f54a6e94b49be95a36eb412a34
+  m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
