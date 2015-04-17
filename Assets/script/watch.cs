@@ -7,18 +7,7 @@ public class watch : MonoBehaviour
 {
 	Controller Controller = new Controller ();
 	
-	public enum GestureState
-	{
-		none,
-		ready,
-		detected,
-		action,
-		ing,
-		other,
-		cooldown
-	}
-	
-	public GestureState TapWatch = GestureState.none;
+	public Gesture.State TapWatch = Gesture.State.none;
 	public Sounds Sounds;
 	public Metrics Metrics;
 	public Hands Hands;
@@ -26,7 +15,7 @@ public class watch : MonoBehaviour
 	public Vector3 wristcenter;
 	private float cooldownTime;
 	public float MaxcooldownTime;
-	public int voiceon;
+	public int voiceon = 1;
 	
 	private AudioSource _audio;
 	
@@ -35,11 +24,6 @@ public class watch : MonoBehaviour
 		this._audio = GetComponent<AudioSource>();
 	}
 
-	void Start ()
-	{
-		voiceon = 1;
-	}
-	
 	void OnTriggerEnter (Collider other)
 	{
 
@@ -48,34 +32,29 @@ public class watch : MonoBehaviour
 
 			switch (TapWatch) {
 
-			case GestureState.none:
+			case Gesture.State.none:
 				if (voiceon == 1) {
 					Narrator.audiosource.Stop ();
 					Metrics.Nar_Check = false;
 					voiceon = 0;
-					TapWatch = GestureState.cooldown;
-				}
-				if (voiceon == 0) {
-					TapWatch = GestureState.other;
-
+					TapWatch = Gesture.State.cooldown;
+				} else if (voiceon == 0) {
+					TapWatch = Gesture.State.other;
 				}
 				break;
 
-
-			case GestureState.other:
+			case Gesture.State.other:
 				voiceon = 1;
-				TapWatch = GestureState.cooldown;
+				TapWatch = Gesture.State.cooldown;
 				if (Metrics.levelcount == 0) {
 					Narrator.audiosource.PlayOneShot (Narrator.stonewrong);
 				}
-			
-			break;
+				break;
 
-
-			case GestureState.cooldown:
+			case Gesture.State.cooldown:
 				cooldownTime -= Time.deltaTime;
 				if (cooldownTime <= 0) {
-					TapWatch = GestureState.none;
+					TapWatch = Gesture.State.none;
 					//voiceon = 1;
 					cooldownTime = MaxcooldownTime;
 				}

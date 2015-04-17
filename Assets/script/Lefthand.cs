@@ -13,18 +13,9 @@ public class Lefthand : MonoBehaviour
 	public finger_left finger_left;
 	public Metrics Metrics;
 
-	public enum GestureState
-	{
-		none,
-		detected,
-		action,
-		ing,
-		ready,
-		cooldown
-	}
-	public GestureState Bird = GestureState.none;
-	public GestureState Paddle = GestureState.none;
-	public GestureState Bike = GestureState.none;
+	public Gesture.State Bird = Gesture.State.none;
+	public Gesture.State Paddle = Gesture.State.none;
+	public Gesture.State Bike = Gesture.State.none;
 	private float cooldownTime;
 	public float MaxcooldownTime;
 	public float MaxcooldownTime1;
@@ -35,7 +26,6 @@ public class Lefthand : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		Controller = new Controller ();
 		cooldownTime = MaxcooldownTime;
 		hit = 0;
 
@@ -144,49 +134,49 @@ public class Lefthand : MonoBehaviour
 
 					switch (Bird) {
 				
-			case GestureState.none:
+			case Gesture.State.none:
 
 						if (openhand && palmdown) {
-							Bird = GestureState .detected;
+							Bird = Gesture.State.detected;
 						}
 					
 				
 				break;
 				
-			case GestureState.detected:
+			case Gesture.State.detected:
 				if (palmrightin) {
-					Bird = GestureState.action;
+					Bird = Gesture.State.action;
 				}
 				if (Grab == 1) {
-					Bird = GestureState .ready;
+					Bird = Gesture.State.ready;
 					Sounds.audiosource.PlayOneShot (Sounds.panicflapping);
 					Sounds.audiosource.PlayOneShot (Sounds.grabbird);
 					Sounds.audiosource.PlayOneShot (Sounds.boatshiffer2, 5.0f);
 				}
 				break;
 
-			case GestureState.ready:
+			case Gesture.State.ready:
 				if (Grab < 0.8) {
-					Bird = GestureState.none;
+					Bird = Gesture.State.none;
 					Sounds.audiosource.PlayOneShot (Sounds.weakflapping);
 					Sounds.audiosource.PlayOneShot (Sounds.birdflyslonghand);
 				}
 				break;
 				
-			case GestureState.action:
+			case Gesture.State.action:
 				if (!ring.IsExtended) {
 					hit = 1;
 					GameObject.Find ("Hands").SendMessage ("LHhit", hit);
-					Bird = GestureState .cooldown;
+					Bird = Gesture.State.cooldown;
 				}
 				break;
 				
-			case GestureState.cooldown:
+			case Gesture.State.cooldown:
 				cooldownTime -= Time.deltaTime;
 				if (cooldownTime <= 0) {
 					hit = 0;
 					GameObject.Find ("Hands").SendMessage ("LHhit", hit);
-					Bird = GestureState.none;
+					Bird = Gesture.State.none;
 					cooldownTime = MaxcooldownTime1;
 				}
 				break;
@@ -202,34 +192,34 @@ public class Lefthand : MonoBehaviour
 				if(!Metrics.Nar_Check){
 			switch (Paddle) {
 				
-			case GestureState.none:
+			case Gesture.State.none:
 
 					if (pitchforward && palmdown) {
-						Paddle = GestureState .detected;
+						Paddle = Gesture.State.detected;
 					}
 			
 				break;
 				
-			case GestureState.detected:
+			case Gesture.State.detected:
 				if (transPitch > 30) {
 					hit = 2;
 					Gesturehint.PlayOneShot (finger_left.creak1);
 					GameObject.Find ("Hands").SendMessage ("LHhit", hit);
-					Paddle = GestureState .action;
+					Paddle = Gesture.State.action;
 				} 
 				break;
 				
-			case GestureState.action:
+			case Gesture.State.action:
 				//if (transWave_z >40) {
 				//audio.PlayOneShot (script1.creak2);
-				Paddle = GestureState .cooldown;
+				Paddle = Gesture.State.cooldown;
 				//}
 				break;
 				
-			case GestureState.cooldown:
+			case Gesture.State.cooldown:
 				cooldownTime -= Time.deltaTime;
 				if (cooldownTime <= 0) {
-					Paddle = GestureState.none;
+					Paddle = Gesture.State.none;
 					hit = 0;
 					GameObject.Find ("Hands").SendMessage ("LHhit", hit);
 					cooldownTime = MaxcooldownTime;
@@ -249,24 +239,24 @@ public class Lefthand : MonoBehaviour
 
 			switch (Bike) {
 				
-			case GestureState.none:
+			case Gesture.State.none:
 
 					if (pitchforward) {
-						Bike = GestureState.ready;
+						Bike = Gesture.State.ready;
 			}
 				
 			break;
 
 
 				
-			case GestureState.ready:
+			case Gesture.State.ready:
 
 				if (Metrics.levelcount == 5 && Metrics.bellcount < 6) {
 
 					if (palmdown && Grab > 0.4) {
 
 						Gesturehint.PlayOneShot(finger_left.bike);
-						Bike = GestureState .detected;
+						Bike = Gesture.State.detected;
 
 					}
 				}
@@ -274,22 +264,22 @@ public class Lefthand : MonoBehaviour
 
 
 				
-			case GestureState.detected:
+			case Gesture.State.detected:
 				//if(middle.IsExtended){
-				Bike = GestureState .action;
+				Bike = Gesture.State.action;
 				//}
 			break;
 
-			case GestureState.action:
+			case Gesture.State.action:
 				//if(!middle.IsExtended){
-				Bike = GestureState .cooldown;	
+				Bike = Gesture.State.cooldown;	
 				//}
 			break;
 
-			case GestureState.cooldown:
+			case Gesture.State.cooldown:
 				cooldownTime -= Time.deltaTime;
 				if (cooldownTime <= 0) {
-					Bike = GestureState.ready;
+					Bike = Gesture.State.ready;
 					cooldownTime = MaxcooldownTime;
 				}
 			break;

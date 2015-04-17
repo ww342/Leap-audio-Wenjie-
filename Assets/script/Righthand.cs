@@ -18,25 +18,14 @@ public class Righthand : MonoBehaviour
 	public AudioMixerGroup HintsMix;
 	public AudioMixerGroup EnvironmentMix;
 
-
-	public enum GestureState
-	{
-		none,
-		ready,
-		detected,
-		action,
-		ing,
-		other,
-		cooldown
-	}
-	public GestureState Stone = GestureState.none;
-	public GestureState Bird = GestureState.none;
-	public GestureState Paddle = GestureState.none;
-	public GestureState Rope = GestureState.none;
-	public GestureState Star = GestureState.none;
-	public GestureState Flower = GestureState.none;
-	public GestureState Tree = GestureState.none;
-	public GestureState Bike = GestureState.none;
+	public Gesture.State Stone = Gesture.State.none;
+	public Gesture.State Bird = Gesture.State.none;
+	public Gesture.State Paddle = Gesture.State.none;
+	public Gesture.State Rope = Gesture.State.none;
+	public Gesture.State Star = Gesture.State.none;
+	public Gesture.State Flower = Gesture.State.none;
+	public Gesture.State Tree = Gesture.State.none;
+	public Gesture.State Bike = Gesture.State.none;
 
 
 	private float cooldownTime;
@@ -55,7 +44,6 @@ public class Righthand : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		Controller = new Controller ();
 		cooldownTime = MaxcooldownTime;
 		hit = 0;
 
@@ -181,23 +169,23 @@ public class Righthand : MonoBehaviour
 
 										switch (Stone) {
 			
-										case GestureState.none:
+										case Gesture.State.none:
 						                        Sinus.frequency =0;
 						                        Sinus.gain =0;
 												if (pitchforward && palmdown) {
-														Stone = GestureState .detected;
+														Stone = Gesture.State.detected;
 
 												}
 				
 												break;
 			
-										case GestureState.detected:
+										case Gesture.State.detected:
 								//if (transPitch > 10) {
 												if (Grab > 0.9 && wristforward) {
 							                            Environment.PlayOneShot (Sounds.grabstone);
 							                            //Instantiate (GameObject.Find ("Stone"));
 							                            GrabStone = true;
-														Stone = GestureState .action;
+														Stone = Gesture.State.action;
 														GameObject.Find ("Hands").SendMessage ("hint3");
 												}
 
@@ -205,7 +193,7 @@ public class Righthand : MonoBehaviour
 							                      if(wristleft||wristright) {
 								                       Environment.PlayOneShot (Sounds.gentlesplash, 1.0f);
 								                       Environment.PlayOneShot(Sounds.longcreak);
-							                           Stone = GestureState.action;
+							                           Stone = Gesture.State.action;
 								                       GrabWater = true;
 								                       
 							                           GameObject.Find ("Hands").SendMessage ("hint3");
@@ -214,13 +202,13 @@ public class Righthand : MonoBehaviour
 								//}
 												break;
 			
-										case GestureState.action:
+										case Gesture.State.action:
 						                if(GrabStone){
 
 						                 if(wristforward && openhand){
 						               
 														GameObject.Find ("Hands").SendMessage ("transitwatch");
-														Stone = GestureState.none;
+														Stone = Gesture.State.none;
 														GameObject.Find ("Hands").SendMessage ("hint2");
 								                        Environment.PlayOneShot (finger_right.stonedrop);
 							                            GrabStone = false;
@@ -228,7 +216,7 @@ public class Righthand : MonoBehaviour
 							             if(wristleft||wristright) {
 								                   if(openhand){
 									GameObject.Find ("Hands").SendMessage ("transitwatch");
-									Stone = GestureState.none;
+									Stone = Gesture.State.none;
 									GrabStone = false;
 									GameObject.Find ("Hands").SendMessage ("hint2");
 									Environment.PlayOneShot (Sounds.waterdrop,10.0f);
@@ -239,10 +227,10 @@ public class Righthand : MonoBehaviour
 							if (Mathf.Abs (transWave_z_10) > 50) {
 								//|| Mathf.Abs(losetrack_trans_z) >30)
 								GameObject.Find ("Hands").SendMessage ("quickwatch");
-								Stone = GestureState.ready;
+								Stone = Gesture.State.ready;
 							}
 							if (palmleft || palmleftin || palmup || palmright) {
-								Stone = GestureState.other;
+								Stone = Gesture.State.other;
 								GameObject.Find ("Hands").SendMessage ("transitwatch");
 								GameObject.Find ("Hands").SendMessage ("hint2");
 							}
@@ -342,7 +330,7 @@ public class Righthand : MonoBehaviour
 									GameObject.Find ("Hands").SendMessage ("normalwatch");
 									Environment.PlayOneShot (Sounds.rightsleevelift,3.0f);
 									GameObject.Find ("Hands").SendMessage ("hint3");
-									Stone = GestureState.ing;
+									Stone = Gesture.State.ing;
 
 								}
 							}
@@ -351,7 +339,7 @@ public class Righthand : MonoBehaviour
 
 								if(GrabWater){
 								                      GameObject.Find ("Hands").SendMessage ("transitwatch");
-								                      Stone = GestureState.none;
+								                      Stone = Gesture.State.none;
 								                      GrabWater = false;
 								                      GameObject.Find ("Hands").SendMessage ("hint2");
 							                          Environment.PlayOneShot (Sounds.gentlewaterdrop,2.5f);
@@ -363,7 +351,7 @@ public class Righthand : MonoBehaviour
 												
 												break;
 
-										case GestureState.ready:
+										case Gesture.State.ready:
 						                   Sinus.frequency =0;
 						                   Sinus.gain =0;
 												if (Grab == 0) {
@@ -372,11 +360,11 @@ public class Righthand : MonoBehaviour
 							                            GameObject.Find ("Hands").SendMessage ("quickwatch");
 														GameObject.Find ("Hands").SendMessage ("WrongCount");
 														GameObject.Find ("Hands").SendMessage ("hint2");
-														Stone = GestureState .none;
+														Stone = Gesture.State.none;
 												}
 												break;
 
-										case GestureState.other:
+										case Gesture.State.other:
 						                     Sinus.frequency =0;
 						                     Sinus.gain =0;
 												if (palmdown) {
@@ -388,14 +376,14 @@ public class Righthand : MonoBehaviour
 									                                    Environment.PlayOneShot (Sounds.waterdrop, 8.0f);
 																		GameObject.Find ("Hands").SendMessage ("hint1");
 																		GameObject.Find ("Hands").SendMessage ("WrongCount");
-																		Stone = GestureState.none;
+																		Stone = Gesture.State.none;
 																}
 														}
 														if (transWave_y_10 < - 50) {
 																GameObject.Find ("Hands").SendMessage ("hint3");
 								                                Environment.PlayOneShot (Sounds.rightsleevelift, 3.0f);
 																GameObject.Find ("Hands").SendMessage ("normalwatch");
-																Stone = GestureState.ing;
+																Stone = Gesture.State.ing;
 														}
 												}
 												if (palmleft || palmleftin || palmup || palmright) {
@@ -407,7 +395,7 @@ public class Righthand : MonoBehaviour
 																		GameObject.Find ("Northdown").SendMessage ("sound3");
 																		GameObject.Find ("Hands").SendMessage ("quickwatch");
 																		GameObject.Find ("Hands").SendMessage ("WrongCount");
-																		Stone = GestureState.none;
+																		Stone = Gesture.State.none;
 																}
 														}
 
@@ -418,7 +406,7 @@ public class Righthand : MonoBehaviour
 																		GameObject.Find ("Northdown").SendMessage ("sound5");
 																		GameObject.Find ("Hands").SendMessage ("quickwatch");
 																		GameObject.Find ("Hands").SendMessage ("WrongCount");
-																		Stone = GestureState.none;
+																		Stone = Gesture.State.none;
 																}
 														}
 														if (Mathf.Abs (transWave_y_10 / transWave_x_10) > 0.6) {
@@ -428,13 +416,13 @@ public class Righthand : MonoBehaviour
 																		GameObject.Find ("Northdown").SendMessage ("sound4");
 																		GameObject.Find ("Hands").SendMessage ("quickwatch");
 																		GameObject.Find ("Hands").SendMessage ("WrongCount");
-																		Stone = GestureState.none;
+																		Stone = Gesture.State.none;
 																}
 														}
 												}
 												break;
 
-										case  GestureState.ing:
+										case  Gesture.State.ing:
 						                    Sinus.frequency =0;
 						                    Sinus.gain =0;
 												if (openhand && wristforward) {
@@ -445,14 +433,14 @@ public class Righthand : MonoBehaviour
 																		GameObject.Find ("Hands").SendMessage ("StoneCount");
 																		GameObject.Find ("Hands").SendMessage ("normalwatch");
 																		Sounds.audiosource.PlayOneShot (hint.Stone_correct_hint4);
-																		Stone = GestureState .cooldown;
+																		Stone = Gesture.State.cooldown;
 																}
 								else{
 								
 									Environment.PlayOneShot (Sounds.waterdrop, 8.0f);
 									Environment.PlayOneShot (Sounds.longlean);
 									GameObject.Find ("Hands").SendMessage ("quickwatch");
-									Stone = GestureState .none;
+									Stone = Gesture.State.none;
 								}
 							}
 							
@@ -461,7 +449,7 @@ public class Righthand : MonoBehaviour
 								GameObject.Find ("Hands").SendMessage ("hint1");
 																		GameObject.Find ("Hands").SendMessage ("quickwatch");
 																		GameObject.Find ("Northforward").SendMessage ("farskip");
-																		Stone = GestureState .none;
+																		Stone = Gesture.State.none;
 							                                    }
 
 																 
@@ -477,18 +465,18 @@ public class Righthand : MonoBehaviour
 																		GameObject.Find ("Northwest").SendMessage ("sound1");
 																		GameObject.Find ("Northwest").SendMessage ("sound2");
 									                                    Environment.PlayOneShot (finger_right.creak1);
-									                                    Stone = GestureState .none;
+									                                    Stone = Gesture.State.none;
 																}
 																if (wristmiddle) {
 																		GameObject.Find ("Hands").SendMessage ("quickwatch");
 																		GameObject.Find ("Northforward").SendMessage ("leftskip");
-																		Stone = GestureState.none;
+																		Stone = Gesture.State.none;
 																}
 														}
 														if ((transWave_y_10 < 10) || (losetrack_trans_y < 10)) {
 								                                Environment.PlayOneShot (finger_right.stonedrop, 10.0f);
 								                                GameObject.Find ("Hands").SendMessage ("quickwatch");
-																Stone = GestureState .none;
+																Stone = Gesture.State.none;
 														}
 												}
 												if (openhand && wristright) {
@@ -499,26 +487,26 @@ public class Righthand : MonoBehaviour
 																		GameObject.Find ("Northeast").SendMessage ("sound1");
 																		GameObject.Find ("Northeast").SendMessage ("sound2");
 																		Gesturehint.PlayOneShot (finger_right.creak1);
-																		Stone = GestureState .none;
+																		Stone = Gesture.State.none;
 																}
 																if (wristmiddle) {
 																		GameObject.Find ("Hands").SendMessage ("quickwatch");
 																		GameObject.Find ("Northforward").SendMessage ("rightskip");
-																		Stone = GestureState .none;
+																		Stone = Gesture.State.none;
 																}
 														}
 														if ((transWave_y_10 < 10) || (losetrack_trans_y < 10)) {
 								                                Environment.PlayOneShot (finger_right.stonedrop, 10.0f);
 								                                GameObject.Find ("Hands").SendMessage ("quickwatch");
-																Stone = GestureState .none;
+																Stone = Gesture.State.none;
 														}
 												}
 												break;
 			
-										case GestureState.cooldown:
+										case Gesture.State.cooldown:
 												cooldownTime -= Time.deltaTime;
 												if (cooldownTime <= 0) {
-														Stone = GestureState.none;
+														Stone = Gesture.State.none;
 														cooldownTime = MaxcooldownTime;
 												}
 												break;
@@ -537,20 +525,20 @@ public class Righthand : MonoBehaviour
 
 												switch (Bird) {
 			
-												case GestureState.none:
+												case Gesture.State.none:
 
 														if (openhand && palmdown) {
-																Bird = GestureState .detected;
+																Bird = Gesture.State.detected;
 														}
 				
 														break;
 			
-												case GestureState.detected:
+												case Gesture.State.detected:
 														if (palmleftin) { 
-																Bird = GestureState.action;
+																Bird = Gesture.State.action;
 														}
 														if (Grab == 1) {
-																Bird = GestureState.ready;
+																Bird = Gesture.State.ready;
 																GameObject.Find ("Hands").SendMessage ("quickwatch");
 																GameObject.Find ("Hands").SendMessage ("hint1");
 								                                Environment.PlayOneShot (Sounds.panicflapping);
@@ -558,7 +546,7 @@ public class Righthand : MonoBehaviour
 								                                Environment.PlayOneShot (Sounds.boatshiffer2, 5.0f);
 														}
 														if (transWave_y_3 > 30) {
-																Bird = GestureState .none;
+																Bird = Gesture.State.none;
 																GameObject.Find ("Hands").SendMessage ("quickwatch");
 																GameObject.Find ("Hands").SendMessage ("hint1");
 								                                Environment.PlayOneShot (Sounds.seedpouring);
@@ -571,9 +559,9 @@ public class Righthand : MonoBehaviour
 														}
 														break;
 
-												case GestureState.ready:
+												case Gesture.State.ready:
 														if (Grab < 0.8) {
-																Bird = GestureState.none;
+																Bird = Gesture.State.none;
 																GameObject.Find ("Hands").SendMessage ("transitwatch");
 																GameObject.Find ("Hands").SendMessage ("hint2");
 								                                Environment.PlayOneShot (Sounds.weakflapping);
@@ -581,20 +569,20 @@ public class Righthand : MonoBehaviour
 														}
 														break;
 			
-												case GestureState.action:
+												case Gesture.State.action:
 														if (!ring.IsExtended && Grab < 0.8) {
 																hit = 1;
 																GameObject.Find ("Hands").SendMessage ("RHhit", hit);
-																Bird = GestureState .cooldown;
+																Bird = Gesture.State.cooldown;
 														}
 														break;
 			
-												case GestureState.cooldown:
+												case Gesture.State.cooldown:
 														cooldownTime -= Time.deltaTime;
 														if (cooldownTime <= 0) {
 																hit = 0;
 																GameObject.Find ("Hands").SendMessage ("RHhit", hit);
-																Bird = GestureState.none;
+																Bird = Gesture.State.none;
 																cooldownTime = MaxcooldownTime1;
 														}
 														break;
@@ -613,31 +601,31 @@ public class Righthand : MonoBehaviour
 
 										switch (Paddle) {
 			
-										case GestureState.none:
+										case Gesture.State.none:
 								
 												if (pitchforward && palmdown) {
-														Paddle = GestureState .detected;
+														Paddle = Gesture.State.detected;
 												}
 							
 												break;
 			
-										case GestureState.detected:
+										case Gesture.State.detected:
 												if (transPitch > 30) { 
 														hit = 2;
 							                            Environment.PlayOneShot (finger_right.creak1);
 														GameObject.Find ("Hands").SendMessage ("RHhit", hit);
-														Paddle = GestureState.action;
+														Paddle = Gesture.State.action;
 												} 
 												break;
 			
-										case GestureState.action:
-												Paddle = GestureState .cooldown;
+										case Gesture.State.action:
+												Paddle = Gesture.State.cooldown;
 												break;
 			
-										case GestureState.cooldown:
+										case Gesture.State.cooldown:
 												cooldownTime -= Time.deltaTime;
 												if (cooldownTime <= 0) {
-														Paddle = GestureState.none;
+														Paddle = Gesture.State.none;
 														hit = 0;
 														GameObject.Find ("Hands").SendMessage ("RHhit", hit);
 														cooldownTime = MaxcooldownTime;
@@ -650,57 +638,57 @@ public class Righthand : MonoBehaviour
 						// Rope
 						switch (Rope) {
 				
-						case GestureState.none:
+						case Gesture.State.none:
 								if (Metrics.levelcount == 4) {
 										if (Metrics.wrongcount > 2 || Metrics.flowercount == 12) {
 												if (palmright) {
-														Rope = GestureState.ready;
+														Rope = Gesture.State.ready;
 												}
 										}
 								}
 								break;
 
-						case  GestureState.ready:
+						case  Gesture.State.ready:
 								if (Metrics.levelcount == 4) {
 										if (Metrics.wrongcount > 2 || Metrics.flowercount == 12) {
 												if (!openhand) {
 														if (transWave_z_10 > 50) {
-																Rope = GestureState .detected;
+																Rope = Gesture.State.detected;
 														}
 												}
 										}
 								}
 								break;
 
-						case GestureState.detected:
+						case Gesture.State.detected:
 								if (!openhand) {
 										if (transWave_x_10 > 5) {
-												Rope = GestureState .action;
+												Rope = Gesture.State.action;
 										}
 								}
 								break;
 
-						case GestureState.action:
+						case Gesture.State.action:
 								if (!openhand) {
 										if (transWave_z_10 < -50) {
-												Rope = GestureState .ing;
+												Rope = Gesture.State.ing;
 										}
 								}
 								break;
 				
-						case GestureState.ing:
+						case Gesture.State.ing:
 								if (!openhand) {
 										if (transWave_x_10 < -5) {
 												GameObject.Find ("Hands").SendMessage ("RopeCount");
-												Rope = GestureState .cooldown;
+												Rope = Gesture.State.cooldown;
 										}
 								}
 								break;
 
-						case GestureState.cooldown:
+						case Gesture.State.cooldown:
 								cooldownTime -= Time.deltaTime;
 								if (cooldownTime <= 0) {
-										Rope = GestureState.ready;
+										Rope = Gesture.State.ready;
 										cooldownTime = MaxcooldownTime;
 								}
 								break;
@@ -714,36 +702,36 @@ public class Righthand : MonoBehaviour
 
 										switch (Flower) {
 			
-										case GestureState.none:
+										case Gesture.State.none:
 
 												if (pitchforward && palmdown) {
-														Flower = GestureState .detected;
+														Flower = Gesture.State.detected;
 												}
 				
 												break;
 			
-										case GestureState.detected:
+										case Gesture.State.detected:
 												if (Pinch == 1) {
-														Flower = GestureState .action;
+														Flower = Gesture.State.action;
 												}
 												break;
 			
-										case GestureState.action:
+										case Gesture.State.action:
 												if (palmup) {//transRoll > 50 && transRoll < 120 && Pinch > 0.8)
 														GameObject.Find ("Hands").SendMessage ("FlowerCount");
-														Flower = GestureState .cooldown;	
+														Flower = Gesture.State.cooldown;	
 												}
 												if (transRoll > 50 && transRoll < 120 && Pinch < 0.5) {
 							                            Environment.PlayOneShot (Sounds.paddlewrong);
-														Flower = GestureState .cooldown;	
+														Flower = Gesture.State.cooldown;	
 												}
 												break;
 
 			
-										case GestureState.cooldown:
+										case Gesture.State.cooldown:
 												cooldownTime -= Time.deltaTime;
 												if (cooldownTime <= 0) {
-														Flower = GestureState.none;
+														Flower = Gesture.State.none;
 														cooldownTime = MaxcooldownTime;
 												}
 												break;
@@ -759,33 +747,33 @@ public class Righthand : MonoBehaviour
 
 										switch (Tree) {
 			
-										case GestureState.none:
+										case Gesture.State.none:
 
 												if (palmleft) {
-														Tree = GestureState .detected;
+														Tree = Gesture.State.detected;
 												}
 				
 												break;
 			
-										case GestureState.detected:
+										case Gesture.State.detected:
 												if (Metrics.levelcount == 4 && Metrics.wrongcount <= 2 && Metrics.flowercount < 12) {
 														if (!ring.IsExtended) {
-																Tree = GestureState .action;
+																Tree = Gesture.State.action;
 														}
 												}
 												break;
 			
-										case GestureState.action:
+										case Gesture.State.action:
 												if (transWave_x_10 > 10) {
 														GameObject.Find ("Hands").SendMessage ("FlowerCount");
-														Tree = GestureState .cooldown;	
+														Tree = Gesture.State.cooldown;	
 												}
 												break;
 			
-										case GestureState.cooldown:
+										case Gesture.State.cooldown:
 												cooldownTime -= Time.deltaTime;
 												if (cooldownTime <= 0) {
-														Tree = GestureState.detected;
+														Tree = Gesture.State.detected;
 														cooldownTime = MaxcooldownTime;
 												}
 												break;
@@ -800,40 +788,40 @@ public class Righthand : MonoBehaviour
 
 										switch (Bike) {
 			
-										case GestureState.none:
+										case Gesture.State.none:
 
 												if (pitchforward) {
-														Bike = GestureState.ready;
+														Bike = Gesture.State.ready;
 												}
 			
 												break;
 			
-										case GestureState.ready:
+										case Gesture.State.ready:
 												if (Metrics.levelcount == 5 && Metrics.bellcount < 6) {
 														if (palmdown && Grab > 0.4 && thumb.IsExtended) {
 								                                Environment.PlayOneShot (finger_right.bike);
-																Bike = GestureState .detected;
+																Bike = Gesture.State.detected;
 														}
 												}
 												break;
 			
-										case GestureState.detected:
+										case Gesture.State.detected:
 												if (!thumb.IsExtended) {
 							                            Environment.PlayOneShot (finger_right.bell);
 														GameObject.Find ("Hands").SendMessage ("BellCount");
-														Bike = GestureState.action;
+														Bike = Gesture.State.action;
 				
 												}
 												break;
 			
-										case GestureState.action:
-												Bike = GestureState .cooldown;	
+										case Gesture.State.action:
+												Bike = Gesture.State.cooldown;	
 												break;
 			
-										case GestureState.cooldown:
+										case Gesture.State.cooldown:
 												cooldownTime -= Time.deltaTime;
 												if (cooldownTime <= 0) {
-														Bike = GestureState.ready;
+														Bike = Gesture.State.ready;
 														cooldownTime = MaxcooldownTime;
 												}
 												break;
@@ -848,43 +836,43 @@ public class Righthand : MonoBehaviour
 
 								switch (Star) {
 			
-								case GestureState.none:
+								case Gesture.State.none:
 
 										if (pitchupforward) {
-												Star = GestureState.ready;
+												Star = Gesture.State.ready;
 										}
 			
 										break;
 			
-								case GestureState.ready:
+								case Gesture.State.ready:
 										if (transPitch > 10) {
 												if (!openhand) {
-														Star = GestureState .detected;
+														Star = Gesture.State.detected;
 												}
 										}
 										break;
 			
-								case GestureState.detected:
+								case Gesture.State.detected:
 				                        //if(transYaw>3){
 										if (palmin) {
 							Environment.PlayOneShot (Sounds.star);
-												Star = GestureState .action;
+												Star = Gesture.State.action;
 										}
 										break;
 			
-								case GestureState.action:
+								case Gesture.State.action:
 										if (palmup) {
 												GameObject.Find ("Hands").SendMessage ("StarCount");
 							                    Environment.PlayOneShot (Sounds.win);
 							                    Environment.PlayOneShot (Sounds.shiny);
-												Star = GestureState .cooldown;	
+												Star = Gesture.State.cooldown;	
 										}
 										break;
 			
-								case GestureState.cooldown:
+								case Gesture.State.cooldown:
 										cooldownTime -= Time.deltaTime;
 										if (cooldownTime <= 0) {
-												Star = GestureState.detected;
+												Star = Gesture.State.detected;
 												cooldownTime = MaxcooldownTime;
 										}
 										break;
