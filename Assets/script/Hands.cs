@@ -11,7 +11,7 @@ public class Hands : MonoBehaviour
 	public Narrator Narrator;
 	public Metrics Metrics;
 	
-	public enum HandState
+	public enum HandState // TODO: how is this different from GestureState?
 	{
 		none,
 		onehand,
