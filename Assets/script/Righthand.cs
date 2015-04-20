@@ -20,7 +20,6 @@ public class Righthand : MonoBehaviour
 	public Gesture.State Paddle = Gesture.State.none;
 	public Gesture.State Rope = Gesture.State.none;
 	public Gesture.State Star = Gesture.State.none;
-	public Gesture.State Flower = Gesture.State.none;
 	public Gesture.State Tree = Gesture.State.none;
 	public Gesture.State Bike = Gesture.State.none;
 	private float cooldownTime;
@@ -249,23 +248,23 @@ public class Righthand : MonoBehaviour
 				
 			case Gesture.State.none:
 				if (Metrics.levelcount == 4) {
-					if (Metrics.wrongcount > 2 || Metrics.flowercount == 12) {
+					//if (Metrics.wrongcount > 2 || Metrics.flowercount == 12) {
 						if (palmright) {
 							Rope = Gesture.State.ready;
 						}
-					}
+					//}
 				}
 				break;
 
 			case  Gesture.State.ready:
 				if (Metrics.levelcount == 4) {
-					if (Metrics.wrongcount > 2 || Metrics.flowercount == 12) {
+					//if (Metrics.wrongcount > 2 || Metrics.flowercount == 12) {
 						if (!openhand) {
 							if (transWave_z_10 > 50) {
 								Rope = Gesture.State.detected;
 							}
 						}
-					}
+					//}
 				}
 				break;
 
@@ -304,46 +303,6 @@ public class Righthand : MonoBehaviour
 			}
 
 
-			// Flower
-
-			//if (Metrics.levelcount == 1 && Metrics.wrongcount <= 2 && Metrics.flowercount < 4) {
-
-					switch (Flower) {
-			
-					case Gesture.State.none:
-
-						if (pitchforward && palmdown) {
-							Flower = Gesture.State.detected;
-						}
-				
-						break;
-			
-					case Gesture.State.detected:
-						if (Pinch == 1) {
-							Flower = Gesture.State.action;
-						}
-						break;
-			
-					case Gesture.State.action:
-						if (palmup) {//transRoll > 50 && transRoll < 120 && Pinch > 0.8)
-							Hands.FlowerCount();
-							Flower = Gesture.State.cooldown;	
-						}
-						if (transRoll > 50 && transRoll < 120 && Pinch < 0.5) {
-							Sounds.Environment.PlayOneShot (Sounds.paddlewrong);
-							Flower = Gesture.State.cooldown;	
-						}
-						break;
-
-			
-					case Gesture.State.cooldown:
-						cooldownTime -= Time.deltaTime;
-						if (cooldownTime <= 0) {
-							Flower = Gesture.State.none;
-							cooldownTime = MaxcooldownTime;
-						}
-						break;
-					}
 
 
 
@@ -361,16 +320,14 @@ public class Righthand : MonoBehaviour
 						break;
 			
 					case Gesture.State.detected:
-						if (Metrics.levelcount == 4 && Metrics.wrongcount <= 2 && Metrics.flowercount < 12) {
 							if (!ring.IsExtended) {
 								Tree = Gesture.State.action;
 							}
-						}
 						break;
 			
 					case Gesture.State.action:
 						if (transWave_x_10 > 10) {
-							Hands.FlowerCount();
+//							Hands.FlowerCount(); // TODO: flower counting used for tree and flower?
 							Tree = Gesture.State.cooldown;	
 						}
 						break;

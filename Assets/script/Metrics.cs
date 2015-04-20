@@ -7,7 +7,6 @@ public class Metrics : MonoBehaviour {
 	public  int birdcount;
 	public  int paddlecount;
 	public  int ropecount;
-	public  int flowercount;
 	public  int starcount;
 	public  int bellcount;
 	public int wrongcount;

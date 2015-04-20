@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StoneThrowGesture : Gesture
-{
-	public float CooldownTime = 1f;
+public class StoneThrowGesture : Gesture {
 
-	private void StoneCount ()
-	{
+	private void StoneCount () {
 		this.count ++;
 		//audio.PlayOneShot (stone);
 		//audio.PlayOneShot (hitfish);
@@ -43,13 +40,14 @@ public class StoneThrowGesture : Gesture
 		Stone stone = GameObject.Find ("/MovingElements/Stone").GetComponent<Stone>();
 		stone.GrabStone = grabbed;
 	}
-
-
-	override public IEnumerator Activate ()
-	{
+	
+	override public IEnumerator Activate () {
 		GrabStone(false);
 		Sinus.frequency = 0;
 		Sinus.gain = 0;
+
+		yield return StartCoroutine(this.CheckAndWaitForCooldown());
+
 		while (this.state == State.none) {
 			yield return null;
 			if (right.pitchforward && right.palmdown) {

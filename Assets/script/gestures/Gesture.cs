@@ -39,9 +39,25 @@ abstract public class Gesture : MonoBehaviour {
 	public State state = State.none;
 	public int count = 0; // how often was it successfully detected?
 	public int wrongcount = 0; // count failures too
+	private float CooldownTime = 1f; // seconds
+	private float AfterCooldown = 0f;
+
+	public void SetCooldown() {
+		this.state = State.cooldown;
+		this.AfterCooldown = Time.realtimeSinceStartup + CooldownTime;
+	}
+
+	public IEnumerator CheckAndWaitForCooldown() {
+		if ((this.state == State.cooldown) && (AfterCooldown > Time.realtimeSinceStartup)) {
+			yield return new WaitForSeconds(AfterCooldown - Time.realtimeSinceStartup);
+		}
+		this.state = State.none;
+		AfterCooldown = 0f;
+	}
 
 	public class HandState {
 		public float Grab = 0f;
+		public float Pinch = 0f;
 		public float pitch = 0f;
 		public bool pitchforward = false;
 		public bool palmdown = false;
@@ -56,6 +72,8 @@ abstract public class Gesture : MonoBehaviour {
 		public bool wristhigh = false;
 		public bool openhand = false;
 		public float transPitch = 0f;
+		public float transYaw = 0f;
+		public float transRoll = 0f;
 		public float transWave_x_3 = 0f;
 		public float transWave_y_3 = 0f;
 		public float transWave_z_3 = 0f;
@@ -112,7 +130,7 @@ abstract public class Gesture : MonoBehaviour {
 			float roll = rightmost.PalmNormal.Roll * 180.0f / Mathf.PI;
 			float yaw = rightmost.Direction.Yaw * 180.0f / Mathf.PI;
 			right.Grab = rightmost.GrabStrength;
-			float Pinch = rightmost.PinchStrength;
+			right.Pinch = rightmost.PinchStrength;
 			float radius = rightmost.SphereRadius;
 			float handmove_x = rightmost.PalmPosition.x;
 			float handmove_y = rightmost.PalmPosition.y;
@@ -131,8 +149,8 @@ abstract public class Gesture : MonoBehaviour {
 			
 			float transRadius = previousframe6.Hands.Rightmost.SphereRadius - radius;
 			right.transPitch = previousframe10.Hands.Rightmost.Direction.Pitch - right.pitch;
-			float transYaw = previousframe10.Hands.Rightmost.Direction.Yaw - yaw;
-			float transRoll = previousframe10.Hands.Rightmost.PalmNormal.Roll * 180.0f / Mathf.PI - roll;
+			right.transYaw = previousframe10.Hands.Rightmost.Direction.Yaw - yaw;
+			right.transRoll = previousframe10.Hands.Rightmost.PalmNormal.Roll * 180.0f / Mathf.PI - roll;
 			right.transWave_y_10 = previousframe10.Hands.Rightmost.PalmPosition.y - handmove_y;
 			right.transWave_z_10 = previousframe10.Hands.Rightmost.PalmPosition.z - handmove_z;
 			right.transWave_x_10 = previousframe10.Hands.Rightmost.PalmPosition.x - handmove_x;
@@ -155,7 +173,7 @@ abstract public class Gesture : MonoBehaviour {
 			
 			bool wavearm = radius < 40 && right.pitch >= 95 && right.pitch <= 100;
 			bool grabstone = transRadius > 10;//&& Grab >0.4 && pitch <10;
-			bool catchbird = roll >= 170 && Pinch >= 0.5 && Pinch <= 1;
+			bool catchbird = roll >= 170 && right.Pinch >= 0.5 && right.Pinch <= 1;
 			
 			bool yawforward = yaw <= 20 && yaw >= -20;
 			bool yawside = yaw < -20 || yaw > 20;

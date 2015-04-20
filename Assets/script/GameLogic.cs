@@ -48,17 +48,50 @@ public class GameLogic : MonoBehaviour {
 		while (stonethrow.count < 3) {
 			yield return StartCoroutine(stonethrow.Activate());
 		}
-		if (stonethrow.wrongcount <= 2) {
+		bool doFlowerGesture = (stonethrow.wrongcount <= 2);
+		Destroy (stonethrow);
+
+		if (doFlowerGesture) {
+			Debug.Log ("Flower petal picking (optional reward)");
 			yield return Narrator.PlayAndWait(Narrator.flowerpose);
+			Gesture flower = gameObject.AddComponent<FlowerGesture>();
+			while (flower.count < 1) {
+				yield return StartCoroutine(flower.Activate());
+			}
+			yield return Narrator.PlayAndWait(Narrator.flower1);
+			while (flower.count < 4) {
+				yield return StartCoroutine(flower.Activate());
+			}
+			yield return Narrator.PlayAndWait(Narrator.flyfromtree);
+
+			// TODO: the above narration (flyfromtree) and the narration in the "else" below
+			// (stone3) that's played instead of the flower gesture overlap!
+			// ideally we would split the instructions at the end from the two response parts
+			// (actual sound clip names: flying from tree, fishresponse3)
+
+			// TODO: previously, flowers worked up to 12 and then triggered tieing directly.
+			// now only four flowers are possible
+			//yield return Narrator.PlayAndWait(Narrator.tietheboat);
+
+			Destroy (flower);
 		} else {
+			Debug.Log ("NO Flower petal picking (optional reward)");
 			yield return Narrator.PlayAndWait(Narrator.stone3);
 		}
-		Destroy (stonethrow);
 
 		// example code for stop here:
 		//yield break;
 
-		Debug.Log ("TODO: next gesture");
+		Debug.Log ("Bird");
+
+		Debug.Log ("Paddle");
+		
+		Debug.Log ("Rope & Tree");
+		
+		Debug.Log ("Bike");
+		
+		Debug.Log ("Star");
+		
 	}
 	
 }

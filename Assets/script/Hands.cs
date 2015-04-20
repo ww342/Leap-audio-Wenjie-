@@ -158,46 +158,6 @@ public class Hands : MonoBehaviour
 
 	}
 
-	public void FlowerCount ()
-	{
-		Metrics.flowercount ++;
-		Sounds.audiosource.PlayOneShot (Sounds.flower);
-		        
-		if (Metrics.flowercount == 1) {
-			//yield return Narrator.PlayAndWait(Narrator.flower1);
-		}
-
-		if (Metrics.flowercount == 4) {
-			Metrics.wrongcount = 0;
-			Sounds.Ambience_A.Stop ();
-			Sounds.Ambience_A.minDistance = 8;
-			Sounds.Ambience_A.clip = Sounds.wave;
-			Sounds.Ambience_D.PlayOneShot (Sounds.landonflpping, 5.0f);
-			Sounds.Ambience_D.PlayOneShot (Sounds.birdstandonpaddle);
-
-			//yield return Narrator.PlayAndWait(Narrator.flyfromtree);
-		}
-
-		if (Metrics.flowercount == 5) {
-			Sounds.audiosource.PlayOneShot (Sounds.leave);
-		}
-
-		if (Metrics.flowercount == 7) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.leave);
-		}
-
-		if (Metrics.flowercount == 10) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.leave);
-			Sounds.Ambience_D.PlayOneShot (Sounds.wind, 5.0f);
-		}
-			            
-		if (Metrics.flowercount == 12) {
-			//yield return Narrator.PlayAndWait(Narrator.tietheboat);
-			//LevelCount ();
-			Metrics.wrongcount = 0;
-		}
-	}
-	
 	public void BellCount ()
 	{
 		Metrics.bellcount ++;

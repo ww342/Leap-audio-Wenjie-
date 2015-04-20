@@ -654,7 +654,6 @@ MonoBehaviour:
   Paddle: 0
   Rope: 0
   Star: 0
-  Flower: 0
   Tree: 0
   Bike: 0
   MaxcooldownTime: 1
@@ -1430,7 +1429,6 @@ MonoBehaviour:
   birdcount: 0
   paddlecount: 0
   ropecount: 0
-  flowercount: 0
   starcount: 0
   bellcount: 0
   wrongcount: 0
