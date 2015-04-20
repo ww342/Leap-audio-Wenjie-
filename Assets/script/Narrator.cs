@@ -31,10 +31,15 @@ public class Narrator : MonoBehaviour
 	public AudioClip stonewrong;
 	public AudioClip birdwrong;
 
-	public AudioSource audiosource;
+	private AudioSource audiosource;
 	
 	void Awake ()
 	{
 		this.audiosource = GetComponent<AudioSource>();
+	}
+
+	public WaitForSeconds PlayAndWait(AudioClip clip) {
+		this.audiosource.PlayOneShot (clip);
+		return new WaitForSeconds(clip.length);
 	}
 }

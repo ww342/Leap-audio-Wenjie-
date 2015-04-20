@@ -5,14 +5,11 @@ using Leap;
 public class Lefthand : MonoBehaviour
 {
 	Controller Controller = new Controller ();
-
+	public Hands Hands;
 	public Sounds Sounds;
 	public Narrator Narrator;
 	public hint hint;
-	public leftpalm leftpalm;
-	public finger_left finger_left;
 	public Metrics Metrics;
-
 	public Gesture.State Bird = Gesture.State.none;
 	public Gesture.State Paddle = Gesture.State.none;
 	public Gesture.State Bike = Gesture.State.none;
@@ -20,10 +17,8 @@ public class Lefthand : MonoBehaviour
 	public float MaxcooldownTime;
 	public float MaxcooldownTime1;
 	public int hit;
-
 	private AudioSource Gesturehint;
 
-	// Use this for initialization
 	void Start ()
 	{
 		cooldownTime = MaxcooldownTime;
@@ -33,7 +28,6 @@ public class Lefthand : MonoBehaviour
 		Gesturehint.minDistance = 5;
 	}
 
-	// Update is called once per frame
 	void Update ()
 	{
 		//Frame variables
@@ -112,184 +106,165 @@ public class Lefthand : MonoBehaviour
 			bool palmrightin = roll > 130 && roll < 160;
 			bool openhand = thumb.IsExtended && index.IsExtended && middle.IsExtended && ring.IsExtended && pinky.IsExtended;
 			          
-/*
-		if (script.levelcount == 2 || script.levelcount ==3 ) {
-						if ((leftmost.IsLeft) && (startframe.Hands.Count > 0)) {
-								transform.rotation = Quaternion.Slerp (transform.rotation, wrist, Time.deltaTime * smooth);
-						}  
-						//transform.position  = handcenter * 0.05f  ;
-				}
-*/
-
 			//keep sending left hand index tip position to script"Hands" to check SOS WATCH TAPPING MESSAGE 
 			//GameObject.Find ("Hands").SendMessage ("TaptheWatch", indextip);
 
 
-
+			if (Metrics.levelcount > 2) {
 			// Bird
 
-			if (Metrics.levelcount == 1 || Metrics.levelcount == 2) {
-				if (Metrics.wrongcount > 2 || Metrics.flowercount == 4) {
-					if(!Metrics.Nar_Check){
-
-					switch (Bird) {
+			//if (Metrics.levelcount == 1 || Metrics.levelcount == 2) {
+				//if (Metrics.wrongcount > 2 || Metrics.flowercount == 4) {
+					
+						switch (Bird) {
 				
-			case Gesture.State.none:
+						case Gesture.State.none:
 
-						if (openhand && palmdown) {
-							Bird = Gesture.State.detected;
-						}
+							if (openhand && palmdown) {
+								Bird = Gesture.State.detected;
+							}
 					
 				
-				break;
+							break;
 				
-			case Gesture.State.detected:
-				if (palmrightin) {
-					Bird = Gesture.State.action;
-				}
-				if (Grab == 1) {
-					Bird = Gesture.State.ready;
-					Sounds.audiosource.PlayOneShot (Sounds.panicflapping);
-					Sounds.audiosource.PlayOneShot (Sounds.grabbird);
-					Sounds.audiosource.PlayOneShot (Sounds.boatshiffer2, 5.0f);
-				}
-				break;
+						case Gesture.State.detected:
+							if (palmrightin) {
+								Bird = Gesture.State.action;
+							}
+							if (Grab == 1) {
+								Bird = Gesture.State.ready;
+								Sounds.audiosource.PlayOneShot (Sounds.panicflapping);
+								Sounds.audiosource.PlayOneShot (Sounds.grabbird);
+								Sounds.audiosource.PlayOneShot (Sounds.boatshiffer2, 5.0f);
+							}
+							break;
 
-			case Gesture.State.ready:
-				if (Grab < 0.8) {
-					Bird = Gesture.State.none;
-					Sounds.audiosource.PlayOneShot (Sounds.weakflapping);
-					Sounds.audiosource.PlayOneShot (Sounds.birdflyslonghand);
-				}
-				break;
+						case Gesture.State.ready:
+							if (Grab < 0.8) {
+								Bird = Gesture.State.none;
+								Sounds.audiosource.PlayOneShot (Sounds.weakflapping);
+								Sounds.audiosource.PlayOneShot (Sounds.birdflyslonghand);
+							}
+							break;
 				
-			case Gesture.State.action:
-				if (!ring.IsExtended) {
-					hit = 1;
-					GameObject.Find ("Hands").SendMessage ("LHhit", hit);
-					Bird = Gesture.State.cooldown;
-				}
-				break;
+						case Gesture.State.action:
+							if (!ring.IsExtended) {
+								hit = 1;
+								Hands.LHhit(hit);
+								Bird = Gesture.State.cooldown;
+							}
+							break;
 				
-			case Gesture.State.cooldown:
-				cooldownTime -= Time.deltaTime;
-				if (cooldownTime <= 0) {
-					hit = 0;
-					GameObject.Find ("Hands").SendMessage ("LHhit", hit);
-					Bird = Gesture.State.none;
-					cooldownTime = MaxcooldownTime1;
-				}
-				break;
-			}
+						case Gesture.State.cooldown:
+							cooldownTime -= Time.deltaTime;
+							if (cooldownTime <= 0) {
+								hit = 0;
+								Hands.LHhit(hit);
+								Bird = Gesture.State.none;
+								cooldownTime = MaxcooldownTime1;
+							}
+							break;
+						}
 
-			}
-			}
-			}
 
 			// Paddle
 
-			if (Metrics.levelcount == 3) {
-				if(!Metrics.Nar_Check){
-			switch (Paddle) {
+			//if (Metrics.levelcount == 3) {
+					switch (Paddle) {
 				
-			case Gesture.State.none:
+					case Gesture.State.none:
 
-					if (pitchforward && palmdown) {
-						Paddle = Gesture.State.detected;
-					}
+						if (pitchforward && palmdown) {
+							Paddle = Gesture.State.detected;
+						}
 			
-				break;
+						break;
 				
-			case Gesture.State.detected:
-				if (transPitch > 30) {
-					hit = 2;
-					Gesturehint.PlayOneShot (finger_left.creak1);
-					GameObject.Find ("Hands").SendMessage ("LHhit", hit);
-					Paddle = Gesture.State.action;
-				} 
-				break;
+					case Gesture.State.detected:
+						if (transPitch > 30) {
+							hit = 2;
+							Gesturehint.PlayOneShot (Sounds.creak1); // should be played on finger!
+							Hands.LHhit(hit);
+							Paddle = Gesture.State.action;
+						} 
+						break;
 				
-			case Gesture.State.action:
+					case Gesture.State.action:
 				//if (transWave_z >40) {
 				//audio.PlayOneShot (script1.creak2);
-				Paddle = Gesture.State.cooldown;
+						Paddle = Gesture.State.cooldown;
 				//}
-				break;
+						break;
 				
-			case Gesture.State.cooldown:
-				cooldownTime -= Time.deltaTime;
-				if (cooldownTime <= 0) {
-					Paddle = Gesture.State.none;
-					hit = 0;
-					GameObject.Find ("Hands").SendMessage ("LHhit", hit);
-					cooldownTime = MaxcooldownTime;
-				}
-				break;
-			}
+					case Gesture.State.cooldown:
+						cooldownTime -= Time.deltaTime;
+						if (cooldownTime <= 0) {
+							Paddle = Gesture.State.none;
+							hit = 0;
+							Hands.LHhit(hit);
+							cooldownTime = MaxcooldownTime;
+						}
+						break;
+					}
 
-			}
-			}
 
 
 			//Bike
 
 
-			if (Metrics.levelcount == 5) {
-				if(!Metrics.Nar_Check ){
+			//if (Metrics.levelcount == 5) {
 
-			switch (Bike) {
+					switch (Bike) {
 				
-			case Gesture.State.none:
+					case Gesture.State.none:
 
-					if (pitchforward) {
-						Bike = Gesture.State.ready;
-			}
+						if (pitchforward) {
+							Bike = Gesture.State.ready;
+						}
 				
-			break;
+						break;
 
 
 				
-			case Gesture.State.ready:
+					case Gesture.State.ready:
 
-				if (Metrics.levelcount == 5 && Metrics.bellcount < 6) {
+						if (Metrics.levelcount == 5 && Metrics.bellcount < 6) {
 
-					if (palmdown && Grab > 0.4) {
+							if (palmdown && Grab > 0.4) {
 
-						Gesturehint.PlayOneShot(finger_left.bike);
-						Bike = Gesture.State.detected;
+								Gesturehint.PlayOneShot (Sounds.bike); // TODO: should be played on finger
+								Bike = Gesture.State.detected;
+
+							}
+						}
+						break;
+
+
+				
+					case Gesture.State.detected:
+				//if(middle.IsExtended){
+						Bike = Gesture.State.action;
+				//}
+						break;
+
+					case Gesture.State.action:
+				//if(!middle.IsExtended){
+						Bike = Gesture.State.cooldown;	
+				//}
+						break;
+
+					case Gesture.State.cooldown:
+						cooldownTime -= Time.deltaTime;
+						if (cooldownTime <= 0) {
+							Bike = Gesture.State.ready;
+							cooldownTime = MaxcooldownTime;
+						}
+						break;
 
 					}
-				}
-			break;
 
-
-				
-			case Gesture.State.detected:
-				//if(middle.IsExtended){
-				Bike = Gesture.State.action;
-				//}
-			break;
-
-			case Gesture.State.action:
-				//if(!middle.IsExtended){
-				Bike = Gesture.State.cooldown;	
-				//}
-			break;
-
-			case Gesture.State.cooldown:
-				cooldownTime -= Time.deltaTime;
-				if (cooldownTime <= 0) {
-					Bike = Gesture.State.ready;
-					cooldownTime = MaxcooldownTime;
-				}
-			break;
-
-			    }
-
-
-
-				}
 			}
+
 		}
 	}
 }

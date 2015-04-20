@@ -18,19 +18,19 @@ public class Northforward : MonoBehaviour
 
 	private Rigidbody _rigidbody;
 	
-	void Awake ()
+	public void Awake ()
 	{
 		this._rigidbody = GetComponent<Rigidbody>();
 	}
 	
-	void Start ()
+	public void Start ()
 	{
 		sound1_once = gameObject.AddComponent <AudioSource> ();
 		sound1_once.clip = sounds.stoneskipping;
 		sound1_once.minDistance = 200;
 	}
 	
-	void rightskip ()
+	public void rightskip ()
 	{
 		sound1_once.Play ();
 		rightstoneskip = true;
@@ -38,7 +38,7 @@ public class Northforward : MonoBehaviour
 		Invoke ("goback", 4);
 	}
 
-	void farskip ()
+	public void farskip ()
 	{
 		sound1_once.Play ();
 		sound1_once.pitch = 1;
@@ -46,7 +46,7 @@ public class Northforward : MonoBehaviour
 		Invoke ("goback", 5);
 	}
 
-	void leftskip ()
+	public void leftskip ()
 	{
 		sound1_once.Play ();
 		sound1_once.pitch = 3;
@@ -54,7 +54,7 @@ public class Northforward : MonoBehaviour
 		Invoke ("goback", 3);
 	}
 	
-	void goback ()
+	public void goback ()
 	{
 		farstoneskip = false;
 		leftstoneskip = false;
@@ -62,7 +62,7 @@ public class Northforward : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update ()
+	public void Update ()
 	{
 		if (farstoneskip == true) {
 			_rigidbody.MovePosition (_rigidbody.position + far * Time.deltaTime);

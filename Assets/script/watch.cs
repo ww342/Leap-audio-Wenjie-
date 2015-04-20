@@ -34,8 +34,8 @@ public class watch : MonoBehaviour
 
 			case Gesture.State.none:
 				if (voiceon == 1) {
-					Narrator.audiosource.Stop ();
-					Metrics.Nar_Check = false;
+					//Narrator.audiosource.Stop ();
+					//Metrics.Nar_Check = false;
 					voiceon = 0;
 					TapWatch = Gesture.State.cooldown;
 				} else if (voiceon == 0) {
@@ -47,7 +47,7 @@ public class watch : MonoBehaviour
 				voiceon = 1;
 				TapWatch = Gesture.State.cooldown;
 				if (Metrics.levelcount == 0) {
-					Narrator.audiosource.PlayOneShot (Narrator.stonewrong);
+					//Narrator.audiosource.PlayOneShot (Narrator.stonewrong);
 				}
 				break;
 

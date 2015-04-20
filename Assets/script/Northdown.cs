@@ -18,12 +18,12 @@ public class Northdown : MonoBehaviour
 	
 	private Rigidbody _rigidbody;
 	
-	void Awake ()
+	public void Awake ()
 	{
 		this._rigidbody = GetComponent<Rigidbody>();
 	}
 	
-	void Start ()
+	public void Start ()
 	{
 		sound1_once = gameObject.AddComponent <AudioSource> ();
 		sound1_once.clip = sounds.stone;
@@ -43,18 +43,18 @@ public class Northdown : MonoBehaviour
 		sound4_once.minDistance = 200;
 	}
 	
-	void sound1 ()
+	public void sound1 ()
 	{
 		sound1_once.Play ();
 	}
 
-	void sound2 ()
+	public void sound2 ()
 	{
 		sound2_once.Play ();
 		Invoke ("sound6", 1);
 	}
 
-	void sound3 ()
+	public void sound3 ()
 	{
 		sound3_once.Play ();
 		stoneskip = true;
@@ -62,7 +62,7 @@ public class Northdown : MonoBehaviour
 		Invoke ("goback", 4);
 	}
 
-	void sound4 ()
+	public void sound4 ()
 	{
 		sound3_once.Play ();
 		sound3_once.pitch = 1;
@@ -70,7 +70,7 @@ public class Northdown : MonoBehaviour
 		Invoke ("goback", 5);
 	}
 
-	void sound5 ()
+	public void sound5 ()
 	{
 		sound3_once.Play ();
 		sound3_once.pitch = 3;
@@ -78,17 +78,17 @@ public class Northdown : MonoBehaviour
 		Invoke ("goback", 3);
 	}
 
-	void sound6 ()
+	public void sound6 ()
 	{
 		sound4_once.Play ();
 	}
 
-	void goback ()
+	public void goback ()
 	{
 		stoneskip = false;
 	}
 	// Update is called once per frame
-	void Update ()
+	public void Update ()
 	{
 		if (stoneskip == true) {
 			_rigidbody.MovePosition (_rigidbody.position + speed * Time.deltaTime);

@@ -38,11 +38,11 @@ public class bgm : MonoBehaviour
 		// TODO: I assume this meas that the background musix should be lower when the narrator speaks?
 		// should be done with snapshots (and Master_vol does not seem to exist as a control)
 		return;
-		if (Metrics.Nar_Check) {
+		//if (Metrics.Nar_Check) {
 			AudioMixer1.SetFloat("Master_vol", 2);
-		} else {
+		//} else {
 			AudioMixer1.SetFloat("Master_vol", 10);
-		}
+		//}
 	}
 
 	// Update is called once per frame

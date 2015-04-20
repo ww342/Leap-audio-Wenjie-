@@ -2,15 +2,13 @@
 using System.Collections;
 
 public class Metrics : MonoBehaviour {
-	public  int stonecount;
+	// these counter variables will gradually be replaced by GameLogic
+	public int levelcount = -1;
 	public  int birdcount;
 	public  int paddlecount;
-	public  int levelcount;
 	public  int ropecount;
 	public  int flowercount;
 	public  int starcount;
 	public  int bellcount;
-	public  int wrongcount;
-	public float VoiceLength;
-	public bool Nar_Check;
+	public int wrongcount;
 }

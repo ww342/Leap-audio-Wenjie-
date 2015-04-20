@@ -27,12 +27,12 @@ public class Northwest : MonoBehaviour
 
 	private Rigidbody _rigidbody;
 
-	void Awake ()
+	public void Awake ()
 	{
 		this._rigidbody = GetComponent<Rigidbody>();
 	}
 
-	void Start ()
+	public void Start ()
 	{
 		sound1_once = gameObject.AddComponent <AudioSource> ();
 		sound1_once.clip = sounds.rockhitleave;
@@ -43,25 +43,25 @@ public class Northwest : MonoBehaviour
 		sound2_once.minDistance = 50;
 	}
 
-	void sound1 ()
+	public void sound1 ()
 	{
 		sound1_once.Play ();
 		leavefall = true;
 		Invoke ("goback", 5);
 	}
 	
-	void sound2 ()
+	public void sound2 ()
 	{
 		sound2_once.Play ();
 	}
 	
-	void goback ()
+	public void goback ()
 	{
 		leavefall = false;
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	public void Update ()
 	{
 		if (leavefall == true) {
 			_rigidbody.MovePosition (_rigidbody.position + speed * Time.deltaTime);
@@ -73,7 +73,7 @@ public class Northwest : MonoBehaviour
 	}
 
 /*
-	void Update () {
+	public void Update () {
 		switch (Leavefall) {
 			case SoundState.none:
 
