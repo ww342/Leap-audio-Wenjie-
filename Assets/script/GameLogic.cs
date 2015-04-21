@@ -28,10 +28,14 @@ public class GameLogic : MonoBehaviour {
 			yield return null;
 		}
 		Debug.Log ("Main game started!");
-		Gesture barehands = gameObject.AddComponent<BareHandsGesture>();
+		BareHandsGesture barehands = gameObject.AddComponent<BareHandsGesture>();
 		yield return StartCoroutine(barehands.Activate());
-		Destroy (barehands);
+		Debug.Log ("First hand seen!");
 		Sounds.StopInitialSetup();
+		// barehands detected once, restart it in parallel now for hands-present related sound effects:
+		barehands.state = Gesture.State.none;
+		barehands.onlyonce = false; // keep running
+		barehands.ActivateInParallel();
 
 		Debug.Log ("Story Begins!");
 		yield return Narrator.PlayAndWait(Narrator.begin);
@@ -112,6 +116,9 @@ public class GameLogic : MonoBehaviour {
 		Sounds.Ambience_D.PlayOneShot (Sounds.sky);
 		Sounds.Ambience_B.minDistance = 10;
 
+		// remove parallel no-hands/hands sound effects:
+		barehands.DeactivateInParallel();
+		Destroy (barehands);
 	}
 	
 }

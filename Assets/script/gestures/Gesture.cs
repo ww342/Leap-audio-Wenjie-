@@ -98,6 +98,11 @@ abstract public class Gesture : MonoBehaviour {
 			yield return null; // always wait at least one frame first
 		} while (! (right.seen || left.seen));
 	}
+	public IEnumerator WaitForNoHands() {
+		do {
+			yield return null; // always wait at least one frame first
+		} while (right.seen || left.seen);
+	}
 
 	public class HandState {
 		public bool seen = false; // indicates if the hand data is current

@@ -235,15 +235,6 @@ public class Hands : MonoBehaviour
 		Frame frame = Controller.Frame ();
 		int handnumbers = frame.Hands.Count;
 
-		if (Metrics.levelcount > -1 && Metrics.levelcount < 6) {
-			if (handnumbers < 1) {
-				Sounds.Ambience_C.pitch = 3;
-			}
-			if (handnumbers > 0) {
-				Sounds.Ambience_C.pitch = 1;
-			}
-		}
-
 		// Tap Watch to Send SOS message
 
 		/*
