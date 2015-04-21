@@ -18,7 +18,6 @@ public class Hands : MonoBehaviour
 		cooldown
 	}
 	public HandState Paddle = HandState.none;
-	public HandState Bird = HandState.none;
 	public HandState Bike = HandState.none;
 	private float cooldownTime;
 	public float MaxcooldownTime;
@@ -76,7 +75,7 @@ public class Hands : MonoBehaviour
 			Sounds.Ambience_A.Stop ();
 			Sounds.Ambience_B.minDistance = 1;
 			Sounds.Ambience_C.minDistance = 1;
-			LevelCount ();
+			//LevelCount ();
 			if (Metrics.wrongcount > 2) {
 				Invoke ("playropepose", 5);
 			}
@@ -115,48 +114,12 @@ public class Hands : MonoBehaviour
 			Sounds.Ambience_D.PlayOneShot (Sounds.grass);
 			Sounds.Ambience_B.minDistance = 5;
 			Sounds.Ambience_B.Play ();
-			LevelCount ();
+			//LevelCount ();
 			Metrics.wrongcount = 0;
 		}
 	}
 	
-	public void BirdCount ()
-	{
-		Metrics.birdcount ++;
-		Sounds.Ambience_D.PlayOneShot (Sounds.bird);
-		LevelCount ();
-		Sounds.normalwatch ();
-		Sounds.hint3 ();
-		Sounds.Ambience_D.PlayOneShot (Sounds.grabseed);
 
-		
-		if (Metrics.birdcount == 1) {
-			//yield return Narrator.PlayAndWait(Narrator.bird1);
-
-		}
-		if (Metrics.birdcount == 2) {
-			//yield return Narrator.PlayAndWait(Narrator.bird2);
-
-			Sounds.Ambience_D.PlayOneShot (Sounds.rain);
-			Sounds.Ambience_A.clip = Sounds.wave;
-			Sounds.Ambience_A.loop = true;
-			Sounds.Ambience_A.minDistance = 8;
-			Sounds.Ambience_A.Play ();
-			Metrics.wrongcount = 0;
-		}
-	}
-
-	public void BirdWrong ()
-	{
-
-		Sounds.Ambience_D.PlayOneShot (Sounds.birdonboat);
-		Sounds.Ambience_D.PlayOneShot (Sounds.shortflapping);
-		//yield return Narrator.PlayAndWait(Narrator.birdwrong);
-		Metrics.wrongcount++;
-		Sounds.quickenwatch ();
-		Sounds.hint3 ();
-
-	}
 
 	public void BellCount ()
 	{
@@ -184,7 +147,7 @@ public class Hands : MonoBehaviour
 			Sounds.Ambience_D.PlayOneShot (Sounds.brake);
 			//yield return Narrator.PlayAndWait(Narrator.bell6);
 
-			LevelCount ();
+			//LevelCount ();
 		}
 	}
 	
@@ -215,7 +178,7 @@ public class Hands : MonoBehaviour
 			Invoke ("Glow", 2);
 			Invoke ("Timetravel", 6);
 			Invoke ("watchstop", 8);
-			LevelCount ();
+			//LevelCount ();
 		}
 	}
 
@@ -265,18 +228,6 @@ public class Hands : MonoBehaviour
 		}
 	}
 	*/
-
-	public void LevelCount () // TODO: main game logic here, needs to move into GameLogic!
-	{
-		Metrics.levelcount ++;
-		if (Metrics.levelcount == 5) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.wind);
-		}
-		if (Metrics.levelcount == 6) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.sky);
-			Sounds.Ambience_B.minDistance = 10;
-		}
-	}
 
 	// Update is called once per frame
 	public void Update ()
@@ -389,62 +340,6 @@ public class Hands : MonoBehaviour
 					break;
 				}
 
-		//Bird
-		//if (Metrics.levelcount == 1 || Metrics.levelcount == 2) {
-
-				switch (Bird) {
-				
-				case HandState.none:
-					if (handnumbers == 1) {
-						Bird = HandState.onehand;
-					}
-
-					if (handnumbers == 2) {
-						Bird = HandState.twohands;
-					}
-					break;
-				
-				case HandState.onehand:
-					if (handnumbers == 1) {
-						if (rhhit == 1 && lhhit == 0) {
-							BirdWrong ();
-							Bird = HandState.cooldown;
-						}
-					
-						if (lhhit == 1 && rhhit == 0) {
-							BirdWrong ();
-							Bird = HandState.cooldown;
-						}
-					}
-
-					if (handnumbers == 2) {
-						Bird = HandState.twohands;
-					}
-					break;
-
-				
-				case HandState.twohands:
-					if (handnumbers == 2) {
-						if (rhhit == 1 && lhhit == 1) {
-							BirdCount ();
-							Bird = HandState.cooldown;
-						}
-					}
-
-					if (handnumbers == 1) { 
-						Bird = HandState.onehand;
-					}
-					break;
-
-
-				case HandState.cooldown:
-					cooldownTime -= Time.deltaTime;
-					if (cooldownTime <= 0) {
-						Bird = HandState.none;
-						cooldownTime = MaxcooldownTime;
-					}
-					break;
-				}
 		}
 	}
 }

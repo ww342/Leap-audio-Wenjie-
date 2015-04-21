@@ -37,8 +37,34 @@ abstract public class Gesture : MonoBehaviour {
 	}
 	
 	public State state = State.none;
+
+	// base function for starting detection of a gesture:
+	public abstract IEnumerator Activate();
+	
+	// helper functions to start detection in parallel in a separate coroutine:
+	private IEnumerator startedCoroutine = null;
+	
+	private IEnumerator RunInParallel() { // repeatedly run ourselves
+		while (true) {
+			yield return StartCoroutine(this.Activate());
+		}
+	}
+	
+	public void ActivateInParallel() {
+		startedCoroutine = this.RunInParallel();
+		StartCoroutine(startedCoroutine);
+	}
+	
+	public void DeactivateInParallel() {
+		if (startedCoroutine != null) {
+			StopCoroutine(startedCoroutine);
+		}
+	}
+
 	public int count = 0; // how often was it successfully detected?
 	public int wrongcount = 0; // count failures too
+
+	// Cooldown Handling:
 	private float CooldownTime = 1f; // seconds
 	private float AfterCooldown = 0f;
 
@@ -55,7 +81,26 @@ abstract public class Gesture : MonoBehaviour {
 		AfterCooldown = 0f;
 	}
 
+	// Waiting for hand date to appear:
+	public IEnumerator WaitForHands(bool leftneeded=true, bool rightneeded=true) {
+		do {
+			yield return null; // always wait at least one frame first
+		} while ((rightneeded && ! right.seen) || (leftneeded && ! left.seen));
+	}
+	public IEnumerator WaitForLeftHand() {
+		return WaitForHands(rightneeded : false);
+	}
+	public IEnumerator WaitForRightHand() {
+		return WaitForHands(leftneeded : false);
+	}
+	public IEnumerator WaitForAnyHand() {
+		do {
+			yield return null; // always wait at least one frame first
+		} while (! (right.seen || left.seen));
+	}
+
 	public class HandState {
+		public bool seen = false; // indicates if the hand data is current
 		public float Grab = 0f;
 		public float Pinch = 0f;
 		public float pitch = 0f;
@@ -65,6 +110,7 @@ abstract public class Gesture : MonoBehaviour {
 		public bool palmleft = false;
 		public bool palmleftin = false;
 		public bool palmright = false;
+		public bool palmrightin = false;
 		public bool wristforward = false;
 		public bool wristleft = false;
 		public bool wristright = false;
@@ -86,14 +132,13 @@ abstract public class Gesture : MonoBehaviour {
 		public float losetrack_trans_x = 0f;
 		public float losetrack_trans_y = 0f;
 		public float losetrack_trans_z = 0f;
+		public Finger ring;
 	}
 
+	public int handcount = 0;
 	public HandState left = new HandState();
 	public HandState right = new HandState();
 	
-	// base function for starting detection of a gesture:
-	public abstract IEnumerator Activate();
-
 	public void Start() {
 		this.Sounds = GameObject.Find("/Sounds").GetComponent<Sounds>();
 		rightpalm = GameObject.Find("rightpalm").GetComponent<rightpalm>();
@@ -104,27 +149,28 @@ abstract public class Gesture : MonoBehaviour {
 		//Frame variables
 		Frame startframe = Controller.Frame ();
 		Frame previousframe3 = Controller.Frame (3);
-		Frame previousframe10 = Controller.Frame (10);
 		Frame previousframe6 = Controller.Frame (6);
-		
+		Frame previousframe10 = Controller.Frame (10);
+		handcount = startframe.Hands.Count;
+
 		// Right Hand variables
 		Hand rightmost = startframe.Hands.Rightmost;
 
-		if ((! rightmost.IsRight) || (startframe.Hands.Count < 1)) {
-			right = new HandState(); // reset to default values
+		if ((! rightmost.IsRight) || (handcount < 1)) {
+			right.seen = false;
 		} else {
+			right.seen = true;
 			Finger thumb = rightmost.Fingers [0];
 			Finger index = rightmost.Fingers [1];
 			Finger middle = rightmost.Fingers [2];
-			Finger ring = rightmost.Fingers [3];
+			right.ring = rightmost.Fingers [3];
 			Finger pinky = rightmost.Fingers [4];
 			
-			float ringtipSpeed_x = ring.TipVelocity.x;
-			float ringtipSpeed_y = ring.TipVelocity.y;
-			float ringtipSpeed_z = ring.TipVelocity.z;
+			float ringtipSpeed_x = right.ring.TipVelocity.x;
+			float ringtipSpeed_y = right.ring.TipVelocity.y;
+			float ringtipSpeed_z = right.ring.TipVelocity.z;
 			float trans_ringtipSpeed_z = previousframe3.Hands.Rightmost.Fingers [3].TipVelocity.z - ringtipSpeed_z;
 			float Throw = trans_ringtipSpeed_z;
-			
 			
 			right.pitch = rightmost.Direction.Pitch * 180.0f / Mathf.PI;
 			float roll = rightmost.PalmNormal.Roll * 180.0f / Mathf.PI;
@@ -188,7 +234,7 @@ abstract public class Gesture : MonoBehaviour {
 			right.palmleftin = roll > -160 && roll < -130;
 			bool pitchdownforward = right.pitch <= -10 && right.pitch >= -30;
 			bool palmin = yaw <= -50 && yaw >= -80;
-			right.openhand = thumb.IsExtended && index.IsExtended && middle.IsExtended && ring.IsExtended && pinky.IsExtended;
+			right.openhand = thumb.IsExtended && index.IsExtended && middle.IsExtended && right.ring.IsExtended && pinky.IsExtended;
 			
 			bool elbowforward = elbow_z < 200;
 			right.wristhigh = wrist_y > 350;
@@ -202,13 +248,14 @@ abstract public class Gesture : MonoBehaviour {
 		//Left Hand variables
 		Hand leftmost = startframe.Hands.Leftmost;
 		
-		if ((! leftmost.IsLeft) || (startframe.Hands.Count < 1)) {
-			left = new HandState(); // reset to default values
+		if ((! leftmost.IsLeft) || (handcount < 1)) {
+			left.seen = false;
 		} else {
+			left.seen = true;
 			Finger thumb = startframe.Fingers [0];
 			Finger index = startframe.Fingers [1];
 			Finger middle = startframe.Fingers [2];
-			Finger ring = startframe.Fingers [3];
+			left.ring = startframe.Fingers [3];
 			Finger pinky = startframe.Fingers [4];
 			
 			float thumbtip_x = thumb.TipPosition.x;
@@ -223,9 +270,9 @@ abstract public class Gesture : MonoBehaviour {
 			float middletip_y = middle.TipPosition.y;
 			float middletip_z = middle.TipPosition.z;
 			
-			float ringtip_x = ring.TipPosition.x;
-			float ringtip_y = ring.TipPosition.y;
-			float ringtip_z = ring.TipPosition.z;
+			float ringtip_x = left.ring.TipPosition.x;
+			float ringtip_y = left.ring.TipPosition.y;
+			float ringtip_z = left.ring.TipPosition.z;
 			
 			float pinkytip_x = pinky.TipPosition.x;
 			float pinkytip_y = pinky.TipPosition.y;
@@ -237,40 +284,40 @@ abstract public class Gesture : MonoBehaviour {
 			Vector3 ringtip = new Vector3 (ringtip_x, ringtip_y, -ringtip_z);
 			Vector3 pinkytip = new Vector3 (pinkytip_x, pinkytip_y, -pinkytip_z);
 			
-			float pitch = leftmost.Direction.Pitch * 180.0f / Mathf.PI;
+			left.pitch = leftmost.Direction.Pitch * 180.0f / Mathf.PI;
 			float roll = leftmost.PalmNormal.Roll * 180.0f / Mathf.PI;
 			float yaw = leftmost.Direction.Yaw * 180.0f / Mathf.PI;
-			float Grab = leftmost.GrabStrength;
-			float Pinch = leftmost.PinchStrength;
+			left.Grab = leftmost.GrabStrength;
+			left.Pinch = leftmost.PinchStrength;
 			float radius = leftmost.SphereRadius;
 			float handmove_x = leftmost.PalmPosition.x;
 			float handmove_y = leftmost.PalmPosition.y;
 			float handmove_z = leftmost.PalmPosition.z;
 			Vector3 handcenter = new Vector3 (handmove_x, handmove_y, -handmove_z);
 			
-			Quaternion wrist = Quaternion.Euler (-pitch, yaw, roll);
+			Quaternion wrist = Quaternion.Euler (-left.pitch, yaw, roll);
 			
 			float transRadius = previousframe3.Hands.Leftmost.SphereRadius - radius;
-			float transPitch = previousframe3.Hands.Leftmost.Direction.Pitch - pitch;
-			float transPaddle = previousframe10.Hands.Leftmost.Direction.Pitch - pitch;
-			float transRoll = previousframe10.Hands.Leftmost.PalmNormal.Roll * 180.0f / Mathf.PI - roll;
+			left.transPitch = previousframe3.Hands.Leftmost.Direction.Pitch - left.pitch;
+			float transPaddle = previousframe10.Hands.Leftmost.Direction.Pitch - left.pitch;
+			left.transRoll = previousframe10.Hands.Leftmost.PalmNormal.Roll * 180.0f / Mathf.PI - roll;
 			float transWave_y = previousframe3.Hands.Leftmost.PalmPosition.y - handmove_y;
 			float transWave_z = previousframe3.Hands.Leftmost.PalmPosition.z - handmove_z;
 			// gestures bool 
 			
-			bool wavearm = radius < 40 && pitch >= 95 && pitch <= 100;
-			bool grabstone = transRadius > 10 && Grab > 0.4 && pitch < 10;
-			bool catchbird = roll >= 170 && Pinch >= 0.5 && Pinch <= 1;
+			bool wavearm = radius < 40 && left.pitch >= 95 && left.pitch <= 100;
+			bool grabstone = transRadius > 10 && left.Grab > 0.4 && left.pitch < 10;
+			bool catchbird = roll >= 170 && left.Pinch >= 0.5 && left.Pinch <= 1;
 			
 			bool yawforward = yaw <= 25 && yaw >= -25;
 			bool yawside = yaw < -40 || yaw > 40;
-			bool pitchforward = pitch <= 90 && pitch >= -90;
-			bool pitchupforward = pitch <= 45 && pitch >= 40;
-			bool palmdown = roll < 20 && roll > -20;
-			bool palmup = roll <= -90 || roll >= 180; 
-			bool palmright = roll > 90 && roll < 110;
-			bool palmrightin = roll > 130 && roll < 160;
-			bool openhand = thumb.IsExtended && index.IsExtended && middle.IsExtended && ring.IsExtended && pinky.IsExtended;
+			left.pitchforward = left.pitch <= 90 && left.pitch >= -90;
+			bool pitchupforward = left.pitch <= 45 && left.pitch >= 40;
+			left.palmdown = roll < 20 && roll > -20;
+			left.palmup = roll <= -90 || roll >= 180; 
+			left.palmright = roll > 90 && roll < 110;
+			left.palmrightin = roll > 130 && roll < 160;
+			left.openhand = thumb.IsExtended && index.IsExtended && middle.IsExtended && left.ring.IsExtended && pinky.IsExtended;
 		}
 	}
 }

@@ -13,10 +13,6 @@ public class Righthand : MonoBehaviour
 	public rightpalm rightpalm;
 	public Metrics Metrics;
 
-	// Audio Mixer Groups
-	public AudioMixerGroup HintsMix;
-	public AudioMixerGroup EnvironmentMix;
-	public Gesture.State Bird = Gesture.State.none;
 	public Gesture.State Paddle = Gesture.State.none;
 	public Gesture.State Rope = Gesture.State.none;
 	public Gesture.State Star = Gesture.State.none;
@@ -26,8 +22,6 @@ public class Righthand : MonoBehaviour
 	public float MaxcooldownTime;
 	public float MaxcooldownTime1;
 	public int hit ;
-	public int armcount;
-	//public bool OpenHand;
 
 	void Start ()
 	{
@@ -134,75 +128,6 @@ public class Righthand : MonoBehaviour
 			if (Metrics.levelcount > 2) {
 
 
-			//Bird
-
-			//if (Metrics.levelcount == 1 || Metrics.levelcount == 2) {
-				//if (Metrics.wrongcount > 2 || Metrics.flowercount == 4) {
-				
-						switch (Bird) {
-			
-						case Gesture.State.none:
-
-							if (openhand && palmdown) {
-								Bird = Gesture.State.detected;
-							}
-				
-							break;
-			
-						case Gesture.State.detected:
-							if (palmleftin) { 
-								Bird = Gesture.State.action;
-							}
-							if (Grab == 1) {
-								Bird = Gesture.State.ready;
-								Sounds.quickenwatch();
-								Sounds.hint1();
-								Sounds.Environment.PlayOneShot (Sounds.panicflapping);
-								Sounds.Environment.PlayOneShot (Sounds.grabbird);
-								Sounds.Environment.PlayOneShot (Sounds.boatshiffer2, 5.0f);
-							}
-							if (transWave_y_3 > 30) {
-								Bird = Gesture.State.none;
-								Sounds.quickenwatch();
-								Sounds.hint1();
-								Sounds.Environment.PlayOneShot (Sounds.seedpouring);
-								Sounds.Environment.PlayOneShot (Sounds.panicbird);
-								Sounds.Environment.PlayOneShot (Sounds.panicflapping);
-								Sounds.Environment.PlayOneShot (Sounds.panicfrog);
-								Sounds.Environment.PlayOneShot (Sounds.boatshake, 5.0f);
-								Sounds.Environment.PlayOneShot (Sounds.longlean);
-								Sounds.Environment.PlayOneShot (Sounds.birdpecking);
-							}
-							break;
-
-						case Gesture.State.ready:
-							if (Grab < 0.8) {
-								Bird = Gesture.State.none;
-								Sounds.transitwatch();
-								Sounds.hint2();
-								Sounds.Environment.PlayOneShot (Sounds.weakflapping);
-								Sounds.Environment.PlayOneShot (Sounds.birdflyslonghand);
-							}
-							break;
-			
-						case Gesture.State.action:
-							if (!ring.IsExtended && Grab < 0.8) {
-								hit = 1;
-								Hands.RHhit(hit);
-								Bird = Gesture.State.cooldown;
-							}
-							break;
-			
-						case Gesture.State.cooldown:
-							cooldownTime -= Time.deltaTime;
-							if (cooldownTime <= 0) {
-								hit = 0;
-								Hands.RHhit(hit);
-								Bird = Gesture.State.none;
-								cooldownTime = MaxcooldownTime1;
-							}
-							break;
-						}
 
 
 			// Paddle

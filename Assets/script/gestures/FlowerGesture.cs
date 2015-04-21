@@ -36,21 +36,21 @@ public class FlowerGesture : Gesture {
 		yield return StartCoroutine(this.CheckAndWaitForCooldown());
 
 		while (this.state == State.none) {
-			yield return null;
+			yield return StartCoroutine(this.WaitForRightHand());
 			if (right.pitchforward && right.palmdown) {
 				this.state = State.detected;
 			}
 		}
 
 		while (this.state == State.detected) {
-			yield return null;
+			yield return StartCoroutine(this.WaitForRightHand());
 			if (right.Pinch == 1) {
 				this.state = State.action;
 			}
 		}
 
 		while (this.state == State.action) {
-			yield return null;
+			yield return StartCoroutine(this.WaitForRightHand());
 			if (right.palmup) {//transRoll > 50 && transRoll < 120 && Pinch > 0.8)
 				this.FlowerCount();
 				this.SetCooldown();

@@ -10,7 +10,6 @@ public class Lefthand : MonoBehaviour
 	public Narrator Narrator;
 	public hint hint;
 	public Metrics Metrics;
-	public Gesture.State Bird = Gesture.State.none;
 	public Gesture.State Paddle = Gesture.State.none;
 	public Gesture.State Bike = Gesture.State.none;
 	private float cooldownTime;
@@ -111,60 +110,6 @@ public class Lefthand : MonoBehaviour
 
 
 			if (Metrics.levelcount > 2) {
-			// Bird
-
-			//if (Metrics.levelcount == 1 || Metrics.levelcount == 2) {
-				//if (Metrics.wrongcount > 2 || Metrics.flowercount == 4) {
-					
-						switch (Bird) {
-				
-						case Gesture.State.none:
-
-							if (openhand && palmdown) {
-								Bird = Gesture.State.detected;
-							}
-					
-				
-							break;
-				
-						case Gesture.State.detected:
-							if (palmrightin) {
-								Bird = Gesture.State.action;
-							}
-							if (Grab == 1) {
-								Bird = Gesture.State.ready;
-								Sounds.audiosource.PlayOneShot (Sounds.panicflapping);
-								Sounds.audiosource.PlayOneShot (Sounds.grabbird);
-								Sounds.audiosource.PlayOneShot (Sounds.boatshiffer2, 5.0f);
-							}
-							break;
-
-						case Gesture.State.ready:
-							if (Grab < 0.8) {
-								Bird = Gesture.State.none;
-								Sounds.audiosource.PlayOneShot (Sounds.weakflapping);
-								Sounds.audiosource.PlayOneShot (Sounds.birdflyslonghand);
-							}
-							break;
-				
-						case Gesture.State.action:
-							if (!ring.IsExtended) {
-								hit = 1;
-								Hands.LHhit(hit);
-								Bird = Gesture.State.cooldown;
-							}
-							break;
-				
-						case Gesture.State.cooldown:
-							cooldownTime -= Time.deltaTime;
-							if (cooldownTime <= 0) {
-								hit = 0;
-								Hands.LHhit(hit);
-								Bird = Gesture.State.none;
-								cooldownTime = MaxcooldownTime1;
-							}
-							break;
-						}
 
 
 			// Paddle

@@ -4,7 +4,6 @@ using System.Collections;
 public class Metrics : MonoBehaviour {
 	// these counter variables will gradually be replaced by GameLogic
 	public int levelcount = -1;
-	public  int birdcount;
 	public  int paddlecount;
 	public  int ropecount;
 	public  int starcount;

@@ -17,7 +17,9 @@ public class GameLogic : MonoBehaviour {
 	void Start () {
 		StartCoroutine(MainGame());
 	}
-	
+
+	// Main flow of the game:
+	// linear progression of gestures being activated and reacted to
 	IEnumerator MainGame() {
 		Metrics.levelcount = -1;
 		Sounds.InitialSetup();
@@ -29,9 +31,8 @@ public class GameLogic : MonoBehaviour {
 		Gesture barehands = gameObject.AddComponent<BareHandsGesture>();
 		yield return StartCoroutine(barehands.Activate());
 		Destroy (barehands);
-
 		Sounds.StopInitialSetup();
-		Hands.LevelCount ();
+
 		Debug.Log ("Story Begins!");
 		yield return Narrator.PlayAndWait(Narrator.begin);
 
@@ -79,19 +80,38 @@ public class GameLogic : MonoBehaviour {
 			yield return Narrator.PlayAndWait(Narrator.stone3);
 		}
 
-		// example code for stop here:
+		// example code for stopping here:
 		//yield break;
 
-		Debug.Log ("Bird");
+		Debug.Log ("Bird catching");
+		BirdCatchGesture birdcatch = gameObject.AddComponent<BirdCatchGesture>();
+		birdcatch.StartHands(); // separate hands in parallel!
+		while (birdcatch.count < 1) {
+			yield return StartCoroutine(birdcatch.Activate());
+			if (birdcatch.wrongcount > 0) {
+				yield return Narrator.PlayAndWait(Narrator.birdwrong);
+				birdcatch.wrongcount = 0;
+			}
+		}
+		yield return Narrator.PlayAndWait(Narrator.bird1);
+		while (birdcatch.count < 2) {
+			yield return StartCoroutine(birdcatch.Activate());
+		}
+		birdcatch.StopHands();
+		yield return Narrator.PlayAndWait(Narrator.bird2);
+		Destroy (birdcatch);
 
 		Debug.Log ("Paddle");
 		
 		Debug.Log ("Rope & Tree");
 		
 		Debug.Log ("Bike");
+		Sounds.Ambience_D.PlayOneShot (Sounds.wind);
 		
 		Debug.Log ("Star");
-		
+		Sounds.Ambience_D.PlayOneShot (Sounds.sky);
+		Sounds.Ambience_B.minDistance = 10;
+
 	}
 	
 }

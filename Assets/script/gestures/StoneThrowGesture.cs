@@ -46,14 +46,14 @@ public class StoneThrowGesture : Gesture {
 		yield return StartCoroutine(this.CheckAndWaitForCooldown());
 
 		while (this.state == State.none) {
-			yield return null;
+			yield return StartCoroutine(this.WaitForRightHand());
 			if (right.pitchforward && right.palmdown) {
 				this.state = State.detected;
 			}
 		}
 
 		while (this.state == State.detected) {
-			yield return null;
+			yield return StartCoroutine(this.WaitForRightHand());
 			if (right.Grab > 0.9) {
 				if (right.wristforward) { // success
 					this.state = State.action;
@@ -75,7 +75,7 @@ public class StoneThrowGesture : Gesture {
 		}
 
 		while (this.state == State.action) {
-			yield return null;
+			yield return StartCoroutine(this.WaitForRightHand());
 			if (right.wristforward && right.openhand) {
 				Sounds.transitwatch ();
 				this.state = State.none;
@@ -147,7 +147,7 @@ public class StoneThrowGesture : Gesture {
 		}
 
 		while (this.state == State.ready) {
-			yield return null;
+			yield return StartCoroutine(this.WaitForRightHand());
 			Sinus.frequency = 0;
 			Sinus.gain = 0;
 			if (right.Grab == 0) {
@@ -161,7 +161,7 @@ public class StoneThrowGesture : Gesture {
 		}
 				
 		while (this.state == State.other) {
-			yield return null;
+			yield return StartCoroutine(this.WaitForRightHand());
 			Sinus.frequency = 0;
 			Sinus.gain = 0;
 			if (right.palmdown) {
@@ -215,7 +215,7 @@ public class StoneThrowGesture : Gesture {
 		}
 		
 		while (this.state == State.ing) {
-			yield return null;
+			yield return StartCoroutine(this.WaitForRightHand());
 			Sinus.frequency = 0;
 			Sinus.gain = 0;
 			if (right.openhand && right.wristforward) {
