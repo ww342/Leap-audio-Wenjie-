@@ -5,9 +5,6 @@ public class StoneThrowGesture : Gesture {
 
 	private void StoneCount () {
 		this.count ++;
-		//audio.PlayOneShot (stone);
-		//audio.PlayOneShot (hitfish);
-		//normalwatch ();
 		Sounds.Northdown.sound1();
 		Sounds.Northdown.sound2();
 		Sounds.Northdown.sound6();		
@@ -95,7 +92,6 @@ public class StoneThrowGesture : Gesture {
 				yield break; // restart!
 			}
 			if (Mathf.Abs (right.transWave_z_10) > 50) {
-				//|| Mathf.Abs(losetrack_trans_z) >30)
 				Sounds.quickenwatch ();
 				this.state = State.ready;
 			}
@@ -155,7 +151,6 @@ public class StoneThrowGesture : Gesture {
 			Sinus.frequency = 0;
 			Sinus.gain = 0;
 			if (right.Grab == 0) {
-				//audio.PlayOneShot (script.stonewrong);
 				Sounds.Environment.PlayOneShot (Sounds.waterdrop, 8.0f);
 				Sounds.quickenwatch ();
 				this.wrongcount++;
@@ -171,9 +166,7 @@ public class StoneThrowGesture : Gesture {
 			Sinus.gain = 0;
 			if (right.palmdown) {
 				if (Mathf.Abs (right.transWave_y_10 / right.transWave_x_10) < 0.6 && Mathf.Abs (right.transWave_y_10 / right.transWave_x_10) > 0.1) {
-					//|| (  Mathf.Abs(losetrack_trans_y/losetrack_trans_x)<0.6  &&  Mathf.Abs(losetrack_trans_y/losetrack_trans_x)>0.1  ))
 					if (right.openhand) {
-						//audio.PlayOneShot (script.stonewrong);
 						Sounds.quickenwatch ();
 						Sounds.Environment.PlayOneShot (Sounds.waterdrop, 8.0f);
 						Sounds.hint1 ();
@@ -192,9 +185,7 @@ public class StoneThrowGesture : Gesture {
 			if (right.palmleft || right.palmleftin || right.palmup || right.palmright) {
 				Sounds.hint2 ();
 				if (Mathf.Abs (right.transWave_y_6 / right.transWave_x_6) < 0.6 && Mathf.Abs (right.transWave_y_6 / right.transWave_x_6) > 0.1) {
-					//|| (  Mathf.Abs(losetrack_trans_y/losetrack_trans_x)<0.6  &&  Mathf.Abs(losetrack_trans_y/losetrack_trans_x)>0.1  ))
 					if (right.transPitch > 20 && right.Grab < 0.5) {
-						//audio.PlayOneShot (script.stonewrong);
 						Sounds.Northdown.sound3();
 						Sounds.quickenwatch ();
 						this.wrongcount++;
@@ -203,9 +194,7 @@ public class StoneThrowGesture : Gesture {
 					}
 				}
 				if (Mathf.Abs (right.transWave_y_3 / right.transWave_x_3) < 0.6 && Mathf.Abs (right.transWave_y_3 / right.transWave_x_3) > 0.1) {
-					//|| (  Mathf.Abs(losetrack_trans_y/losetrack_trans_x)<0.6  &&  Mathf.Abs(losetrack_trans_y/losetrack_trans_x)>0.1  ))
 					if (right.transPitch > 20 && right.Grab < 0.5) {
-						//audio.PlayOneShot (script.stonewrong);
 						Sounds.Northdown.sound5();
 						Sounds.quickenwatch ();
 						this.wrongcount++;
@@ -214,9 +203,7 @@ public class StoneThrowGesture : Gesture {
 					}
 				}
 				if (Mathf.Abs (right.transWave_y_10 / right.transWave_x_10) > 0.6) {
-					//|| (  Mathf.Abs(losetrack_trans_y/losetrack_trans_x)>0.6 ))
 					if (right.transPitch > 20 && right.Grab < 0.5) {
-						//audio.PlayOneShot (script.stonewrong);
 						Sounds.Northdown.sound4();
 						Sounds.quickenwatch ();
 						this.wrongcount++;
