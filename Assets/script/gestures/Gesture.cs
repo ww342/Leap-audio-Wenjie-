@@ -139,7 +139,7 @@ abstract public class Gesture : MonoBehaviour {
 	public HandState left = new HandState();
 	public HandState right = new HandState();
 	
-	public void Start() {
+	public void Awake() {
 		this.Sounds = GameObject.Find("/Sounds").GetComponent<Sounds>();
 		rightpalm = GameObject.Find("rightpalm").GetComponent<rightpalm>();
 	}
