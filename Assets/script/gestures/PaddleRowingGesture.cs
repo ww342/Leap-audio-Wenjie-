@@ -1,40 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BirdCatchGesture : TwoHandGesture<BirdCatchLeftHandGesture, BirdCatchRightHandGesture> {
+public class PaddleRowingGesture : TwoHandGesture<PaddleRowingLeftHandGesture, PaddleRowingRightHandGesture> {
 
-	public void BirdCount () {
-		this.count++;
-		Sounds.Ambience_D.PlayOneShot (Sounds.bird);
-		Sounds.normalwatch ();
-		Sounds.hint3 ();
-		Sounds.Ambience_D.PlayOneShot (Sounds.grabseed);
-		if (this.count == 2) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.rain);
-			Sounds.Ambience_A.clip = Sounds.wave;
-			Sounds.Ambience_A.loop = true;
-			Sounds.Ambience_A.minDistance = 8;
+	public void PaddleCount () {
+		this.count ++;
+		Sounds.Ambience_D.PlayOneShot (Sounds.paddle);
+		if (this.count == 1) {
+			Sounds.Ambience_A.minDistance = 5;
+			Sounds.Ambience_D.PlayOneShot (Sounds.lakewaveslapping);
 			Sounds.Ambience_A.Play ();
-			this.wrongcount = 0;
+			Sounds.Ambience_B.minDistance = 8;
+		}
+		if (this.count == 2) {
+			Sounds.Ambience_B.minDistance = 6;
+		}
+		if (this.count == 3) {
+			Sounds.Ambience_B.minDistance = 4;
+			Sounds.Ambience_C.minDistance = 2;
+		}
+		if (this.count == 4) {
+			Sounds.Ambience_A.Stop ();
+			Sounds.Ambience_B.minDistance = 1;
+			Sounds.Ambience_C.minDistance = 1;
 		}
 	}
 	
-	public void BirdWrong () {
-		Sounds.Ambience_D.PlayOneShot (Sounds.birdonboat);
-		Sounds.Ambience_D.PlayOneShot (Sounds.shortflapping);
-		this.wrongcount++;
-		Sounds.quickenwatch ();
-		Sounds.hint3 ();
-	}
-
 	override public IEnumerator Activate () {
 		yield return StartCoroutine(this.CheckAndWaitForCooldown());
-
+		
 		if ((leftHandGesture == null) || (rightHandGesture == null)) {
-			Debug.LogWarning("BirdCatchGesture activated without activating sub-hand-gestures!");
+			Debug.LogWarning("PaddleRowingGesture activated without activating sub-hand-gestures!");
 			yield break; // can't work, so break
 		}
-
+		
 		while (this.state == State.none) { // no hand
 			yield return StartCoroutine(this.WaitForAnyHand());
 			if (handcount == 1) {
@@ -49,10 +48,13 @@ public class BirdCatchGesture : TwoHandGesture<BirdCatchLeftHandGesture, BirdCat
 			if (handcount == 1) {
 				if ((rightHandGesture.state == State.cooldown && leftHandGesture.state != State.cooldown)
 				    || (rightHandGesture.state != State.cooldown && leftHandGesture.state == State.cooldown)) {
-					BirdWrong ();
+					Sounds.Ambience_D.PlayOneShot (Sounds.paddlewrong);
+					Sounds.quickenwatch();
+					this.wrongcount++;
 					this.SetCooldown();
 				}
 			} else if (handcount == 2) {
+				Sounds.transitwatch();
 				this.state = State.action;
 			}
 		}
@@ -62,7 +64,8 @@ public class BirdCatchGesture : TwoHandGesture<BirdCatchLeftHandGesture, BirdCat
 			if (handcount == 2) {
 				if (rightHandGesture.state == State.cooldown
 				    && leftHandGesture.state == State.cooldown) {
-					BirdCount ();
+					PaddleCount ();
+					Sounds.normalwatch();
 					this.SetCooldown();
 				}
 			}

@@ -1,30 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Leap;
 
 [RequireComponent(typeof(AudioSource))]
 public class Hands : MonoBehaviour
 {
-	Controller Controller = new Controller ();
 	public Sounds Sounds;
 	public Narrator Narrator;
 	public Metrics Metrics;
 	
-	public enum HandState // TODO: how is this different from GestureState?
-	{
-		none,
-		onehand,
-		twohands,
-		cooldown
-	}
-	public HandState Paddle = HandState.none;
-	public HandState Bike = HandState.none;
-	private float cooldownTime;
-	public float MaxcooldownTime;
-	public float MaxcooldownTime1;
-	public int rhhit = 0;
-	public int lhhit = 0;
-
 	//SOS GESTURE VARIABLES
 /*
 	public Vector3 watchposition;
@@ -33,57 +16,6 @@ public class Hands : MonoBehaviour
 	public float tappingdistance;
 */
 
-	public void Start ()
-	{
-
-		cooldownTime = MaxcooldownTime;
-
-
-	}
-	
-	public void playropepose ()
-	{
-		//yield return Narrator.PlayAndWait(Narrator.ropepose);
-	}
-
-
-	public void PaddleCount ()
-	{
-
-		Metrics.paddlecount ++;
-		Sounds.Ambience_D.PlayOneShot (Sounds.paddle);
-		
-		if (Metrics.paddlecount == 1) {
-			//yield return Narrator.PlayAndWait(Narrator.paddle1);
-			Sounds.Ambience_A.minDistance = 5;
-			Sounds.Ambience_D.PlayOneShot (Sounds.lakewaveslapping);
-			Sounds.Ambience_A.Play ();
-			Sounds.Ambience_B.minDistance = 8;
-		}
-		if (Metrics.paddlecount == 2) {
-			
-			Sounds.Ambience_B.minDistance = 6;
-		}
-		if (Metrics.paddlecount == 3) {
-			
-			Sounds.Ambience_B.minDistance = 4;
-			Sounds.Ambience_C.minDistance = 2;
-		}
-		if (Metrics.paddlecount == 4) {
-			//yield return Narrator.PlayAndWait(Narrator.paddle4);
-
-			Sounds.Ambience_A.Stop ();
-			Sounds.Ambience_B.minDistance = 1;
-			Sounds.Ambience_C.minDistance = 1;
-			//LevelCount ();
-			if (Metrics.wrongcount > 2) {
-				Invoke ("playropepose", 5);
-			}
-			if (Metrics.wrongcount <= 2) {
-				//yield return Narrator.PlayAndWait(Narrator.treepose);
-			}
-		}
-	}
 		
 	public void RopeCount ()
 	{
@@ -182,16 +114,6 @@ public class Hands : MonoBehaviour
 		}
 	}
 
-	public void LHhit (int statenumber)
-	{
-		lhhit = statenumber;
-	}
-
-	public void RHhit (int statenumber)
-	{
-		rhhit = statenumber;
-	}
-
 	// A void that gets wrist position from the right hand
 
 	/*
@@ -232,9 +154,6 @@ public class Hands : MonoBehaviour
 	// Update is called once per frame
 	public void Update ()
 	{
-		Frame frame = Controller.Frame ();
-		int handnumbers = frame.Hands.Count;
-
 		// Tap Watch to Send SOS message
 
 		/*
@@ -269,68 +188,6 @@ public class Hands : MonoBehaviour
 				}
 */
 
-		if (Metrics.levelcount > 2) {
-		// Paddle
-		//if (Metrics.levelcount == 3) {
-				switch (Paddle) {
 
-				case HandState.none:
-					if (handnumbers == 1) {
-						Paddle = HandState.onehand;
-					}
-					if (handnumbers == 2) {
-						Paddle = HandState.twohands;
-					}
-					break;
-
-				case HandState.onehand:
-					if (handnumbers == 1) {
-						if (rhhit == 2 && lhhit == 0) {
-							Sounds.Ambience_D.PlayOneShot (Sounds.paddlewrong);
-							Sounds.quickenwatch();
-							Metrics.wrongcount++;
-							Paddle = HandState.cooldown;
-						}
-		
-						if (lhhit == 2 && rhhit == 0) {
-							Sounds.Ambience_D.PlayOneShot (Sounds.paddlewrong);
-							Sounds.quickenwatch();
- 					Metrics.wrongcount++;
-							Paddle = HandState.cooldown;
-						}
-					}
-
-					if (handnumbers == 2) {
-						Paddle = HandState.twohands;
-						Sounds.transitwatch();
-					}
-					break;
-
-				case HandState.twohands:
-					if (handnumbers == 2) {
-						if (rhhit == 2 && lhhit == 2) {
-							PaddleCount ();
-							Sounds.normalwatch();
-
-							Paddle = HandState.cooldown;
-						}
-					}
-
-					if (handnumbers == 1) { 
-						Paddle = HandState.onehand;
-					}
-
-					break;
-
-				case HandState.cooldown:
-					cooldownTime -= Time.deltaTime;
-					if (cooldownTime <= 0) {
-						Paddle = HandState.none;
-						cooldownTime = MaxcooldownTime1;
-					}
-					break;
-				}
-
-		}
 	}
 }

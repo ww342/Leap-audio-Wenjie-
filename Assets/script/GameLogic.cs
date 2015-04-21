@@ -20,6 +20,7 @@ public class GameLogic : MonoBehaviour {
 
 	// Main flow of the game:
 	// linear progression of gestures being activated and reacted to
+	// also allows to simply comment out parts you want to skip for testing
 	IEnumerator MainGame() {
 		Metrics.levelcount = -1;
 		Sounds.InitialSetup();
@@ -36,7 +37,7 @@ public class GameLogic : MonoBehaviour {
 		barehands.state = Gesture.State.none;
 		barehands.onlyonce = false; // keep running
 		barehands.ActivateInParallel();
-
+/*
 		Debug.Log ("Story Begins!");
 		yield return Narrator.PlayAndWait(Narrator.begin);
 
@@ -102,14 +103,32 @@ public class GameLogic : MonoBehaviour {
 			yield return StartCoroutine(birdcatch.Activate());
 		}
 		birdcatch.StopHands();
-		yield return Narrator.PlayAndWait(Narrator.bird2);
-		Destroy (birdcatch);
+*/		yield return Narrator.PlayAndWait(Narrator.bird2);
+//		Destroy (birdcatch);
 
-		Debug.Log ("Paddle");
+		Debug.Log ("Paddle rowing");
+		PaddleRowingGesture paddlerowing = gameObject.AddComponent<PaddleRowingGesture>();
+		paddlerowing.StartHands(); // separate hands in parallel!
+		while (paddlerowing.count < 1) {
+			yield return StartCoroutine(paddlerowing.Activate());
+		}
+		yield return Narrator.PlayAndWait(Narrator.paddle1);
+		while (paddlerowing.count < 4) {
+			yield return StartCoroutine(paddlerowing.Activate());
+		}
+		paddlerowing.StopHands();
+		yield return Narrator.PlayAndWait(Narrator.paddle4);
+		if (paddlerowing.wrongcount > 2) {
+			yield return new WaitForSeconds(5f);
+			yield return Narrator.PlayAndWait(Narrator.ropepose);
+		} else {
+			yield return Narrator.PlayAndWait(Narrator.treepose);
+		}
+		Destroy (paddlerowing);
+
+		Debug.Log ("Rope & Tree binding");
 		
-		Debug.Log ("Rope & Tree");
-		
-		Debug.Log ("Bike");
+		Debug.Log ("Bike riding");
 		Sounds.Ambience_D.PlayOneShot (Sounds.wind);
 		
 		Debug.Log ("Star");

@@ -10,7 +10,6 @@ public class Lefthand : MonoBehaviour
 	public Narrator Narrator;
 	public hint hint;
 	public Metrics Metrics;
-	public Gesture.State Paddle = Gesture.State.none;
 	public Gesture.State Bike = Gesture.State.none;
 	private float cooldownTime;
 	public float MaxcooldownTime;
@@ -110,47 +109,6 @@ public class Lefthand : MonoBehaviour
 
 
 			if (Metrics.levelcount > 2) {
-
-
-			// Paddle
-
-			//if (Metrics.levelcount == 3) {
-					switch (Paddle) {
-				
-					case Gesture.State.none:
-
-						if (pitchforward && palmdown) {
-							Paddle = Gesture.State.detected;
-						}
-			
-						break;
-				
-					case Gesture.State.detected:
-						if (transPitch > 30) {
-							hit = 2;
-							Gesturehint.PlayOneShot (Sounds.creak1); // should be played on finger!
-							Hands.LHhit(hit);
-							Paddle = Gesture.State.action;
-						} 
-						break;
-				
-					case Gesture.State.action:
-				//if (transWave_z >40) {
-				//audio.PlayOneShot (script1.creak2);
-						Paddle = Gesture.State.cooldown;
-				//}
-						break;
-				
-					case Gesture.State.cooldown:
-						cooldownTime -= Time.deltaTime;
-						if (cooldownTime <= 0) {
-							Paddle = Gesture.State.none;
-							hit = 0;
-							Hands.LHhit(hit);
-							cooldownTime = MaxcooldownTime;
-						}
-						break;
-					}
 
 
 

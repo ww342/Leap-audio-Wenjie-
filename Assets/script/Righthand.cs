@@ -13,7 +13,6 @@ public class Righthand : MonoBehaviour
 	public rightpalm rightpalm;
 	public Metrics Metrics;
 
-	public Gesture.State Paddle = Gesture.State.none;
 	public Gesture.State Rope = Gesture.State.none;
 	public Gesture.State Star = Gesture.State.none;
 	public Gesture.State Tree = Gesture.State.none;
@@ -128,45 +127,6 @@ public class Righthand : MonoBehaviour
 			if (Metrics.levelcount > 2) {
 
 
-
-
-			// Paddle
-
-			//if (Metrics.levelcount == 3) {
-
-					switch (Paddle) {
-			
-					case Gesture.State.none:
-								
-						if (pitchforward && palmdown) {
-							Paddle = Gesture.State.detected;
-						}
-							
-						break;
-			
-					case Gesture.State.detected:
-						if (transPitch > 30) { 
-							hit = 2;
-					Sounds.Environment.PlayOneShot (Sounds.creak1); // TODO: should be played on finger
-							Hands.RHhit(hit);
-							Paddle = Gesture.State.action;
-						} 
-						break;
-			
-					case Gesture.State.action:
-						Paddle = Gesture.State.cooldown;
-						break;
-			
-					case Gesture.State.cooldown:
-						cooldownTime -= Time.deltaTime;
-						if (cooldownTime <= 0) {
-							Paddle = Gesture.State.none;
-							hit = 0;
-							Hands.RHhit(hit);
-							cooldownTime = MaxcooldownTime;
-						}
-						break;
-					}
 
 			// Rope
 			switch (Rope) {
