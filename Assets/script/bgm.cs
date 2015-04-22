@@ -50,7 +50,8 @@ public class bgm : MonoBehaviour
 
 		SetMastervol();
 
-		//TODO: this needs to be moved to a call in Sounds that is called from GameLogic
+		//TODO: this needs to be moved to a method (RestartBackgroundMusic) in Sounds that is called from GameLogic
+		// at the right time
 		/*if (Metrics.levelcount == 4) {
 			_audio.Stop ();
 			_audio.clip = land;

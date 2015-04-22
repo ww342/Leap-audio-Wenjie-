@@ -224,7 +224,7 @@ public class StoneThrowGesture : Gesture {
 						Sounds.Environment.PlayOneShot (Sounds.rightsleevedown, 3.0f);
 						this.StoneCount ();
 						Sounds.normalwatch ();
-						Sounds.audiosource.PlayOneShot (Sounds.hint.Stone_correct_hint4);
+						Sounds.audiosource.PlayOneShot (Sounds.Hints.Stone_correct_hint4);
 						this.state = State.none;
 					} else {
 						Sounds.Environment.PlayOneShot (Sounds.waterdrop, 8.0f);

@@ -21,7 +21,7 @@ public class Sounds : MonoBehaviour {
 	public Northeast Northeast;
 	public Northforward Northforward;
 	public Northwest Northwest;
-	public hint hint;
+	public Hints Hints;
 
 	// the mixer groups used by sounds played here:
 	public AudioMixerGroup HintsMix;
@@ -119,7 +119,7 @@ public class Sounds : MonoBehaviour {
 		this.Northeast = GameObject.Find("/Environment/Northeast").GetComponent<Northeast>();
 		this.Northforward = GameObject.Find("/Environment/Northforward").GetComponent<Northforward>();
 		this.Northwest = GameObject.Find("/Environment/Northwest").GetComponent<Northwest>();
-		this.hint = GameObject.Find("/hint").GetComponent<hint>();
+		this.Hints = GameObject.Find("/Hints").GetComponent<Hints>();
 	}
 
 	void Start() {
@@ -158,7 +158,7 @@ public class Sounds : MonoBehaviour {
 		
 		transition_hint = gameObject.AddComponent <AudioSource> ();
 		transition_hint.outputAudioMixerGroup = HintsMix;
-		//transtion_hint.clip  = hint.Stone_correct_hint0;
+		//transtion_hint.clip  = Hints.Stone_correct_hint0;
 		transition_hint.clip = this.transitionhint1;
 		//transtion_hint .loop = true;
 		//transtion_hint.pitch = 1;

@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
-public class hint : MonoBehaviour
+public class Hints : MonoBehaviour
 {
 	public AudioClip Stone_correct_hint0;
 	public AudioClip Stone_correct_hint1;
