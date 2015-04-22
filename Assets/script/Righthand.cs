@@ -13,7 +13,6 @@ public class Righthand : MonoBehaviour
 	public rightpalm rightpalm;
 	public Metrics Metrics;
 
-	public Gesture.State Rope = Gesture.State.none;
 	public Gesture.State Star = Gesture.State.none;
 	public Gesture.State Bike = Gesture.State.none;
 
@@ -114,62 +113,6 @@ public class Righthand : MonoBehaviour
 
 
 			if (Metrics.levelcount > 2) {
-
-
-
-			// Rope
-			switch (Rope) {
-				
-			case Gesture.State.none:
-				if (Metrics.levelcount == 4) {
-					//if (Metrics.wrongcount > 2 || Metrics.flowercount == 12) {
-						if (palmright) {
-							Rope = Gesture.State.ready;
-						}
-					//}
-				}
-				break;
-
-			case  Gesture.State.ready:
-				if (Metrics.levelcount == 4) {
-					//if (Metrics.wrongcount > 2 || Metrics.flowercount == 12) {
-						if (!openhand) {
-							if (transWave_z_10 > 50) {
-								Rope = Gesture.State.detected;
-							}
-						}
-					//}
-				}
-				break;
-
-			case Gesture.State.detected:
-				if (!openhand) {
-					if (transWave_x_10 > 5) {
-						Rope = Gesture.State.action;
-					}
-				}
-				break;
-
-			case Gesture.State.action:
-				if (!openhand) {
-					if (transWave_z_10 < -50) {
-						Rope = Gesture.State.ing;
-					}
-				}
-				break;
-				
-			case Gesture.State.ing:
-				if (!openhand) {
-					if (transWave_x_10 < -5) {
-						Hands.RopeCount();
-						Rope = Gesture.State.cooldown;
-					}
-				}
-				break;
-
-			case Gesture.State.cooldown:
-				break;
-			}
 
 
 

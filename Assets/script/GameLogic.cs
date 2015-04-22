@@ -74,6 +74,7 @@ public class GameLogic : MonoBehaviour {
 		
 		Debug.Log ("Bike riding");
 		Sounds.Ambience_D.PlayOneShot (Sounds.wind);
+		yield return StartCoroutine(DoBikeRiding());
 		
 		Debug.Log ("Star");
 		Sounds.Ambience_D.PlayOneShot (Sounds.sky);
@@ -171,6 +172,24 @@ public class GameLogic : MonoBehaviour {
 	}
 
 	IEnumerator DoRopeBinding() {
+		Gesture ropebind = gameObject.AddComponent<RopeBindingGesture>();
+		while (ropebind.count < 1) {
+			yield return StartCoroutine(ropebind.Activate());
+		}
+		yield return Narrator.PlayAndWait(Narrator.rope1);
+		while (ropebind.count < 2) {
+			yield return StartCoroutine(ropebind.Activate());
+		}
+		yield return Narrator.PlayAndWait(Narrator.rope2);
+		while (ropebind.count < 3) {
+			yield return StartCoroutine(ropebind.Activate());
+		}
+		yield return Narrator.PlayAndWait(Narrator.rope3);
+		Destroy (ropebind);
+	}
+
+	IEnumerator DoBikeRiding() {
 		yield return null;
 	}
+
 }

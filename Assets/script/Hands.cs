@@ -8,39 +8,7 @@ public class Hands : MonoBehaviour
 	public Narrator Narrator;
 	public Metrics Metrics;
 	
-	public void RopeCount ()
-	{
-		Metrics.ropecount ++;
-			
-		if (Metrics.ropecount == 1) {
-				
-			//yield return Narrator.PlayAndWait(Narrator.rope1);
 
-			Sounds.Ambience_D.PlayOneShot (Sounds.rope);
-			Sounds.Ambience_B.minDistance = 0;
-			Sounds.Ambience_B.clip = Sounds.crickets;
-		}
-		
-		if (Metrics.ropecount == 2) {
-
-			Sounds.Ambience_D.PlayOneShot (Sounds.rope);
-			//yield return Narrator.PlayAndWait(Narrator.rope2);
-
-			Sounds.Ambience_B.minDistance = 2;
-		}
-
-		if (Metrics.ropecount == 3) {
-
-			//yield return Narrator.PlayAndWait(Narrator.rope3);
-
-
-			Sounds.Ambience_D.PlayOneShot (Sounds.grass);
-			Sounds.Ambience_B.minDistance = 5;
-			Sounds.Ambience_B.Play ();
-			//LevelCount ();
-			Metrics.wrongcount = 0;
-		}
-	}
 	
 
 
