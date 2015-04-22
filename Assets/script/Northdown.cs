@@ -4,7 +4,6 @@ using System.Collections;
 [RequireComponent(typeof(AudioSource))]
 public class Northdown : MonoBehaviour
 {
-	public Hands script;
 	public Sounds sounds;
 	public Narrator voice;
 	private AudioSource sound1_once;

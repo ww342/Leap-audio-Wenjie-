@@ -4,7 +4,6 @@ using System.Collections;
 [RequireComponent(typeof(AudioSource))]
 public class Northwest : MonoBehaviour
 {
-	public Hands script;
 	public Sounds sounds;
 	public Narrator voice;
 

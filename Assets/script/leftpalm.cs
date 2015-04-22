@@ -7,7 +7,6 @@ public class leftpalm : MonoBehaviour
 {
 	Controller Controller = new Controller ();
 	public Sounds sounds;
-	public Hands script;
 	public Narrator voice;
 	public Vector3 handcenter;
 	public Vector3 losetrack;

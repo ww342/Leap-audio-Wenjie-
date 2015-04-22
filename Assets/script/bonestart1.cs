@@ -8,7 +8,6 @@ public class bonestart1 : MonoBehaviour
 	public float smooth ;
 	public Finger.FingerType fingerType;
 	public Bone.BoneType BoneType ;
-	public Hands script;
 
 	void Update ()
 	{

@@ -9,10 +9,8 @@ using System.Collections;
 /// Initial start of the game is triggered with space.
 /// </summary>
 public class GameLogic : MonoBehaviour {
-	public Hands Hands;
 	public Sounds Sounds;
 	public Narrator Narrator;
-	public Metrics Metrics;
 
 	void Start () {
 		StartCoroutine(MainGame());
@@ -79,6 +77,12 @@ public class GameLogic : MonoBehaviour {
 		Debug.Log ("Star");
 		Sounds.Ambience_D.PlayOneShot (Sounds.sky);
 		Sounds.Ambience_B.minDistance = 10;
+		yield return StartCoroutine(DoStarPicking());
+
+		// TODO: change those to a sequence of wait and call methods:
+		Invoke ("Glow", 2);
+		Invoke ("Timetravel", 6);
+		Invoke ("watchstop", 8);
 
 		// remove parallel no-hands/hands sound effects:
 		barehands.DeactivateInParallel();
@@ -119,6 +123,7 @@ public class GameLogic : MonoBehaviour {
 		while (flower.count < 4) {
 			yield return StartCoroutine(flower.Activate());
 		}
+		Destroy (flower);
 		yield return Narrator.PlayAndWait(Narrator.flyfromtree);
 		// TODO: the above narration (flyfromtree) and the narration in the "else" below
 		// (stone3) that's played instead of the flower gesture overlap!
@@ -126,7 +131,6 @@ public class GameLogic : MonoBehaviour {
 		// (actual sound clip names: flying from tree, fishresponse3)
 		// Actually the case in a few clips that narration is duplicate!
 		// Ideally every voice clip should only exist once on its own!
-		Destroy (flower);
 	}
 
 	IEnumerator DoBirdCatching() {
@@ -144,8 +148,8 @@ public class GameLogic : MonoBehaviour {
 			yield return StartCoroutine(birdcatch.Activate());
 		}
 		birdcatch.StopHands();
-		yield return Narrator.PlayAndWait(Narrator.bird2);
 		Destroy (birdcatch);
+		yield return Narrator.PlayAndWait(Narrator.bird2);
 	}
 
 	IEnumerator DoPaddleRowing(PaddleRowingGesture paddlerowing) {
@@ -167,8 +171,8 @@ public class GameLogic : MonoBehaviour {
 		while (treeshake.count < 8) {
 			yield return StartCoroutine(treeshake.Activate());
 		}
-		yield return Narrator.PlayAndWait(Narrator.tietheboat);
 		Destroy (treeshake);
+		yield return Narrator.PlayAndWait(Narrator.tietheboat);
 	}
 
 	IEnumerator DoRopeBinding() {
@@ -184,12 +188,36 @@ public class GameLogic : MonoBehaviour {
 		while (ropebind.count < 3) {
 			yield return StartCoroutine(ropebind.Activate());
 		}
-		yield return Narrator.PlayAndWait(Narrator.rope3);
 		Destroy (ropebind);
+		yield return Narrator.PlayAndWait(Narrator.rope3);
 	}
 
 	IEnumerator DoBikeRiding() {
-		yield return null;
+		BikeRidingGesture bikeride = gameObject.AddComponent<BikeRidingGesture>();
+		bikeride.StartHands(); // separate hands in parallel!
+		while (bikeride.count < 6) {
+			yield return StartCoroutine(bikeride.Activate());
+		}
+		bikeride.StopHands();
+		Destroy (bikeride);
+		yield return Narrator.PlayAndWait(Narrator.bell6);
 	}
 
+	IEnumerator DoStarPicking() {
+		Gesture starpick = gameObject.AddComponent<StarPickingGesture>();
+		while (starpick.count < 1) {
+			yield return StartCoroutine(starpick.Activate());
+		}
+		yield return Narrator.PlayAndWait(Narrator.star1);
+		while (starpick.count < 2) {
+			yield return StartCoroutine(starpick.Activate());
+		}
+		yield return Narrator.PlayAndWait(Narrator.star2);
+		while (starpick.count < 3) {
+			yield return StartCoroutine(starpick.Activate());
+		}
+		Destroy (starpick);
+		yield return Narrator.PlayAndWait(Narrator.star3);
+	}
+	
 }

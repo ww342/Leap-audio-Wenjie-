@@ -9,8 +9,6 @@ public class watch : MonoBehaviour
 	
 	public Gesture.State TapWatch = Gesture.State.none;
 	public Sounds Sounds;
-	public Metrics Metrics;
-	public Hands Hands;
 	public Narrator Narrator;
 	public Vector3 wristcenter;
 	private float cooldownTime;
@@ -46,9 +44,6 @@ public class watch : MonoBehaviour
 			case Gesture.State.other:
 				voiceon = 1;
 				TapWatch = Gesture.State.cooldown;
-				if (Metrics.levelcount == 0) {
-					//Narrator.audiosource.PlayOneShot (Narrator.stonewrong);
-				}
 				break;
 
 			case Gesture.State.cooldown:

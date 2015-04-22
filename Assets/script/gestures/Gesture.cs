@@ -110,8 +110,10 @@ abstract public class Gesture : MonoBehaviour {
 		public float Pinch = 0f;
 		public float pitch = 0f;
 		public bool pitchforward = false;
+		public bool pitchupforward = false;
 		public bool palmdown = false;
 		public bool palmup = false;
+		public bool palmin = false;
 		public bool palmleft = false;
 		public bool palmleftin = false;
 		public bool palmright = false;
@@ -138,6 +140,7 @@ abstract public class Gesture : MonoBehaviour {
 		public float losetrack_trans_y = 0f;
 		public float losetrack_trans_z = 0f;
 		public Finger ring;
+		public Finger thumb;
 	}
 
 	public int handcount = 0;
@@ -165,7 +168,7 @@ abstract public class Gesture : MonoBehaviour {
 			right.seen = false;
 		} else {
 			right.seen = true;
-			Finger thumb = rightmost.Fingers [0];
+			right.thumb = rightmost.Fingers [0];
 			Finger index = rightmost.Fingers [1];
 			Finger middle = rightmost.Fingers [2];
 			right.ring = rightmost.Fingers [3];
@@ -231,15 +234,15 @@ abstract public class Gesture : MonoBehaviour {
 			bool yawleft = yaw < -20;
 			bool yawright = yaw > 20;
 			right.pitchforward = right.pitch <= 10 && right.pitch >= 0;
-			bool pitchupforward = right.pitch <= 45 && right.pitch >= 40;
+			right.pitchupforward = right.pitch <= 45 && right.pitch >= 40;
 			right.palmdown = roll < 20 && roll > -20;
 			right.palmup = roll <= -140 || roll >= 140; 
 			right.palmright = roll > 50 && roll < 60;
 			right.palmleft = roll > - 60 && roll < -50;
 			right.palmleftin = roll > -160 && roll < -130;
 			bool pitchdownforward = right.pitch <= -10 && right.pitch >= -30;
-			bool palmin = yaw <= -50 && yaw >= -80;
-			right.openhand = thumb.IsExtended && index.IsExtended && middle.IsExtended && right.ring.IsExtended && pinky.IsExtended;
+			right.palmin = yaw <= -50 && yaw >= -80;
+			right.openhand = right.thumb.IsExtended && index.IsExtended && middle.IsExtended && right.ring.IsExtended && pinky.IsExtended;
 			
 			bool elbowforward = elbow_z < 200;
 			right.wristhigh = wrist_y > 350;
@@ -257,15 +260,15 @@ abstract public class Gesture : MonoBehaviour {
 			left.seen = false;
 		} else {
 			left.seen = true;
-			Finger thumb = startframe.Fingers [0];
+			left.thumb = startframe.Fingers [0];
 			Finger index = startframe.Fingers [1];
 			Finger middle = startframe.Fingers [2];
 			left.ring = startframe.Fingers [3];
 			Finger pinky = startframe.Fingers [4];
 			
-			float thumbtip_x = thumb.TipPosition.x;
-			float thumbtip_y = thumb.TipPosition.y;
-			float thumbtip_z = thumb.TipPosition.z;
+			float thumbtip_x = left.thumb.TipPosition.x;
+			float thumbtip_y = left.thumb.TipPosition.y;
+			float thumbtip_z = left.thumb.TipPosition.z;
 			
 			float indextip_x = index.TipPosition.x;
 			float indextip_y = index.TipPosition.y;
@@ -317,12 +320,12 @@ abstract public class Gesture : MonoBehaviour {
 			bool yawforward = yaw <= 25 && yaw >= -25;
 			bool yawside = yaw < -40 || yaw > 40;
 			left.pitchforward = left.pitch <= 90 && left.pitch >= -90;
-			bool pitchupforward = left.pitch <= 45 && left.pitch >= 40;
+			left.pitchupforward = left.pitch <= 45 && left.pitch >= 40;
 			left.palmdown = roll < 20 && roll > -20;
 			left.palmup = roll <= -90 || roll >= 180; 
 			left.palmright = roll > 90 && roll < 110;
 			left.palmrightin = roll > 130 && roll < 160;
-			left.openhand = thumb.IsExtended && index.IsExtended && middle.IsExtended && left.ring.IsExtended && pinky.IsExtended;
+			left.openhand = left.thumb.IsExtended && index.IsExtended && middle.IsExtended && left.ring.IsExtended && pinky.IsExtended;
 		}
 	}
 }

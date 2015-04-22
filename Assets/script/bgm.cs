@@ -4,7 +4,6 @@ using UnityEngine.Audio;
 [RequireComponent(typeof(AudioSource))]
 public class bgm : MonoBehaviour
 {
-	public Metrics Metrics;
 	public AudioClip lake;
 	public AudioClip land;
 
@@ -48,14 +47,16 @@ public class bgm : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+
 		SetMastervol();
 
-		if (Metrics.levelcount == 4) {
+		//TODO: this needs to be moved to a call in Sounds that is called from GameLogic
+		/*if (Metrics.levelcount == 4) {
 			_audio.Stop ();
 			_audio.clip = land;
 			_audio.loop = false;
 			_audio.minDistance = 10;
 			Replay ();
-		}
+		}*/
 	}
 }
