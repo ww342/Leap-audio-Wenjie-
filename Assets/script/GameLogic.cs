@@ -79,14 +79,16 @@ public class GameLogic : MonoBehaviour {
 		Sounds.Ambience_B.minDistance = 10;
 		yield return StartCoroutine(DoStarPicking());
 
-		// TODO: change those to a sequence of wait and call methods:
-		Invoke ("Glow", 2);
-		Invoke ("Timetravel", 6);
-		Invoke ("watchstop", 8);
-
 		// remove parallel no-hands/hands sound effects:
 		barehands.DeactivateInParallel();
 		Destroy (barehands);
+
+		// the timing of those might be off now:
+		Sounds.Glow();
+		Sounds.Timetravel();
+		yield return new WaitForSeconds(2f);
+		Sounds.watchstop();
+		Debug.Log ("Main game finished!");
 	}
 
 	IEnumerator CheckBareHands(BareHandsGesture barehands) {
