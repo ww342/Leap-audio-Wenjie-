@@ -8,15 +8,6 @@ public class Hands : MonoBehaviour
 	public Narrator Narrator;
 	public Metrics Metrics;
 	
-	//SOS GESTURE VARIABLES
-/*
-	public Vector3 watchposition;
-	public Vector3 tapwatch;
-	public Vector3 difference;
-	public float tappingdistance;
-*/
-
-		
 	public void RopeCount ()
 	{
 		Metrics.ropecount ++;
@@ -114,80 +105,4 @@ public class Hands : MonoBehaviour
 		}
 	}
 
-	// A void that gets wrist position from the right hand
-
-	/*
-	public void WatchSurface(Vector3 wristposition)
-	{
-		watchposition = wristposition;
-		Update ();
-	}
-
-	// A void that gets index position from the left hand
-	public void TaptheWatch(Vector3 indextip)
-	{
-		tapwatch = indextip;
-		Update ();
-	}
-
-    void Beep(){
-		switch (TapWatch) {
-		case HandState.none:
-		    {
-				audio.PlayOneShot (sounds.watchbeep, 30.0f);
-				
-				TapWatch = HandState.cooldown;
-			}
-			break;
-			
-		case HandState.cooldown:
-			cooldownTime -= Time.deltaTime;
-			if (cooldownTime <= 0) {
-				TapWatch = HandState.none;
-				cooldownTime = MaxcooldownTime1;
-			}
-			break;
-		}
-	}
-	*/
-
-	// Update is called once per frame
-	public void Update ()
-	{
-		// Tap Watch to Send SOS message
-
-		/*
-		 * difference = new Vector3( watchposition.x  - tapwatch.x, watchposition.y - tapwatch.y, watchposition.z - tapwatch.z);
-		
-		tappingdistance = Mathf.Sqrt(
-			Mathf.Pow(difference.x, 2f) +
-			Mathf.Pow(difference.y, 2f) +
-			Mathf.Pow(difference.z, 2f));
-		
-
-		switch (TapWatch) {
-				case HandState.none:
-						if (tappingdistance > 90 && tappingdistance < 100) {
-				
-								audio.PlayOneShot (sounds.watchbeep, 30.0f);
-
-								TapWatch = HandState.cooldown;
-						}
-
-						break;
-
-				case HandState.cooldown:
-
-						cooldownTime -= Time.deltaTime;
-						if (cooldownTime <= 0) {
-								TapWatch = HandState.none;
-								cooldownTime = MaxcooldownTime1;
-						}
-
-						break;
-				}
-*/
-
-
-	}
 }
