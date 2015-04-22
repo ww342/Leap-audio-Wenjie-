@@ -55,9 +55,22 @@ public class GameLogic : MonoBehaviour {
 		yield return StartCoroutine(DoBirdCatching());
 
 		Debug.Log ("Paddle rowing");
-		yield return StartCoroutine(DoPaddleRowing());
+		PaddleRowingGesture paddlerowing = gameObject.AddComponent<PaddleRowingGesture>();
+		yield return StartCoroutine(DoPaddleRowing(paddlerowing));
+		bool doTreeGesture = (paddlerowing.wrongcount <= 2);
+		Destroy (paddlerowing);
 
-		Debug.Log ("Rope & Tree binding");
+		if (doTreeGesture) {
+			Debug.Log ("Tree shaking (optional reward)");
+			yield return StartCoroutine(DoTreeShaking());
+		} else {
+			Debug.Log ("NO Tree shaking (optional reward)");
+			yield return new WaitForSeconds(5f);
+			yield return Narrator.PlayAndWait(Narrator.ropepose);
+		}
+
+		Debug.Log ("Rope binding");
+		yield return StartCoroutine(DoRopeBinding());
 		
 		Debug.Log ("Bike riding");
 		Sounds.Ambience_D.PlayOneShot (Sounds.wind);
@@ -106,16 +119,12 @@ public class GameLogic : MonoBehaviour {
 			yield return StartCoroutine(flower.Activate());
 		}
 		yield return Narrator.PlayAndWait(Narrator.flyfromtree);
-		
 		// TODO: the above narration (flyfromtree) and the narration in the "else" below
 		// (stone3) that's played instead of the flower gesture overlap!
 		// ideally we would split the instructions at the end from the two response parts
 		// (actual sound clip names: flying from tree, fishresponse3)
-		
-		// TODO: previously, flowers worked up to 12 and then triggered tieing directly.
-		// now only four flowers are possible
-		//yield return Narrator.PlayAndWait(Narrator.tietheboat);
-		
+		// Actually the case in a few clips that narration is duplicate!
+		// Ideally every voice clip should only exist once on its own!
 		Destroy (flower);
 	}
 
@@ -138,8 +147,7 @@ public class GameLogic : MonoBehaviour {
 		Destroy (birdcatch);
 	}
 
-	IEnumerator DoPaddleRowing() {
-		PaddleRowingGesture paddlerowing = gameObject.AddComponent<PaddleRowingGesture>();
+	IEnumerator DoPaddleRowing(PaddleRowingGesture paddlerowing) {
 		paddlerowing.StartHands(); // separate hands in parallel!
 		while (paddlerowing.count < 1) {
 			yield return StartCoroutine(paddlerowing.Activate());
@@ -150,13 +158,19 @@ public class GameLogic : MonoBehaviour {
 		}
 		paddlerowing.StopHands();
 		yield return Narrator.PlayAndWait(Narrator.paddle4);
-		if (paddlerowing.wrongcount > 2) {
-			yield return new WaitForSeconds(5f);
-			yield return Narrator.PlayAndWait(Narrator.ropepose);
-		} else {
-			yield return Narrator.PlayAndWait(Narrator.treepose);
-		}
-		Destroy (paddlerowing);
 	}
 
+	IEnumerator DoTreeShaking() {
+		yield return Narrator.PlayAndWait(Narrator.treepose);
+		Gesture treeshake = gameObject.AddComponent<TreeShakingGesture>();
+		while (treeshake.count < 8) {
+			yield return StartCoroutine(treeshake.Activate());
+		}
+		yield return Narrator.PlayAndWait(Narrator.tietheboat);
+		Destroy (treeshake);
+	}
+
+	IEnumerator DoRopeBinding() {
+		yield return null;
+	}
 }

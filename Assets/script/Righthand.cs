@@ -15,19 +15,8 @@ public class Righthand : MonoBehaviour
 
 	public Gesture.State Rope = Gesture.State.none;
 	public Gesture.State Star = Gesture.State.none;
-	public Gesture.State Tree = Gesture.State.none;
 	public Gesture.State Bike = Gesture.State.none;
-	private float cooldownTime;
-	public float MaxcooldownTime;
-	public float MaxcooldownTime1;
-	public int hit ;
 
-	void Start ()
-	{
-		cooldownTime = MaxcooldownTime;
-		hit = 0;
-
-	}
 
 	void Update ()
 	{
@@ -179,52 +168,12 @@ public class Righthand : MonoBehaviour
 				break;
 
 			case Gesture.State.cooldown:
-				cooldownTime -= Time.deltaTime;
-				if (cooldownTime <= 0) {
-					Rope = Gesture.State.ready;
-					cooldownTime = MaxcooldownTime;
-				}
 				break;
 			}
 
 
 
 
-
-			// Tree
-			//if (Metrics.levelcount == 4 && Metrics.wrongcount <= 2 && Metrics.flowercount < 12) {
-
-					switch (Tree) {
-			
-					case Gesture.State.none:
-
-						if (palmleft) {
-							Tree = Gesture.State.detected;
-						}
-				
-						break;
-			
-					case Gesture.State.detected:
-							if (!ring.IsExtended) {
-								Tree = Gesture.State.action;
-							}
-						break;
-			
-					case Gesture.State.action:
-						if (transWave_x_10 > 10) {
-//							Hands.FlowerCount(); // TODO: flower counting used for tree and flower?
-							Tree = Gesture.State.cooldown;	
-						}
-						break;
-			
-					case Gesture.State.cooldown:
-						cooldownTime -= Time.deltaTime;
-						if (cooldownTime <= 0) {
-							Tree = Gesture.State.detected;
-							cooldownTime = MaxcooldownTime;
-						}
-						break;
-					}
 		
 			// Bike
 
@@ -263,11 +212,6 @@ public class Righthand : MonoBehaviour
 						break;
 			
 					case Gesture.State.cooldown:
-						cooldownTime -= Time.deltaTime;
-						if (cooldownTime <= 0) {
-							Bike = Gesture.State.ready;
-							cooldownTime = MaxcooldownTime;
-						}
 						break;
 					}
 
@@ -311,11 +255,6 @@ public class Righthand : MonoBehaviour
 						break;
 			
 					case Gesture.State.cooldown:
-						cooldownTime -= Time.deltaTime;
-						if (cooldownTime <= 0) {
-							Star = Gesture.State.detected;
-							cooldownTime = MaxcooldownTime;
-						}
 						break;
 					}
 			}

@@ -650,11 +650,7 @@ MonoBehaviour:
   Metrics: {fileID: 269770586}
   Rope: 0
   Star: 0
-  Tree: 0
   Bike: 0
-  MaxcooldownTime: 1
-  MaxcooldownTime1: 2
-  hit: 0
 --- !u!1 &142768894
 GameObject:
   m_ObjectHideFlags: 0
@@ -9868,9 +9864,6 @@ MonoBehaviour:
   hint: {fileID: 953696198}
   Metrics: {fileID: 269770586}
   Bike: 0
-  MaxcooldownTime: 1
-  MaxcooldownTime1: 2
-  hit: 0
 --- !u!114 &1807179251
 MonoBehaviour:
   m_ObjectHideFlags: 0

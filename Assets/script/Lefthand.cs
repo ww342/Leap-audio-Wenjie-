@@ -11,20 +11,7 @@ public class Lefthand : MonoBehaviour
 	public hint hint;
 	public Metrics Metrics;
 	public Gesture.State Bike = Gesture.State.none;
-	private float cooldownTime;
-	public float MaxcooldownTime;
-	public float MaxcooldownTime1;
-	public int hit;
-	private AudioSource Gesturehint;
 
-	void Start ()
-	{
-		cooldownTime = MaxcooldownTime;
-		hit = 0;
-
-		Gesturehint = gameObject.AddComponent <AudioSource> ();
-		Gesturehint.minDistance = 5;
-	}
 
 	void Update ()
 	{
@@ -135,7 +122,7 @@ public class Lefthand : MonoBehaviour
 
 							if (palmdown && Grab > 0.4) {
 
-								Gesturehint.PlayOneShot (Sounds.bike); // TODO: should be played on finger
+								Sounds.Gesturehint.PlayOneShot (Sounds.bike); // TODO: should be played on finger
 								Bike = Gesture.State.detected;
 
 							}
@@ -156,18 +143,8 @@ public class Lefthand : MonoBehaviour
 				//}
 						break;
 
-					case Gesture.State.cooldown:
-						cooldownTime -= Time.deltaTime;
-						if (cooldownTime <= 0) {
-							Bike = Gesture.State.ready;
-							cooldownTime = MaxcooldownTime;
-						}
-						break;
-
-					}
-
+				}
 			}
-
 		}
 	}
 }
