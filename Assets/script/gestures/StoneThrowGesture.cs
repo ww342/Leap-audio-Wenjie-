@@ -62,14 +62,13 @@ public class StoneThrowGesture : Gesture {
 					Sounds.hint3 ();
 				}
 				if (right.wristleft || right.wristright) { // grabbed the water
-					this.state = State.action;
-					Sounds.Environment.PlayOneShot (Sounds.gentlesplash, 1.0f);
-					Sounds.Environment.PlayOneShot (Sounds.longcreak);
-					Sounds.transitwatch ();
 					this.state = State.none;
-					Sounds.hint2 ();
-					Sounds.Environment.PlayOneShot (Sounds.gentlewaterdrop, 2.5f);
+					Sounds.Environment.PlayOneShot (Sounds.gentlesplash, 3.0f);
+					Sounds.Environment.PlayOneShot (Sounds.gentlewaterdrop, 3.0f);
+					Sounds.Environment.PlayOneShot (Sounds.longcreak,0.8f);
+					Sounds.transitwatch ();
 					yield break; // restart!
+
 				}
 			} 
 		}
