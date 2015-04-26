@@ -22,6 +22,7 @@ public class Sounds : MonoBehaviour {
 	public Northforward Northforward;
 	public Northwest Northwest;
 	public Hints Hints;
+	public bgm BackgroundMusic;
 
 	// the mixer groups used by sounds played here:
 	public AudioMixerGroup HintsMix;
@@ -236,5 +237,19 @@ public class Sounds : MonoBehaviour {
 	{
 		Ambience_D.PlayOneShot (this.timetravel, 2.0f);
 	}
-	
+
+
+	public void ChangeBackgroundMusic ()
+	{
+		BackgroundMusic = GameObject.Find("/Environment/BackgroundMusic").GetComponent<bgm>();
+		BackgroundMusic._audio.Stop ();
+		BackgroundMusic._audio.clip = BackgroundMusic.land;
+		BackgroundMusic._audio.loop = false;
+		BackgroundMusic._audio.minDistance = 10;
+	}
+
+	public void RestartBackgroundMusic ()
+	{
+		BackgroundMusic._audio.Play ();
+	}
 }

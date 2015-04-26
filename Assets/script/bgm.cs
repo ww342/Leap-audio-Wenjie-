@@ -8,7 +8,7 @@ public class bgm : MonoBehaviour
 	public AudioClip land;
 
 
-	private AudioSource _audio;
+	public  AudioSource _audio;
 
 	//Audio Mixer Groups
 	public AudioMixerGroup BackgroundMix;
@@ -50,14 +50,6 @@ public class bgm : MonoBehaviour
 
 		SetMastervol();
 
-		//TODO: this needs to be moved to a method (RestartBackgroundMusic) in Sounds that is called from GameLogic
-		// at the right time
-		/*if (Metrics.levelcount == 4) {
-			_audio.Stop ();
-			_audio.clip = land;
-			_audio.loop = false;
-			_audio.minDistance = 10;
-			Replay ();
-		}*/
+
 	}
 }

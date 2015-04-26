@@ -53,7 +53,7 @@ public class Northdown : MonoBehaviour
 		Invoke ("sound6", 1);
 	}
 
-	public void sound3 ()
+	public void MidStoneSkip ()
 	{
 		sound3_once.Play ();
 		stoneskip = true;
@@ -61,7 +61,7 @@ public class Northdown : MonoBehaviour
 		Invoke ("goback", 4);
 	}
 
-	public void sound4 ()
+	public void SlowStoneSkip ()
 	{
 		sound3_once.Play ();
 		sound3_once.pitch = 1;
@@ -69,7 +69,7 @@ public class Northdown : MonoBehaviour
 		Invoke ("goback", 5);
 	}
 
-	public void sound5 ()
+	public void QuickStoneSkip ()
 	{
 		sound3_once.Play ();
 		sound3_once.pitch = 3;

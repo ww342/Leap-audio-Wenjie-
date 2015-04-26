@@ -94,7 +94,7 @@ public class StoneThrowGesture : Gesture {
 				Sounds.quickenwatch ();
 				this.state = State.ready;
 			}
-			if (right.palmleft || right.palmleftin || right.palmup || right.palmright) {
+			if (right.palmleft || right.palmleftin || right.palmup || right.palmright){
 				this.state = State.other;
 				Sounds.transitwatch ();
 				Sounds.hint2 ();
@@ -138,7 +138,7 @@ public class StoneThrowGesture : Gesture {
 				}
 				if (right.transWave_y_10 < - 80) {
 					Sounds.normalwatch ();
-					Sounds.Environment.PlayOneShot (Sounds.rightsleevelift, 3.0f);
+					Sounds.Environment.PlayOneShot (Sounds.rightsleevelift, 5.0f);
 					Sounds.hint3 ();
 					this.state = State.ing;
 				}
@@ -183,33 +183,39 @@ public class StoneThrowGesture : Gesture {
 			}
 			if (right.palmleft || right.palmleftin || right.palmup || right.palmright) {
 				Sounds.hint2 ();
-				if (Mathf.Abs (right.transWave_y_6 / right.transWave_x_6) < 0.6 && Mathf.Abs (right.transWave_y_6 / right.transWave_x_6) > 0.1) {
-					if (right.transPitch > 20 && right.Grab < 0.5) {
-						Sounds.Northdown.sound3();
+//				if (Mathf.Abs (right.transWave_y_6 / right.transWave_x_6) < 0.6 && Mathf.Abs (right.transWave_y_6 / right.transWave_x_6) > 0.1) {
+//					if (right.transPitch > 20 && right.Grab < 0.5) {
+				if(right.transWave_x_3>20){
+						Sounds.Northdown.MidStoneSkip();
 						Sounds.quickenwatch ();
 						this.wrongcount++;
 						this.state = State.none;
 						yield break; // restart!
-					}
 				}
-				if (Mathf.Abs (right.transWave_y_3 / right.transWave_x_3) < 0.6 && Mathf.Abs (right.transWave_y_3 / right.transWave_x_3) > 0.1) {
-					if (right.transPitch > 20 && right.Grab < 0.5) {
-						Sounds.Northdown.sound5();
+//					}
+//				}
+//				if (Mathf.Abs (right.transWave_y_3 / right.transWave_x_3) < 0.6 && Mathf.Abs (right.transWave_y_3 / right.transWave_x_3) > 0.1) {
+//					if (right.transPitch > 20 && right.Grab < 0.5) {
+				if(right.transWave_x_10>30){
+						Sounds.Northdown.QuickStoneSkip();
 						Sounds.quickenwatch ();
 						this.wrongcount++;
 						this.state = State.none;
 						yield break; // restart!
-					}
 				}
-				if (Mathf.Abs (right.transWave_y_10 / right.transWave_x_10) > 0.6) {
-					if (right.transPitch > 20 && right.Grab < 0.5) {
-						Sounds.Northdown.sound4();
-						Sounds.quickenwatch ();
-						this.wrongcount++;
-						this.state = State.none;
-						yield break; // restart!
-					}
-				}
+//					}
+//				}
+//				if (Mathf.Abs (right.transWave_y_10 / right.transWave_x_10) > 0.6) {
+//					if (right.transPitch > 20 && right.Grab < 0.5) {
+//				if(right.transWave_x_6 >10){
+//						Sounds.Northdown.SlowStoneSkip();
+//						Sounds.quickenwatch ();
+//						this.wrongcount++;
+//						this.state = State.none;
+//						yield break; // restart!
+//				}
+//					}
+//				}
 			}
 		}
 		

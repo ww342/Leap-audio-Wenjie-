@@ -184,18 +184,22 @@ public class GameLogic : MonoBehaviour {
 		}
 		yield return Narrator.PlayAndWait(Narrator.rope1);
 		while (ropebind.count < 2) {
+
 			yield return StartCoroutine(ropebind.Activate());
 		}
 		yield return Narrator.PlayAndWait(Narrator.rope2);
 		while (ropebind.count < 3) {
+
 			yield return StartCoroutine(ropebind.Activate());
 		}
 		Destroy (ropebind);
 		yield return Narrator.PlayAndWait(Narrator.rope3);
+		Sounds.ChangeBackgroundMusic ();
 	}
 
 	IEnumerator DoBikeRiding() {
 		BikeRidingGesture bikeride = gameObject.AddComponent<BikeRidingGesture>();
+		Sounds.RestartBackgroundMusic ();
 		bikeride.StartHands(); // separate hands in parallel!
 		while (bikeride.count < 6) {
 			yield return StartCoroutine(bikeride.Activate());
