@@ -6,23 +6,28 @@ public class PaddleRowingGesture : TwoHandGesture<PaddleRowingLeftHandGesture, P
 	public void PaddleCount () {
 		this.count ++;
 		Sounds.Ambience_D.PlayOneShot (Sounds.paddle);
+		//ReverbControl.BlendSnapShot (GameLogic.ReverbNum);
 		if (this.count == 1) {
 			Sounds.Ambience_A.minDistance = 5;
 			Sounds.Ambience_D.PlayOneShot (Sounds.lakewaveslapping);
 			Sounds.Ambience_A.Play ();
 			Sounds.Ambience_B.minDistance = 8;
+			//GameLogic.ReverbNum =3;
 		}
 		if (this.count == 2) {
 			Sounds.Ambience_B.minDistance = 6;
+			//GameLogic.ReverbNum =2;
 		}
 		if (this.count == 3) {
 			Sounds.Ambience_B.minDistance = 4;
 			Sounds.Ambience_C.minDistance = 2;
+			//GameLogic.ReverbNum =1;
 		}
 		if (this.count == 4) {
 			Sounds.Ambience_A.Stop ();
 			Sounds.Ambience_B.minDistance = 1;
 			Sounds.Ambience_C.minDistance = 1;
+			//GameLogic.ReverbNum =0;
 		}
 	}
 	

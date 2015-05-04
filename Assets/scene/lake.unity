@@ -1392,6 +1392,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sounds: {fileID: 580846435}
   Narrator: {fileID: 485923159}
+  ReverbControl: {fileID: 1955015025}
+  ReverbNum: 4
 --- !u!1 &283423006
 GameObject:
   m_ObjectHideFlags: 0
@@ -3216,6 +3218,7 @@ MonoBehaviour:
   Northforward: {fileID: 0}
   Northwest: {fileID: 0}
   Hints: {fileID: 0}
+  BackgroundMusic: {fileID: 0}
   HintsMix: {fileID: 24303206, guid: 46df3ef2c45054a8da39d2652e0a7a06, type: 2}
   EnvironmentMix: {fileID: 24360642, guid: 46df3ef2c45054a8da39d2652e0a7a06, type: 2}
   BackgroundMix: {fileID: 24363896, guid: 46df3ef2c45054a8da39d2652e0a7a06, type: 2}
@@ -9986,6 +9989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lake: {fileID: 8300000, guid: 8e652f280dde046c88641178d420e79a, type: 3}
   land: {fileID: 8300000, guid: 440593d4a38214547ad867b67e98e21b, type: 3}
+  _audio: {fileID: 0}
   BackgroundMix: {fileID: 24363896, guid: 46df3ef2c45054a8da39d2652e0a7a06, type: 2}
   AudioMixer1: {fileID: 24100000, guid: 46df3ef2c45054a8da39d2652e0a7a06, type: 2}
 --- !u!82 &1820628473
@@ -10775,6 +10779,52 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1946532988}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1955015024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1955015026}
+  - 114: {fileID: 1955015025}
+  m_Layer: 0
+  m_Name: ReverbControl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1955015025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1955015024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a628f8979765447bb9379a531e4e502d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snapshots:
+  - {fileID: 24500003, guid: 46df3ef2c45054a8da39d2652e0a7a06, type: 2}
+  - {fileID: 24554226, guid: 46df3ef2c45054a8da39d2652e0a7a06, type: 2}
+  mixer: {fileID: 24100000, guid: 46df3ef2c45054a8da39d2652e0a7a06, type: 2}
+  weights:
+  - 0
+  - 0
+--- !u!4 &1955015026
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1955015024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.39999962, y: -11.1000004, z: 9.20000076}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
 --- !u!1 &1970157617
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,9 @@ using System.Collections;
 public class GameLogic : MonoBehaviour {
 	public Sounds Sounds;
 	public Narrator Narrator;
+	public ReverbControl ReverbControl;
+
+	public int ReverbNum=4;
 
 	void Start () {
 		StartCoroutine(MainGame());
@@ -21,10 +24,12 @@ public class GameLogic : MonoBehaviour {
 	// also allows to simply comment out parts you want to skip for testing
 	IEnumerator MainGame() {
 		Sounds.InitialSetup();
+		ReverbControl.BlendSnapShot (ReverbNum);
 		Debug.Log ("Waiting for game-start signal (space)");
 		while (! Input.GetKeyDown("space")) {
 			yield return null;
 		}
+
 		Debug.Log ("Main game started!");
 		BareHandsGesture barehands = gameObject.AddComponent<BareHandsGesture>();
 		yield return StartCoroutine(CheckBareHands(barehands));
@@ -55,6 +60,28 @@ public class GameLogic : MonoBehaviour {
 		Debug.Log ("Paddle rowing");
 		PaddleRowingGesture paddlerowing = gameObject.AddComponent<PaddleRowingGesture>();
 		yield return StartCoroutine(DoPaddleRowing(paddlerowing));
+
+		if (paddlerowing.count == 1) {
+			ReverbNum = 3;
+			ReverbControl.BlendSnapShot (ReverbNum);
+			Debug.Log ("1 meter away from cave");
+				}
+		if (paddlerowing.count == 2) {
+			ReverbNum = 2;
+			ReverbControl.BlendSnapShot (ReverbNum);
+			Debug.Log ("2 meter away from cave");
+		}
+		if (paddlerowing.count == 3) {
+			ReverbNum = 1;
+			ReverbControl.BlendSnapShot (ReverbNum);
+			Debug.Log ("3 meter away from cave");
+		}
+		if (paddlerowing.count == 4) {
+			ReverbNum = 0;
+			ReverbControl.BlendSnapShot (ReverbNum);
+			Debug.Log ("4 meter away from cave");
+		}
+
 		bool doTreeGesture = (paddlerowing.wrongcount <= 2);
 		Destroy (paddlerowing);
 
@@ -105,19 +132,23 @@ public class GameLogic : MonoBehaviour {
 		while (stonethrow.count < 1) {
 			yield return StartCoroutine(stonethrow.Activate());
 		}
+		Sounds.Ambience_A.minDistance = 6;
 		yield return Narrator.PlayAndWait(Narrator.stone1);
 		while (stonethrow.count < 2) {
 			yield return StartCoroutine(stonethrow.Activate());
 		}
+		Sounds.Ambience_A.minDistance = 2;
 		yield return Narrator.PlayAndWait(Narrator.stone2);
 		while (stonethrow.count < 3) {
 			yield return StartCoroutine(stonethrow.Activate());
 		}
+		Sounds.Ambience_A.minDistance = 0;
 	}
 
 	IEnumerator DoFlowerPicking() {
 		yield return Narrator.PlayAndWait(Narrator.flowerpose);
 		Gesture flower = gameObject.AddComponent<FlowerGesture>();
+
 		while (flower.count < 1) {
 			yield return StartCoroutine(flower.Activate());
 		}

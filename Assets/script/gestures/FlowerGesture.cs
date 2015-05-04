@@ -5,7 +5,7 @@ public class FlowerGesture : Gesture {
 
 	private void FlowerCount () {
 		this.count++;
-		Sounds.audiosource.PlayOneShot (Sounds.flower);		
+		Sounds.audiosource.PlayOneShot (Sounds.flower,20.0f);		
 		if (this.count == 4) {
 			Sounds.Ambience_A.Stop ();
 			Sounds.Ambience_A.minDistance = 8;
@@ -38,10 +38,10 @@ public class FlowerGesture : Gesture {
 				this.FlowerCount();
 				this.SetCooldown();
 			}
-			if (right.transRoll > 50 && right.transRoll < 120 && right.Pinch < 0.5) {
-				Sounds.Environment.PlayOneShot (Sounds.paddlewrong);
-				this.SetCooldown();
-			}
+//			if (right.transRoll > 50 && right.transRoll < 120 && right.Pinch < 0.5) {
+//				Sounds.Environment.PlayOneShot (Sounds.paddlewrong);
+//				this.SetCooldown();
+//			}
 		}
 	}
 }
