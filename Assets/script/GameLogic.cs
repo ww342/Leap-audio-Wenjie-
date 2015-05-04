@@ -11,6 +11,7 @@ using System.Collections;
 public class GameLogic : MonoBehaviour {
 	public Sounds Sounds;
 	public Narrator Narrator;
+	public int GameVersion = 0;
 
 	void Start () {
 		StartCoroutine(MainGame());
@@ -20,9 +21,15 @@ public class GameLogic : MonoBehaviour {
 	// linear progression of gestures being activated and reacted to
 	// also allows to simply comment out parts you want to skip for testing
 	IEnumerator MainGame() {
+		GameVersion = Random.Range(1, 2);
 		Sounds.InitialSetup();
-		Debug.Log ("Waiting for game-start signal (space)");
-		while (! Input.GetKeyDown("space")) {
+		Debug.Log ("Waiting for random game-start signal (space). Use 1 or 2 to select a specific game version.");
+		while (! Input.GetKeyDown(KeyCode.Space)) {
+			if (Input.GetKeyDown(KeyCode.Alpha1)) {
+				GameVersion = 1;
+			} else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+				GameVersion = 2;
+			}
 			yield return null;
 		}
 
