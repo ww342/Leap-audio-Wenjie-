@@ -108,6 +108,7 @@ public class Sounds : MonoBehaviour {
 	public AudioClip bell;
 	public AudioClip stonedrop;
 
+	public ReverbControl ReverbControl;
 	
 	void Awake ()
 	{
@@ -180,6 +181,7 @@ public class Sounds : MonoBehaviour {
 		Handfree.pitch = 2;
 		Handfree.minDistance = 8;
 		Handfree.Play ();
+		ReverbControl.BlendSnapShot (0);
 	}
 
 	public void StopInitialSetup() {

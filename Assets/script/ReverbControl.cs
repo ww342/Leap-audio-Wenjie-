@@ -19,12 +19,12 @@ public class ReverbControl : MonoBehaviour {
 
 		switch (ReverbNum) {
 
-				case 4:
+				case 0:
 						weights [0] = 1.0f;
 						weights [1] = 0.0f;
 						mixer.TransitionToSnapshots (snapshots, weights, 2.0f);
 						break;
-				case 3:
+				case 1:
 						weights [0] = .75f;
 						weights [1] = .25f;
 						mixer.TransitionToSnapshots (snapshots, weights, 2.0f);
@@ -34,12 +34,12 @@ public class ReverbControl : MonoBehaviour {
 						weights [1] = 0.5f;
 						mixer.TransitionToSnapshots (snapshots, weights, 2.0f);
 						break;
-				case 1:
+				case 3:
 						weights [0] = .25f;
 						weights [1] = .75f;
 						mixer.TransitionToSnapshots (snapshots, weights, 2.0f);
 						break;
-				case 0:
+				case 4:
 						weights [0] = 0.0f;
 						weights [1] = 1.0f;
 						mixer.TransitionToSnapshots (snapshots, weights, 2.0f);
