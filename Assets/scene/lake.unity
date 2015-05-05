@@ -1402,6 +1402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sounds: {fileID: 580846435}
   Narrator: {fileID: 485923159}
+  GameVersion: 0
 --- !u!1 &283423006
 GameObject:
   m_ObjectHideFlags: 0
