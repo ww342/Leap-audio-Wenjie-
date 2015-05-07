@@ -21,7 +21,7 @@ public class GameLogic : MonoBehaviour {
 	// linear progression of gestures being activated and reacted to
 	// also allows to simply comment out parts you want to skip for testing
 	IEnumerator MainGame() {
-		GameVersion = Random.Range(1, 2);
+		GameVersion = Random.Range(1, 3);
 		Sounds.InitialSetup();
 		Debug.Log ("Waiting for random game-start signal (space). Use 1 or 2 to select a specific game version.");
 		while (! Input.GetKeyDown(KeyCode.Space)) {
