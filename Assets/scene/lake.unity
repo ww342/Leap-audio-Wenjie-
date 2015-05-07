@@ -2697,32 +2697,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1800fdec929a549218b1bf936c551970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  begin: {fileID: 8300000, guid: efc883094e8e14c4aa1ad0f2c4f15427, type: 3}
-  flowerpose: {fileID: 8300000, guid: dd2a762b59a1a448ca6a5b44eaf4bfb6, type: 3}
-  flower1: {fileID: 8300000, guid: f9cc407f0be6e41bd859f548881aec7c, type: 3}
-  flyfromtree: {fileID: 8300000, guid: c32ed06e9053c4c4e97e932d681ca848, type: 3}
-  stone1: {fileID: 8300000, guid: bacc7a0dda34d4e528f60a003e4b2cbe, type: 3}
-  stone2: {fileID: 8300000, guid: ea5cd5215b7e64dca8de013f6453b0b9, type: 3}
-  stone3: {fileID: 8300000, guid: 495e403cd8e7b4cbd9b109725be39b90, type: 3}
-  bird1: {fileID: 8300000, guid: a6f5eb8578315400f9015b66006c1a7b, type: 3}
-  bird2: {fileID: 8300000, guid: 25c05390beece44d6b0f98035c47bfed, type: 3}
-  paddle1: {fileID: 8300000, guid: ebf35fac63a6541c1a99c5ae8a87ed4d, type: 3}
-  paddle2: {fileID: 0}
-  paddle3: {fileID: 0}
-  paddle4: {fileID: 8300000, guid: 82cfb91df7e1b4c6d85fe3e7274c5c62, type: 3}
-  treepose: {fileID: 8300000, guid: ae81d38c207054c62b3172d1308e9493, type: 3}
-  tietheboat: {fileID: 8300000, guid: afc10df6fb3d648f59a61605d42c2ff2, type: 3}
-  ropepose: {fileID: 8300000, guid: bf941f2e06c28483aa05fd7a6ad7f6dd, type: 3}
-  rope1: {fileID: 8300000, guid: 146b67d7ae2544ed0995e5fefc542e49, type: 3}
-  rope2: {fileID: 8300000, guid: 22e679773b20a44f587eb768263c3a34, type: 3}
-  rope3: {fileID: 8300000, guid: aeca5127464f7408aae224b93b07f8e0, type: 3}
-  bell6: {fileID: 8300000, guid: fa13fbd61c4cd4deb8ae4d3fd6379e48, type: 3}
-  star1: {fileID: 8300000, guid: 869cabd182e6846338df3f5f17f9a84d, type: 3}
-  star2: {fileID: 8300000, guid: c0dfd410c40e046cd908756b370218b5, type: 3}
-  star3: {fileID: 8300000, guid: c1b142607d3b04947af2cee26e477d9e, type: 3}
-  starwrong: {fileID: 8300000, guid: 6bc48ff421ed142579640603c5207e83, type: 3}
-  stonewrong: {fileID: 8300000, guid: 83ab45543bf1449cdb4806d46a73a119, type: 3}
-  birdwrong: {fileID: 8300000, guid: d8a7f44aaf3a64d6eb8961413ba5f765, type: 3}
+  StoneIntro: {fileID: 8300000, guid: e009fe104f47745e5aba89104fba63b6, type: 3}
+  Stone_Correct_response_01: {fileID: 8300000, guid: 7ab5c2c232f364aa68bfc479fc53f36a,
+    type: 3}
+  Stone_Correct_response_02: {fileID: 8300000, guid: 9ebd748c0a88b4d9e90adfc882ccadf3,
+    type: 3}
+  Stone_Correct_response_03: {fileID: 8300000, guid: 14ff888643c3644928a600af6a18121c,
+    type: 3}
+  FlowerIntro: {fileID: 8300000, guid: c961cc72ffbd44cf2b40e5b64c68619e, type: 3}
+  Flower_Correct_response_01: {fileID: 8300000, guid: 51ee07baf55d14a1a84ea1f04f160e6d,
+    type: 3}
+  BirdIntro_afterStone: {fileID: 8300000, guid: c40aba17af0284823892eb5aa1da2968,
+    type: 3}
+  BirdIntro_afterFlower: {fileID: 8300000, guid: dfbaa214638d8474998b1652d348467c,
+    type: 3}
+  Bird_Correct_response_01: {fileID: 8300000, guid: 2bdcc32ab5ed84710b4dffdf61bbccb8,
+    type: 3}
+  Bird_Correct_response_02: {fileID: 8300000, guid: 0e224491ccf5644ec8c79bbf6ec4419c,
+    type: 3}
+  Bird_Correct_response_03: {fileID: 0}
+  PaddleIntro: {fileID: 0}
+  Paddle_Correct_response_01: {fileID: 8300000, guid: ff31c6c746c7d4186823c9069b5209d8,
+    type: 3}
+  Paddle_Correct_response_02: {fileID: 0}
+  Paddle_Correct_response_03: {fileID: 8300000, guid: 230cbdab43466494a96ff3f0c2edc9c6,
+    type: 3}
+  TreeIntro: {fileID: 8300000, guid: 6f26cac002c1a48b7bc40abfaa295e1e, type: 3}
+  Tree_Correct_response_01: {fileID: 0}
+  Tree_Correct_response_02: {fileID: 0}
+  Tree_Correct_response_03: {fileID: 0}
+  RopeIntro_afterTree: {fileID: 8300000, guid: d2495b55596564b3da03db93a22895cf, type: 3}
+  RopeIntro_afterPaddle: {fileID: 8300000, guid: fd4e06ba101924999822d6e3c20c3844,
+    type: 3}
+  Rope_Correct_response_01: {fileID: 8300000, guid: 75af9b06fa55843fd858350dd7141e24,
+    type: 3}
+  Rope_Correct_response_02: {fileID: 8300000, guid: bace93a5ea911432bafaef27e3ab2260,
+    type: 3}
+  Rope_Correct_response_03: {fileID: 8300000, guid: b32616b9dbfe0487cbdd0b7a2e724c0f,
+    type: 3}
+  BikeIntro: {fileID: 0}
+  Bike_Correct_response_01: {fileID: 0}
+  Bike_Correct_response_02: {fileID: 0}
+  Bike_Correct_response_03: {fileID: 0}
+  StarIntro: {fileID: 8300000, guid: 914189dfd2b644d4ba9f7e510a4a8a96, type: 3}
+  Star_Correct_response_01: {fileID: 8300000, guid: 1b204efdea5154b1a9580bf72c927a1d,
+    type: 3}
+  Star_Correct_response_02: {fileID: 8300000, guid: bede8813bd687432d9ead5c84543774c,
+    type: 3}
+  Star_Correct_response_03: {fileID: 8300000, guid: 02ce3d58a4ae84d1aa2bb7912c3b9f42,
+    type: 3}
+  StoneGesture: {fileID: 8300000, guid: 70732ca9d92ba4fecb57ac5d3525b34f, type: 3}
+  Stone_hint_01: {fileID: 8300000, guid: 861e5343dac3547e48a8a0323ed251d7, type: 3}
+  FlowerGesture: {fileID: 8300000, guid: 6789851ed1925410e840f7f0c9f881de, type: 3}
+  Flower_hint_01: {fileID: 0}
+  BirdGesture: {fileID: 8300000, guid: a19fb6f5fd2054fd7bdb68937a69ec77, type: 3}
+  Bird_hint_01: {fileID: 0}
+  PaddleGesture: {fileID: 8300000, guid: a95b40f4577eb4f4faa1d6ada9fa19ee, type: 3}
+  Paddle_hint_01: {fileID: 8300000, guid: adb1b864bb40d4297907df7beec2ece4, type: 3}
+  TreeGesture: {fileID: 8300000, guid: 512247f76157d4dfba7ba0e199f35d2c, type: 3}
+  Tree_hint_01: {fileID: 0}
+  RopeGesture: {fileID: 8300000, guid: ee158c3c6d61a423e8d3855207667cd7, type: 3}
+  Rope_hint_01: {fileID: 8300000, guid: 015e237ebf84147cb8d6a8cdae2d6ac7, type: 3}
+  BikeGesture: {fileID: 8300000, guid: ec2cc8b0cd06a40d7a627b84bc1d130e, type: 3}
+  Bike_hint_01: {fileID: 0}
+  StarGesture: {fileID: 8300000, guid: fbdd515e054ba4dc4a1f155391f8287b, type: 3}
+  Star_hint_01: {fileID: 8300000, guid: d3e190fb7de2f42fcb85bdebefb90287, type: 3}
 --- !u!1 &493981742
 GameObject:
   m_ObjectHideFlags: 0
