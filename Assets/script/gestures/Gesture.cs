@@ -24,7 +24,12 @@ using Leap;
 abstract public class Gesture : MonoBehaviour {
 	protected Controller Controller = new Controller ();
 	public Sounds Sounds;
+	public Narrator Narrator;
+	public GameLogic GameLogic;
 	private rightpalm rightpalm; // TODO: try to simplify this so that the calculation is included here!
+
+	public AudioSource PlayFromRighthand; 
+	public AudioSource PlayFromLefthand;
 
 	public enum State {
 		none,
@@ -149,7 +154,11 @@ abstract public class Gesture : MonoBehaviour {
 	
 	public void Awake() {
 		this.Sounds = GameObject.Find("/Sounds").GetComponent<Sounds>();
-		rightpalm = GameObject.Find("rightpalm").GetComponent<rightpalm>();
+		this.Narrator = GameObject.Find ("/Narrator").GetComponent<Narrator>();
+		this.GameLogic = GameObject.Find ("/GameFlowAndMetrics").GetComponent<GameLogic> ();
+		this.rightpalm = GameObject.Find("rightpalm").GetComponent<rightpalm>();
+		this.PlayFromRighthand = GameObject.Find ("rightpalm").GetComponent<AudioSource> ();
+		this.PlayFromLefthand = GameObject.Find ("leftpalm").GetComponent<AudioSource>();
 	}
 
 	void Update ()

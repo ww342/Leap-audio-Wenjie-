@@ -38,6 +38,9 @@ public class Narrator : MonoBehaviour
 	public AudioClip Stone_Correct_response_01;
 	public AudioClip Stone_Correct_response_02;
 	public AudioClip Stone_Correct_response_03;
+	public AudioClip Stone_grabbingwater_response;
+	public AudioClip Stone_tinythrow_response;
+	public AudioClip Stone_wrongdirection_response;
 
 	public AudioClip FlowerIntro;
 	public AudioClip Flower_Correct_response_01;
@@ -46,12 +49,16 @@ public class Narrator : MonoBehaviour
 	public AudioClip BirdIntro_afterFlower;
 	public AudioClip Bird_Correct_response_01;
 	public AudioClip Bird_Correct_response_02;
-	public AudioClip Bird_Correct_response_03;
+	public AudioClip Bird_cannotbreath_response;
+	public AudioClip Bird_onehandgrab_response;
+	public AudioClip Bird_walkingaway_response;
+
 
 	public AudioClip PaddleIntro;
 	public AudioClip Paddle_Correct_response_01;
 	public AudioClip Paddle_Correct_response_02;
 	public AudioClip Paddle_Correct_response_03;
+	public AudioClip Paddle_onepaddle_response;
 
 	public AudioClip TreeIntro;
 	public AudioClip Tree_Correct_response_01;
@@ -64,10 +71,10 @@ public class Narrator : MonoBehaviour
 	public AudioClip Rope_Correct_response_02;
 	public AudioClip Rope_Correct_response_03;
 
-	public AudioClip BikeIntro;
-	public AudioClip Bike_Correct_response_01;
-	public AudioClip Bike_Correct_response_02;
-	public AudioClip Bike_Correct_response_03;
+
+	public AudioClip Bike_onehand_response;
+	public AudioClip Bike_getthebrake_response;
+	public AudioClip Bike_fall_response;
 
 	public AudioClip StarIntro;
 	public AudioClip Star_Correct_response_01;

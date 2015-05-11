@@ -2703,6 +2703,12 @@ MonoBehaviour:
     type: 3}
   Stone_Correct_response_03: {fileID: 8300000, guid: 14ff888643c3644928a600af6a18121c,
     type: 3}
+  Stone_grabbingwater_response: {fileID: 8300000, guid: e53b7cd271a254224a952345ee453b92,
+    type: 3}
+  Stone_tinythrow_response: {fileID: 8300000, guid: fc086e69583ce4c9fb31944fd11c9e14,
+    type: 3}
+  Stone_wrongdirection_response: {fileID: 8300000, guid: 92ae5f9deaaf44681aad9d73bc43d75a,
+    type: 3}
   FlowerIntro: {fileID: 8300000, guid: c961cc72ffbd44cf2b40e5b64c68619e, type: 3}
   Flower_Correct_response_01: {fileID: 8300000, guid: 51ee07baf55d14a1a84ea1f04f160e6d,
     type: 3}
@@ -2714,12 +2720,19 @@ MonoBehaviour:
     type: 3}
   Bird_Correct_response_02: {fileID: 8300000, guid: 0e224491ccf5644ec8c79bbf6ec4419c,
     type: 3}
-  Bird_Correct_response_03: {fileID: 0}
+  Bird_cannotbreath_response: {fileID: 8300000, guid: af528b6e0aa334a7e81c67a5689838b3,
+    type: 3}
+  Bird_onehandgrab_response: {fileID: 8300000, guid: 5fcee77f701e14e31a392c2a7e3d0d8f,
+    type: 3}
+  Bird_walkingaway_response: {fileID: 8300000, guid: b9fb7132a3ea241839db5699173f14ba,
+    type: 3}
   PaddleIntro: {fileID: 0}
   Paddle_Correct_response_01: {fileID: 8300000, guid: ff31c6c746c7d4186823c9069b5209d8,
     type: 3}
   Paddle_Correct_response_02: {fileID: 0}
   Paddle_Correct_response_03: {fileID: 8300000, guid: 230cbdab43466494a96ff3f0c2edc9c6,
+    type: 3}
+  Paddle_onepaddle_response: {fileID: 8300000, guid: be6af94b7778042a18219eae5402f266,
     type: 3}
   TreeIntro: {fileID: 8300000, guid: 6f26cac002c1a48b7bc40abfaa295e1e, type: 3}
   Tree_Correct_response_01: {fileID: 0}
@@ -2728,16 +2741,17 @@ MonoBehaviour:
   RopeIntro_afterTree: {fileID: 8300000, guid: d2495b55596564b3da03db93a22895cf, type: 3}
   RopeIntro_afterPaddle: {fileID: 8300000, guid: fd4e06ba101924999822d6e3c20c3844,
     type: 3}
-  Rope_Correct_response_01: {fileID: 8300000, guid: 75af9b06fa55843fd858350dd7141e24,
+  Rope_Correct_response_01: {fileID: 8300000, guid: dc46922f9100b44b2924101d47f37dc1,
     type: 3}
   Rope_Correct_response_02: {fileID: 8300000, guid: bace93a5ea911432bafaef27e3ab2260,
     type: 3}
   Rope_Correct_response_03: {fileID: 8300000, guid: b32616b9dbfe0487cbdd0b7a2e724c0f,
     type: 3}
-  BikeIntro: {fileID: 0}
-  Bike_Correct_response_01: {fileID: 0}
-  Bike_Correct_response_02: {fileID: 0}
-  Bike_Correct_response_03: {fileID: 0}
+  Bike_onehand_response: {fileID: 8300000, guid: 20d467f32eac248c58126f8ef5fa4beb,
+    type: 3}
+  Bike_getthebrake_response: {fileID: 8300000, guid: 7c3a72490fdbc4927abae6bed94621cc,
+    type: 3}
+  Bike_fall_response: {fileID: 8300000, guid: 375b044035e9e41588de3ab530e63897, type: 3}
   StarIntro: {fileID: 8300000, guid: 914189dfd2b644d4ba9f7e510a4a8a96, type: 3}
   Star_Correct_response_01: {fileID: 8300000, guid: 1b204efdea5154b1a9580bf72c927a1d,
     type: 3}

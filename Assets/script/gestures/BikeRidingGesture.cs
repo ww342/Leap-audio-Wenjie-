@@ -54,6 +54,9 @@ public class BikeRidingGesture : TwoHandGesture<BikeRidingLeftHandGesture, BikeR
 				}
 			}
 			if (handcount == 1) { 
+				yield return Narrator.PlayAndWait(Narrator.Bike_onehand_response);
+				PlayFromRighthand.PlayOneShot(Sounds.Dur_Bike_fall);
+				yield return Narrator.PlayAndWait(Narrator.Bike_fall_response);
 				this.state = State.detected;
 			}
 		}

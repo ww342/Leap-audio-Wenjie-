@@ -5,7 +5,8 @@ public class BirdCatchGesture : TwoHandGesture<BirdCatchLeftHandGesture, BirdCat
 
 	public void BirdCount () {
 		this.count++;
-		Sounds.Ambience_D.PlayOneShot (Sounds.Post_Bird_twohandcatch);
+		PlayFromRighthand.PlayOneShot (Sounds.Post_Bird_twohandcatch);
+		PlayFromLefthand.PlayOneShot (Sounds.Post_Bird_twohandcatch);
 		Sounds.normalwatch ();
 		Sounds.hint3 ();
 		Sounds.Ambience_D.PlayOneShot (Sounds.Dur_Bird_grabseed);
@@ -20,8 +21,7 @@ public class BirdCatchGesture : TwoHandGesture<BirdCatchLeftHandGesture, BirdCat
 	}
 	
 	public void BirdWrong () {
-		Sounds.Ambience_D.PlayOneShot (Sounds.Post_Bird_onehandcatch);
-		Sounds.Ambience_D.PlayOneShot (Sounds.Dur_Bird_shortflapping);
+
 		this.wrongcount++;
 		Sounds.quickenwatch ();
 		Sounds.hint3 ();
@@ -47,10 +47,36 @@ public class BirdCatchGesture : TwoHandGesture<BirdCatchLeftHandGesture, BirdCat
 		while (this.state == State.detected) { // one hand
 			yield return StartCoroutine(this.WaitForAnyHand());
 			if (handcount == 1) {
-				if ((rightHandGesture.state == State.cooldown && leftHandGesture.state != State.cooldown)
-				    || (rightHandGesture.state != State.cooldown && leftHandGesture.state == State.cooldown)) {
+				if (rightHandGesture.state == State.cooldown && leftHandGesture.state != State.cooldown) {
+
+					PlayFromRighthand.PlayOneShot (Sounds.Post_Bird_onehandcatch);
+					PlayFromRighthand.PlayOneShot (Sounds.Dur_Bird_shortflapping);
 					BirdWrong ();
+					if(GameLogic.GameVersion==1){
+						yield return Narrator.PlayAndWait(Narrator.BirdGesture);//placeholder for new recording!
+					}
+
+					if(GameLogic.GameVersion==2){
+						yield return Narrator.PlayAndWait(Narrator.Bird_walkingaway_response);
+					}
+
 					this.SetCooldown();
+
+				}
+				    if (rightHandGesture.state != State.cooldown && leftHandGesture.state == State.cooldown) {
+					PlayFromLefthand.PlayOneShot (Sounds.Post_Bird_onehandcatch);
+					PlayFromLefthand.PlayOneShot (Sounds.Dur_Bird_shortflapping);
+					BirdWrong ();
+
+					if(GameLogic.GameVersion==1){
+						yield return Narrator.PlayAndWait(Narrator.BirdGesture);//placeholder for new recording!
+					}
+					if(GameLogic.GameVersion==2){
+						yield return Narrator.PlayAndWait(Narrator.Bird_walkingaway_response);
+					}
+
+					this.SetCooldown();
+				
 				}
 			} else if (handcount == 2) {
 				this.state = State.action;

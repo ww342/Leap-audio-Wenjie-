@@ -20,9 +20,17 @@ public class BirdCatchLeftHandGesture : Gesture {
 			}
 			if (left.Grab == 1) {
 				this.state = State.ready;
-				Sounds.audiosource.PlayOneShot (Sounds.Dur_Bird_Panicflapping1);
-				Sounds.audiosource.PlayOneShot (Sounds.Dur_Bird_onehandsqueeze);
-				Sounds.audiosource.PlayOneShot (Sounds.Pre_Bird_boatshiffer2, 5.0f);
+
+				if(GameLogic.GameVersion == 1){
+					yield return Narrator.PlayAndWait(Narrator.BirdGesture);// placeholder for new recordings!
+				}
+				
+				if(GameLogic.GameVersion == 2){
+					PlayFromRighthand.PlayOneShot (Sounds.Dur_Bird_Panicflapping1);
+					PlayFromRighthand.PlayOneShot (Sounds.Dur_Bird_onehandsqueeze);
+					Sounds.Environment.PlayOneShot (Sounds.Pre_Bird_boatshiffer1, 5.0f);
+					yield return Narrator.PlayAndWait(Narrator.Bird_onehandgrab_response);
+				}
 			}
 		}
 		
@@ -30,14 +38,16 @@ public class BirdCatchLeftHandGesture : Gesture {
 			yield return StartCoroutine(this.WaitForLeftHand());
 			if (left.Grab < 0.8) {
 				this.state = State.none;
-				Sounds.audiosource.PlayOneShot (Sounds.Dur_Bird_weakflpping);
-				Sounds.audiosource.PlayOneShot (Sounds.Dur_Bird_flyalonghand);
+				Sounds.transitwatch();
+				Sounds.hint2();
+				PlayFromLefthand.PlayOneShot (Sounds.Dur_Bird_weakflpping);
+				PlayFromLefthand.PlayOneShot (Sounds.Dur_Bird_flyalonghand);
 			}
 		}
 
 		while (this.state == State.action) {
 			yield return StartCoroutine(this.WaitForLeftHand());
-			if (!left.ring.IsExtended) {
+			if (!left.ring.IsExtended && left.Grab < 0.8) {
 				this.SetCooldown();
 				// cooldown function like lhhit now
 				// we could use a separate state like (ing) for that.

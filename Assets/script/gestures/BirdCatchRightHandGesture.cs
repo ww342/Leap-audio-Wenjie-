@@ -22,9 +22,17 @@ public class BirdCatchRightHandGesture : Gesture {
 				this.state = State.ready;
 				Sounds.quickenwatch();
 				Sounds.hint1();
-				Sounds.Environment.PlayOneShot (Sounds.Dur_Bird_Panicflapping1);
-				Sounds.Environment.PlayOneShot (Sounds.Dur_Bird_onehandsqueeze);
-				Sounds.Environment.PlayOneShot (Sounds.Pre_Bird_boatshiffer1, 5.0f);
+
+				if(GameLogic.GameVersion == 1){
+					yield return Narrator.PlayAndWait(Narrator.BirdGesture);// placeholder for new recordings!
+				}
+				
+				if(GameLogic.GameVersion == 2){
+					PlayFromRighthand.PlayOneShot (Sounds.Dur_Bird_Panicflapping1);
+					PlayFromRighthand.PlayOneShot (Sounds.Dur_Bird_onehandsqueeze);
+					Sounds.Environment.PlayOneShot (Sounds.Pre_Bird_boatshiffer1, 5.0f);
+					yield return Narrator.PlayAndWait(Narrator.Bird_onehandgrab_response);
+				}
 			}
 			if (right.transWave_y_3 > 30) {
 				this.state = State.none;
@@ -46,8 +54,8 @@ public class BirdCatchRightHandGesture : Gesture {
 				this.state = State.none;
 				Sounds.transitwatch();
 				Sounds.hint2();
-				Sounds.Environment.PlayOneShot (Sounds.Dur_Bird_weakflpping);
-				Sounds.Environment.PlayOneShot (Sounds.Dur_Bird_flyalonghand);
+				PlayFromRighthand.PlayOneShot (Sounds.Dur_Bird_weakflpping);
+				PlayFromRighthand.PlayOneShot (Sounds.Dur_Bird_flyalonghand);
 			}
 		}
 		
@@ -55,7 +63,7 @@ public class BirdCatchRightHandGesture : Gesture {
 			yield return StartCoroutine(this.WaitForRightHand());
 			if (!right.ring.IsExtended && right.Grab < 0.8) {
 				this.SetCooldown();
-				// cooldown function like lhhit now
+				// cooldown function like rhhit now
 				// we could use a separate state like (ing) for that.
 			}
 		}

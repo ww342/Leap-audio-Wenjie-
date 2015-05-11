@@ -17,7 +17,7 @@ public class PaddleRowingLeftHandGesture : Gesture {
 			yield return StartCoroutine(this.WaitForLeftHand());
 			if (left.transPitch > 30) {
 				this.SetCooldown(); // previously this was the hit notification
-				Sounds.Gesturehint.PlayOneShot (Sounds.Dur_Paddle_creak1); // should be played on finger!
+				PlayFromLefthand.PlayOneShot (Sounds.Dur_Paddle_creak1); 
 			}
 		}
 	}
