@@ -85,7 +85,9 @@ public class GameLogic : MonoBehaviour {
 
 		Debug.Log ("Rope binding");
 		yield return StartCoroutine(DoRopeBinding());
-		
+
+		Sounds.ChangeBackgroundMusic ();
+
 		Debug.Log ("Bike riding");
 		Sounds.Ambience_D.PlayOneShot (Sounds.Ambience_grassinthewind);
 		yield return StartCoroutine(DoBikeRiding());
@@ -226,7 +228,6 @@ public class GameLogic : MonoBehaviour {
 		}
 		Destroy (ropebind);
 		yield return Narrator.PlayAndWait(Narrator.Rope_Correct_response_03);
-		Sounds.ChangeBackgroundMusic ();
 	}
 
 	IEnumerator DoBikeRiding() {
