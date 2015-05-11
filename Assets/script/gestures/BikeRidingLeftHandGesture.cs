@@ -16,20 +16,17 @@ public class BikeRidingLeftHandGesture : Gesture {
 		while (this.state == State.ready) {
 			yield return StartCoroutine(this.WaitForLeftHand());
 			if (left.palmdown && left.Grab > 0.4) {
-				PlayFromLefthand.PlayOneShot (Sounds.Post_Bike_twohandles); 
-				this.SetCooldown();
+				this.state = State.detected;
 			}
 		}
 		while (this.state == State.detected) {
 			yield return StartCoroutine(this.WaitForLeftHand());
-			if (left.Grab==1) {
-				PlayFromLefthand.PlayOneShot (Sounds.Dur_Bike_brake); 
+			if (left.Grab >= 0.91) {
+				PlayFromRighthand.clip = Sounds.Dur_Bike_brake;
+				PlayFromRighthand.Play();
 				PlayFromLefthand.PlayOneShot (Sounds.Dur_Bike_wheelslowdown);
 				this.SetCooldown();
-			}
-
-			if (left.Grab<0.9) {
-				PlayFromLefthand.PlayOneShot (Sounds.Post_Bike_twohandles);
+			} else if (left.Grab > 0.4) {
 				this.SetCooldown();
 			}
 		}
