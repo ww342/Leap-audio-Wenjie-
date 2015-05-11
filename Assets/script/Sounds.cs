@@ -145,6 +145,7 @@ public class Sounds : MonoBehaviour {
 		this.Northforward = GameObject.Find("/Environment/Northforward").GetComponent<Northforward>();
 		this.Northwest = GameObject.Find("/Environment/Northwest").GetComponent<Northwest>();
 		this.Hints = GameObject.Find("/Hints").GetComponent<Hints>();
+		this.BackgroundMusic = GameObject.Find("/Environment/BackgroundMusic").GetComponent<bgm>();
 	}
 
 	void Start() {
@@ -266,7 +267,6 @@ public class Sounds : MonoBehaviour {
 
 	public void ChangeBackgroundMusic ()
 	{
-		BackgroundMusic = GameObject.Find("/Environment/BackgroundMusic").GetComponent<bgm>();
 		BackgroundMusic._audio.Stop ();
 		BackgroundMusic._audio.clip = BackgroundMusic.land;
 		BackgroundMusic._audio.loop = false;
