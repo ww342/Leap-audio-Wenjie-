@@ -22,21 +22,21 @@ public class BirdCatchRightHandGesture : Gesture {
 				this.state = State.ready;
 				Sounds.quickenwatch();
 				Sounds.hint1();
-				Sounds.Environment.PlayOneShot (Sounds.panicflapping);
-				Sounds.Environment.PlayOneShot (Sounds.grabbird);
-				Sounds.Environment.PlayOneShot (Sounds.boatshiffer2, 5.0f);
+				Sounds.Environment.PlayOneShot (Sounds.Dur_Bird_Panicflapping1);
+				Sounds.Environment.PlayOneShot (Sounds.Dur_Bird_onehandsqueeze);
+				Sounds.Environment.PlayOneShot (Sounds.Pre_Bird_boatshiffer1, 5.0f);
 			}
 			if (right.transWave_y_3 > 30) {
 				this.state = State.none;
 				Sounds.quickenwatch();
 				Sounds.hint1();
-				Sounds.Environment.PlayOneShot (Sounds.seedpouring);
-				Sounds.Environment.PlayOneShot (Sounds.panicbird);
-				Sounds.Environment.PlayOneShot (Sounds.panicflapping);
-				Sounds.Environment.PlayOneShot (Sounds.panicfrog);
-				Sounds.Environment.PlayOneShot (Sounds.boatshake, 5.0f);
-				Sounds.Environment.PlayOneShot (Sounds.longlean);
-				Sounds.Environment.PlayOneShot (Sounds.birdpecking);
+				Sounds.Environment.PlayOneShot (Sounds.Post_Bird_seedpouring);
+				Sounds.Environment.PlayOneShot (Sounds.Post_Bird_paniccry);
+				Sounds.Environment.PlayOneShot (Sounds.Dur_Bird_Panicflapping2);
+				Sounds.Environment.PlayOneShot (Sounds.Dur_Bird_Panicfrog);
+				Sounds.Environment.PlayOneShot (Sounds.Dur_Paddle_Boat_shake1, 5.0f);
+				Sounds.Environment.PlayOneShot (Sounds.Post_Stone_longlean);
+				Sounds.Environment.PlayOneShot (Sounds.Pre_Bird_pecking);
 			}
 		}
 		
@@ -46,8 +46,8 @@ public class BirdCatchRightHandGesture : Gesture {
 				this.state = State.none;
 				Sounds.transitwatch();
 				Sounds.hint2();
-				Sounds.Environment.PlayOneShot (Sounds.weakflapping);
-				Sounds.Environment.PlayOneShot (Sounds.birdflyslonghand);
+				Sounds.Environment.PlayOneShot (Sounds.Dur_Bird_weakflpping);
+				Sounds.Environment.PlayOneShot (Sounds.Dur_Bird_flyalonghand);
 			}
 		}
 		

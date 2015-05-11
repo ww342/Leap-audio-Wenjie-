@@ -87,11 +87,11 @@ public class GameLogic : MonoBehaviour {
 		yield return StartCoroutine(DoRopeBinding());
 		
 		Debug.Log ("Bike riding");
-		Sounds.Ambience_D.PlayOneShot (Sounds.wind);
+		Sounds.Ambience_D.PlayOneShot (Sounds.Ambience_grassinthewind);
 		yield return StartCoroutine(DoBikeRiding());
 		
 		Debug.Log ("Star");
-		Sounds.Ambience_D.PlayOneShot (Sounds.sky);
+		Sounds.Ambience_D.PlayOneShot (Sounds.Ambience_space);
 		Sounds.Ambience_B.minDistance = 10;
 		yield return StartCoroutine(DoStarPicking());
 
@@ -153,12 +153,6 @@ public class GameLogic : MonoBehaviour {
 		yield return Narrator.PlayAndWait(Narrator.BirdIntro_afterFlower);
 		Destroy (flower);
 	
-		// TODO: the above narration (flyfromtree) and the narration in the "else" below
-		// (stone3) that's played instead of the flower gesture overlap!
-		// ideally we would split the instructions at the end from the two response parts
-		// (actual sound clip names: flying from tree, fishresponse3)
-		// Actually the case in a few clips that narration is duplicate!
-		// Ideally every voice clip should only exist once on its own!
 	}
 
 	IEnumerator DoBirdCatching() {
@@ -198,10 +192,13 @@ public class GameLogic : MonoBehaviour {
 	}
 
 	IEnumerator DoTreeShaking() {
-		if (GameVersion == 1) {
-						yield return Narrator.PlayAndWait (Narrator.TreeGesture);
-				}
+
 		Gesture treeshake = gameObject.AddComponent<TreeShakingGesture>();
+		yield return Narrator.PlayAndWait(Narrator.TreeIntro);
+
+		if (GameVersion == 1) {
+			yield return Narrator.PlayAndWait (Narrator.TreeGesture);
+		}
 		while (treeshake.count < 8) {
 			yield return StartCoroutine(treeshake.Activate());
 		}

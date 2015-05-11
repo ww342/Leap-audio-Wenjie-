@@ -16,7 +16,7 @@ public class BikeRidingRightHandGesture : Gesture {
 		while (this.state == State.ready) {
 			yield return StartCoroutine(this.WaitForRightHand());
 			if (right.palmdown && right.Grab > 0.4 && right.thumb.IsExtended) {
-				Sounds.Environment.PlayOneShot (Sounds.bike); // TODO: play on finger
+				Sounds.Environment.PlayOneShot (Sounds.Post_Bike_twohandles); // TODO: play on finger
 				this.state = State.detected;
 			}
 		}
@@ -24,7 +24,7 @@ public class BikeRidingRightHandGesture : Gesture {
 		while (this.state == State.detected) {
 			yield return StartCoroutine(this.WaitForRightHand());
 			if (!right.thumb.IsExtended) {
-				Sounds.Environment.PlayOneShot (Sounds.bell); // TODO: play on finger
+				Sounds.Environment.PlayOneShot (Sounds.Post_Bike_belltrimble); // TODO: play on finger
 				this.SetCooldown();
 			}
 		}

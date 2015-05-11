@@ -5,16 +5,16 @@ public class TreeShakingGesture : Gesture {
 	
 	private void TreeCount () {
 		this.count++;
-		Sounds.audiosource.PlayOneShot (Sounds.flower);
+		Sounds.audiosource.PlayOneShot (Sounds.Post_Flower_sparkle);
 		if (this.count == 1) {
-			Sounds.audiosource.PlayOneShot (Sounds.leave);
+			Sounds.audiosource.PlayOneShot (Sounds.Post_Tree_branchshaking);
 		}
 		if (this.count == 3) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.leave);
+			Sounds.Ambience_D.PlayOneShot (Sounds.Post_Tree_branchshaking);
 		}
 		if (this.count == 6) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.leave);
-			Sounds.Ambience_D.PlayOneShot (Sounds.wind, 5.0f);
+			Sounds.Ambience_D.PlayOneShot (Sounds.Post_Tree_branchshaking);
+			Sounds.Ambience_D.PlayOneShot (Sounds.Post_Tree_leaverustling, 5.0f);
 		}
 	}
 	

@@ -25,7 +25,7 @@ public class Northforward : MonoBehaviour
 	public void Start ()
 	{
 		sound1_once = gameObject.AddComponent <AudioSource> ();
-		sound1_once.clip = sounds.stoneskipping;
+		sound1_once.clip = sounds.Post_Stone_stoneskipping;
 		sound1_once.minDistance = 200;
 	}
 	

@@ -20,9 +20,9 @@ public class BirdCatchLeftHandGesture : Gesture {
 			}
 			if (left.Grab == 1) {
 				this.state = State.ready;
-				Sounds.audiosource.PlayOneShot (Sounds.panicflapping);
-				Sounds.audiosource.PlayOneShot (Sounds.grabbird);
-				Sounds.audiosource.PlayOneShot (Sounds.boatshiffer2, 5.0f);
+				Sounds.audiosource.PlayOneShot (Sounds.Dur_Bird_Panicflapping1);
+				Sounds.audiosource.PlayOneShot (Sounds.Dur_Bird_onehandsqueeze);
+				Sounds.audiosource.PlayOneShot (Sounds.Pre_Bird_boatshiffer2, 5.0f);
 			}
 		}
 		
@@ -30,8 +30,8 @@ public class BirdCatchLeftHandGesture : Gesture {
 			yield return StartCoroutine(this.WaitForLeftHand());
 			if (left.Grab < 0.8) {
 				this.state = State.none;
-				Sounds.audiosource.PlayOneShot (Sounds.weakflapping);
-				Sounds.audiosource.PlayOneShot (Sounds.birdflyslonghand);
+				Sounds.audiosource.PlayOneShot (Sounds.Dur_Bird_weakflpping);
+				Sounds.audiosource.PlayOneShot (Sounds.Dur_Bird_flyalonghand);
 			}
 		}
 

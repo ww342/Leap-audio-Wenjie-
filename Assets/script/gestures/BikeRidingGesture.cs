@@ -9,15 +9,15 @@ public class BikeRidingGesture : TwoHandGesture<BikeRidingLeftHandGesture, BikeR
 			Sounds.Ambience_B.minDistance = 10;
 		}
 		if (this.count == 3) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.lightning);
+			Sounds.Ambience_D.PlayOneShot (Sounds.Ambience_thunder);
 		}
 		if (this.count == 5) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.wind);
-			Sounds.Ambience_B.clip = Sounds.grass;
+			Sounds.Ambience_D.PlayOneShot (Sounds.Pre_Bike_grassfootstep);
+			Sounds.Ambience_B.clip = Sounds.Ambience_grassinthewind;
 			Sounds.Ambience_B .Play ();
 		}
 		if (this.count == 6) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.brake);
+			Sounds.Ambience_D.PlayOneShot (Sounds.Dur_Bike_fall);
 		}
 	}
 

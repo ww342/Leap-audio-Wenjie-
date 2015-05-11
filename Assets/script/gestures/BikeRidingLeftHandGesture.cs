@@ -16,7 +16,7 @@ public class BikeRidingLeftHandGesture : Gesture {
 		while (this.state == State.ready) {
 			yield return StartCoroutine(this.WaitForLeftHand());
 			if (left.palmdown && left.Grab > 0.4) {
-				Sounds.Gesturehint.PlayOneShot (Sounds.bike); // TODO: should be played on finger
+				Sounds.Gesturehint.PlayOneShot (Sounds.Post_Bike_twohandles); // TODO: should be played on finger
 				this.SetCooldown();
 			}
 		}

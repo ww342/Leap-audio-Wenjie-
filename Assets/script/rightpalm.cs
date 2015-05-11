@@ -13,7 +13,14 @@ public class rightpalm : MonoBehaviour
 	public float losetrack_x;
 	public float losetrack_y;
 	public float losetrack_z;
-	
+//	public AudioSource GestureFeedback;
+//
+//	void Start(){
+//
+//		GestureFeedback = GetComponent<AudioSource>();
+//
+//		}
+//	
 	void PositionSave ()
 
 	{

@@ -30,6 +30,7 @@ public class Sounds : MonoBehaviour {
 	public AudioMixerGroup BackgroundMix;
 
 	// all clips:
+	/*
 	public AudioClip upanddownhint;
 	public AudioClip gentlewaterdrop;
 	public AudioClip gentlesplash;
@@ -100,6 +101,8 @@ public class Sounds : MonoBehaviour {
 	public AudioClip boatshiffer2;
 	public AudioClip longcreak;
 	public AudioClip longlean;
+
+
 	// finger sounds: TODO: make sure they are played with an AudioSource at the correct location:
 	public AudioClip creak1;
 	public AudioClip creak2;
@@ -107,6 +110,112 @@ public class Sounds : MonoBehaviour {
 	public AudioClip brake;
 	public AudioClip bell;
 	public AudioClip stonedrop;
+*/
+
+
+
+
+	//Newly Named clips
+	public AudioClip Ambience_Boat_floatcreaks;
+	public AudioClip Ambience_cavewaterdripping;
+	public AudioClip Ambience_crickets;
+	public AudioClip Ambience_fishswimming;
+	public AudioClip Ambience_frog;
+	public AudioClip Ambience_grassinthewind;
+	public AudioClip Ambience_meteorshower;
+	public AudioClip Ambience_space;
+	public AudioClip Ambience_wavelapping;
+	public AudioClip Ambience_thunder;
+
+	public AudioClip Pre_Stone_snore;
+	public AudioClip Dur_Stone_grabstone;
+	public AudioClip Dur_Stone_rightsleevedown;
+	public AudioClip Dur_Stone_rightsleevelift;
+	public AudioClip Dur_Stone_gentlewaterdrop;
+	public AudioClip Dur_Stone_gentlesplash;
+	public AudioClip Post_Stone_dropontheboat;
+	public AudioClip Post_Stone_Correctthrow;
+	public AudioClip Post_Stone_Fishjump_LefttoRight;
+	public AudioClip Post_Stone_Fishjump_righttoleft;
+	public AudioClip Post_Stone_fishspashing;
+	public AudioClip Post_Stone_hitthefish;
+	public AudioClip Post_Stone_longcreak;
+	public AudioClip Post_Stone_rockhittingleaves;
+	public AudioClip Post_Stone_stoneskipping;
+	public AudioClip Post_Stone_waterdrop;
+	public AudioClip Post_Stone_longlean;
+
+	public AudioClip Pre_Flower_duck;
+	public AudioClip Dur_Flower;
+	public AudioClip Post_Flower_sparkle;
+
+	public AudioClip Pre_Bird_birdflyin;
+	public AudioClip Pre_Bird_boatshiffer1;
+	public AudioClip Pre_Bird_boatshiffer2;
+	public AudioClip Pre_Bird_landonflapping;
+	public AudioClip Pre_Bird_pecking;
+	public AudioClip Dur_Bird_grabseed;
+	public AudioClip Dur_Bird_longflapping;
+	public AudioClip Dur_Bird_onehandsqueeze;
+	public AudioClip Dur_Bird_Panicflapping1;
+	public AudioClip Dur_Bird_Panicflapping2;
+	public AudioClip Dur_Bird_Panicfrog;
+	public AudioClip Dur_Bird_flyalonghand;
+	public AudioClip Dur_Bird_shortflapping;
+	public AudioClip Dur_Bird_smallflapping;
+	public AudioClip Dur_Bird_struggleflapping;
+	public AudioClip Dur_Bird_twohandgrabbing;
+	public AudioClip Dur_Bird_weakflpping;
+	public AudioClip Post_Bird_onehandcatch;
+	public AudioClip Post_Bird_paniccry;
+	public AudioClip Post_Bird_seedpouring;
+	public AudioClip Post_Bird_twohandcatch;
+
+
+	public AudioClip Pre_Paddle_thunder_rain;
+	public AudioClip Dur_Paddle_Boat_shake1;
+	public AudioClip Dur_Paddle_Boat_shake2;
+	public AudioClip Dur_Paddle_Boat_shiffer;
+	public AudioClip Dur_Paddle_creak1;
+	public AudioClip Dur_Paddle_creak2;
+	public AudioClip Dur_Paddle_grabbing;
+	public AudioClip Post_Paddle_rowing;
+	public AudioClip Post_Paddle_wave;
+
+	public AudioClip Pre_Tree;
+	public AudioClip Dur_Tree;
+	public AudioClip Post_Tree_branchshaking;
+	public AudioClip Post_Tree_leaverustling;
+
+	public AudioClip Pre_Rope;
+	public AudioClip Dur_Rope_creaks;
+	public AudioClip Post_Rope;
+
+	public AudioClip Pre_Bike_grassfootstep;
+	public AudioClip Dur_Bike_brake;
+	public AudioClip Dur_Bike_fall;
+	public AudioClip Dur_Bike_wheelslowdown;
+	public AudioClip Post_Bike_belltrimble;
+	public AudioClip Post_Bike_twohandles;
+
+
+	public AudioClip Pre_Star;
+	public AudioClip Dur_Star_starrain;
+	public AudioClip Post_Star_shiny;
+	public AudioClip Post_Star_glow;
+	public AudioClip Post_Star_timetravel;
+
+	public AudioClip Dur_Watch_middlespeed;
+	public AudioClip Dur_Watch_slowspeed;
+	public AudioClip Dur_Watch_fastspeed;
+	public AudioClip Post_Watch_watchbeep;
+	public AudioClip Dur_Ringinghint_01;
+	public AudioClip Dur_Ringinghint_02;
+	public AudioClip Dur_Ringinghint_03;
+
+
+
+
 
 	public ReverbControl ReverbControl;
 	
@@ -127,21 +236,21 @@ public class Sounds : MonoBehaviour {
 	void Start() {
 		Ambience_A = gameObject.AddComponent<AudioSource> ();
 		Ambience_A.outputAudioMixerGroup = EnvironmentMix;
-		Ambience_A.clip = this.fish;
+		Ambience_A.clip = Ambience_fishswimming;
 		Ambience_A.loop = true;
 		Ambience_A.minDistance = 10;
 		//Ambience_A.Play ();
 
 		Ambience_B = gameObject.AddComponent<AudioSource> ();
 		Ambience_B.outputAudioMixerGroup = EnvironmentMix;
-		Ambience_B.clip = this.frog;
+		Ambience_B.clip = Ambience_frog;
 		Ambience_B.loop = true;
 		Ambience_B.minDistance = 10;
 		Ambience_B.Play ();
 		
 		Ambience_C = gameObject.AddComponent <AudioSource> ();
 		Ambience_C.outputAudioMixerGroup = EnvironmentMix;
-		Ambience_C.clip = this.lakewaveslapping;
+		Ambience_C.clip = Ambience_wavelapping;
 		Ambience_C.loop = true;
 		Ambience_C.pitch = 1;
 		Ambience_C.minDistance = 6;
@@ -153,7 +262,7 @@ public class Sounds : MonoBehaviour {
 		
 		watch = GameObject.Find("/Watch").GetComponent <AudioSource> ();
 		watch.outputAudioMixerGroup = HintsMix;
-		watch.clip = this.slowwatch;
+		watch.clip = Dur_Watch_slowspeed;
 		watch.loop = true;
 		watch.minDistance = 30;
 		watch.Play ();
@@ -161,7 +270,7 @@ public class Sounds : MonoBehaviour {
 		transition_hint = gameObject.AddComponent <AudioSource> ();
 		transition_hint.outputAudioMixerGroup = HintsMix;
 		//transtion_hint.clip  = Hints.Stone_correct_hint0;
-		transition_hint.clip = this.transitionhint1;
+		transition_hint.clip = Dur_Ringinghint_01;
 		//transtion_hint .loop = true;
 		//transtion_hint.pitch = 1;
 		transition_hint.minDistance = 2;
@@ -176,7 +285,7 @@ public class Sounds : MonoBehaviour {
 		// default background sound before anything starts:
 		Handfree = gameObject.AddComponent<AudioSource> ();
 		Handfree.outputAudioMixerGroup = BackgroundMix;
-		Handfree.clip = this.snore;
+		Handfree.clip = Pre_Stone_snore;
 		Handfree.loop = true;
 		Handfree.pitch = 2;
 		Handfree.minDistance = 8;
@@ -191,19 +300,19 @@ public class Sounds : MonoBehaviour {
 
 	public void quickenwatch ()
 	{
-		watch.clip = this.quickwatch;
+		watch.clip = Dur_Watch_fastspeed;
 		watch.Play ();
 	}
 	
 	public void transitwatch ()
 	{
-		watch.clip = this.middlewatch;
+		watch.clip = Dur_Watch_middlespeed;
 		watch.Play ();
 	}
 	
 	public void normalwatch ()
 	{
-		watch.clip = this.slowwatch;
+		watch.clip = Dur_Watch_slowspeed;
 		watch.Play ();
 	}
 	
@@ -214,30 +323,30 @@ public class Sounds : MonoBehaviour {
 	
 	public void hint1 ()
 	{
-		transition_hint.clip = this.transitionhint1;
+		transition_hint.clip = Dur_Ringinghint_01;
 		transition_hint.Play ();
 	}
 	
 	public void hint2 ()
 	{
-		transition_hint.clip = this.transitionhint2;
+		transition_hint.clip = Dur_Ringinghint_02;
 		transition_hint.Play ();
 	}
 	
 	public void hint3 ()
 	{
-		transition_hint.clip = this.transitionhint3;
+		transition_hint.clip = Dur_Ringinghint_03;
 		transition_hint.Play ();
 	}
 	
 	public void Glow ()
 	{
-		Ambience_D.PlayOneShot (this.glow);
+		Ambience_D.PlayOneShot (Post_Star_glow);
 	}
 	
 	public void Timetravel ()
 	{
-		Ambience_D.PlayOneShot (this.timetravel, 2.0f);
+		Ambience_D.PlayOneShot (Post_Star_timetravel, 2.0f);
 	}
 
 

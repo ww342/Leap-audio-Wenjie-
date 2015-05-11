@@ -5,13 +5,13 @@ public class FlowerGesture : Gesture {
 
 	private void FlowerCount () {
 		this.count++;
-		Sounds.audiosource.PlayOneShot (Sounds.flower,20.0f);		
+		Sounds.audiosource.PlayOneShot (Sounds.Post_Flower_sparkle,20.0f);		
 		if (this.count == 4) {
 			Sounds.Ambience_A.Stop ();
 			Sounds.Ambience_A.minDistance = 8;
-			Sounds.Ambience_A.clip = Sounds.wave;
-			Sounds.Ambience_D.PlayOneShot (Sounds.landonflpping, 5.0f);
-			Sounds.Ambience_D.PlayOneShot (Sounds.birdstandonpaddle);
+			Sounds.Ambience_A.clip = Sounds.Post_Paddle_wave;
+			Sounds.Ambience_D.PlayOneShot (Sounds.Pre_Bird_landonflapping, 5.0f);
+			Sounds.Ambience_D.PlayOneShot (Sounds.Pre_Bird_pecking);
 		}
 	}
 	

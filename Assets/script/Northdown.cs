@@ -25,19 +25,19 @@ public class Northdown : MonoBehaviour
 	public void Start ()
 	{
 		sound1_once = gameObject.AddComponent <AudioSource> ();
-		sound1_once.clip = sounds.stone;
-		sound1_once.minDistance = 200;
+		sound1_once.clip = sounds.Post_Stone_Correctthrow;
+		sound1_once.minDistance = 300;
 
 		sound2_once = gameObject.AddComponent <AudioSource> ();
-		sound2_once.clip = sounds.hitfish;
-		sound2_once.minDistance = 100;
+		sound2_once.clip = sounds.Post_Stone_fishspashing;
+		sound2_once.minDistance = 50;
 
 		sound3_once = gameObject.AddComponent <AudioSource> ();
-		sound3_once.clip = sounds.stoneskipping;
+		sound3_once.clip = sounds.Post_Stone_stoneskipping;
 		sound3_once.minDistance = 200;
 
 		sound4_once = gameObject.AddComponent <AudioSource> ();
-		sound4_once.clip = sounds.fishploppy;
+		sound4_once.clip = sounds.Post_Stone_hitthefish;
 		sound4_once.pitch = 3;
 		sound4_once.minDistance = 200;
 	}

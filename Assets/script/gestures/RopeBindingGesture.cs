@@ -6,16 +6,16 @@ public class RopeBindingGesture : Gesture {
 	public void RopeCount () {
 		this.count++;
 		if (this.count == 1) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.rope);
+			Sounds.Ambience_D.PlayOneShot (Sounds.Dur_Rope_creaks);
 			Sounds.Ambience_B.minDistance = 0;
-			Sounds.Ambience_B.clip = Sounds.crickets;
+			Sounds.Ambience_B.clip = Sounds.Ambience_crickets;
 		}
 		if (this.count == 2) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.rope);
+			Sounds.Ambience_D.PlayOneShot (Sounds.Dur_Rope_creaks);
 			Sounds.Ambience_B.minDistance = 2;
 		}
 		if (this.count == 3) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.grass);
+			Sounds.Ambience_D.PlayOneShot (Sounds.Pre_Bike_grassfootstep);
 			Sounds.Ambience_B.minDistance = 5;
 			Sounds.Ambience_B.Play ();
 		}

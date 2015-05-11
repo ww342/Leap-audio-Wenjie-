@@ -23,11 +23,11 @@ public class Northeast : MonoBehaviour
 	public void Start ()
 	{
 		sound1_once = gameObject.AddComponent <AudioSource> ();
-		sound1_once.clip = sounds.leave;
+		sound1_once.clip = sounds.Post_Tree_leaverustling;
 		sound1_once.minDistance = 50;
 
 		sound2_once = gameObject.AddComponent <AudioSource> ();
-		sound2_once.clip = sounds.rockhitleave;
+		sound2_once.clip = sounds.Post_Stone_rockhittingleaves;
 		sound2_once.minDistance = 50;
 	}
 	

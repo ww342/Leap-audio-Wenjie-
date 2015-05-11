@@ -6,11 +6,11 @@ public class StarPickingGesture : Gesture {
 	public void StarCount () {
 		this.count ++;
 		if (this.count == 1) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.lightning);
-			Sounds.Ambience_D.PlayOneShot (Sounds.footstep);
+			Sounds.Ambience_D.PlayOneShot (Sounds.Ambience_meteorshower);
+			Sounds.Ambience_D.PlayOneShot (Sounds.Pre_Bike_grassfootstep);
 		}
 		if (this.count == 2) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.footstep);
+			Sounds.Ambience_D.PlayOneShot (Sounds.Pre_Bike_grassfootstep);
 		}
 	}
 
@@ -34,7 +34,7 @@ public class StarPickingGesture : Gesture {
 		while (this.state == State.detected) {
 			yield return StartCoroutine(this.WaitForRightHand());
 			if (right.palmin) {
-				Sounds.Environment.PlayOneShot (Sounds.star);
+				Sounds.Environment.PlayOneShot (Sounds.Dur_Star_starrain);
 				this.state = State.action;
 			}
 		}
@@ -43,8 +43,8 @@ public class StarPickingGesture : Gesture {
 			yield return StartCoroutine(this.WaitForRightHand());
 			if (right.palmup) {
 				StarCount();
-				Sounds.Environment.PlayOneShot (Sounds.win);
-				Sounds.Environment.PlayOneShot (Sounds.shiny);
+
+				Sounds.Environment.PlayOneShot (Sounds.Post_Star_shiny);
 				this.SetCooldown();
 			}
 		}

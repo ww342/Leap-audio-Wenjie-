@@ -5,13 +5,13 @@ public class BirdCatchGesture : TwoHandGesture<BirdCatchLeftHandGesture, BirdCat
 
 	public void BirdCount () {
 		this.count++;
-		Sounds.Ambience_D.PlayOneShot (Sounds.bird);
+		Sounds.Ambience_D.PlayOneShot (Sounds.Post_Bird_twohandcatch);
 		Sounds.normalwatch ();
 		Sounds.hint3 ();
-		Sounds.Ambience_D.PlayOneShot (Sounds.grabseed);
+		Sounds.Ambience_D.PlayOneShot (Sounds.Dur_Bird_grabseed);
 		if (this.count == 2) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.rain);
-			Sounds.Ambience_A.clip = Sounds.wave;
+			Sounds.Ambience_D.PlayOneShot (Sounds.Pre_Paddle_thunder_rain);
+			Sounds.Ambience_A.clip = Sounds.Post_Paddle_wave;
 			Sounds.Ambience_A.loop = true;
 			Sounds.Ambience_A.minDistance = 8;
 			Sounds.Ambience_A.Play ();
@@ -20,8 +20,8 @@ public class BirdCatchGesture : TwoHandGesture<BirdCatchLeftHandGesture, BirdCat
 	}
 	
 	public void BirdWrong () {
-		Sounds.Ambience_D.PlayOneShot (Sounds.birdonboat);
-		Sounds.Ambience_D.PlayOneShot (Sounds.shortflapping);
+		Sounds.Ambience_D.PlayOneShot (Sounds.Post_Bird_onehandcatch);
+		Sounds.Ambience_D.PlayOneShot (Sounds.Dur_Bird_shortflapping);
 		this.wrongcount++;
 		Sounds.quickenwatch ();
 		Sounds.hint3 ();

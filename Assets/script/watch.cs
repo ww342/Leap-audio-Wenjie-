@@ -26,7 +26,7 @@ public class watch : MonoBehaviour
 	{
 
 		if (other.name == ("bone_distal_index_L")) {
-			_audio.PlayOneShot (Sounds.watchbeep, 5.0f);
+			_audio.PlayOneShot (Sounds.Post_Watch_watchbeep, 5.0f);
 
 			switch (TapWatch) {
 

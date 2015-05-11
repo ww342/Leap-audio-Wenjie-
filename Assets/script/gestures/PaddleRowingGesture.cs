@@ -5,11 +5,11 @@ public class PaddleRowingGesture : TwoHandGesture<PaddleRowingLeftHandGesture, P
 
 	public void PaddleCount () {
 		this.count ++;
-		Sounds.Ambience_D.PlayOneShot (Sounds.paddle);
+		Sounds.Ambience_D.PlayOneShot (Sounds.Post_Paddle_rowing);
 		// initially ReverbControl is set to 0
 		if (this.count == 1) {
 			Sounds.Ambience_A.minDistance = 5;
-			Sounds.Ambience_D.PlayOneShot (Sounds.lakewaveslapping);
+			Sounds.Ambience_D.PlayOneShot (Sounds.Ambience_wavelapping);
 			Sounds.Ambience_A.Play ();
 			Sounds.Ambience_B.minDistance = 8;
 		}
@@ -51,7 +51,7 @@ public class PaddleRowingGesture : TwoHandGesture<PaddleRowingLeftHandGesture, P
 			if (handcount == 1) {
 				if ((rightHandGesture.state == State.cooldown && leftHandGesture.state != State.cooldown)
 				    || (rightHandGesture.state != State.cooldown && leftHandGesture.state == State.cooldown)) {
-					Sounds.Ambience_D.PlayOneShot (Sounds.paddlewrong);
+					Sounds.Ambience_D.PlayOneShot (Sounds.Dur_Paddle_creak2);
 					Sounds.quickenwatch();
 					this.wrongcount++;
 					this.SetCooldown();

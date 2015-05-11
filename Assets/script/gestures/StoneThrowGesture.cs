@@ -15,17 +15,17 @@ public class StoneThrowGesture : Gesture {
 			Sounds.Ambience_A.minDistance = 4;
 		}
 		if (this.count == 3) {
-			Sounds.Ambience_D.PlayOneShot (Sounds.spash, 0.5f);
+			Sounds.Ambience_D.PlayOneShot (Sounds.Post_Stone_Fishjump_righttoleft, 0.5f);
 			Sounds.Ambience_A.minDistance = 1;
 			if (this.wrongcount <= 2) {
-				Sounds.Ambience_A.clip = Sounds.duck;
+				Sounds.Ambience_A.clip = Sounds.Pre_Flower_duck;
 				Sounds.Ambience_A.minDistance = 8;
 				Sounds.Ambience_B.loop = true;
 				Sounds.Ambience_A.Play ();
 			}
 			if (this.wrongcount > 2) {
-				Sounds.Ambience_D.PlayOneShot (Sounds.birdstandonpaddle);
-				Sounds.Ambience_A.clip = Sounds.shortflapping;
+				Sounds.Ambience_D.PlayOneShot (Sounds.Pre_Bird_landonflapping);
+				Sounds.Ambience_A.clip = Sounds.Dur_Bird_shortflapping;
 				Sounds.Ambience_A.minDistance = 20;
 				Sounds.Ambience_A.loop = false;
 				Sounds.Ambience_A.Play ();
@@ -57,15 +57,15 @@ public class StoneThrowGesture : Gesture {
 			if (right.Grab > 0.9) {
 				if (right.wristforward) { // success
 					this.state = State.action;
-					Sounds.Environment.PlayOneShot (Sounds.grabstone);
+					Sounds.Environment.PlayOneShot (Sounds.Dur_Stone_grabstone);
 					GrabStone(true);
 					Sounds.hint3 ();
 				}
 				if (right.wristleft || right.wristright) { // grabbed the water
 					this.state = State.none;
-					Sounds.Environment.PlayOneShot (Sounds.gentlesplash, 3.0f);
-					Sounds.Environment.PlayOneShot (Sounds.gentlewaterdrop, 3.0f);
-					Sounds.Environment.PlayOneShot (Sounds.longcreak,0.8f);
+					Sounds.Environment.PlayOneShot (Sounds.Dur_Stone_gentlesplash, 10.0f);
+					Sounds.Environment.PlayOneShot (Sounds.Dur_Stone_gentlewaterdrop, 10.0f);
+					Sounds.Environment.PlayOneShot (Sounds.Post_Stone_longcreak,0.8f);
 					Sounds.transitwatch ();
 					yield break; // restart!
 
@@ -79,7 +79,7 @@ public class StoneThrowGesture : Gesture {
 				Sounds.transitwatch ();
 				this.state = State.none;
 				Sounds.hint2 ();
-				Sounds.Environment.PlayOneShot (Sounds.stonedrop); //TODO: finger
+				Sounds.Environment.PlayOneShot (Sounds.Post_Stone_dropontheboat); //TODO: finger
 				GrabStone(false);
 			}
 			if ((right.wristleft || right.wristright) && right.openhand) {
@@ -87,7 +87,7 @@ public class StoneThrowGesture : Gesture {
 				this.state = State.none;
 				GrabStone(false);
 				Sounds.hint2 ();
-				Sounds.Environment.PlayOneShot (Sounds.waterdrop, 10.0f);
+				Sounds.Environment.PlayOneShot (Sounds.Post_Stone_waterdrop, 10.0f);
 				yield break; // restart!
 			}
 			if (Mathf.Abs (right.transWave_z_10) > 50) {
@@ -136,9 +136,9 @@ public class StoneThrowGesture : Gesture {
 					Sinus.gain = 0.09;
 					Sinus.frequency = 850;
 				}
-				if (right.transWave_y_10 < - 80) {
+				if (right.transWave_y_10 < - 60) {
 					Sounds.normalwatch ();
-					Sounds.Environment.PlayOneShot (Sounds.rightsleevelift, 5.0f);
+					Sounds.Environment.PlayOneShot (Sounds.Dur_Stone_rightsleevelift, 6.0f);
 					Sounds.hint3 ();
 					this.state = State.ing;
 				}
@@ -150,7 +150,7 @@ public class StoneThrowGesture : Gesture {
 			Sinus.frequency = 0;
 			Sinus.gain = 0;
 			if (right.Grab == 0) {
-				Sounds.Environment.PlayOneShot (Sounds.waterdrop, 8.0f);
+				Sounds.Environment.PlayOneShot (Sounds.Post_Stone_waterdrop, 8.0f);
 				Sounds.quickenwatch ();
 				this.wrongcount++;
 				Sounds.hint2 ();
@@ -167,7 +167,7 @@ public class StoneThrowGesture : Gesture {
 				if (Mathf.Abs (right.transWave_y_10 / right.transWave_x_10) < 0.6 && Mathf.Abs (right.transWave_y_10 / right.transWave_x_10) > 0.1) {
 					if (right.openhand) {
 						Sounds.quickenwatch ();
-						Sounds.Environment.PlayOneShot (Sounds.waterdrop, 8.0f);
+						Sounds.Environment.PlayOneShot (Sounds.Post_Stone_waterdrop, 8.0f);
 						Sounds.hint1 ();
 						this.wrongcount++;
 						this.state = State.none;
@@ -176,7 +176,7 @@ public class StoneThrowGesture : Gesture {
 				}
 				if (right.transWave_y_10 < - 50) {
 					Sounds.hint3 ();
-					Sounds.Environment.PlayOneShot (Sounds.rightsleevelift, 3.0f);
+					Sounds.Environment.PlayOneShot (Sounds.Dur_Stone_rightsleevelift, 3.0f);
 					Sounds.normalwatch ();
 					this.state = State.ing;
 				}
@@ -226,14 +226,14 @@ public class StoneThrowGesture : Gesture {
 			if (right.openhand && right.wristforward) {
 				if (right.wristmiddle) {
 					if ((right.transWave_y_10 > 60 && right.transWave_z_3 > 10) || (right.losetrack_trans_y > 100)) {
-						Sounds.Environment.PlayOneShot (Sounds.rightsleevedown, 3.0f);
+						Sounds.Environment.PlayOneShot (Sounds.Dur_Stone_rightsleevedown, 3.0f);
 						this.StoneCount ();
 						Sounds.normalwatch ();
 						Sounds.audiosource.PlayOneShot (Sounds.Hints.Stone_correct_hint4);
 						this.state = State.none;
 					} else {
-						Sounds.Environment.PlayOneShot (Sounds.waterdrop, 8.0f);
-						Sounds.Environment.PlayOneShot (Sounds.longlean);
+						Sounds.Environment.PlayOneShot (Sounds.Post_Stone_waterdrop, 8.0f);
+						Sounds.Environment.PlayOneShot (Sounds.Post_Stone_longlean);
 						Sounds.quickenwatch ();
 						this.state = State.none;
 						yield break; // restart!
@@ -256,7 +256,7 @@ public class StoneThrowGesture : Gesture {
 						Sounds.quickenwatch ();
 						Sounds.Northwest.sound1();
 						Sounds.Northwest.sound2();
-						Sounds.Environment.PlayOneShot (Sounds.creak1); // TODO finger
+						Sounds.Environment.PlayOneShot (Sounds.Dur_Paddle_creak1); // TODO finger
 						this.state = State.none;
 						yield break; // restart!
 					}
@@ -268,7 +268,7 @@ public class StoneThrowGesture : Gesture {
 					}
 				}
 				if ((right.transWave_y_10 < 10) || (right.losetrack_trans_y < 10)) {
-					Sounds.Environment.PlayOneShot (Sounds.stonedrop, 10.0f); // TODO: finger
+					Sounds.Environment.PlayOneShot (Sounds.Post_Stone_dropontheboat, 10.0f); // TODO: finger
 					Sounds.quickenwatch ();
 					this.state = State.none;
 					yield break; // restart!
@@ -281,7 +281,7 @@ public class StoneThrowGesture : Gesture {
 						Sounds.quickenwatch ();
 						Sounds.Northeast.sound1();
 						Sounds.Northeast.sound2();
-						Sounds.Gesturehint.PlayOneShot (Sounds.creak1); // TODO: move finger sounds!!!
+						Sounds.Gesturehint.PlayOneShot (Sounds.Dur_Paddle_creak1); // TODO: move finger sounds!!!
 						this.state = State.none;
 						yield break; // restart!
 					}
@@ -293,7 +293,7 @@ public class StoneThrowGesture : Gesture {
 					}
 				}
 				if ((right.transWave_y_10 < 10) || (right.losetrack_trans_y < 10)) {
-					Sounds.Environment.PlayOneShot (Sounds.stonedrop, 10.0f); //  TODO: move finger sounds
+					Sounds.Environment.PlayOneShot (Sounds.Post_Stone_dropontheboat, 10.0f); //  TODO: move finger sounds
 					Sounds.quickenwatch ();
 					this.state = State.none;
 					yield break; // restart!
