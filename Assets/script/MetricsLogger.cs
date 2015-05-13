@@ -31,7 +31,7 @@ public class MetricsLogger : MonoBehaviour {
 	}
 	
 	public void LogData(string dataLine) {
-		dataLine = System.DateTime.Now.ToString("u") + ": " + dataLine;
+		dataLine = System.DateTime.Now.ToString("u") + ", " + dataLine;
 		File.AppendAllText(destinationFilename, dataLine + "\n");
 		Debug.Log(dataLine);
 	}

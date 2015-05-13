@@ -12,8 +12,10 @@ public class GameLogic : MonoBehaviour {
 	public Sounds Sounds;
 	public Narrator Narrator;
 	public int GameVersion = 0;
+	protected MetricsLogger DataLogger;
 
 	void Start () {
+		DataLogger = gameObject.GetComponent<MetricsLogger>();
 		StartCoroutine(MainGame());
 	}
 
@@ -32,6 +34,7 @@ public class GameLogic : MonoBehaviour {
 			}
 			yield return null;
 		}
+		DataLogger.LogData("Starting game version " + GameVersion);
 
 		Debug.Log ("Main game started!");
 		BareHandsGesture barehands = gameObject.AddComponent<BareHandsGesture>();
@@ -42,8 +45,8 @@ public class GameLogic : MonoBehaviour {
 
 		Debug.Log ("Stone throwing");
 		if (GameVersion == 1) {
-						yield return Narrator.PlayAndWait (Narrator.StoneGesture);
-				}
+			yield return Narrator.PlayAndWait (Narrator.StoneGesture);
+		}
 		Gesture stonethrow = gameObject.AddComponent<StoneThrowGesture>();
 		yield return StartCoroutine(DoStoneThrowing(stonethrow));
 		bool doFlowerGesture = (stonethrow.wrongcount <= 2);
@@ -106,7 +109,7 @@ public class GameLogic : MonoBehaviour {
 		Sounds.Timetravel();
 		yield return new WaitForSeconds(2f);
 		Sounds.watchstop();
-		Debug.Log ("Main game finished!");
+		DataLogger.LogData("Main game finished!");
 	}
 
 	IEnumerator CheckBareHands(BareHandsGesture barehands) {
@@ -120,7 +123,7 @@ public class GameLogic : MonoBehaviour {
 	}
 
 	IEnumerator DoStoneThrowing(Gesture stonethrow) {
-
+		System.DateTime startTime = System.DateTime.Now;
 		while (stonethrow.count < 1) {
 			yield return StartCoroutine(stonethrow.Activate());
 		}
@@ -135,16 +138,17 @@ public class GameLogic : MonoBehaviour {
 			yield return StartCoroutine(stonethrow.Activate());
 		}
 		Sounds.Ambience_A.minDistance = 0;
+		LogGestureEnd("Stone Throwing", stonethrow, startTime);
 		yield return Narrator.PlayAndWait(Narrator.Stone_Correct_response_03);
 	}
 
 	IEnumerator DoFlowerPicking() {
 		yield return Narrator.PlayAndWait(Narrator.FlowerIntro);
 		if (GameVersion == 1) {
-						yield return Narrator.PlayAndWait (Narrator.FlowerGesture);
-				}
+			yield return Narrator.PlayAndWait (Narrator.FlowerGesture);
+		}
+		System.DateTime startTime = System.DateTime.Now;
 		Gesture flower = gameObject.AddComponent<FlowerGesture>();
-
 		while (flower.count < 1) {
 			yield return StartCoroutine(flower.Activate());
 		}
@@ -152,18 +156,18 @@ public class GameLogic : MonoBehaviour {
 		while (flower.count < 4) {
 			yield return StartCoroutine(flower.Activate());
 		}
-		yield return Narrator.PlayAndWait(Narrator.BirdIntro_afterFlower);
+		LogGestureEnd("Flower", flower, startTime);
 		Destroy (flower);
-	
+		yield return Narrator.PlayAndWait(Narrator.BirdIntro_afterFlower);
 	}
 
 	IEnumerator DoBirdCatching() {
 		if (GameVersion == 1) {
-						yield return Narrator.PlayAndWait (Narrator.BirdGesture);
-				}
+			yield return Narrator.PlayAndWait (Narrator.BirdGesture);
+		}
+		System.DateTime startTime = System.DateTime.Now;
 		BirdCatchGesture birdcatch = gameObject.AddComponent<BirdCatchGesture>();
-		birdcatch.StartHands(); // separate hands in parallel!
-	
+		birdcatch.StartHands(); // separate hands in parallel!	
 		while (birdcatch.count < 1) {
 			yield return StartCoroutine(birdcatch.Activate());
 			if (birdcatch.wrongcount > 0) {
@@ -176,11 +180,13 @@ public class GameLogic : MonoBehaviour {
 			yield return StartCoroutine(birdcatch.Activate());
 		}
 		birdcatch.StopHands();
+		LogGestureEnd("Bird Catching", birdcatch, startTime);
 		Destroy (birdcatch);
 		yield return Narrator.PlayAndWait(Narrator.Bird_Correct_response_02);
 	}
 
 	IEnumerator DoPaddleRowing(PaddleRowingGesture paddlerowing) {
+		System.DateTime startTime = System.DateTime.Now;
 		paddlerowing.StartHands(); // separate hands in parallel!
 		while (paddlerowing.count < 1) {
 			yield return StartCoroutine(paddlerowing.Activate());
@@ -190,28 +196,30 @@ public class GameLogic : MonoBehaviour {
 			yield return StartCoroutine(paddlerowing.Activate());
 		}
 		paddlerowing.StopHands();
+		LogGestureEnd("Paddle Rowing", paddlerowing, startTime);
 		yield return Narrator.PlayAndWait(Narrator.Paddle_Correct_response_03);
 	}
 
 	IEnumerator DoTreeShaking() {
-
-		Gesture treeshake = gameObject.AddComponent<TreeShakingGesture>();
 		yield return Narrator.PlayAndWait(Narrator.TreeIntro);
-
+		System.DateTime startTime = System.DateTime.Now;
+		Gesture treeshake = gameObject.AddComponent<TreeShakingGesture>();
 		if (GameVersion == 1) {
 			yield return Narrator.PlayAndWait (Narrator.TreeGesture);
 		}
 		while (treeshake.count < 8) {
 			yield return StartCoroutine(treeshake.Activate());
 		}
+		LogGestureEnd("Tree Shaking", treeshake, startTime);
 		Destroy (treeshake);
 		yield return Narrator.PlayAndWait(Narrator.RopeIntro_afterTree);
 	}
 
 	IEnumerator DoRopeBinding() {
 		if (GameVersion == 1) {
-						yield return Narrator.PlayAndWait (Narrator.RopeGesture);
-				}
+			yield return Narrator.PlayAndWait (Narrator.RopeGesture);
+		}
+		System.DateTime startTime = System.DateTime.Now;
 		Gesture ropebind = gameObject.AddComponent<RopeBindingGesture>();
 		while (ropebind.count < 1) {
 			yield return StartCoroutine(ropebind.Activate());
@@ -226,14 +234,16 @@ public class GameLogic : MonoBehaviour {
 
 			yield return StartCoroutine(ropebind.Activate());
 		}
+		LogGestureEnd("Rope Binding", ropebind, startTime);
 		Destroy (ropebind);
 		yield return Narrator.PlayAndWait(Narrator.Rope_Correct_response_03);
 	}
 
 	IEnumerator DoBikeRiding() {
 		if (GameVersion == 1) {
-						yield return Narrator.PlayAndWait (Narrator.BikeGesture);
-				}
+			yield return Narrator.PlayAndWait (Narrator.BikeGesture);
+		}
+		System.DateTime startTime = System.DateTime.Now;
 		BikeRidingGesture bikeride = gameObject.AddComponent<BikeRidingGesture>();
 		Sounds.RestartBackgroundMusic ();
 		bikeride.StartHands(); // separate hands in parallel!
@@ -241,14 +251,16 @@ public class GameLogic : MonoBehaviour {
 			yield return StartCoroutine(bikeride.Activate());
 		}
 		bikeride.StopHands();
+		LogGestureEnd("Bike Riding", bikeride, startTime);
 		Destroy (bikeride);
 		yield return Narrator.PlayAndWait(Narrator.StarIntro);
 	}
 
 	IEnumerator DoStarPicking() {
 		if (GameVersion == 1) {
-						yield return Narrator.PlayAndWait (Narrator.StarGesture);
-				}
+			yield return Narrator.PlayAndWait (Narrator.StarGesture);
+		}
+		System.DateTime startTime = System.DateTime.Now;
 		Gesture starpick = gameObject.AddComponent<StarPickingGesture>();
 		while (starpick.count < 1) {
 			yield return StartCoroutine(starpick.Activate());
@@ -261,8 +273,15 @@ public class GameLogic : MonoBehaviour {
 		while (starpick.count < 3) {
 			yield return StartCoroutine(starpick.Activate());
 		}
+		LogGestureEnd("Star Picking", starpick, startTime);
 		Destroy (starpick);
 		yield return Narrator.PlayAndWait(Narrator.Star_Correct_response_03);
 	}
-	
+
+	private void LogGestureEnd(string gestureName, Gesture gest, System.DateTime startTime)
+	{
+		DataLogger.LogData(System.String.Format(
+			"Gesture complete (name, duration, count, wrongcount), {0}, {1}, {2}, {3}",
+			gestureName, (System.DateTime.Now - startTime).TotalSeconds, gest.count, gest.wrongcount));
+	}
 }
