@@ -76,6 +76,7 @@ public class BikeRidingGesture : TwoHandGesture<BikeRidingLeftHandGesture, BikeR
 			if (handcount == 1) { 
 				yield return Narrator.PlayAndWait(Narrator.Bike_onehand_response);
 				if (handcount == 1) {
+					this.wrongcount++;
 					PlayFromRighthand.clip = Sounds.Dur_Bike_fall;
 					PlayFromRighthand.Play();
 					yield return Narrator.PlayAndWait(Narrator.Bike_fall_response);
