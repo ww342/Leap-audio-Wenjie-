@@ -35,11 +35,11 @@ public class Northwest : MonoBehaviour
 	{
 		sound1_once = gameObject.AddComponent <AudioSource> ();
 		sound1_once.clip = sounds.Post_Stone_rockhittingleaves;
-		sound1_once.minDistance = 50;
+		sound1_once.minDistance = 100;
 
 		sound2_once = gameObject.AddComponent <AudioSource> ();
 		sound2_once.clip = sounds.Post_Tree_leaverustling;
-		sound2_once.minDistance = 50;
+		sound2_once.minDistance = 100;
 	}
 
 	public void sound1 ()

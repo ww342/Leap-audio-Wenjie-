@@ -5,8 +5,10 @@ public class PaddleRowingGesture : TwoHandGesture<PaddleRowingLeftHandGesture, P
 
 	public void PaddleCount () {
 		this.count ++;
-		PlayFromRighthand.PlayOneShot (Sounds.Post_Paddle_rowing);
-		PlayFromLefthand.PlayOneShot (Sounds.Post_Paddle_rowing);
+		PlayFromRighthand.PlayOneShot (Sounds.Post_Paddle_rowing,3.0f);
+		PlayFromLefthand.PlayOneShot (Sounds.Post_Paddle_rowing,3.0f);
+		//PlayFromRighthand.PlayOneShot (Sounds.Dur_Paddle_row1);
+		//PlayFromRighthand.PlayOneShot (Sounds.Dur_Paddle_row2);
 		// initially ReverbControl is set to 0
 		if (this.count == 1) {
 			Sounds.Ambience_A.minDistance = 5;
@@ -51,10 +53,14 @@ public class PaddleRowingGesture : TwoHandGesture<PaddleRowingLeftHandGesture, P
 			yield return StartCoroutine(this.WaitForAnyHand());
 			if (handcount == 1) {
 				if (rightHandGesture.state == State.cooldown && leftHandGesture.state != State.cooldown){
-					PlayFromRighthand.PlayOneShot (Sounds.Dur_Paddle_creak2);
+					PlayFromRighthand.PlayOneShot (Sounds.Dur_Paddle_creak2,5.0f);
+					PlayFromRighthand.PlayOneShot (Sounds.Dur_Paddle_droppaddle_response01,20.0f);
+
 				}
 				   if (rightHandGesture.state != State.cooldown && leftHandGesture.state == State.cooldown) {
-					 PlayFromLefthand.PlayOneShot (Sounds.Dur_Paddle_creak2);
+					 PlayFromLefthand.PlayOneShot (Sounds.Dur_Paddle_creak2,5.0f);
+					PlayFromLefthand.PlayOneShot (Sounds.Dur_Paddle_droppaddle_response02, 20.0f);
+
 				}
 
 					Sounds.quickenwatch();
@@ -73,6 +79,15 @@ public class PaddleRowingGesture : TwoHandGesture<PaddleRowingLeftHandGesture, P
 				if (rightHandGesture.state == State.cooldown
 				    && leftHandGesture.state == State.cooldown) {
 					PaddleCount ();
+
+					if (this.count == 3 && GameLogic.GameVersion == 2) {
+						Narrator.PlayIfPossible(Narrator.Paddle_Correct_response_002);
+						
+						// Need Help for detecting time period !! If player stop moving for 5 secs 
+						//after hearing 'Narrator.Paddle_Correct_response_002",then play 'Narrator.Paddle_longstop_response'
+						//Narrator.PlayIfPossible(Narrator.Paddle_longstop_response,3);
+						
+					}
 					Sounds.normalwatch();
 					this.SetCooldown();
 				}

@@ -22,14 +22,14 @@ public class BirdCatchLeftHandGesture : Gesture {
 				this.state = State.ready;
 
 				if(GameLogic.GameVersion == 1){
-					yield return Narrator.PlayAndWait(Narrator.BirdGesture);// placeholder for new recordings!
+					Narrator.PlayIfPossible(Narrator.BirdGesture);// placeholder for new recordings!
 				}
 				
 				if(GameLogic.GameVersion == 2){
 					PlayFromRighthand.PlayOneShot (Sounds.Dur_Bird_Panicflapping1);
 					PlayFromRighthand.PlayOneShot (Sounds.Dur_Bird_onehandsqueeze);
 					Sounds.Environment.PlayOneShot (Sounds.Pre_Bird_boatshiffer1, 5.0f);
-					yield return Narrator.PlayAndWait(Narrator.Bird_onehandgrab_response);
+					Narrator.PlayIfPossible(Narrator.Bird_onehandgrab_response);
 				}
 			}
 		}

@@ -24,14 +24,14 @@ public class BirdCatchRightHandGesture : Gesture {
 				Sounds.hint1();
 
 				if(GameLogic.GameVersion == 1){
-					yield return Narrator.PlayAndWait(Narrator.BirdGesture);// placeholder for new recordings!
+					Narrator.PlayIfPossible(Narrator.BirdGesture);// placeholder for new recordings!
 				}
 				
 				if(GameLogic.GameVersion == 2){
 					PlayFromRighthand.PlayOneShot (Sounds.Dur_Bird_Panicflapping1);
 					PlayFromRighthand.PlayOneShot (Sounds.Dur_Bird_onehandsqueeze);
 					Sounds.Environment.PlayOneShot (Sounds.Pre_Bird_boatshiffer1, 5.0f);
-					yield return Narrator.PlayAndWait(Narrator.Bird_onehandgrab_response);
+					Narrator.PlayIfPossible(Narrator.Bird_onehandgrab_response);
 				}
 			}
 			if (right.transWave_y_3 > 30) {
@@ -45,6 +45,7 @@ public class BirdCatchRightHandGesture : Gesture {
 				Sounds.Environment.PlayOneShot (Sounds.Dur_Paddle_Boat_shake1, 5.0f);
 				Sounds.Environment.PlayOneShot (Sounds.Post_Stone_longlean);
 				Sounds.Environment.PlayOneShot (Sounds.Pre_Bird_pecking);
+				Narrator.PlayIfPossible(Narrator.Bird_onehandgrab_response);
 			}
 		}
 		

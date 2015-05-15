@@ -7,6 +7,7 @@ public class BikeRidingGesture : TwoHandGesture<BikeRidingLeftHandGesture, BikeR
 		this.count++;
 		if (this.count == 1) {
 			Sounds.Ambience_B.minDistance = 10;
+
 		}
 		if (this.count == 3) {
 			Sounds.Ambience_D.PlayOneShot (Sounds.Ambience_thunder);
@@ -14,7 +15,7 @@ public class BikeRidingGesture : TwoHandGesture<BikeRidingLeftHandGesture, BikeR
 		if (this.count == 5) {
 			Sounds.Ambience_D.PlayOneShot (Sounds.Pre_Bike_grassfootstep);
 			Sounds.Ambience_B.clip = Sounds.Ambience_grassinthewind;
-			Sounds.Ambience_B .Play ();
+			Sounds.Ambience_B.Play ();
 		}
 		if (this.count == 6) {
 			Sounds.Ambience_D.PlayOneShot (Sounds.Dur_Bike_fall);
@@ -44,12 +45,12 @@ public class BikeRidingGesture : TwoHandGesture<BikeRidingLeftHandGesture, BikeR
 				this.state = State.action;
 			}
 			if (rightHandGesture.state == State.detected || rightHandGesture.state == State.cooldown) {
-				PlayFromRighthand.clip = Sounds.Dur_Bike_fall; // TODO: change to more appropriate voice/sound
-				PlayFromRighthand.Play();
+				Sounds.PlayImmediately(PlayFromRighthand, Sounds.Dur_Bike_wheelslowdown); // TODO: change to more appropriate voice/sound
+				Narrator.PlayIfPossible(Narrator.Bike_ringbell_onehand_response);
 			}
 			if (leftHandGesture.state == State.detected || leftHandGesture.state == State.cooldown) {
-				PlayFromLefthand.clip = Sounds.Dur_Bike_brake; // TODO: change to more appropriate voice/sound
-				PlayFromLefthand.Play();
+				Sounds.PlayImmediately(PlayFromLefthand, Sounds.Dur_Bike_brake); // TODO: change to more appropriate voice/sound
+				Narrator.PlayIfPossible(Narrator.Bike_brake_onehand_response);
 			}
 		}
 
@@ -57,33 +58,32 @@ public class BikeRidingGesture : TwoHandGesture<BikeRidingLeftHandGesture, BikeR
 			yield return StartCoroutine(this.WaitForAnyHand());
 			if (handcount == 2) {
 				if (rightHandGesture.state == State.detected || rightHandGesture.state == State.cooldown) {
-					if (PlayFromRighthand.clip != Sounds.Post_Bike_twohandles || !PlayFromRighthand.isPlaying) {
-						PlayFromRighthand.clip = Sounds.Post_Bike_twohandles;
-						PlayFromRighthand.Play();
-					}
+					Sounds.PlayImmediately(PlayFromRighthand, Sounds.Post_Bike_twohandles);
 				}
 				if (leftHandGesture.state == State.detected || leftHandGesture.state == State.cooldown) {
-					if (PlayFromLefthand.clip != Sounds.Post_Bike_twohandles || !PlayFromLefthand.isPlaying) {
-						PlayFromLefthand.clip = Sounds.Post_Bike_twohandles;
-						PlayFromLefthand.Play();
-					}
+					Sounds.PlayImmediately(PlayFromLefthand, Sounds.Post_Bike_twohandles);
 				}
 				if (rightHandGesture.state == State.cooldown) { // only the right is required?
 					BellCount();
-					this.SetCooldown();
+				}
+				if (this.count <1 && GameLogic.GameVersion == 2) {
+					Narrator.PlayIfPossible(Narrator.Bike_ringbell_twohands_response);
+				}
+				this.SetCooldown();
 				}
 			}
-			if (handcount == 1) { 
+			if (handcount == 1) {
+				// actually wait for the second hand to come back during the response!
 				yield return Narrator.PlayAndWait(Narrator.Bike_onehand_response);
 				if (handcount == 1) {
 					this.wrongcount++;
-					PlayFromRighthand.clip = Sounds.Dur_Bike_fall;
-					PlayFromRighthand.Play();
-					yield return Narrator.PlayAndWait(Narrator.Bike_fall_response);
+					Sounds.PlayImmediately(PlayFromRighthand, Sounds.Dur_Bike_fall);
+					Narrator.PlayIfPossible(Narrator.Bike_fall_response);
 					this.state = State.detected;
 				}
 			}
 		}
 	}
 
-}
+
+

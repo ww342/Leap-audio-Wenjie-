@@ -9,9 +9,13 @@ public class TreeShakingGesture : Gesture {
 		if (this.count == 1) {
 			Sounds.audiosource.PlayOneShot (Sounds.Post_Tree_branchshaking);
 		}
+
+
 		if (this.count == 3) {
 			Sounds.Ambience_D.PlayOneShot (Sounds.Post_Tree_branchshaking);
 		}
+
+
 		if (this.count == 6) {
 			Sounds.Ambience_D.PlayOneShot (Sounds.Post_Tree_branchshaking);
 			Sounds.Ambience_D.PlayOneShot (Sounds.Post_Tree_leaverustling, 5.0f);
@@ -39,9 +43,22 @@ public class TreeShakingGesture : Gesture {
 			yield return StartCoroutine(this.WaitForRightHand());
 			if (right.transWave_x_10 > 10) {
 				this.TreeCount();
-				this.SetCooldown();
+			
+				if (GameLogic.GameVersion == 2) {
+					if (this.count == 2) {
+						Narrator.PlayIfPossible(Narrator.Tree_Correct_response_001);
+					}
+					if (this.count == 4) {
+						Narrator.PlayIfPossible(Narrator.Tree_Correct_response_002);
+					}
+						
+				}
+				
 			}
+
+			this.SetCooldown();
 		}
 	}
-
 }
+
+

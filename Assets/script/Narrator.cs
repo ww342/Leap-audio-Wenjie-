@@ -135,7 +135,28 @@ public class Narrator : MonoBehaviour
 	}
 
 	public WaitForSeconds PlayAndWait(AudioClip clip) {
-		this.audiosource.PlayOneShot (clip);
+		this.audiosource.clip = clip;
+		this.audiosource.Play();
 		return new WaitForSeconds(clip.length);
+	}
+
+	public void PlayIfPossible(AudioClip clip)
+	{
+		if (! this.audiosource.isPlaying) {
+			this.audiosource.clip = clip;
+			this.audiosource.Play();
+		}
+	}
+
+	public void PlayImmediately(AudioClip clip)
+	{
+		if (this.audiosource.isPlaying) {
+			if (this.audiosource.clip == clip) {
+				return;
+			}
+			this.audiosource.Stop();
+		}
+		this.audiosource.clip = clip;
+		this.audiosource.Play();
 	}
 }

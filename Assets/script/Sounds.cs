@@ -60,7 +60,7 @@ public class Sounds : MonoBehaviour {
 	public AudioClip Post_Stone_longlean;
 
 	public AudioClip Pre_Flower_duck;
-	public AudioClip Dur_Flower;
+	public AudioClip Dur_Flower_pinch;
 	public AudioClip Post_Flower_sparkle;
 
 	public AudioClip Pre_Bird_birdflyin;
@@ -89,6 +89,10 @@ public class Sounds : MonoBehaviour {
 	public AudioClip Pre_Paddle_thunder_rain;
 	public AudioClip Dur_Paddle_Boat_shake1;
 	public AudioClip Dur_Paddle_Boat_shake2;
+	public AudioClip Dur_Paddle_droppaddle_response01;
+	public AudioClip Dur_Paddle_droppaddle_response02;
+	public AudioClip Dur_Paddle_row1;
+	public AudioClip Dur_Paddle_row2;
 	public AudioClip Dur_Paddle_Boat_shiffer;
 	public AudioClip Dur_Paddle_creak1;
 	public AudioClip Dur_Paddle_creak2;
@@ -276,5 +280,25 @@ public class Sounds : MonoBehaviour {
 	public void RestartBackgroundMusic ()
 	{
 		BackgroundMusic._audio.Play ();
+	}
+
+	public void PlayIfPossible(AudioSource audiosource, AudioClip clip)
+	{
+		if (! audiosource.isPlaying) {
+			audiosource.clip = clip;
+			audiosource.Play();
+		}
+	}
+	
+	public void PlayImmediately(AudioSource audiosource, AudioClip clip)
+	{
+		if (audiosource.isPlaying) {
+			if (audiosource.clip == clip) {
+				return;
+			}
+			audiosource.Stop();
+		}
+		audiosource.clip = clip;
+		audiosource.Play();
 	}
 }

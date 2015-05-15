@@ -37,6 +37,7 @@ public class GameLogic : MonoBehaviour {
 		DataLogger.LogData("Starting game version " + GameVersion);
 
 		Debug.Log ("Main game started!");
+		System.DateTime startTime = System.DateTime.Now;
 		BareHandsGesture barehands = gameObject.AddComponent<BareHandsGesture>();
 		yield return StartCoroutine(CheckBareHands(barehands));
 
@@ -67,6 +68,7 @@ public class GameLogic : MonoBehaviour {
 		Debug.Log ("Bird catching");
 		yield return StartCoroutine(DoBirdCatching());
 
+
 		Debug.Log ("Paddle rowing");
 		if (GameVersion == 1) {
 						yield return Narrator.PlayAndWait (Narrator.PaddleGesture);
@@ -75,6 +77,9 @@ public class GameLogic : MonoBehaviour {
 		yield return StartCoroutine(DoPaddleRowing(paddlerowing));
 		bool doTreeGesture = (paddlerowing.wrongcount <= 2);
 		Destroy (paddlerowing);
+
+		// middle point, log hand count:
+		LogGestureEnd("Bare Hands until middle", barehands, startTime);
 
 		if (doTreeGesture) {
 			Debug.Log ("Tree shaking (optional reward)");
@@ -102,6 +107,7 @@ public class GameLogic : MonoBehaviour {
 
 		// remove parallel no-hands/hands sound effects:
 		barehands.DeactivateInParallel();
+		LogGestureEnd("Bare Hands overall", barehands, startTime);
 		Destroy (barehands);
 
 		// the timing of those might be off now:
@@ -128,18 +134,35 @@ public class GameLogic : MonoBehaviour {
 			yield return StartCoroutine(stonethrow.Activate());
 		}
 		Sounds.Ambience_A.minDistance = 6;
-		yield return Narrator.PlayAndWait(Narrator.Stone_Correct_response_01);
+		if (GameVersion == 1) {
+						yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_01);
+				}
+		if (GameVersion == 2) {
+			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_001);
+				}
 		while (stonethrow.count < 2) {
 			yield return StartCoroutine(stonethrow.Activate());
 		}
 		Sounds.Ambience_A.minDistance = 2;
-		yield return Narrator.PlayAndWait(Narrator.Stone_Correct_response_02);
+
+		if (GameVersion == 1) {
+			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_02);
+		}
+		if (GameVersion == 2) {
+			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_002);
+		}
+
 		while (stonethrow.count < 3) {
 			yield return StartCoroutine(stonethrow.Activate());
 		}
 		Sounds.Ambience_A.minDistance = 0;
 		LogGestureEnd("Stone Throwing", stonethrow, startTime);
-		yield return Narrator.PlayAndWait(Narrator.Stone_Correct_response_03);
+		if (GameVersion == 1) {
+			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_03);
+		}
+		if (GameVersion == 2) {
+			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_003);
+		}
 	}
 
 	IEnumerator DoFlowerPicking() {
@@ -190,14 +213,24 @@ public class GameLogic : MonoBehaviour {
 		paddlerowing.StartHands(); // separate hands in parallel!
 		while (paddlerowing.count < 1) {
 			yield return StartCoroutine(paddlerowing.Activate());
+
 		}
-		yield return Narrator.PlayAndWait(Narrator.Paddle_Correct_response_01);
+			if (GameVersion == 1) {
+				yield return Narrator.PlayAndWait (Narrator.Paddle_Correct_response_01);
+			}
+			if (GameVersion == 2) {
+				yield return Narrator.PlayAndWait (Narrator.Paddle_Correct_response_001);
+			}
+
+
 		while (paddlerowing.count < 4) {
 			yield return StartCoroutine(paddlerowing.Activate());
 		}
 		paddlerowing.StopHands();
 		LogGestureEnd("Paddle Rowing", paddlerowing, startTime);
+
 		yield return Narrator.PlayAndWait(Narrator.Paddle_Correct_response_03);
+	
 	}
 
 	IEnumerator DoTreeShaking() {
@@ -224,22 +257,40 @@ public class GameLogic : MonoBehaviour {
 		while (ropebind.count < 1) {
 			yield return StartCoroutine(ropebind.Activate());
 		}
-		yield return Narrator.PlayAndWait(Narrator.Rope_Correct_response_01);
+		if (GameVersion == 1) {
+						yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_01);
+				}
+		if (GameVersion == 2) {
+						yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_001);
+				}
 		while (ropebind.count < 2) {
 
 			yield return StartCoroutine(ropebind.Activate());
 		}
-		yield return Narrator.PlayAndWait(Narrator.Rope_Correct_response_02);
+		if (GameVersion == 1) {
+			yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_02);
+		}
+		if (GameVersion == 2) {
+			yield return Narrator.PlayAndWait (Narrator.Rope_updownbind_response_01);
+		}
 		while (ropebind.count < 3) {
 
 			yield return StartCoroutine(ropebind.Activate());
 		}
 		LogGestureEnd("Rope Binding", ropebind, startTime);
 		Destroy (ropebind);
-		yield return Narrator.PlayAndWait(Narrator.Rope_Correct_response_03);
+
+		if (GameVersion == 1) {
+			yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_03);
+		}
+		if (GameVersion == 2) {
+			yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_003);
+		}
+
 	}
 
 	IEnumerator DoBikeRiding() {
+		yield return Narrator.PlayAndWait(Narrator.Bike_Intro);
 		if (GameVersion == 1) {
 			yield return Narrator.PlayAndWait (Narrator.BikeGesture);
 		}

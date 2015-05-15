@@ -53,11 +53,11 @@ public class BirdCatchGesture : TwoHandGesture<BirdCatchLeftHandGesture, BirdCat
 					PlayFromRighthand.PlayOneShot (Sounds.Dur_Bird_shortflapping);
 					BirdWrong ();
 					if(GameLogic.GameVersion==1){
-						yield return Narrator.PlayAndWait(Narrator.BirdGesture);//placeholder for new recording!
+						Narrator.PlayIfPossible(Narrator.BirdGesture);//placeholder for new recording!
 					}
 
 					if(GameLogic.GameVersion==2){
-						yield return Narrator.PlayAndWait(Narrator.Bird_walkingaway_response);
+						Narrator.PlayIfPossible(Narrator.Bird_walkingaway_response);
 					}
 
 					this.SetCooldown();
@@ -69,10 +69,10 @@ public class BirdCatchGesture : TwoHandGesture<BirdCatchLeftHandGesture, BirdCat
 					BirdWrong ();
 
 					if(GameLogic.GameVersion==1){
-						yield return Narrator.PlayAndWait(Narrator.BirdGesture);//placeholder for new recording!
+						Narrator.PlayIfPossible(Narrator.BirdGesture);//placeholder for new recording!
 					}
 					if(GameLogic.GameVersion==2){
-						yield return Narrator.PlayAndWait(Narrator.Bird_walkingaway_response);
+						Narrator.PlayIfPossible(Narrator.Bird_walkingaway_response);
 					}
 
 					this.SetCooldown();
