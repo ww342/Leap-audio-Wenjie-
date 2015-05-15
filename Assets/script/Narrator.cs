@@ -36,14 +36,25 @@ public class Narrator : MonoBehaviour
 	// Game Story Narration
 	public AudioClip StoneIntro;
 	public AudioClip Stone_Correct_response_01;
+	public AudioClip Stone_Correct_response_001;
 	public AudioClip Stone_Correct_response_02;
+	public AudioClip Stone_Correct_response_002;
 	public AudioClip Stone_Correct_response_03;
+	public AudioClip Stone_Correct_response_003;
 	public AudioClip Stone_grabbingwater_response;
+	public AudioClip Stone_hittingleaves_response;
+	public AudioClip Stone_liftarm_response;
+	public AudioClip Stone_skipstone_response;
 	public AudioClip Stone_tinythrow_response;
 	public AudioClip Stone_wrongdirection_response;
+	public AudioClip Stone_wrong_response;
 
 	public AudioClip FlowerIntro;
 	public AudioClip Flower_Correct_response_01;
+	public AudioClip Flower_Correct_response_002;
+	public AudioClip Flower_Correct_response_003;
+	public AudioClip Flower_flipover_response_01;
+	public AudioClip Flower_pinch_response;
 
 	public AudioClip BirdIntro_afterStone;
 	public AudioClip BirdIntro_afterFlower;
@@ -53,26 +64,38 @@ public class Narrator : MonoBehaviour
 	public AudioClip Bird_onehandgrab_response;
 	public AudioClip Bird_walkingaway_response;
 
-
-	public AudioClip PaddleIntro;
+	
 	public AudioClip Paddle_Correct_response_01;
+	public AudioClip Paddle_Correct_response_001;
 	public AudioClip Paddle_Correct_response_02;
+	public AudioClip Paddle_Correct_response_002;
 	public AudioClip Paddle_Correct_response_03;
 	public AudioClip Paddle_onepaddle_response;
+	public AudioClip Paddle_droppaddles_response;
+	public AudioClip Paddle_longstop_response;
+	public AudioClip Paddle_siderowing_response;
+
 
 	public AudioClip TreeIntro;
-	public AudioClip Tree_Correct_response_01;
-	public AudioClip Tree_Correct_response_02;
-	public AudioClip Tree_Correct_response_03;
+	public AudioClip Tree_Correct_response_001;
+	public AudioClip Tree_Correct_response_002;
+
 
 	public AudioClip RopeIntro_afterTree;
 	public AudioClip RopeIntro_afterPaddle;
 	public AudioClip Rope_Correct_response_01;
+	public AudioClip Rope_Correct_response_001;
 	public AudioClip Rope_Correct_response_02;
 	public AudioClip Rope_Correct_response_03;
+	public AudioClip Rope_Correct_response_003;
+	public AudioClip Rope_updownbind_response_01;
+	public AudioClip Rope_updownbind_response_02;
 
-
+	public AudioClip Bike_Intro;
 	public AudioClip Bike_onehand_response;
+	public AudioClip Bike_brake_onehand_response;
+	public AudioClip Bike_ringbell_onehand_response;
+	public AudioClip Bike_ringbell_twohands_response;
 	public AudioClip Bike_getthebrake_response;
 	public AudioClip Bike_fall_response;
 
@@ -80,6 +103,11 @@ public class Narrator : MonoBehaviour
 	public AudioClip Star_Correct_response_01;
 	public AudioClip Star_Correct_response_02;
 	public AudioClip Star_Correct_response_03;
+	public AudioClip Star_grab_response_01;
+	public AudioClip Star_flipover_response_01;
+	public AudioClip Star_flipover_response_02;
+	public AudioClip Star_openhand_response_01;
+
 	
 	// Gesture Vocal Instruction
 	public AudioClip StoneGesture;
