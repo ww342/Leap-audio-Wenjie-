@@ -3468,7 +3468,7 @@ MonoBehaviour:
   Post_Rope: {fileID: 0}
   Pre_Bike_grassfootstep: {fileID: 8300000, guid: 8a1e63df67e8d4821a41a72f8dba29b7,
     type: 3}
-  Dur_Bike_brake: {fileID: 8300000, guid: 517f745042d124c53b39b32223be0fd4, type: 3}
+  Dur_Bike_brake: {fileID: 8300000, guid: 8ccf59f75eb0e4c7db2c7cd006b9caee, type: 3}
   Dur_Bike_fall: {fileID: 8300000, guid: 62f9b75dee54441c585e902bbde5a570, type: 3}
   Dur_Bike_wheelslowdown: {fileID: 8300000, guid: ed819322ed2d04aa5b5c30a64664b82f,
     type: 3}
