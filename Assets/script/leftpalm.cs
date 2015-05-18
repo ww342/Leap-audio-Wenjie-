@@ -10,6 +10,9 @@ public class leftpalm : MonoBehaviour
 	public Narrator voice;
 	public Vector3 handcenter;
 	public Vector3 losetrack;
+	public float handmove_x;
+	public float handmove_y;
+	public float handmove_z;
 	public float losetrack_x;
 	public float losetrack_y;
 	public float losetrack_z;
@@ -35,9 +38,9 @@ public class leftpalm : MonoBehaviour
 		Frame perviousframe6 = Controller.Frame (6);
 		Hand leftmost = startframe.Hands.Leftmost;
 
-		float handmove_x = leftmost.PalmPosition.x;
-		float handmove_y = leftmost.PalmPosition.y;
-		float handmove_z = leftmost.PalmPosition.z;
+		handmove_x = leftmost.PalmPosition.x;
+		handmove_y = leftmost.PalmPosition.y;
+		handmove_z = leftmost.PalmPosition.z;
 		handcenter = new Vector3 (handmove_x, handmove_y, -handmove_z);
 
 		float transWave_y_10 = perviousframe10.Hands.Rightmost.PalmPosition.y - handmove_y;

@@ -10,19 +10,14 @@ public class rightpalm : MonoBehaviour
 	public Narrator voice;
 	public Vector3 handcenter;
 	public Vector3 losetrack;
+	public float handmove_x;
+	public float handmove_y;
+	public float handmove_z;
 	public float losetrack_x;
 	public float losetrack_y;
 	public float losetrack_z;
-//	public AudioSource GestureFeedback;
-//
-//	void Start(){
-//
-//		GestureFeedback = GetComponent<AudioSource>();
-//
-//		}
-//	
-	void PositionSave ()
 
+	void PositionSave ()
 	{
 		PlayerPrefs.SetFloat ("x", transform.position.x);
 		PlayerPrefs.SetFloat ("y", transform.position.y);
@@ -33,7 +28,9 @@ public class rightpalm : MonoBehaviour
 		losetrack_y = transform.position.y * 20.0f;
 		losetrack_z = transform.position.z * 20.0f;
 	}
-	
+
+
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -43,9 +40,9 @@ public class rightpalm : MonoBehaviour
 		Frame perviousframe6 = Controller.Frame(6);
 		Hand rightmost = startframe.Hands.Rightmost;
 
-		float handmove_x = rightmost.PalmPosition.x;
-		float handmove_y = rightmost.PalmPosition.y;
-		float handmove_z = rightmost.PalmPosition.z;
+		handmove_x = rightmost.PalmPosition.x;
+		handmove_y = rightmost.PalmPosition.y;
+		handmove_z = rightmost.PalmPosition.z;
 		handcenter = new Vector3 (handmove_x, handmove_y, -handmove_z);
 
 		float transWave_y_10 = perviousframe10.Hands.Rightmost.PalmPosition.y - handmove_y;
@@ -57,6 +54,7 @@ public class rightpalm : MonoBehaviour
 		float transWave_y_3 = perviousframe3.Hands.Rightmost.PalmPosition.y - handmove_y;
 		float transWave_z_3 = perviousframe3.Hands.Rightmost.PalmPosition.z - handmove_z;
 		float transWave_x_3 = perviousframe3.Hands.Rightmost.PalmPosition.x - handmove_x;
+
 
 		if ((rightmost.IsRight) && (startframe.Hands.Count > 0)) {
 
