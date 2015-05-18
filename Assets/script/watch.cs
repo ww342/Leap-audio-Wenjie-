@@ -22,6 +22,7 @@ public class watch : MonoBehaviour
 		this._audio = GetComponent<AudioSource>();
 	}
 
+	/*
 	void OnTriggerEnter (Collider other)
 	{
 
@@ -57,6 +58,7 @@ public class watch : MonoBehaviour
 			}
 		}
 	}
+	*/
 
 	void Update ()
 	{
