@@ -3,7 +3,6 @@ using System.Collections;
 
 public class StoneThrowGesture : Gesture {
 
-
 	private void StoneCount () {
 		this.count ++;
 		Sounds.Northdown.sound1();
@@ -41,8 +40,8 @@ public class StoneThrowGesture : Gesture {
 	
 	override public IEnumerator Activate () {
 		GrabStone(false);
-		Sinus.frequency = 0;
-		Sinus.gain = 0;
+		Sinus sinus = GameObject.Find ("/MovingElements/Stone").GetComponent<Sinus>();
+		sinus.Reset();
 
 		yield return StartCoroutine(this.CheckAndWaitForCooldown());
 
@@ -119,42 +118,7 @@ public class StoneThrowGesture : Gesture {
 				Sounds.hint2 ();
 			}
 			if (right.palmdown) {
-				if (right.pitch > 10 && right.pitch <= 20) {
-					Sinus.gain = 0.01;
-					Sinus.frequency = 450;
-				}
-				if (right.pitch > 20 && right.pitch <= 30) {
-					Sinus.gain = 0.02;
-					Sinus.frequency = 500;
-				}
-				if (right.pitch > 30 && right.pitch <= 40) {
-					Sinus.gain = 0.03;
-					Sinus.frequency = 550;
-				}
-				if (right.pitch > 40 && right.pitch <= 50) {
-					Sinus.gain = 0.04;
-					Sinus.frequency = 600;
-				}
-				if (right.pitch > 50 && right.pitch <= 60) {
-					Sinus.gain = 0.05;
-					Sinus.frequency = 650;
-				}
-				if (right.pitch > 60 && right.pitch <= 70) {
-					Sinus.gain = 0.06;
-					Sinus.frequency = 700;
-				}
-				if (right.pitch > 70 && right.pitch <= 80) {
-					Sinus.gain = 0.07;
-					Sinus.frequency = 750;
-				}
-				if (right.pitch > 80 && right.pitch <= 90) {
-					Sinus.gain = 0.08;
-					Sinus.frequency = 800;
-				}
-				if (right.pitch > 90 && right.pitch <= 100) { 
-					Sinus.gain = 0.09;
-					Sinus.frequency = 850;
-				}
+				sinus.SetPitch(right.pitch);
 				if (right.transWave_y_10 < - 60) {
 					Sounds.normalwatch ();
 					PlayFromRighthand.PlayOneShot (Sounds.Dur_Stone_rightsleevelift, 6.0f);
@@ -172,8 +136,7 @@ public class StoneThrowGesture : Gesture {
 
 		while (this.state == State.ready) {
 			yield return StartCoroutine(this.WaitForRightHand());
-			Sinus.frequency = 0;
-			Sinus.gain = 0;
+			sinus.Reset();
 			if (right.Grab == 0) {
 				PlayFromRighthand.PlayOneShot (Sounds.Post_Stone_waterdrop, 8.0f);
 				Sounds.quickenwatch ();
@@ -195,8 +158,7 @@ public class StoneThrowGesture : Gesture {
 				
 		while (this.state == State.other) {
 			yield return StartCoroutine(this.WaitForRightHand());
-			Sinus.frequency = 0;
-			Sinus.gain = 0;
+			sinus.Reset();
 			if (right.palmdown) {
 				if (Mathf.Abs (right.transWave_y_10 / right.transWave_x_10) < 0.6 && Mathf.Abs (right.transWave_y_10 / right.transWave_x_10) > 0.1) {
 					if (right.openhand) {
@@ -278,8 +240,7 @@ public class StoneThrowGesture : Gesture {
 		
 		while (this.state == State.ing) {
 			yield return StartCoroutine(this.WaitForRightHand());
-			Sinus.frequency = 0;
-			Sinus.gain = 0;
+			sinus.Reset();
 			if (right.openhand && right.wristforward) {
 				if (right.wristmiddle) {
 					if ((right.transWave_y_10 > 60 && right.transWave_z_3 > 10) || (right.losetrack_trans_y > 100)) {
