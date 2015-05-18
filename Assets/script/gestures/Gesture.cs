@@ -26,7 +26,8 @@ abstract public class Gesture : MonoBehaviour {
 	public Sounds Sounds;
 	public Narrator Narrator;
 	public GameLogic GameLogic;
-	private rightpalm rightpalm; // TODO: try to simplify this so that the calculation is included here!
+	public rightpalm rightpalm; // TODO: try to simplify this so that the calculation is included here!
+	public leftpalm leftpalm;
 
 	public AudioSource PlayFromRighthand; 
 	public AudioSource PlayFromLefthand;
@@ -157,6 +158,7 @@ abstract public class Gesture : MonoBehaviour {
 		this.Narrator = GameObject.Find ("/Narrator").GetComponent<Narrator>();
 		this.GameLogic = GameObject.Find ("/GameFlowAndMetrics").GetComponent<GameLogic> ();
 		this.rightpalm = GameObject.Find("rightpalm").GetComponent<rightpalm>();
+		this.leftpalm = GameObject.Find("leftpalm").GetComponent<leftpalm>();
 		this.PlayFromRighthand = GameObject.Find ("rightpalm").GetComponent<AudioSource> ();
 		this.PlayFromLefthand = GameObject.Find ("leftpalm").GetComponent<AudioSource>();
 	}

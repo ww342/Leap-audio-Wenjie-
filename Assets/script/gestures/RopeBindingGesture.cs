@@ -26,7 +26,7 @@ public class RopeBindingGesture : Gesture {
 		
 		while (this.state == State.none) {
 			yield return StartCoroutine(this.WaitForRightHand());
-			if (right.palmright) {
+			if (right.Grab>0.7) {
 				this.state = State.ready;
 			}
 		}
@@ -37,10 +37,13 @@ public class RopeBindingGesture : Gesture {
 				this.state = State.detected;
 			}
 		}
-		
+
 		while (this.state == State.detected) {
 			yield return StartCoroutine(this.WaitForRightHand());
 			if (!right.openhand && (right.transWave_x_10 > 5)) {
+				this.state = State.action;
+			}
+			if (!right.openhand && (right.transWave_y_10 < -30 || right.transWave_y_10 > 30)) {
 				this.state = State.action;
 			}
 		}
@@ -48,6 +51,10 @@ public class RopeBindingGesture : Gesture {
 		while (this.state == State.action) {
 			yield return StartCoroutine(this.WaitForRightHand());
 			if (!right.openhand && (right.transWave_z_10 < -50)) {
+
+				this.state = State.ing;
+			}
+			if (!right.openhand && (right.transWave_y_10 < -30 || right.transWave_y_10 > 30)) {
 				this.state = State.ing;
 			}
 		}
@@ -57,6 +64,10 @@ public class RopeBindingGesture : Gesture {
 			if (!right.openhand && (right.transWave_x_10 < -5)) {
 				this.RopeCount();
 				this.SetCooldown();
+			}
+			if (!right.openhand && (right.transWave_y_10 < -30 || right.transWave_y_10 > 30)) {
+				Narrator.PlayIfPossible(Narrator.Rope_updownbind_v2);
+				this.state = State.detected;
 			}
 		}
 	}

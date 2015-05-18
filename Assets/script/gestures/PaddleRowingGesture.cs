@@ -75,7 +75,16 @@ public class PaddleRowingGesture : TwoHandGesture<PaddleRowingLeftHandGesture, P
 		
 		while (this.state == State.action) { // two hands
 			yield return StartCoroutine(this.WaitForAnyHand());
+
 			if (handcount == 2) {
+				if(Mathf.Abs(rightpalm.handmove_x-leftpalm.handmove_x) >=400) {
+					if(GameLogic.GameVersion==2){
+						Narrator.PlayIfPossible(Narrator.Paddle_palmsfarapart_v1);
+					}
+					if(GameLogic.GameVersion==1){
+						Narrator.PlayIfPossible(Narrator.Paddle_palmsfarapart_v1);
+					}
+				}
 				if (rightHandGesture.state == State.cooldown
 				    && leftHandGesture.state == State.cooldown) {
 					PaddleCount ();
