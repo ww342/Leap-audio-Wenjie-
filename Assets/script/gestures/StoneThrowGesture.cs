@@ -84,6 +84,7 @@ public class StoneThrowGesture : Gesture {
 
 		while (this.state == State.action) {
 			yield return StartCoroutine(this.WaitForRightHand());
+			sinus.SetPitch(right.pitch);
 			if (right.wristforward && right.openhand) {
 				Sounds.transitwatch ();
 				this.state = State.none;
@@ -118,7 +119,6 @@ public class StoneThrowGesture : Gesture {
 				Sounds.hint2 ();
 			}
 			if (right.palmdown) {
-				sinus.SetPitch(right.pitch);
 				if (right.transWave_y_10 < - 60) {
 					Sounds.normalwatch ();
 					PlayFromRighthand.PlayOneShot (Sounds.Dur_Stone_rightsleevelift, 6.0f);
