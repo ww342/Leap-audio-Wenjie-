@@ -29,7 +29,7 @@ public class Sounds : MonoBehaviour {
 	public AudioMixerGroup EnvironmentMix;
 	public AudioMixerGroup BackgroundMix;
 	
-	//Newly Named clips
+	[Header("Ambience sounds")]
 	public AudioClip Ambience_Boat_floatcreaks;
 	public AudioClip Ambience_cavewaterdripping;
 	public AudioClip Ambience_crickets;
@@ -41,6 +41,7 @@ public class Sounds : MonoBehaviour {
 	public AudioClip Ambience_wavelapping;
 	public AudioClip Ambience_thunder;
 
+	[Header("Stone gesture sounds")]
 	public AudioClip Pre_Stone_snore;
 	public AudioClip Dur_Stone_grabstone;
 	public AudioClip Dur_Stone_rightsleevedown;
@@ -59,10 +60,12 @@ public class Sounds : MonoBehaviour {
 	public AudioClip Post_Stone_waterdrop;
 	public AudioClip Post_Stone_longlean;
 
+	[Header("Flower sounds")]
 	public AudioClip Pre_Flower_duck;
 	public AudioClip Dur_Flower_pinch;
 	public AudioClip Post_Flower_sparkle;
 
+	[Header("Bird sounds")]
 	public AudioClip Pre_Bird_birdflyin;
 	public AudioClip Pre_Bird_boatshiffer1;
 	public AudioClip Pre_Bird_boatshiffer2;
@@ -85,7 +88,7 @@ public class Sounds : MonoBehaviour {
 	public AudioClip Post_Bird_seedpouring;
 	public AudioClip Post_Bird_twohandcatch;
 
-
+	[Header("Paddle sounds")]
 	public AudioClip Pre_Paddle_thunder_rain;
 	public AudioClip Dur_Paddle_Boat_shake1;
 	public AudioClip Dur_Paddle_Boat_shake2;
@@ -100,15 +103,18 @@ public class Sounds : MonoBehaviour {
 	public AudioClip Post_Paddle_rowing;
 	public AudioClip Post_Paddle_wave;
 
+	[Header("Tree sounds")]
 	public AudioClip Pre_Tree;
 	public AudioClip Dur_Tree;
 	public AudioClip Post_Tree_branchshaking;
 	public AudioClip Post_Tree_leaverustling;
 
+	[Header("Rope sounds")]
 	public AudioClip Pre_Rope;
 	public AudioClip Dur_Rope_creaks;
 	public AudioClip Post_Rope;
 
+	[Header("Bike sounds")]
 	public AudioClip Pre_Bike_grassfootstep;
 	public AudioClip Dur_Bike_brake;
 	public AudioClip Dur_Bike_fall;
@@ -116,13 +122,14 @@ public class Sounds : MonoBehaviour {
 	public AudioClip Post_Bike_belltrimble;
 	public AudioClip Post_Bike_twohandles;
 
-
+	[Header("Star sounds")]
 	public AudioClip Pre_Star;
 	public AudioClip Dur_Star_starrain;
 	public AudioClip Post_Star_shiny;
 	public AudioClip Post_Star_glow;
 	public AudioClip Post_Star_timetravel;
 
+	[Header("Watch sounds")]
 	public AudioClip Dur_Watch_middlespeed;
 	public AudioClip Dur_Watch_slowspeed;
 	public AudioClip Dur_Watch_fastspeed;
