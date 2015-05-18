@@ -34,7 +34,7 @@ public class Northforward : MonoBehaviour
 		sound1_once.Play ();
 		rightstoneskip = true;
 		sound1_once.pitch = 2;
-		Invoke ("goback", 4);
+		StartCoroutine(goback(4f));
 	}
 
 	public void farskip ()
@@ -42,7 +42,7 @@ public class Northforward : MonoBehaviour
 		sound1_once.Play ();
 		sound1_once.pitch = 1;
 		farstoneskip = true;
-		Invoke ("goback", 5);
+		StartCoroutine(goback(5f));
 	}
 
 	public void leftskip ()
@@ -50,11 +50,12 @@ public class Northforward : MonoBehaviour
 		sound1_once.Play ();
 		sound1_once.pitch = 3;
 		leftstoneskip = true;
-		Invoke ("goback", 3);
+		StartCoroutine(goback(3f));
 	}
 	
-	public void goback ()
+	public IEnumerator goback (float delay)
 	{
+		yield return new WaitForSeconds(delay);
 		farstoneskip = false;
 		leftstoneskip = false;
 		rightstoneskip = false;

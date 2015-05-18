@@ -50,7 +50,7 @@ public class Northdown : MonoBehaviour
 	public void sound2 ()
 	{
 		sound2_once.Play ();
-		Invoke ("sound6", 1);
+		StartCoroutine(delaysound6(1f));
 	}
 
 	public void MidStoneSkip ()
@@ -58,7 +58,7 @@ public class Northdown : MonoBehaviour
 		sound3_once.Play ();
 		stoneskip = true;
 		sound3_once.pitch = 2;
-		Invoke ("goback", 4);
+		StartCoroutine(goback(4f));
 	}
 
 	public void SlowStoneSkip ()
@@ -66,7 +66,7 @@ public class Northdown : MonoBehaviour
 		sound3_once.Play ();
 		sound3_once.pitch = 1;
 		stoneskip = true;
-		Invoke ("goback", 5);
+		StartCoroutine(goback(5f));
 	}
 
 	public void QuickStoneSkip ()
@@ -74,7 +74,7 @@ public class Northdown : MonoBehaviour
 		sound3_once.Play ();
 		sound3_once.pitch = 3;
 		stoneskip = true;
-		Invoke ("goback", 3);
+		StartCoroutine(goback(3f));
 	}
 
 	public void sound6 ()
@@ -82,8 +82,15 @@ public class Northdown : MonoBehaviour
 		sound4_once.Play ();
 	}
 
-	public void goback ()
+	public IEnumerator delaysound6 (float delay)
 	{
+		yield return new WaitForSeconds(delay);
+		sound6 ();
+	}
+
+	public IEnumerator goback (float delay)
+	{
+		yield return new WaitForSeconds(delay);
 		stoneskip = false;
 	}
 	// Update is called once per frame

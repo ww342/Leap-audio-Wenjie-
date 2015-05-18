@@ -46,7 +46,7 @@ public class Northwest : MonoBehaviour
 	{
 		sound1_once.Play ();
 		leavefall = true;
-		Invoke ("goback", 5);
+		StartCoroutine(goback(5f));
 	}
 	
 	public void sound2 ()
@@ -54,8 +54,9 @@ public class Northwest : MonoBehaviour
 		sound2_once.Play ();
 	}
 	
-	public void goback ()
+	public IEnumerator goback (float delay)
 	{
+		yield return new WaitForSeconds(delay);
 		leavefall = false;
 	}
 	
