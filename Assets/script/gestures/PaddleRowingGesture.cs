@@ -81,7 +81,7 @@ public class PaddleRowingGesture : TwoHandGesture<PaddleRowingLeftHandGesture, P
 					PaddleCount ();
 
 					if (this.count == 3 && GameLogic.GameVersion == 2) {
-						Narrator.PlayIfPossible(Narrator.Paddle_Correct_response_002);
+						Narrator.PlayIfPossible(Narrator.Paddle_Correct_response_02_v2);
 						
 						// Need Help for detecting time period !! If player stop moving for 5 secs 
 						//after hearing 'Narrator.Paddle_Correct_response_002",then play 'Narrator.Paddle_longstop_response'

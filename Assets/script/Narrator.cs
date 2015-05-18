@@ -4,129 +4,122 @@ using System.Collections;
 [RequireComponent(typeof(AudioSource))]
 public class Narrator : MonoBehaviour
 {
-	/*
-	public AudioClip begin;
-	public AudioClip flowerpose;
-	public AudioClip flower1;
-	public AudioClip flyfromtree;
-	public AudioClip stone1;
-	public AudioClip stone2;
-	public AudioClip stone3;
-	public AudioClip bird1;
-	public AudioClip bird2;
-	public AudioClip paddle1;
-	public AudioClip paddle2;
-	public AudioClip paddle3;
-	public AudioClip paddle4;
-	public AudioClip treepose;
-	public AudioClip tietheboat;
-	public AudioClip ropepose;
-	public AudioClip rope1;
-	public AudioClip rope2;
-	public AudioClip rope3;
-	public AudioClip bell6;
-	public AudioClip star1;
-	public AudioClip star2;
-	public AudioClip star3;
-	public AudioClip starwrong;
-	public AudioClip stonewrong;
-	public AudioClip birdwrong;
-*/
 
-	// Game Story Narration
+	// Gesture Intro
 	public AudioClip StoneIntro;
-	public AudioClip Stone_Correct_response_01;
-	public AudioClip Stone_Correct_response_001;
-	public AudioClip Stone_Correct_response_02;
-	public AudioClip Stone_Correct_response_002;
-	public AudioClip Stone_Correct_response_03;
-	public AudioClip Stone_Correct_response_003;
-	public AudioClip Stone_grabbingwater_response;
-	public AudioClip Stone_hittingleaves_response;
-	public AudioClip Stone_liftarm_response;
-	public AudioClip Stone_skipstone_response;
-	public AudioClip Stone_tinythrow_response;
-	public AudioClip Stone_wrongdirection_response;
-	public AudioClip Stone_wrong_response;
-
 	public AudioClip FlowerIntro;
-	public AudioClip Flower_Correct_response_01;
-	public AudioClip Flower_Correct_response_002;
-	public AudioClip Flower_Correct_response_003;
-	public AudioClip Flower_flipover_response_01;
-	public AudioClip Flower_pinch_response;
-
 	public AudioClip BirdIntro_afterStone;
 	public AudioClip BirdIntro_afterFlower;
-	public AudioClip Bird_Correct_response_01;
-	public AudioClip Bird_Correct_response_02;
-	public AudioClip Bird_cannotbreath_response;
-	public AudioClip Bird_onehandgrab_response;
-	public AudioClip Bird_walkingaway_response;
-
-	
-	public AudioClip Paddle_Correct_response_01;
-	public AudioClip Paddle_Correct_response_001;
-	public AudioClip Paddle_Correct_response_02;
-	public AudioClip Paddle_Correct_response_002;
-	public AudioClip Paddle_Correct_response_03;
-	public AudioClip Paddle_onepaddle_response;
-	public AudioClip Paddle_droppaddles_response;
-	public AudioClip Paddle_longstop_response;
-	public AudioClip Paddle_siderowing_response;
-
-
+	public AudioClip PaddleIntro;
 	public AudioClip TreeIntro;
-	public AudioClip Tree_Correct_response_001;
-	public AudioClip Tree_Correct_response_002;
-
-
-	public AudioClip RopeIntro_afterTree;
 	public AudioClip RopeIntro_afterPaddle;
-	public AudioClip Rope_Correct_response_01;
-	public AudioClip Rope_Correct_response_001;
-	public AudioClip Rope_Correct_response_02;
-	public AudioClip Rope_Correct_response_03;
-	public AudioClip Rope_Correct_response_003;
-	public AudioClip Rope_updownbind_response_01;
-	public AudioClip Rope_updownbind_response_02;
-
-	public AudioClip Bike_Intro;
-	public AudioClip Bike_onehand_response;
-	public AudioClip Bike_brake_onehand_response;
-	public AudioClip Bike_ringbell_onehand_response;
-	public AudioClip Bike_ringbell_twohands_response;
-	public AudioClip Bike_getthebrake_response;
-	public AudioClip Bike_fall_response;
-
+	public AudioClip RopeIntro_afterTree;
+	public AudioClip BikeIntro;
 	public AudioClip StarIntro;
-	public AudioClip Star_Correct_response_01;
-	public AudioClip Star_Correct_response_02;
-	public AudioClip Star_Correct_response_03;
-	public AudioClip Star_grab_response_01;
-	public AudioClip Star_flipover_response_01;
-	public AudioClip Star_flipover_response_02;
-	public AudioClip Star_openhand_response_01;
 
-	
-	// Gesture Vocal Instruction
+	// Gesture Instruction
+
 	public AudioClip StoneGesture;
-	public AudioClip Stone_hint_01;
 	public AudioClip FlowerGesture;
-	public AudioClip Flower_hint_01;
 	public AudioClip BirdGesture;
-	public AudioClip Bird_hint_01;
 	public AudioClip PaddleGesture;
-	public AudioClip Paddle_hint_01;
 	public AudioClip TreeGesture;
-	public AudioClip Tree_hint_01;
 	public AudioClip RopeGesture;
-	public AudioClip Rope_hint_01;
 	public AudioClip BikeGesture;
-	public AudioClip Bike_hint_01;
 	public AudioClip StarGesture;
-	public AudioClip Star_hint_01;
+
+	//During Gesture Feedback in Game Version 1
+
+	public AudioClip Stone_grabsides_v1;
+	public AudioClip Stone_faraway_v1;
+	public AudioClip Stone_tinythrow_v1;
+	public AudioClip Stone_armlift_v1;
+	public AudioClip Stone_sidethrow_v1;
+	public AudioClip Flower_pinch_v1;
+	public AudioClip Bird_palmstooclose_v1;
+	public AudioClip Bird_onehandcup_v1;
+	public AudioClip Bird_onehandgrab_v1;
+	public AudioClip Bird_toomuchforce_v1;
+	public AudioClip Paddle_palmsfarapart_v1;
+	public AudioClip Paddle_onehand_v1;
+	public AudioClip Rope_updownbind_v1;
+	public AudioClip Bike_leftbrake_v1;
+	public AudioClip Bike_onehandbell_v1;
+	public AudioClip Star_pickup_v1;
+
+
+
+
+	//Correct Response in Game Version1
+
+	public AudioClip Stone_Correct_response_01_v1;
+	public AudioClip Stone_Correct_response_02_v1;
+	public AudioClip Stone_Correct_response_03_v1;
+	public AudioClip Flower_Correct_response_01_v1;
+	public AudioClip Bird_Correct_response_01_v1;
+	public AudioClip Bird_Correct_response_02_v1;
+	public AudioClip Paddle_Correct_response_01_v1;
+	public AudioClip Paddle_Correct_response_04_v1;
+	public AudioClip Tree_Correct_response_02_v1;
+	public AudioClip Rope_Correct_response_01_v1;
+	public AudioClip Rope_Correct_response_02_v1;
+	public AudioClip Rope_Correct_response_03_v1;
+	public AudioClip Star_Correct_response_01_v1;
+	public AudioClip Star_Correct_response_02_v1;
+	public AudioClip Star_Correct_response_03_v1;
+
+
+	//During Gesture Feedback in Game Version 2
+
+	public AudioClip Stone_grabsides_v2;
+	public AudioClip Stone_faraway_v2;
+	public AudioClip Stone_tinythrow_v2;
+	public AudioClip Stone_armlift_v2;
+	public AudioClip Stone_sidethrow_v2;
+	public AudioClip Flower_pinch_v2;
+	public AudioClip Bird_palmstooclose_v2;
+	public AudioClip Bird_onehandcup_v2;
+	public AudioClip Bird_onehandgrab_v2;
+	public AudioClip Bird_toomuchforce_v2;
+	public AudioClip Paddle_palmsfarapart_v2;
+	public AudioClip Paddle_onehand_01_v2;
+	public AudioClip Paddle_onehand_02_v2;
+	public AudioClip Paddle_longstop_v2;
+	public AudioClip Rope_updownbind_v2;
+	public AudioClip Bike_leftbrake_v2;
+	public AudioClip Bike_onehandbell_v2;
+	public AudioClip Bike_onehandle_v2;
+	public AudioClip Bike_falldown_v2;
+	public AudioClip Star_pickup_v2;
+	public AudioClip Star_flipover_v2;
+
+
+	//Correct Response in Game Version2
 	
+	public AudioClip Stone_Correct_response_01_v2;
+	public AudioClip Stone_Correct_response_02_v2;
+	public AudioClip Stone_Correct_response_03_v2;
+	public AudioClip Flower_Correct_response_01_v2;
+	public AudioClip Flower_Correct_response_02_v2;
+	public AudioClip Flower_Correct_response_03_v2;
+	public AudioClip Bird_Correct_response_01_v2;
+	public AudioClip Bird_Correct_response_02_v2;
+	public AudioClip Paddle_Correct_response_01_v2;
+	public AudioClip Paddle_Correct_response_02_v2;
+	public AudioClip Paddle_Correct_response_03_v2;
+	public AudioClip Tree_Correct_response_01_v2;
+	public AudioClip Tree_Correct_response_02_v2;
+	public AudioClip Rope_Correct_response_01_v2;
+	public AudioClip Rope_Correct_response_02_v2;
+	public AudioClip Rope_Correct_response_03_v2;
+	public AudioClip Bike_Correct_response_01_v2;
+	public AudioClip Star_Correct_response_01_v2;
+	public AudioClip Star_Correct_response_02_v2;
+	public AudioClip Star_Correct_response_03_v2;
+
+
+
+//	
 	private AudioSource audiosource;
 	
 	void Awake ()

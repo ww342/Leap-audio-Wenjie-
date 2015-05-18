@@ -32,7 +32,7 @@ public class StarPickingGesture : Gesture {
 
 					if (GameLogic.GameVersion == 2) {
 					if(this.count<1){
-						Narrator.PlayIfPossible(Narrator.Star_grab_response_01);
+						Narrator.PlayIfPossible(Narrator.Star_pickup_v2);
 					}
 
 				}
@@ -45,11 +45,9 @@ public class StarPickingGesture : Gesture {
 				Sounds.Environment.PlayOneShot (Sounds.Dur_Star_starrain);
 				if (GameLogic.GameVersion == 2) {
 					if(this.count<1){
-						Narrator.PlayIfPossible(Narrator.Star_flipover_response_01);
+						Narrator.PlayIfPossible(Narrator.Star_flipover_v2);
 					}
-					if(this.count==2){
-						Narrator.PlayIfPossible(Narrator.Star_flipover_response_02);
-					}
+
 				}
 				this.state = State.action;
 			}
@@ -60,7 +58,7 @@ public class StarPickingGesture : Gesture {
 			if (right.palmup) {
 				StarCount();
 				if (this.count<1 && GameLogic.GameVersion == 2) {
-					Narrator.PlayIfPossible(Narrator.Star_openhand_response_01);
+					Narrator.PlayIfPossible(Narrator.Star_Correct_response_01_v2);
 				}
 				Sounds.Environment.PlayOneShot (Sounds.Post_Star_shiny);
 				this.SetCooldown();

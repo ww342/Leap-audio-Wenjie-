@@ -46,10 +46,10 @@ public class TreeShakingGesture : Gesture {
 			
 				if (GameLogic.GameVersion == 2) {
 					if (this.count == 2) {
-						Narrator.PlayIfPossible(Narrator.Tree_Correct_response_001);
+						Narrator.PlayIfPossible(Narrator.Tree_Correct_response_01_v2);
 					}
 					if (this.count == 4) {
-						Narrator.PlayIfPossible(Narrator.Tree_Correct_response_002);
+						Narrator.PlayIfPossible(Narrator.Tree_Correct_response_02_v2);
 					}
 						
 				}

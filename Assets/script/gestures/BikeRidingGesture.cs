@@ -45,12 +45,30 @@ public class BikeRidingGesture : TwoHandGesture<BikeRidingLeftHandGesture, BikeR
 				this.state = State.action;
 			}
 			if (rightHandGesture.state == State.detected || rightHandGesture.state == State.cooldown) {
-				Sounds.PlayImmediately(PlayFromRighthand, Sounds.Dur_Bike_wheelslowdown); // TODO: change to more appropriate voice/sound
-				Narrator.PlayIfPossible(Narrator.Bike_ringbell_onehand_response);
+				Sounds.PlayImmediately(PlayFromRighthand, Sounds.Dur_Bike_wheelslowdown); 
+				if(this.count<1){
+				if(GameLogic.GameVersion == 1)
+				{
+					Narrator.PlayIfPossible(Narrator.Bike_onehandbell_v1);
+				}
+				if(GameLogic.GameVersion == 2)
+				{
+					Narrator.PlayIfPossible(Narrator.Bike_onehandbell_v2);
+				}
+				}
 			}
 			if (leftHandGesture.state == State.detected || leftHandGesture.state == State.cooldown) {
-				Sounds.PlayImmediately(PlayFromLefthand, Sounds.Dur_Bike_brake); // TODO: change to more appropriate voice/sound
-				Narrator.PlayIfPossible(Narrator.Bike_brake_onehand_response);
+				Sounds.PlayImmediately(PlayFromLefthand, Sounds.Dur_Bike_brake); 
+				if(this.count<1){
+				if(GameLogic.GameVersion == 1)
+				{
+					Narrator.PlayIfPossible(Narrator.Bike_leftbrake_v1);
+				}
+				if(GameLogic.GameVersion == 2)
+				{
+					Narrator.PlayIfPossible(Narrator.Bike_leftbrake_v2);
+				}
+				}
 			}
 		}
 
@@ -67,18 +85,18 @@ public class BikeRidingGesture : TwoHandGesture<BikeRidingLeftHandGesture, BikeR
 					BellCount();
 				}
 				if (this.count <1 && GameLogic.GameVersion == 2) {
-					Narrator.PlayIfPossible(Narrator.Bike_ringbell_twohands_response);
+					Narrator.PlayIfPossible(Narrator.Bike_Correct_response_01_v2);
 				}
 				this.SetCooldown();
 				}
 			}
 			if (handcount == 1) {
 				// actually wait for the second hand to come back during the response!
-				yield return Narrator.PlayAndWait(Narrator.Bike_onehand_response);
+				yield return Narrator.PlayAndWait(Narrator.Bike_onehandle_v2);
 				if (handcount == 1) {
 					this.wrongcount++;
 					Sounds.PlayImmediately(PlayFromRighthand, Sounds.Dur_Bike_fall);
-					Narrator.PlayIfPossible(Narrator.Bike_fall_response);
+					Narrator.PlayIfPossible(Narrator.Bike_falldown_v2);
 					this.state = State.detected;
 				}
 			}

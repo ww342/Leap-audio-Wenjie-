@@ -135,10 +135,10 @@ public class GameLogic : MonoBehaviour {
 		}
 		Sounds.Ambience_A.minDistance = 6;
 		if (GameVersion == 1) {
-						yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_01);
+						yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_01_v1);
 				}
 		if (GameVersion == 2) {
-			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_001);
+			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_01_v2);
 				}
 		while (stonethrow.count < 2) {
 			yield return StartCoroutine(stonethrow.Activate());
@@ -146,10 +146,10 @@ public class GameLogic : MonoBehaviour {
 		Sounds.Ambience_A.minDistance = 2;
 
 		if (GameVersion == 1) {
-			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_02);
+			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_02_v1);
 		}
 		if (GameVersion == 2) {
-			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_002);
+			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_02_v2);
 		}
 
 		while (stonethrow.count < 3) {
@@ -158,10 +158,10 @@ public class GameLogic : MonoBehaviour {
 		Sounds.Ambience_A.minDistance = 0;
 		LogGestureEnd("Stone Throwing", stonethrow, startTime);
 		if (GameVersion == 1) {
-			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_03);
+			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_03_v1);
 		}
 		if (GameVersion == 2) {
-			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_003);
+			yield return Narrator.PlayAndWait (Narrator.Stone_Correct_response_03_v2);
 		}
 	}
 
@@ -175,7 +175,7 @@ public class GameLogic : MonoBehaviour {
 		while (flower.count < 1) {
 			yield return StartCoroutine(flower.Activate());
 		}
-		yield return Narrator.PlayAndWait(Narrator.Flower_Correct_response_01);
+		yield return Narrator.PlayAndWait(Narrator.Flower_Correct_response_01_v1);
 		while (flower.count < 4) {
 			yield return StartCoroutine(flower.Activate());
 		}
@@ -198,14 +198,14 @@ public class GameLogic : MonoBehaviour {
 				birdcatch.wrongcount = 0;
 			}
 		}
-		yield return Narrator.PlayAndWait(Narrator.Bird_Correct_response_01);
+		yield return Narrator.PlayAndWait(Narrator.Bird_Correct_response_01_v1);
 		while (birdcatch.count < 2) {
 			yield return StartCoroutine(birdcatch.Activate());
 		}
 		birdcatch.StopHands();
 		LogGestureEnd("Bird Catching", birdcatch, startTime);
 		Destroy (birdcatch);
-		yield return Narrator.PlayAndWait(Narrator.Bird_Correct_response_02);
+		yield return Narrator.PlayAndWait(Narrator.Bird_Correct_response_02_v1);
 	}
 
 	IEnumerator DoPaddleRowing(PaddleRowingGesture paddlerowing) {
@@ -216,10 +216,10 @@ public class GameLogic : MonoBehaviour {
 
 		}
 			if (GameVersion == 1) {
-				yield return Narrator.PlayAndWait (Narrator.Paddle_Correct_response_01);
+				yield return Narrator.PlayAndWait (Narrator.Paddle_Correct_response_01_v1);
 			}
 			if (GameVersion == 2) {
-				yield return Narrator.PlayAndWait (Narrator.Paddle_Correct_response_001);
+				yield return Narrator.PlayAndWait (Narrator.Paddle_Correct_response_01_v2);
 			}
 
 
@@ -229,7 +229,7 @@ public class GameLogic : MonoBehaviour {
 		paddlerowing.StopHands();
 		LogGestureEnd("Paddle Rowing", paddlerowing, startTime);
 
-		yield return Narrator.PlayAndWait(Narrator.Paddle_Correct_response_03);
+		yield return Narrator.PlayAndWait(Narrator.Paddle_Correct_response_04_v1);
 	
 	}
 
@@ -258,20 +258,20 @@ public class GameLogic : MonoBehaviour {
 			yield return StartCoroutine(ropebind.Activate());
 		}
 		if (GameVersion == 1) {
-						yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_01);
+						yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_01_v1);
 				}
 		if (GameVersion == 2) {
-						yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_001);
+						yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_01_v2);
 				}
 		while (ropebind.count < 2) {
 
 			yield return StartCoroutine(ropebind.Activate());
 		}
 		if (GameVersion == 1) {
-			yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_02);
+			yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_02_v1);
 		}
 		if (GameVersion == 2) {
-			yield return Narrator.PlayAndWait (Narrator.Rope_updownbind_response_01);
+			yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_02_v2);
 		}
 		while (ropebind.count < 3) {
 
@@ -281,16 +281,16 @@ public class GameLogic : MonoBehaviour {
 		Destroy (ropebind);
 
 		if (GameVersion == 1) {
-			yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_03);
+			yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_03_v1);
 		}
 		if (GameVersion == 2) {
-			yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_003);
+			yield return Narrator.PlayAndWait (Narrator.Rope_Correct_response_03_v2);
 		}
 
 	}
 
 	IEnumerator DoBikeRiding() {
-		yield return Narrator.PlayAndWait(Narrator.Bike_Intro);
+		yield return Narrator.PlayAndWait(Narrator.BikeIntro);
 		if (GameVersion == 1) {
 			yield return Narrator.PlayAndWait (Narrator.BikeGesture);
 		}
@@ -316,17 +316,33 @@ public class GameLogic : MonoBehaviour {
 		while (starpick.count < 1) {
 			yield return StartCoroutine(starpick.Activate());
 		}
-		yield return Narrator.PlayAndWait(Narrator.Star_Correct_response_01);
+		if (GameVersion == 1) {
+						yield return Narrator.PlayAndWait (Narrator.Star_Correct_response_01_v1);
+				}
+		if (GameVersion == 2) {
+			yield return Narrator.PlayAndWait (Narrator.Star_Correct_response_01_v2);
+		}
 		while (starpick.count < 2) {
 			yield return StartCoroutine(starpick.Activate());
 		}
-		yield return Narrator.PlayAndWait(Narrator.Star_Correct_response_02);
+
+		if (GameVersion == 1) {
+						yield return Narrator.PlayAndWait (Narrator.Star_Correct_response_02_v1);
+				}
+		if (GameVersion == 2) {
+			yield return Narrator.PlayAndWait (Narrator.Star_Correct_response_02_v2);
+		}
 		while (starpick.count < 3) {
 			yield return StartCoroutine(starpick.Activate());
 		}
 		LogGestureEnd("Star Picking", starpick, startTime);
 		Destroy (starpick);
-		yield return Narrator.PlayAndWait(Narrator.Star_Correct_response_03);
+		if (GameVersion == 1) {
+						yield return Narrator.PlayAndWait (Narrator.Star_Correct_response_03_v1);
+				}
+		if (GameVersion == 2) {
+			yield return Narrator.PlayAndWait (Narrator.Star_Correct_response_03_v2);
+		}
 	}
 
 	private void LogGestureEnd(string gestureName, Gesture gest, System.DateTime startTime)

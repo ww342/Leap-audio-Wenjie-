@@ -12,7 +12,12 @@ public class PaddleRowingLeftHandGesture : Gesture {
 				this.state = State.detected;
 			}
 			if (left.wristleft && right.wristright) {
-				Narrator.PlayIfPossible(Narrator.Paddle_siderowing_response);
+				if(GameLogic.GameVersion == 1){
+				Narrator.PlayIfPossible(Narrator.Paddle_palmsfarapart_v1);
+				}
+				if(GameLogic.GameVersion == 2){
+					Narrator.PlayIfPossible(Narrator.Paddle_palmsfarapart_v2);
+				}
 				PlayFromLefthand.PlayOneShot(Sounds.Dur_Stone_gentlesplash);
 			}
 		}
@@ -24,6 +29,7 @@ public class PaddleRowingLeftHandGesture : Gesture {
 				PlayFromLefthand.PlayOneShot (Sounds.Dur_Paddle_creak1,3.0f); 
 				PlayFromLefthand.PlayOneShot (Sounds.Dur_Paddle_row1,5.0f);
 			}
+		
 		}
 	}
 

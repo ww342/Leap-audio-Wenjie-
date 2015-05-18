@@ -66,14 +66,14 @@ public class StoneThrowGesture : Gesture {
 					this.state = State.none;
 
 					if(GameLogic.GameVersion ==1){
-						Narrator.PlayIfPossible(Narrator.StoneGesture);// place holder for new recording!
+						Narrator.PlayIfPossible(Narrator.Stone_grabsides_v1);
 					}
 
 					if(GameLogic.GameVersion ==2){
 						PlayFromRighthand.PlayOneShot (Sounds.Dur_Stone_gentlesplash, 15.0f);
 						PlayFromRighthand.PlayOneShot (Sounds.Dur_Stone_gentlewaterdrop, 15.0f);
 						Sounds.Environment.PlayOneShot (Sounds.Post_Stone_longcreak,0.8f);
-						Narrator.PlayIfPossible(Narrator.Stone_grabbingwater_response);
+						Narrator.PlayIfPossible(Narrator.Stone_grabsides_v2);
 					}
 
 					Sounds.transitwatch ();
@@ -100,11 +100,11 @@ public class StoneThrowGesture : Gesture {
 				PlayFromRighthand.PlayOneShot (Sounds.Post_Stone_waterdrop, 10.0f);
 
 				if(GameLogic.GameVersion == 1){
-					Narrator.PlayIfPossible(Narrator.Stone_wrongdirection_response);
+					Narrator.PlayIfPossible(Narrator.Stone_tinythrow_v1);
 				}
 				
 				if(GameLogic.GameVersion == 2){
-					Narrator.PlayIfPossible(Narrator.Stone_tinythrow_response);
+					Narrator.PlayIfPossible(Narrator.Stone_tinythrow_v2);
 				}
 
 				yield break; // restart!
@@ -158,8 +158,11 @@ public class StoneThrowGesture : Gesture {
 				if (right.transWave_y_10 < - 60) {
 					Sounds.normalwatch ();
 					PlayFromRighthand.PlayOneShot (Sounds.Dur_Stone_rightsleevelift, 6.0f);
+					if(GameLogic.GameVersion == 1 && this.count <1){
+						Narrator.PlayIfPossible(Narrator.Stone_armlift_v1);
+					}
 					if(GameLogic.GameVersion == 2 && this.count <1){
-						Narrator.PlayIfPossible(Narrator.Stone_liftarm_response);
+						Narrator.PlayIfPossible(Narrator.Stone_armlift_v2);
 					}
 					Sounds.hint3 ();
 					this.state = State.ing;
@@ -179,11 +182,11 @@ public class StoneThrowGesture : Gesture {
 				this.state = State.none;
 
 				if(GameLogic.GameVersion == 1){
-					Narrator.PlayIfPossible(Narrator.Stone_wrongdirection_response);
+					Narrator.PlayIfPossible(Narrator.Stone_tinythrow_v1);
 				}
 
 				if(GameLogic.GameVersion == 2){
-					Narrator.PlayIfPossible(Narrator.Stone_tinythrow_response);
+					Narrator.PlayIfPossible(Narrator.Stone_tinythrow_v2);
 				}
 
 				yield break; // restart!
@@ -209,9 +212,11 @@ public class StoneThrowGesture : Gesture {
 					Sounds.hint3 ();
 					PlayFromRighthand.PlayOneShot (Sounds.Dur_Stone_rightsleevelift, 3.0f);
 					Sounds.normalwatch ();
-
+					if(GameLogic.GameVersion == 1 && this.count <1){
+						Narrator.PlayIfPossible(Narrator.Stone_armlift_v1);
+					}
 					if(GameLogic.GameVersion == 2 && this.count <1){
-						Narrator.PlayIfPossible(Narrator.Stone_liftarm_response);
+						Narrator.PlayIfPossible(Narrator.Stone_armlift_v2);
 					}
 
 					this.state = State.ing;
@@ -226,9 +231,11 @@ public class StoneThrowGesture : Gesture {
 						Sounds.Northdown.MidStoneSkip();
 						Sounds.quickenwatch ();
 						this.wrongcount++;
-
+					if(GameLogic.GameVersion == 1){
+						Narrator.PlayIfPossible(Narrator.Stone_sidethrow_v1);
+					}
 					if(GameLogic.GameVersion == 2){
-						Narrator.PlayIfPossible(Narrator.Stone_skipstone_response);
+						Narrator.PlayIfPossible(Narrator.Stone_sidethrow_v2);
 					}
 						this.state = State.none;
 
@@ -244,8 +251,11 @@ public class StoneThrowGesture : Gesture {
 						Sounds.quickenwatch ();
 						this.wrongcount++;
 
+					if(GameLogic.GameVersion == 1){
+						Narrator.PlayIfPossible(Narrator.Stone_sidethrow_v1);
+					}
 					if(GameLogic.GameVersion == 2){
-						Narrator.PlayIfPossible(Narrator.Stone_skipstone_response);
+						Narrator.PlayIfPossible(Narrator.Stone_sidethrow_v2);
 					}
 						this.state = State.none;
 						yield break; // restart!
@@ -284,11 +294,11 @@ public class StoneThrowGesture : Gesture {
 						Sounds.quickenwatch ();
 						this.state = State.none;
 						if(GameLogic.GameVersion == 1){
-							Narrator.PlayIfPossible(Narrator.Stone_wrongdirection_response);
+							Narrator.PlayIfPossible(Narrator.Stone_tinythrow_v1);
 						}
 						
 						if(GameLogic.GameVersion == 2){
-							Narrator.PlayIfPossible(Narrator.Stone_tinythrow_response);
+							Narrator.PlayIfPossible(Narrator.Stone_tinythrow_v2);
 						}
 						yield break; // restart!
 					}
@@ -299,8 +309,11 @@ public class StoneThrowGesture : Gesture {
 						Sounds.quickenwatch ();
 						Sounds.Northforward.farskip();
 
+						if(GameLogic.GameVersion == 1){
+							Narrator.PlayIfPossible(Narrator.Stone_sidethrow_v1);
+						}
 						if(GameLogic.GameVersion == 2){
-							Narrator.PlayIfPossible(Narrator.Stone_skipstone_response);
+							Narrator.PlayIfPossible(Narrator.Stone_sidethrow_v2);
 						}
 
 						this.state = State.none;
@@ -317,8 +330,11 @@ public class StoneThrowGesture : Gesture {
 						Sounds.Northwest.sound2();
 						PlayFromRighthand.PlayOneShot (Sounds.Dur_Paddle_creak1); 
 
+						if(GameLogic.GameVersion == 1){
+							Narrator.PlayIfPossible(Narrator.Stone_faraway_v1);
+						}
 						if(GameLogic.GameVersion == 2){
-							Narrator.PlayIfPossible(Narrator.Stone_hittingleaves_response);
+							Narrator.PlayIfPossible(Narrator.Stone_faraway_v2);
 						}
 
 						this.state = State.none;
@@ -346,8 +362,11 @@ public class StoneThrowGesture : Gesture {
 						Sounds.Northeast.sound1();
 						Sounds.Northeast.sound2();
 						PlayFromRighthand.PlayOneShot (Sounds.Dur_Paddle_creak1); 
+						if(GameLogic.GameVersion == 1){
+							Narrator.PlayIfPossible(Narrator.Stone_faraway_v1);
+						}
 						if(GameLogic.GameVersion == 2){
-							Narrator.PlayIfPossible(Narrator.Stone_hittingleaves_response);
+							Narrator.PlayIfPossible(Narrator.Stone_faraway_v2);
 						}
 						this.state = State.none;
 						yield break; // restart!
@@ -355,8 +374,11 @@ public class StoneThrowGesture : Gesture {
 					if (right.wristmiddle) {
 						Sounds.quickenwatch ();
 						Sounds.Northforward.rightskip();
+						if(GameLogic.GameVersion == 1){
+							Narrator.PlayIfPossible(Narrator.Stone_sidethrow_v1);
+						}
 						if(GameLogic.GameVersion == 2){
-							Narrator.PlayIfPossible(Narrator.Stone_skipstone_response);
+							Narrator.PlayIfPossible(Narrator.Stone_sidethrow_v2);
 						}
 						this.state = State.none;
 						yield break; // restart!

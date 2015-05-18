@@ -30,8 +30,11 @@ public class FlowerGesture : Gesture {
 			if (right.Pinch == 1) {
 				PlayFromRighthand.PlayOneShot (Sounds.Dur_Flower_pinch,1.0f);
 				this.state = State.action;
+				if(this.count<1 && GameLogic.GameVersion ==1){
+					Narrator.PlayIfPossible(Narrator.Flower_pinch_v1);
+				}
 				if(this.count<1 && GameLogic.GameVersion ==2){
-						Narrator.PlayIfPossible(Narrator.Flower_pinch_response);
+						Narrator.PlayIfPossible(Narrator.Flower_pinch_v2);
 				}
 			}
 		}
@@ -41,14 +44,20 @@ public class FlowerGesture : Gesture {
 			if (right.palmup) {//transRoll > 50 && transRoll < 120 && Pinch > 0.8)
 				this.FlowerCount();
 				this.SetCooldown();
+
+				if(this.count<1 && GameLogic.GameVersion ==1){
+					Narrator.PlayIfPossible(Narrator.Flower_Correct_response_01_v1);
+				}
+
+				}
 				if(this.count<1 && GameLogic.GameVersion ==2){
-					Narrator.PlayIfPossible(Narrator.Flower_flipover_response_01);
+					Narrator.PlayIfPossible(Narrator.Flower_Correct_response_01_v2);
 				}
 				if(this.count==1 && GameLogic.GameVersion ==2){
-					Narrator.PlayIfPossible(Narrator.Flower_Correct_response_002);
+					Narrator.PlayIfPossible(Narrator.Flower_Correct_response_02_v2);
 				}
 				if(this.count==2 && GameLogic.GameVersion ==2){
-					Narrator.PlayIfPossible(Narrator.Flower_Correct_response_003);
+					Narrator.PlayIfPossible(Narrator.Flower_Correct_response_03_v2);
 				}
 			}
 //			if (right.transRoll > 50 && right.transRoll < 120 && right.Pinch < 0.5) {
@@ -57,4 +66,3 @@ public class FlowerGesture : Gesture {
 //			}
 		}
 	}
-}
