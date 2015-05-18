@@ -4,8 +4,8 @@ using System.Collections;
 [RequireComponent(typeof(AudioSource))]
 public class Narrator : MonoBehaviour
 {
+	[Header("Gesture Intros")]
 
-	// Gesture Intro
 	public AudioClip StoneIntro;
 	public AudioClip FlowerIntro;
 	public AudioClip BirdIntro_afterStone;
@@ -17,7 +17,7 @@ public class Narrator : MonoBehaviour
 	public AudioClip BikeIntro;
 	public AudioClip StarIntro;
 
-	// Gesture Instruction
+	[Header("Gesture Instructions")]
 
 	public AudioClip StoneGesture;
 	public AudioClip FlowerGesture;
@@ -28,7 +28,7 @@ public class Narrator : MonoBehaviour
 	public AudioClip BikeGesture;
 	public AudioClip StarGesture;
 
-	//During Gesture Feedback in Game Version 1
+	[Header("During Gesture Feedback in Game Version 1")]
 
 	public AudioClip Stone_grabsides_v1;
 	public AudioClip Stone_faraway_v1;
@@ -47,10 +47,7 @@ public class Narrator : MonoBehaviour
 	public AudioClip Bike_onehandbell_v1;
 	public AudioClip Star_pickup_v1;
 
-
-
-
-	//Correct Response in Game Version1
+	[Header("Correct Responses in Game Version 1")]
 
 	public AudioClip Stone_Correct_response_01_v1;
 	public AudioClip Stone_Correct_response_02_v1;
@@ -67,9 +64,8 @@ public class Narrator : MonoBehaviour
 	public AudioClip Star_Correct_response_01_v1;
 	public AudioClip Star_Correct_response_02_v1;
 	public AudioClip Star_Correct_response_03_v1;
-
-
-	//During Gesture Feedback in Game Version 2
+	
+	[Header("During Gesture Feedback in Game Version 2")]
 
 	public AudioClip Stone_grabsides_v2;
 	public AudioClip Stone_faraway_v2;
@@ -93,8 +89,7 @@ public class Narrator : MonoBehaviour
 	public AudioClip Star_pickup_v2;
 	public AudioClip Star_flipover_v2;
 
-
-	//Correct Response in Game Version2
+	[Header("Correct Responses in Game Version 2")]
 	
 	public AudioClip Stone_Correct_response_01_v2;
 	public AudioClip Stone_Correct_response_02_v2;
@@ -117,9 +112,6 @@ public class Narrator : MonoBehaviour
 	public AudioClip Star_Correct_response_02_v2;
 	public AudioClip Star_Correct_response_03_v2;
 
-
-
-//	
 	private AudioSource audiosource;
 	
 	void Awake ()
@@ -127,7 +119,8 @@ public class Narrator : MonoBehaviour
 		this.audiosource = GetComponent<AudioSource>();
 	}
 
-	public WaitForSeconds PlayAndWait(AudioClip clip) {
+	public WaitForSeconds PlayAndWait(AudioClip clip)
+	{
 		this.audiosource.clip = clip;
 		this.audiosource.Play();
 		return new WaitForSeconds(clip.length);
