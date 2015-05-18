@@ -21,7 +21,7 @@ public class StoneThrowGesture : Gesture {
 			if (this.wrongcount <= 2) {
 				Sounds.Ambience_A.clip = Sounds.Pre_Flower_duck;
 				Sounds.Ambience_A.minDistance = 8;
-				Sounds.Ambience_B.loop = true;
+				Sounds.Ambience_B.loop = true; // TODO: shouldn't this be Ambience_A ???
 				Sounds.Ambience_A.Play ();
 			}
 			if (this.wrongcount > 2) {

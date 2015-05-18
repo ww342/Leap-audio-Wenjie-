@@ -11,7 +11,7 @@ public class Sounds : MonoBehaviour {
 	public AudioSource Ambience_A;
 	public AudioSource Ambience_B;
 	public AudioSource Ambience_C;
-	public AudioSource Ambience_D;
+	public AudioSource Ambience_D; // D is only used for PlayOneShots
 	private AudioSource watch; // attached to /Watch
 	private AudioSource transition_hint;
 	public AudioSource Gesturehint;
