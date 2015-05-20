@@ -84,7 +84,9 @@ public class StoneThrowGesture : Gesture {
 
 		while (this.state == State.action) {
 			yield return StartCoroutine(this.WaitForRightHand());
-			sinus.SetPitch(right.pitch);
+			if(GameLogic.GameVersion == 2) {
+				sinus.SetPitch(right.pitch);
+			}
 			if (right.wristforward && right.openhand) {
 				Sounds.transitwatch ();
 				this.state = State.none;
