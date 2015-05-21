@@ -99,7 +99,7 @@ public class GameLogic : MonoBehaviour {
 		Debug.Log ("Bike riding");
 		Sounds.Ambience_D.PlayOneShot (Sounds.Ambience_grassinthewind);
 		yield return StartCoroutine(DoBikeRiding());
-		
+
 		Debug.Log ("Star");
 		Sounds.Ambience_D.PlayOneShot (Sounds.Ambience_space);
 		Sounds.Ambience_B.minDistance = 10;
@@ -305,11 +305,15 @@ public class GameLogic : MonoBehaviour {
 		LogGestureEnd("Bike Riding", bikeride, startTime);
 		Destroy (bikeride);
 		yield return Narrator.PlayAndWait(Narrator.StarIntro);
+		Sounds.Ambience_D.loop = true;
+		Sounds.Ambience_D.PlayOneShot(Sounds.Ambience_meteor,0.6f);
 	}
 
 	IEnumerator DoStarPicking() {
+
 		if (GameVersion == 1) {
 			yield return Narrator.PlayAndWait (Narrator.StarGesture);
+
 		}
 		System.DateTime startTime = System.DateTime.Now;
 		Gesture starpick = gameObject.AddComponent<StarPickingGesture>();

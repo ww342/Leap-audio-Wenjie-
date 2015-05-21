@@ -86,20 +86,15 @@ public class BirdCatchGesture : TwoHandGesture<BirdCatchLeftHandGesture, BirdCat
 			yield return StartCoroutine(this.WaitForAnyHand());
 			if (handcount == 2) {
 
-				if (Mathf.Abs(rightpalm.handmove_x - leftpalm.handmove_x) <=100 && right.Grab>0.4 && left.Grab>0.4){
-					this.state = State.detected;
-					if(GameLogic.GameVersion ==1){
-						Narrator.PlayImmediately(Narrator.Bird_palmstooclose_v1);
-					}
-					if(GameLogic.GameVersion ==2){
-						Narrator.PlayImmediately(Narrator.Bird_palmstooclose_v2);
-					}
-				}
-				if (rightHandGesture.state == State.cooldown
-				    && leftHandGesture.state == State.cooldown ) {
+				if (Mathf.Abs(rightpalm.handmove_x - leftpalm.handmove_x) <=100 && right.Grab>0.3 && left.Grab>0.3){
 					BirdCount ();
 					this.SetCooldown();
 				}
+//				if (rightHandGesture.state == State.cooldown
+//				    && leftHandGesture.state == State.cooldown ) {
+//					BirdCount ();
+//					this.SetCooldown();
+//				}
 			}
 
 			if (handcount == 1) { 

@@ -123,7 +123,7 @@ public class StoneThrowGesture : Gesture {
 			if (right.palmdown) {
 				if (right.transWave_y_10 < - 60) {
 					Sounds.normalwatch ();
-					PlayFromRighthand.PlayOneShot (Sounds.Dur_Stone_rightsleevelift, 6.0f);
+					PlayFromRighthand.PlayOneShot (Sounds.Dur_Stone_rightsleevelift, 3.0f);
 					if(GameLogic.GameVersion == 1 && this.count <1){
 						Narrator.PlayIfPossible(Narrator.Stone_armlift_v1);
 					}

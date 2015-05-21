@@ -7,6 +7,7 @@ public class BikeRidingGesture : TwoHandGesture<BikeRidingLeftHandGesture, BikeR
 		this.count++;
 		if (this.count == 1) {
 			Sounds.Ambience_B.minDistance = 10;
+			Narrator.PlayIfPossible(Narrator.Bike_Correct_response_01_v2);
 
 		}
 		if (this.count == 3) {
@@ -84,9 +85,9 @@ public class BikeRidingGesture : TwoHandGesture<BikeRidingLeftHandGesture, BikeR
 				if (rightHandGesture.state == State.cooldown) { // only the right is required?
 					BellCount();
 				}
-				if (this.count <1 && GameLogic.GameVersion == 2) {
-					Narrator.PlayIfPossible(Narrator.Bike_Correct_response_01_v2);
-				}
+//				if (this.count <1 && GameLogic.GameVersion == 2) {
+//					Narrator.PlayIfPossible(Narrator.Bike_Correct_response_01_v2);
+//				}
 				this.SetCooldown();
 				}
 			}

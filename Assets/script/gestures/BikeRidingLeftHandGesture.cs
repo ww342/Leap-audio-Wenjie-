@@ -21,7 +21,7 @@ public class BikeRidingLeftHandGesture : Gesture {
 		}
 		while (this.state == State.detected) {
 			yield return StartCoroutine(this.WaitForLeftHand());
-			if (left.Grab >= 0.91) {
+			if (left.Grab == 1 && !left.openhand && left.Pinch ==1) {
 				Sounds.PlayImmediately(PlayFromLefthand, Sounds.Dur_Bike_brake);
 				PlayFromLefthand.PlayOneShot (Sounds.Dur_Bike_wheelslowdown);
 				this.SetCooldown();

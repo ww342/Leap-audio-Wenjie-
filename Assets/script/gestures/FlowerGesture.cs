@@ -5,7 +5,7 @@ public class FlowerGesture : Gesture {
 
 	private void FlowerCount () {
 		this.count++;
-		Sounds.audiosource.PlayOneShot (Sounds.Post_Flower_sparkle,20.0f);		
+		Sounds.audiosource.PlayOneShot (Sounds.Post_Flower_sparkle,3.0f);		
 		if (this.count == 4) {
 			Sounds.Ambience_A.Stop ();
 			Sounds.Ambience_A.minDistance = 8;
@@ -28,7 +28,7 @@ public class FlowerGesture : Gesture {
 		while (this.state == State.detected) {
 			yield return StartCoroutine(this.WaitForRightHand());
 			if (right.Pinch == 1) {
-				PlayFromRighthand.PlayOneShot (Sounds.Dur_Flower_pinch,1.0f);
+				PlayFromRighthand.PlayOneShot (Sounds.Dur_Star_pickup,5.0f);
 				this.state = State.action;
 				if(this.count<1 && GameLogic.GameVersion ==1){
 					Narrator.PlayIfPossible(Narrator.Flower_pinch_v1);

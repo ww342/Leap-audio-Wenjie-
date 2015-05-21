@@ -40,6 +40,7 @@ public class Sounds : MonoBehaviour {
 	public AudioClip Ambience_space;
 	public AudioClip Ambience_wavelapping;
 	public AudioClip Ambience_thunder;
+	public AudioClip Ambience_meteor;
 
 	[Header("Stone gesture sounds")]
 	public AudioClip Pre_Stone_snore;
@@ -123,11 +124,12 @@ public class Sounds : MonoBehaviour {
 	public AudioClip Post_Bike_twohandles;
 
 	[Header("Star sounds")]
-	public AudioClip Pre_Star;
+	public AudioClip Dur_Star_pickup;
 	public AudioClip Dur_Star_starrain;
 	public AudioClip Post_Star_shiny;
 	public AudioClip Post_Star_glow;
 	public AudioClip Post_Star_timetravel;
+
 
 	[Header("Watch sounds")]
 	public AudioClip Dur_Watch_middlespeed;
@@ -210,11 +212,11 @@ public class Sounds : MonoBehaviour {
 	public void InitialSetup() {
 		// default background sound before anything starts:
 		Handfree = gameObject.AddComponent<AudioSource> ();
-		Handfree.outputAudioMixerGroup = BackgroundMix;
+		Handfree.outputAudioMixerGroup = EnvironmentMix;
 		Handfree.clip = Pre_Stone_snore;
 		Handfree.loop = true;
 		Handfree.pitch = 2;
-		Handfree.minDistance = 8;
+		Handfree.minDistance = 1;
 		Handfree.Play ();
 		ReverbControl.BlendSnapShot (0);
 	}
@@ -281,7 +283,7 @@ public class Sounds : MonoBehaviour {
 		BackgroundMusic._audio.Stop ();
 		BackgroundMusic._audio.clip = BackgroundMusic.land;
 		BackgroundMusic._audio.loop = false;
-		BackgroundMusic._audio.minDistance = 10;
+		BackgroundMusic._audio.minDistance = 200;
 	}
 
 	public void RestartBackgroundMusic ()
