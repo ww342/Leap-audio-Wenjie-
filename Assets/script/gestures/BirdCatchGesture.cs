@@ -86,7 +86,7 @@ public class BirdCatchGesture : TwoHandGesture<BirdCatchLeftHandGesture, BirdCat
 			yield return StartCoroutine(this.WaitForAnyHand());
 			if (handcount == 2) {
 
-				if (Mathf.Abs(rightpalm.handmove_x - leftpalm.handmove_x) <=100 && right.Grab>0.3 && left.Grab>0.3){
+				if (Mathf.Abs(rightpalm.handmove_x - leftpalm.handmove_x) <=150 && right.Grab>0.2 && left.Grab>0.2){
 					BirdCount ();
 					this.SetCooldown();
 				}

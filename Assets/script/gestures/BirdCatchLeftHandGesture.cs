@@ -8,7 +8,7 @@ public class BirdCatchLeftHandGesture : Gesture {
 		
 		while (this.state == State.none) {
 			yield return StartCoroutine(this.WaitForLeftHand());
-			if (left.openhand && left.palmdown) {
+			if (left.openhand ) {
 				this.state = State.detected;
 			}
 		}

@@ -34,7 +34,7 @@ public class TreeShakingGesture : Gesture {
 		
 		while (this.state == State.detected) {
 			yield return StartCoroutine(this.WaitForRightHand());
-			if (!right.ring.IsExtended) {
+			if (right.Grab>0.2) {
 				this.state = State.action;
 			}
 		}

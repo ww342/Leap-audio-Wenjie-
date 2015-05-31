@@ -8,7 +8,7 @@ public class PaddleRowingLeftHandGesture : Gesture {
 		
 		while (this.state == State.none) {
 			yield return StartCoroutine(this.WaitForLeftHand());
-			if (left.pitchforward && left.palmdown) {
+			if (left.pitchforward) {
 				this.state = State.detected;
 			}
 			if (left.wristleft && right.wristright) {
@@ -24,10 +24,10 @@ public class PaddleRowingLeftHandGesture : Gesture {
 		
 		while (this.state == State.detected) {
 			yield return StartCoroutine(this.WaitForLeftHand());
-			if (left.transPitch > 30) {
+			if (left.transPitch > 5) {
 				this.SetCooldown(); // previously this was the hit notification
-				PlayFromLefthand.PlayOneShot (Sounds.Dur_Paddle_creak1,3.0f); 
-				PlayFromLefthand.PlayOneShot (Sounds.Dur_Paddle_row1,5.0f);
+				PlayFromLefthand.PlayOneShot (Sounds.Dur_Paddle_creak1,2.0f); 
+				PlayFromLefthand.PlayOneShot (Sounds.Dur_Paddle_row1,3.0f);
 			}
 		
 		}

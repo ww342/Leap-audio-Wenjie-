@@ -240,7 +240,7 @@ public class GameLogic : MonoBehaviour {
 		if (GameVersion == 1) {
 			yield return Narrator.PlayAndWait (Narrator.TreeGesture);
 		}
-		while (treeshake.count < 8) {
+		while (treeshake.count < 7) {
 			yield return StartCoroutine(treeshake.Activate());
 		}
 		LogGestureEnd("Tree Shaking", treeshake, startTime);

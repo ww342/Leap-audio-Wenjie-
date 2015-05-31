@@ -53,13 +53,13 @@ public class PaddleRowingGesture : TwoHandGesture<PaddleRowingLeftHandGesture, P
 			yield return StartCoroutine(this.WaitForAnyHand());
 			if (handcount == 1) {
 				if (rightHandGesture.state == State.cooldown && leftHandGesture.state != State.cooldown){
-					PlayFromRighthand.PlayOneShot (Sounds.Dur_Paddle_creak2,5.0f);
-					PlayFromRighthand.PlayOneShot (Sounds.Dur_Paddle_droppaddle_response01,20.0f);
+					PlayFromRighthand.PlayOneShot (Sounds.Dur_Paddle_creak2,3.0f);
+					PlayFromRighthand.PlayOneShot (Sounds.Dur_Paddle_droppaddle_response01,6.0f);
 
 				}
 				   if (rightHandGesture.state != State.cooldown && leftHandGesture.state == State.cooldown) {
-					 PlayFromLefthand.PlayOneShot (Sounds.Dur_Paddle_creak2,5.0f);
-					PlayFromLefthand.PlayOneShot (Sounds.Dur_Paddle_droppaddle_response02, 20.0f);
+					 PlayFromLefthand.PlayOneShot (Sounds.Dur_Paddle_creak2,3.0f);
+					PlayFromLefthand.PlayOneShot (Sounds.Dur_Paddle_droppaddle_response02, 6.0f);
 
 				}
 
